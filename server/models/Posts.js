@@ -1,5 +1,5 @@
 module.exports = (sequalize, DataTypes) => {
-  const Posts = sequalize.define("Post", {
+  const Posts = sequalize.define("Posts", {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -7,7 +7,7 @@ module.exports = (sequalize, DataTypes) => {
 
     subTitle: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
 
     categories: {
