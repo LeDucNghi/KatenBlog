@@ -7,6 +7,11 @@ export const postsApi = {
     const url = "/posts/";
     return axiosClient.get(url);
   },
+
+  updatePost(id : string): Promise<any> {
+    const url = "/posts/";
+    return axiosClient.get(url);
+  },
 };
 
 // export default postsApi
