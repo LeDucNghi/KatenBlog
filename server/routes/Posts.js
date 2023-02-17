@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Posts } = require("../models");
+const { validateToken } = require("../middlewares/AuthMiddlewares");
 
 // get all post
 router.get("/getallpost", async (req, res) => {
@@ -10,10 +11,12 @@ router.get("/getallpost", async (req, res) => {
 });
 
 // create a new post
-router.post("/createpost", async (req, res) => {
+router.post("/createpost", validateToken, async (req, res) => {
   const post = req.body;
 
-  post.UserId = req.body.id;
+  console.log("req.user.id", req.user.id);
+
+  post.UserId = req.user.id;
 
   await Posts.create(post);
 

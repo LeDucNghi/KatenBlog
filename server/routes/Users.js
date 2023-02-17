@@ -19,9 +19,13 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
-  const { username, password } = req.body;
+  const { name, password } = req.body;
+  console.log("🚀 ~ file: Users.js:23 ~ router.post ~ { name, password }", {
+    name,
+    password,
+  });
 
-  const user = await Users.findOne({ where: { name: username } });
+  const user = await Users.findOne({ where: { name: name } });
 
   if (!user) res.json({ message: "Can not find your account!" });
 
