@@ -3,6 +3,7 @@ import "./App.css";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import { AddEditBlog } from "./pages/AddEditBlog/AddEditBlog";
+import { BlogDetail } from "./pages/BlogDetail/BlogDetail";
 import { Home } from "./pages/Home/Home";
 import { SignIn } from "./pages/SignIn/SignIn";
 import { SignUp } from "./pages/SignUp/SignUp";
@@ -25,6 +26,8 @@ function App() {
       <Route index path="signin" element={<SignIn />} />
 
       <Route index path="edit" element={<AddEditBlog />} />
+
+      <Route index path="post/:id" element={<BlogDetail />} />
     </Routes>
   );
 }

@@ -13,8 +13,7 @@ router.get("/getallpost", async (req, res) => {
 // create a new post
 router.post("/createpost", validateToken, async (req, res) => {
   const post = req.body;
-
-  console.log("req.user.id", req.user.id);
+  console.log("🚀 ~ file: Posts.js:16 ~ router.post ~ post", post);
 
   post.UserId = req.user.id;
 
@@ -25,6 +24,16 @@ router.post("/createpost", validateToken, async (req, res) => {
 
 // get detail post
 router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  // findByPk = find by primary key ( in the database - id is the primary key )
+  const post = await Posts.findByPk(id);
+
+  res.json(post);
+});
+
+// posts comment
+router.post("/:id", validateToken, async (req, res) => {
   const id = req.params.id;
 
   // findByPk = find by primary key ( in the database - id is the primary key )

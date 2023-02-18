@@ -13,6 +13,8 @@ export function SignIn(props: ISignInProps) {
     try {
       const res = await authApi.signin(values);
       console.log("🚀 ~ file: SignIn.tsx:22 ~ handleSubmit ~ res", res.data);
+      // localStorage.setItem("token", res.)
+      localStorage.setItem("token", res.data.token);
     } catch (error) {
       console.log("🚀 ~ file: SignIn.tsx:20 ~ handleSubmit ~ error", error);
     }

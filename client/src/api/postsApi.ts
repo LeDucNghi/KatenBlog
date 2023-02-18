@@ -10,7 +10,7 @@ const postsApi = {
 
   addNewPost(params: Post): Promise<any> {
     const url = `/posts/createpost`;
-    return axiosClient.patch(url);
+    return axiosClient.post(url, params);
   },
 
   updatePost(params: Post): Promise<any> {
@@ -26,6 +26,11 @@ const postsApi = {
   deletePost(id: string): Promise<any> {
     const url = `/posts/${id}`;
     return axiosClient.delete(url);
+  },
+
+  postComment(params: Post): Promise<any> {
+    const url = `/posts/${params}`;
+    return axiosClient.get(url);
   },
 };
 

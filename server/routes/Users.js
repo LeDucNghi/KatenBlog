@@ -5,11 +5,11 @@ const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
 router.post("/signup", async (req, res) => {
-  const { username, password, avatar } = req.body;
+  const { name, password, avatar } = req.body;
 
   bcrypt.hash(password, 10).then((hash) => {
     Users.create({
-      name: username,
+      name: name,
       avatar: avatar,
       password: hash,
     });

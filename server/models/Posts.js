@@ -21,15 +21,15 @@ module.exports = (sequalize, DataTypes) => {
     },
   });
 
-  // Posts.associate = (models) => {
-  //   Posts.hasMany(models.Comments, {
-  //     onDelete: "cascade",
-  //   });
+  Posts.associate = (models) => {
+    Posts.hasMany(models.Comments, {
+      onDelete: "cascade",
+    });
 
-  //   Posts.hasMany(models.Likes, {
-  //     onDelete: "cascade",
-  //   });
-  // };
+    // Posts.hasMany(models.Likes, {
+    //   onDelete: "cascade",
+    // });
+  };
 
   return Posts;
 };
