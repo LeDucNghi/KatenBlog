@@ -11,6 +11,10 @@ interface ICommentProps {
 export function Comment({ id }: ICommentProps) {
   const [comment, setComment] = React.useState("");
 
+  React.useEffect(() => {
+    handleGetPostComment();
+  }, []);
+
   const handlePostComment = async (e: any) => {
     e.preventDefault();
 
@@ -22,6 +26,21 @@ export function Comment({ id }: ICommentProps) {
     } catch (error) {
       console.log(
         "🚀 ~ file: Comment.tsx:22 ~ handlePostComment ~ error",
+        error
+      );
+    }
+  };
+
+  const handleGetPostComment = async () => {
+    try {
+      const res = await commentApi.getComment(id);
+      console.log(
+        "🚀 ~ file: Comment.tsx:33 ~ handleGetPostComment ~ res",
+        res
+      );
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: Comment.tsx:35 ~ handleGetPostComment ~ error",
         error
       );
     }

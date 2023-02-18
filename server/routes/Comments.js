@@ -3,17 +3,17 @@ const router = express.Router();
 const { Comments } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddlewares");
 
-// get detail post
-// router.get("/:id", async (req, res) => {
-//   const id = req.params.id;
+// get post's comment
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
 
-//   // findByPk = find by primary key ( in the database - id is the primary key )
-//   const post = await Posts.findByPk(id);
+  // findByPk = find by primary key ( in the database - id is the primary key )
+  const comment = await Comments.findAll({ where: { PostId: id } });
 
-//   res.json(post);
-// });
+  res.json(comment);
+});
 
-// posts comment
+// post comment
 router.post("/postcomment/:id", validateToken, async (req, res) => {
   const comment = req.body;
   console.log("🚀 ~ file: Comments.js:19 ~ router.post ~ comment", comment);
