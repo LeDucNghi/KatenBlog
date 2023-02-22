@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 import { AddEditBlog } from "./pages/AddEditBlog/AddEditBlog";
 import { BlogDetail } from "./pages/BlogDetail/BlogDetail";
+import { Footer } from "./components/Common/Footer/Footer";
 import { Header } from "./components/Common/Header/Header";
 import { Home } from "./pages/Home/Home";
 import { SignIn } from "./pages/SignIn/SignIn";
@@ -19,6 +20,7 @@ function App() {
   return (
     <>
       <Header />
+
       <Routes>
         <Route index path="/" element={<Navigate to="home" />} />
 
@@ -32,6 +34,8 @@ function App() {
 
         <Route index path="post/:id" element={<BlogDetail />} />
       </Routes>
+
+      <Footer />
     </>
   );
 }

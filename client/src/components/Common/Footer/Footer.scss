@@ -1,0 +1,56 @@
+@use "../../../assets/styles/globalStyles.scss";
+
+footer {
+    position: relative;
+
+    margin: 0 auto;
+
+    width: 90%;
+    height: 10em;
+
+    font-size: 15px;
+    padding: 1.5em 0;
+    // background: red;
+
+    border-top: 0.1em solid #ccc;
+
+    .footer_term_policy {
+        display: flex;
+        justify-content: center;
+
+        margin: 1em auto;
+    }
+
+    .footer_copyright {
+        font-size: 1em;
+        text-align: center;
+    }
+
+    .footer_social {
+        position: relative;
+
+        @include globalStyles.flexCenter;
+        margin: 0 auto;
+
+        width: 50%;
+
+        // background: pink;
+
+        .footer_social_button {
+            width: 2em;
+            height: 2em;
+
+            margin: 0 0.1em;
+
+            color: #808080;
+
+            background: #fff;
+            border-radius: 1em;
+
+            &:hover {
+                color: #000;
+                transition: all 0.5s ease-in-out 0;
+            }
+        }
+    }
+}

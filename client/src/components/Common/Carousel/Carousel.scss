@@ -5,7 +5,7 @@
     width: 90%;
     height: 33em;
 
-    margin: 0 auto;
+    margin: 0 auto 6em auto;
 
     font-size: 15px;
 
@@ -67,7 +67,20 @@
 @media only screen and (max-width: 320px) {
     .carousel_container {
         .carousel_items {
-            width: 70%;
+            width: 90%;
+
+            .carousel_items_content {
+                width: 70%;
+                font-size: 0.8em;
+
+                // .categories {
+                //     font-size: 0.8em;
+                // }
+
+                // .title {
+                //     font-size: 0.8em;
+                // }
+            }
         }
     }
 }
