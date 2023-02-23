@@ -1,13 +1,18 @@
 module.exports = (sequalize, DataTypes) => {
   const Users = sequalize.define("Users", {
-    name: {
+    fullname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
 
     avatar: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
 
     password: {
