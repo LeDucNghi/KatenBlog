@@ -7,8 +7,7 @@ const authApi = {
     return axiosClient.post(url, params);
   },
 
-  signin(params: Profile) {
-    console.log("🚀 ~ file: authApi.ts:11 ~ signin ~ params", params);
+  signin(params: Profile): Promise<Profile> {
     const url = `/users/signin`;
     return axiosClient.post(url, params);
   },

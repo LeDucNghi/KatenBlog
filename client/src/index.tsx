@@ -1,10 +1,12 @@
 import "./index.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { Provider } from "react-redux";
 import React from "react";
+import { ToastContainer } from "react-toastify";
 import { createRoot } from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./app/store";
@@ -19,6 +21,18 @@ root.render(
         <CssBaseline />
         <App />
       </BrowserRouter>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Provider>
   </React.StrictMode>
 );

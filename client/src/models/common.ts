@@ -11,3 +11,5 @@ export interface PostListRes<T> {
 export interface PostListComment<T> {
   data: T[];
 }
+
+// export interface Profile<>

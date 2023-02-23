@@ -1,16 +1,21 @@
 import "./Footer.scss";
 
-import { Button, IconButton, Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { Link as RouterLink } from "react-router-dom";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
 export interface IFooterProps {}
 
 export function Footer(props: IFooterProps) {
+  const { pathname } = useLocation();
+
+  if (pathname === "/signin") return <></>;
+  if (pathname === "/signup") return <></>;
+
   return (
     <footer>
       <div className="footer_social">

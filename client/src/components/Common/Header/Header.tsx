@@ -1,6 +1,7 @@
 import "./Header.scss";
 
 import { Box, Typography } from "@mui/material";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Button from "@mui/material/Button";
@@ -18,12 +19,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
-import { breakpoints } from "../../../utils";
 import { styled } from "@mui/material/styles";
 
 export interface IHeaderProps {}
 
 export function Header(props: IHeaderProps) {
+  const { pathname } = useLocation();
+
   var [width, setWidth] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
 
@@ -42,24 +44,32 @@ export function Header(props: IHeaderProps) {
     setWidth(width);
   };
 
+  if (pathname === "/signin") return <></>;
+  if (pathname === "/signup") return <></>;
+
   return (
     <Box className="header_container">
       <Box className="header_above">
         <Button
+          component={RouterLink}
+          to="/signin"
           className="header_button"
-          // variant="outlined"
           startIcon={<PersonIcon className="header_icon_button" />}
         >
           Sign In
         </Button>
 
-        <Typography className="header_brand_name" variant="h4">
+        <Typography
+          component={RouterLink}
+          to="/home"
+          className="header_brand_name"
+          variant="h4"
+        >
           Zyro
         </Typography>
 
         <Button
           className="header_button"
-          // variant="outlined"
           startIcon={<SearchIcon className="header_icon_button" />}
         >
           Search
