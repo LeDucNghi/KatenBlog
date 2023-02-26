@@ -12,4 +12,7 @@ export interface PostListComment<T> {
   data: T[];
 }
 
-// export interface Profile<>
+export interface Auth<T> {
+  data: T;
+  token: string;
+}

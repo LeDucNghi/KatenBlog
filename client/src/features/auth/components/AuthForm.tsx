@@ -1,51 +1,70 @@
-import "../../../pages/SignIn/SignIn.scss";
+import "../../../components/Common/Auth/AuthPage.scss";
 
 import * as Yup from "yup";
 
-import { Box, Link, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  InputAdornment,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Form, Formik } from "formik";
 
 import { LoadingButton } from "@mui/lab";
 import { Profile } from "../../../models";
 import { Link as RouterLink } from "react-router-dom";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import authApi from "../../../api/authApi";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 export interface ISignInFormProps {
   isSignin: boolean;
 }
 
 export function AuthForm({ isSignin }: ISignInFormProps) {
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleSubmit = async (values: Profile, { setSubmitting }: any) => {
     try {
-      const res = (await isSignin)
-        ? authApi.signin(values)
-        : authApi.signup(values);
+      var res;
+      if (isSignin) {
+        res = await authApi.signin(values);
+      } else {
+        res = await authApi.signup(values);
+      }
 
-      // localStorage.setItem("token",  res.token);
+      if (res.data) {
+        if (isSignin) {
+          localStorage.setItem("token", res.token);
+        }
 
-      await toast("Login success 🥳", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+        await toast(`${res.data.message} success 🥳`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
 
-      await setSubmitting(false);
-      // window.location.href = await "/home";
-      // console.log("🚀 ~ file: SignIn.tsx:22 ~ handleSubmit ~ res", res.data);
-      // if (res ) {
-      // }
-    } catch (error) {
-      console.log("🚀 ~ file: SignIn.tsx:20 ~ handleSubmit ~ error", error);
+        await setSubmitting(false);
+        // window.location.href = await "/home";
+      }
+    } catch (error: any) {
+      if (error) {
+        console.log(error.response.data.message);
+      }
     }
   };
 
-  const initialValues = { name: "", password: "", fullname: "" };
+  const signInInitialValues: Profile = { name: "", password: "" };
+  const signUpInitialValues: Profile = { name: "", password: "", fullname: "" };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -53,16 +72,13 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
       .max(30, "Invalid name")
       .required("Please enter your username 🤔"),
 
-    fullname: Yup.string()
-      .min(1, "Invalid name")
-      .max(30, "Invalid name")
-      .required("Let us know your name 🤔"),
-
     password: Yup.string().required("Please enter your password 🤔"),
   });
+
   return (
     <Formik
-      initialValues={initialValues}
+      enableReinitialize={true}
+      initialValues={isSignin ? signInInitialValues : signUpInitialValues}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) =>
         handleSubmit(values, { setSubmitting })
@@ -88,7 +104,8 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
                   label="Full name"
                   variant="outlined"
                   name="fullname"
-                  value={values.fullname}
+                  autoFocus={true}
+                  value={!isSignin ? values.fullname : ""}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={touched.fullname && Boolean(errors.fullname)}
@@ -102,6 +119,7 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
               label="Username"
               variant="outlined"
               name="name"
+              autoFocus={true}
               value={values.name}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -110,6 +128,7 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
             />
 
             <TextField
+              type={showPassword ? "text" : "password"}
               className="form_input_field"
               label="Password"
               variant="outlined"
@@ -119,17 +138,29 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
               onBlur={handleBlur}
               error={touched.password && Boolean(errors.password)}
               helperText={touched.password && errors.password}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
 
             <Typography variant="h5">
-              Don't have an account?{" "}
+              {isSignin ? "Don't have an account?" : "Already have an account?"}
               <Link
                 variant="subtitle2"
                 underline="hover"
                 component={RouterLink}
-                to="/signup"
+                to={isSignin ? `/signup` : `/signin`}
               >
-                Signup
+                {isSignin ? "Signup" : "Signin"}
               </Link>
             </Typography>
 

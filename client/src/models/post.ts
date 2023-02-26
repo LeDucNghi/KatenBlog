@@ -4,7 +4,7 @@ export interface Post {
   subTitle: string;
   categories: string;
   content: string;
-  username?: string;
+  image?: string;
 
   createdAt?: string;
   updatedAt?: string;

@@ -1,20 +1,34 @@
 import * as Yup from "yup";
 
-import { Button, TextField } from "@mui/material";
+import { Button, IconButton, TextField } from "@mui/material";
 import { Form, Formik } from "formik";
 
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { Post } from "../../models";
 import postsApi from "../../api/postsApi";
+import { useState } from "react";
 
 export interface IAddEditBlogProps {}
 
 export function AddEditBlog(props: IAddEditBlogProps) {
-  const handleSubmit = async (values: Post) => {
+  const [image, setimage] = useState("");
+
+  const handleSubmit = async (values: any) => {
+    console.log(
+      "🚀 ~ file: AddEditBlog.tsx:14 ~ handleSubmit ~ values:",
+      values
+    );
+    // const formData = new FormData();
+    // formData.append("file", image);
+    // formData.append("fileName", image.name);
+
     try {
-      const res = await postsApi.addNewPost(values);
-      console.log("🚀 ~ file: SignIn.tsx:22 ~ handleSubmit ~ res", res.data);
+      // const res = await postsApi.addNewPost(values);
+      const res = await postsApi.uploadImage(image);
+      console.log("🚀 ~ file: AddEditBlog.tsx:25 ~ handleSubmit ~ res:", res);
+      // console.log("🚀 ~ file: SignIn.tsx:22 ~ handleSubmit ~ res", res.data);
       // localStorage.setItem("token", res.)
-      localStorage.setItem("token", res.data.token);
+      // localStorage.setItem("token", res.data.token);
     } catch (error) {
       console.log("🚀 ~ file: SignIn.tsx:20 ~ handleSubmit ~ error", error);
     }
@@ -25,6 +39,7 @@ export function AddEditBlog(props: IAddEditBlogProps) {
     subTitle: "",
     categories: "",
     content: "",
+    image: "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -52,8 +67,14 @@ export function AddEditBlog(props: IAddEditBlogProps) {
       onSubmit={(values, actions) => handleSubmit(values)}
     >
       {(formikProps) => {
-        const { values, handleChange, handleBlur, touched, errors } =
-          formikProps;
+        const {
+          setFieldValue,
+          values,
+          handleChange,
+          handleBlur,
+          touched,
+          errors,
+        } = formikProps;
         return (
           <Form>
             <TextField
@@ -99,6 +120,22 @@ export function AddEditBlog(props: IAddEditBlogProps) {
               error={touched.content && Boolean(errors.content)}
               helperText={touched.content && errors.content}
             />
+
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="label"
+            >
+              <input
+                // value={values.image}
+                name="image"
+                onChange={(e: any) => setimage(e.target.files[0])}
+                hidden
+                accept="image/*"
+                type="file"
+              />
+              <PhotoCamera />
+            </IconButton>
 
             <Button type="submit">Create new post</Button>
           </Form>

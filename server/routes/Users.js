@@ -5,27 +5,35 @@ const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
 router.post("/signup", async (req, res) => {
-  const { name, password, avatar } = req.body;
+  const { name, password, avatar, fullname } = req.body;
 
-  bcrypt.hash(password, 10).then((hash) => {
-    Users.create({
-      name: name,
-      avatar: avatar,
-      password: hash,
+  try {
+    const existedUser = await Users.findOne({ where: { username: name } });
+
+    if (!name || !password || !fullname) {
+      res.status(401).send({ message: "Some fields are missing 🤔" });
+    } else if (existedUser) {
+      res.status(401).send({ message: "This user already existed 🤧" });
+    }
+    await bcrypt.hash(password, 10).then((hash) => {
+      Users.create({
+        username: name,
+        avatar: avatar,
+        fullname: fullname,
+        password: hash,
+      });
     });
-  });
 
-  res.json("Sign up success");
+    await res.json({ message: "Sign up success 🥳" });
+  } catch (error) {
+    res.status(401).send({ message: `${error}` });
+  }
 });
 
 router.post("/signin", async (req, res) => {
   const { name, password } = req.body;
-  console.log("🚀 ~ file: Users.js:23 ~ router.post ~ { name, password }", {
-    name,
-    password,
-  });
 
-  const user = await Users.findOne({ where: { name: name } });
+  const user = await Users.findOne({ where: { username: name } });
 
   if (!user) res.json({ message: "Can not find your account!" });
 
@@ -37,7 +45,7 @@ router.post("/signin", async (req, res) => {
 
     const { password, ...rest } = user.dataValues;
 
-    res.json({ token: accessToken, ...rest });
+    res.json({ token: accessToken, ...rest, message: "Signin success 🥳" });
   });
 });
 

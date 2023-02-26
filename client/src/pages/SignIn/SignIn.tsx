@@ -1,5 +1,3 @@
-import "./SignIn.scss";
-
 import { AuthForm } from "../../features/auth/components/AuthForm";
 import AuthPage from "../../components/Common/Auth/AuthPage";
 

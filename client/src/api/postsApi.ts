@@ -32,6 +32,13 @@ const postsApi = {
     const url = `/posts/${params}`;
     return axiosClient.get(url);
   },
+
+  uploadImage(params: any): Promise<any> {
+    console.log("🚀 ~ file: postsApi.ts:37 ~ uploadImage ~ params:", params);
+    // const { image } = params;
+    const url = `/posts/upload`;
+    return axiosClient.post(url, params);
+  },
 };
 
 export default postsApi;
