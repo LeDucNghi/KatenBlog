@@ -5,6 +5,11 @@ module.exports = (sequalize, DataTypes) => {
       allowNull: false,
     },
 
+    image: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
     subTitle: {
       type: DataTypes.STRING,
       allowNull: false,

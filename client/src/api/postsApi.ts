@@ -33,11 +33,17 @@ const postsApi = {
     return axiosClient.get(url);
   },
 
-  uploadImage(params: any): Promise<any> {
-    console.log("🚀 ~ file: postsApi.ts:37 ~ uploadImage ~ params:", params);
-    // const { image } = params;
+  uploadImage(file: File): Promise<any> {
+    const formData = new FormData();
+
+    formData.append("image", file);
+
     const url = `/posts/upload`;
-    return axiosClient.post(url, params);
+    return axiosClient.post(url, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   },
 };
 

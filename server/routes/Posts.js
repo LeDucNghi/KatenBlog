@@ -1,73 +1,32 @@
 const express = require("express");
 const router = express.Router();
-const { Posts } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddlewares");
-const formidable = require("formidable");
-const fs = require("fs");
-const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, `images/`);
-  },
-  filename: function (req, file, cb) {
-    // const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
-
-const upload = multer({ storage: storage });
+const { upload } = require("../services/Posts/imageUpload");
+const {
+  getAllPost,
+  createPost,
+  getDetailPost,
+  postNewComment,
+  getDetailImage,
+  uploadImage,
+} = require("../controllers/Post");
 
 // get all post
-router.get("/getallpost", async (req, res) => {
-  const postList = await Posts.findAll();
-
-  res.json(postList);
-});
+router.get("/getallpost", getAllPost);
 
 // create a new post
-router.post("/createpost", validateToken, async (req, res) => {
-  const post = req.body;
+router.post("/createpost", validateToken, createPost);
 
-  post.UserId = req.user.id;
+// upload image
+router.post("/upload", upload, uploadImage);
 
-  await Posts.create(post);
-
-  res.json(post);
-});
-
-router.post("/upload", upload.single("file"), (req, res) => {
-  // console.log("🚀 ~ file: Posts.js:27 ~ router.post ~ req:", req.body);
-
-  upload(req, res, (err) => {
-    if (err instanceof multer.MulterError) {
-      return res.status(500).json(err);
-    } else if (err) {
-      return res.status(500).json(err);
-    }
-
-    return res.status(200).send({ message: `${req.file}` });
-  });
-});
+// get image
+router.get("/:publicId", getDetailImage);
 
 // get detail post
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-
-  // findByPk = find by primary key ( in the database - id is the primary key )
-  const post = await Posts.findByPk(id);
-
-  res.json(post);
-});
+router.get("/:id", getDetailPost);
 
 // posts comment
-router.post("/:id", validateToken, async (req, res) => {
-  const id = req.params.id;
-
-  // findByPk = find by primary key ( in the database - id is the primary key )
-  const post = await Posts.findByPk(id);
-
-  res.json(post);
-});
+router.post("/:id", validateToken, postNewComment);
 
 module.exports = router;

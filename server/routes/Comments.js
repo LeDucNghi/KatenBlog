@@ -16,7 +16,6 @@ router.get("/:id", async (req, res) => {
 // post comment
 router.post("/postcomment/:id", validateToken, async (req, res) => {
   const comment = req.body;
-  console.log("🚀 ~ file: Comments.js:19 ~ router.post ~ comment", comment);
 
   comment.UserId = req.user.id;
   comment.PostId = req.params.id;
