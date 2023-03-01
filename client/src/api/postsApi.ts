@@ -9,8 +9,16 @@ const postsApi = {
   },
 
   addNewPost(params: Post): Promise<any> {
+    const formData = new FormData();
+
+    // formData.append("image", params.image);
+
     const url = `/posts/createpost`;
-    return axiosClient.post(url, params);
+    return axiosClient.post(url, params, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   },
 
   updatePost(params: Post): Promise<any> {

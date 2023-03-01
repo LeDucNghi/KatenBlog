@@ -1,5 +1,4 @@
 const { Posts } = require("../models");
-const { uploadCloudinary } = require("../services/Posts/imageUpload");
 
 const getAllPost = async (req, res) => {
   const postList = await Posts.findAll();
@@ -8,27 +7,16 @@ const getAllPost = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const post = req.body;
+  const post = await req.body;
+
+  const image = await uploadImage(req, res);
 
   post.UserId = req.user.id;
+  post.image = image;
 
   await Posts.create(post);
 
-  res.json(post);
-};
-
-const uploadImage = async (req, res) => {
-  try {
-    res.setHeader("Content-Type", "multipart/form-data");
-
-    if (req.file) {
-      await uploadCloudinary(req.file.path);
-
-      await res.status(200).json({ message: "File uploaded" });
-    } else res.status(400).json({ message: "No file uploaded" });
-  } catch (error) {
-    console.log("🚀 ~ file: Posts.js:46 ~ router.post ~ error:", error);
-  }
+  res.status(200).json({ message: "Create post success 🥳", post });
 };
 
 const getDetailImage = async (req, res) => {
@@ -67,7 +55,6 @@ const postNewComment = async (req, res) => {
 module.exports = {
   getAllPost,
   createPost,
-  uploadImage,
   getDetailPost,
   postNewComment,
   getDetailImage,

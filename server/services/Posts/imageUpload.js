@@ -2,19 +2,33 @@ const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, `images`);
-  },
+  // destination: function (req, file, cb) {
+  //   cb(null, `images`);
+  // },
   filename: function (req, file, cb) {
-    console.log("🚀 ~ file: imageUpload.js:12 ~ file:", file);
-
-    if (file.originalname.includes === "blog")
-      cb(null, `blog ${file.originalname}`);
-    else cb(null, `avatar ${file.originalname}`);
+    cb(null, ` ${file.originalname}`);
   },
 });
 
 const upload = multer({ storage: storage }).single("image");
+
+const uploadImage = async (req, res) => {
+  try {
+    res.setHeader("Content-Type", "multipart/form-data");
+
+    if (req.file) {
+      const imageLink = await uploadCloudinary(req.file.path);
+
+      return imageLink;
+
+      // await res.status(200).json({ message: "File uploaded", imageLink });
+      // req.body.image = imageLink;
+      // next();
+    } else res.status(400).json({ message: "No file uploaded" });
+  } catch (error) {
+    console.log("🚀 ~ file: Posts.js:46 ~ router.post ~ error:", error);
+  }
+};
 
 const uploadCloudinary = async (imagePath) => {
   const options = {
@@ -27,7 +41,7 @@ const uploadCloudinary = async (imagePath) => {
     // Upload the image
     const result = await cloudinary.uploader.upload(imagePath, options);
     console.log(result);
-    return result.public_id;
+    return result.url;
   } catch (error) {
     console.error(error);
   }
@@ -35,5 +49,5 @@ const uploadCloudinary = async (imagePath) => {
 
 module.exports = {
   upload,
-  uploadCloudinary,
+  uploadImage,
 };

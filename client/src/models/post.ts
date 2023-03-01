@@ -4,7 +4,7 @@ export interface Post {
   subTitle: string;
   categories: string;
   content: string;
-  image?: string;
+  image?: File;
 
   createdAt?: string;
   updatedAt?: string;

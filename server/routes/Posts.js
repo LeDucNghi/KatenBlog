@@ -15,10 +15,10 @@ const {
 router.get("/getallpost", getAllPost);
 
 // create a new post
-router.post("/createpost", validateToken, createPost);
+router.post("/createpost", [validateToken, upload], createPost);
 
 // upload image
-router.post("/upload", upload, uploadImage);
+// router.post("/upload", upload, uploadImage);
 
 // get image
 router.get("/:publicId", getDetailImage);
