@@ -11,10 +11,14 @@ const postsApi = {
   addNewPost(params: Post): Promise<any> {
     const formData = new FormData();
 
-    // formData.append("image", params.image);
+    formData.append("image", params.image!);
+    formData.append("title", params.title);
+    formData.append("subTitle", params.subTitle);
+    formData.append("categories", params.categories);
+    formData.append("content", params.content);
 
     const url = `/posts/createpost`;
-    return axiosClient.post(url, params, {
+    return axiosClient.post(url, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

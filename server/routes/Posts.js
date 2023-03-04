@@ -8,7 +8,6 @@ const {
   getDetailPost,
   postNewComment,
   getDetailImage,
-  uploadImage,
 } = require("../controllers/Post");
 
 // get all post

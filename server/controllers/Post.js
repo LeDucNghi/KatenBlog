@@ -1,5 +1,7 @@
 const { Posts } = require("../models");
 
+const { uploadImage } = require("../services/Posts/imageUpload");
+
 const getAllPost = async (req, res) => {
   const postList = await Posts.findAll();
 
@@ -8,6 +10,7 @@ const getAllPost = async (req, res) => {
 
 const createPost = async (req, res) => {
   const post = await req.body;
+  console.log("🚀 ~ file: Post.js:11 ~ createPost ~ post:", post);
 
   const image = await uploadImage(req, res);
 
@@ -23,7 +26,7 @@ const getDetailImage = async (req, res) => {
   const id = req.params.publicId;
 
   if (!id)
-    return res.status(400).json({ message: "Can not found your picture" });
+    return res.status(400).json({ message: "Can not find your picture" });
 
   const url = await cloudinary.url(`${id}`, {
     width: 100,

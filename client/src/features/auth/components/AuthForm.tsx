@@ -39,7 +39,7 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
 
       if (res.data) {
         if (isSignin) {
-          localStorage.setItem("token", res.token);
+          localStorage.setItem("token", res.data.token!);
         }
 
         await toast(`${res.data.message} success 🥳`, {

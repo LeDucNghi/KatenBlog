@@ -35,7 +35,7 @@ router.post("/signin", async (req, res) => {
 
   const user = await Users.findOne({ where: { username: name } });
 
-  if (!user) res.json({ message: "Can not find your account!" });
+  if (!user) res.status(401).json({ message: "Can not find your account!" });
 
   //   using bcrypt to compare two password : 1 is from user request, 2 from DB
   bcrypt.compare(password, user.password).then((match) => {

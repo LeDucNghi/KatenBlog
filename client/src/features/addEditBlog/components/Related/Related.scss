@@ -1,0 +1,11 @@
+.addeditblog_foot {
+    position: relative;
+    width: 100%;
+
+    background: red;
+
+    .foot_blogs_related {
+        display: flex;
+        flex-direction: row;
+    }
+}

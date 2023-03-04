@@ -14,6 +14,7 @@ export function Footer(props: IFooterProps) {
   const { pathname } = useLocation();
 
   if (pathname === "/signin") return <></>;
+  // if (pathname === "/edit") return <></>;
   if (pathname === "/signup") return <></>;
 
   return (
