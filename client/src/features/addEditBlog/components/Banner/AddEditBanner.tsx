@@ -12,10 +12,10 @@ import TextField from "@mui/material/TextField";
 export interface IAddEditBannerProps {}
 
 export function AddEditBanner(props: IAddEditBannerProps) {
-  const [age, setAge] = React.useState("");
+  const [category, setCategory] = React.useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
+    setCategory(event.target.value);
   };
 
   return (
@@ -23,12 +23,13 @@ export function AddEditBanner(props: IAddEditBannerProps) {
       <div className="addedit_banner_content">
         <p className="banner_content_category">
           <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
-            <InputLabel id="demo-select-small">Age</InputLabel>
+            <InputLabel id="demo-select-small">Categoy</InputLabel>
             <Select
+              className="banner_input_field"
               labelId="demo-select-small"
               id="demo-select-small"
-              value={age}
-              label="Age"
+              value={category}
+              label="Categoy"
               onChange={handleChange}
             >
               {/* <MenuItem value="">
@@ -42,6 +43,7 @@ export function AddEditBanner(props: IAddEditBannerProps) {
         </p>
         <h2 className="banner_content_title">
           <TextField
+            className="banner_input_field"
             fullWidth
             label="Blog's Title"
             id="outlined-size-small"
@@ -51,6 +53,7 @@ export function AddEditBanner(props: IAddEditBannerProps) {
         </h2>
         <p className="banner_content_subtitle">
           <TextField
+            className="banner_input_field"
             fullWidth
             label="Blog's SubTitle"
             id="outlined-size-small"

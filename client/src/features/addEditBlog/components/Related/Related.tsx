@@ -9,7 +9,7 @@ export interface IRelatedBlogsProps {}
 export function RelatedBlogs(props: IRelatedBlogsProps) {
   return (
     <Box className="addeditblog_foot">
-      <Typography>RELATED ARTICLES</Typography>
+      <Typography className="foot_title">RELATED ARTICLES</Typography>
 
       <Box className="foot_blogs_related">
         {highestList.slice(0, 4).map((items, key) => {
