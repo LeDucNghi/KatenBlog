@@ -40,6 +40,7 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
       if (res.data) {
         if (isSignin) {
           localStorage.setItem("token", res.data.token!);
+          localStorage.setItem("information", JSON.stringify(res.data));
         }
 
         await toast(`${res.data.message} success 🥳`, {

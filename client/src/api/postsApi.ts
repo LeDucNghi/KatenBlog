@@ -1,4 +1,4 @@
-import { Post, PostListRes } from "../models";
+import { Post, PostData, PostListRes } from "../models";
 
 import axiosClient from "./axiosClient";
 
@@ -30,7 +30,7 @@ const postsApi = {
     return axiosClient.patch(url);
   },
 
-  getDetailPost(id: string): Promise<Post> {
+  getDetailPost(id: string | number): Promise<PostData<Post>> {
     const url = `/posts/${id}`;
     return axiosClient.get(url);
   },

@@ -10,7 +10,6 @@ const getAllPost = async (req, res) => {
 
 const createPost = async (req, res) => {
   const post = await req.body;
-  console.log("🚀 ~ file: Post.js:11 ~ createPost ~ post:", post);
 
   const image = await uploadImage(req, res);
 
@@ -39,11 +38,20 @@ const getDetailImage = async (req, res) => {
 
 const getDetailPost = async (req, res) => {
   const id = req.params.id;
+  // console.log("req.user: ", req.user);
 
   // findByPk = find by primary key ( in the database - id is the primary key )
   const post = await Posts.findByPk(id);
 
-  res.json(post);
+  if (!post) res.status(404).json({ message: "Not found your blog" });
+  else {
+    // if (post.UserId === req.user.id) {
+    //   res.status(200).json({ post, checkUser: "isPoster" });
+    // } else {
+    //   res.status(200).json({ post, checkUser: "isPoster" });
+    // }
+    res.status(200).json({ post });
+  }
 };
 
 const postNewComment = async (req, res) => {

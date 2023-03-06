@@ -1,11 +1,19 @@
 export interface Post {
-  id?: number;
+  id?: string | number;
   title: string;
+  image?: File | string;
   subTitle: string;
   categories: string;
   content: string;
-  image?: File;
 
   createdAt?: string;
   updatedAt?: string;
+
+  UserId?: number | string;
+}
+
+export interface PostData<T> {
+  data: {
+    post: T;
+  };
 }
