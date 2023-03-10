@@ -10,7 +10,7 @@ const {
   getDetailImage,
 } = require("../controllers/Post");
 
-const { Posts } = require("../models")
+const { Posts } = require("../models");
 
 // get all post
 router.get("/getallpost", getAllPost);
@@ -31,16 +31,25 @@ router.get("/:id", validateToken, getDetailPost);
 router.post("/:id", validateToken, postNewComment);
 
 // update post
-router.patch("/:id", validateToken, async (req, res) => {
-  const id = req.params.id
+router.put("/:id", validateToken, async (req, res) => {
+  const id = req.params.id;
 
-  const contentChanged = req.body
+  const { title, image, subTitle, categories, content } = req.body;
 
-  if(!contentChanged) {
-    res.status(400).send({message : "Nothing changed"})
-  }
+  // if(!contentChanged) {
+  //   res.status(400).send({message : "Nothing changed"})
+  // }
 
-  await Posts.update()
+  await Posts.update(
+    {
+      title,
+      image,
+      subTitle,
+      categories,
+      content,
+    },
+    { where: { id: id } }
+  );
 });
 
 module.exports = router;

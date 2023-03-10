@@ -4,13 +4,16 @@ import * as Yup from "yup";
 
 import { Form, Formik } from "formik";
 import { Post, Profile } from "../../models";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
 import { AddEditBanner } from "../../features/addEditBlog/components/Banner/AddEditBanner";
 import { AddEditBody } from "../../features/addEditBlog/components/Body/AddEdtiBody";
 import { RelatedBlogs } from "../../features/addEditBlog/components/Related/Related";
 import postsApi from "../../api/postsApi";
-import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
+// import { AddEditBanner } from "../../features/addEditBlog/components/Banner/AddEditBanner";
 
 export interface IAddEditBlogProps {
   check?: "isGuest" | "isPoster" | "isAdd";
@@ -18,6 +21,7 @@ export interface IAddEditBlogProps {
 
 export default function AddEditBlog({ check }: IAddEditBlogProps) {
   const { id } = useParams<string>();
+  const { pathname } = useLocation();
   const account = JSON.parse(localStorage.getItem("information")!) as Profile;
 
   var [image, setImage] = useState<File>();
@@ -30,11 +34,14 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    handleGetDetailPost();
-  }, [id]);
+    if (pathname === "/edit") {
+      setUserType({ ...userType, isAdd: true });
+    } else {
+      handleGetDetailPost();
+    }
+  }, [id, pathname]);
 
   const handleGetDetailPost = async () => {
-    await setIsLoading(true);
     try {
       const res = await postsApi.getDetailPost(id!);
       if (res.data) {
@@ -60,6 +67,8 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
   };
 
   const handleSubmit = async (values: Post) => {
+    await setIsLoading(true);
+
     const newName = `blog ${image?.name} `;
 
     const myNewFile = await new File([image!], newName);
@@ -73,6 +82,20 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
     try {
       const res = await postsApi.addNewPost(newValue);
       console.log("🚀 ~ file: AddEditBlog.tsx:25 ~ handleSubmit ~ res:", res);
+      if (res) {
+        toast.success("🦄 Upload post successful 🥳", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+
+        await setIsLoading(false);
+      }
     } catch (error) {
       console.log("🚀 ~ file: SignIn.tsx:20 ~ handleSubmit ~ error", error);
     }
@@ -93,12 +116,11 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
   const validationSchema = Yup.object().shape({
     title: Yup.string()
       .min(1, "Title is too short")
-      .max(30, "Title is too long")
       .required("Let us know your blog's title 🤔"),
 
     subTitle: Yup.string()
       .min(1, "Sub Title is too short")
-      .max(30, "Sub Title is too long")
+      .max(100, "Sub Title is too long")
       .required("Let us know your blog's sub title 🤔"),
 
     categories: Yup.string().required("Let us know your blog's category 🤔"),
@@ -138,6 +160,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
               handleBlur={handleBlur}
               touched={touched}
               errors={errors}
+              isLoading={isLoading}
             />
 
             <RelatedBlogs />

@@ -5,7 +5,6 @@ import { Post, UserType } from "../../../../models";
 import Button from "@mui/material/Button";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -56,15 +55,13 @@ export function AddEditBanner({
                 labelId="demo-simple-select-error-label"
                 id="demo-simple-select-error"
                 value={
-                  userType.isAdd || userType.isPoster
-                    ? blogData?.categories
-                    : values.categories
+                  userType.isPoster ? blogData?.categories : values.categories
                 }
                 label="Categoy"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                error={touched.title && Boolean(errors.title)}
-                // helperText={touched.title && errors.title}
+                error={touched.categories && Boolean(errors.categories)}
+                // helperText={touched.categories && errors.categories}
               >
                 {categoriesOptions.map((items, key) => {
                   return (
@@ -75,7 +72,9 @@ export function AddEditBanner({
                 })}
               </Select>
 
-              <FormHelperText>{touched.title && errors.title}</FormHelperText>
+              {/* <FormHelperText> */}
+              <p>{touched.categories && errors.categories}</p>
+              {/* </FormHelperText> */}
             </FormControl>
           )}
         </p>
@@ -90,11 +89,7 @@ export function AddEditBanner({
               id="outlined-size-small"
               size="small"
               name="title"
-              value={
-                userType.isAdd || userType.isPoster
-                  ? blogData?.title
-                  : values.title
-              }
+              value={userType.isPoster ? blogData?.title : values.title}
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.title && Boolean(errors.title)}
@@ -114,11 +109,7 @@ export function AddEditBanner({
               id="outlined-size-small"
               size="small"
               name="subTitle"
-              value={
-                userType.isAdd || userType.isPoster
-                  ? blogData?.subTitle
-                  : values?.subTitle
-              }
+              value={userType.isPoster ? blogData?.subTitle : values?.subTitle}
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.subTitle && Boolean(errors.subTitle)}
@@ -143,7 +134,7 @@ export function AddEditBanner({
         )}
         <img
           src={
-            userType.isAdd || userType.isPoster
+            userType.isPoster
               ? `${blogData?.image}`
               : image
               ? `${image}`

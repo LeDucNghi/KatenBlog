@@ -41,7 +41,15 @@ function App() {
 
         <Route index path="signin" element={<SignIn />} />
 
-        <Route index path="edit" element={<AddEditBlog />} />
+        <Route
+          index
+          path="edit"
+          element={
+            <Suspense fallback={<Loading />}>
+              <AddEditBlog />
+            </Suspense>
+          }
+        />
 
         <Route
           index

@@ -64,3 +64,52 @@
         }
     }
 }
+
+@media only screen and (max-width: 320px) {
+    .addeditblog_foot {
+        margin-top: 5em;
+
+        .foot_title {
+            &::before {
+                content: "";
+
+                width: 55%;
+            }
+        }
+
+        .foot_blogs_related {
+            flex-wrap: wrap;
+
+            .blogs_related_items {
+                width: 49%;
+
+                margin-bottom: 1em;
+
+                .related_items_img {
+                    width: 9em;
+                    height: 9em;
+                }
+
+                .related_items_content {
+                    padding-right: 0.5em;
+
+                    .items_content_category {
+                        font-size: 0.8em;
+                        margin: 0.5em 0;
+                    }
+
+                    .items_content_title {
+                        font-size: 1em;
+                        margin: 0.5em 0;
+                    }
+
+                    .items_content_subtitle,
+                    .items_content_time {
+                        font-size: 0.9em;
+                        margin: 0.5em 0;
+                    }
+                }
+            }
+        }
+    }
+}

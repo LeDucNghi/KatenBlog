@@ -1,7 +1,10 @@
+import "./AddEdtiBody.scss";
+
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { Post, UserType } from "../../../../models";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { LoadingButton } from "@mui/lab";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
@@ -13,6 +16,7 @@ export interface IAddEditBodyProps {
   errors: any;
   userType: UserType;
   blogData: Post;
+  isLoading: boolean;
 }
 
 export function AddEditBody({
@@ -23,6 +27,7 @@ export function AddEditBody({
   errors,
   userType,
   blogData,
+  isLoading,
 }: IAddEditBodyProps) {
   return (
     <Box className="addeditblog_body">
@@ -64,13 +69,14 @@ export function AddEditBody({
               rows={10}
             />
 
-            <Button
+            <LoadingButton
+              loading={isLoading}
               className="addedit_form_button"
               variant="contained"
               type="submit"
             >
               Create new post
-            </Button>
+            </LoadingButton>
           </>
         )}
       </Box>
