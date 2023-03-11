@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const { validateToken } = require("../middlewares/AuthMiddlewares");
-const { upload } = require("../services/Posts/imageUpload");
+const { upload, uploadImage } = require("../services/Posts/imageUpload");
 const {
   getAllPost,
   createPost,
   getDetailPost,
   postNewComment,
-  getDetailImage,
+  updatePost,
 } = require("../controllers/Post");
 
 const { Posts } = require("../models");
@@ -31,25 +31,6 @@ router.get("/:id", validateToken, getDetailPost);
 router.post("/:id", validateToken, postNewComment);
 
 // update post
-router.put("/:id", validateToken, async (req, res) => {
-  const id = req.params.id;
-
-  const { title, image, subTitle, categories, content } = req.body;
-
-  // if(!contentChanged) {
-  //   res.status(400).send({message : "Nothing changed"})
-  // }
-
-  await Posts.update(
-    {
-      title,
-      image,
-      subTitle,
-      categories,
-      content,
-    },
-    { where: { id: id } }
-  );
-});
+router.put("/:id", [validateToken, upload], updatePost);
 
 module.exports = router;

@@ -45,7 +45,7 @@ export function AddEditBanner({
       <div className="addedit_banner_content">
         <p className="banner_content_category">
           {userType.isGuest ? (
-            `${blogData?.categories}`
+            `${blogData.categories}`
           ) : (
             <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
               <InputLabel id="demo-select-small">Categoy</InputLabel>
@@ -54,9 +54,7 @@ export function AddEditBanner({
                 className="banner_input_field"
                 labelId="demo-simple-select-error-label"
                 id="demo-simple-select-error"
-                value={
-                  userType.isPoster ? blogData?.categories : values.categories
-                }
+                value={values?.categories}
                 label="Categoy"
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -80,7 +78,7 @@ export function AddEditBanner({
         </p>
         <h2 className="banner_content_title">
           {userType.isGuest ? (
-            `${blogData?.title}`
+            `${blogData.title}`
           ) : (
             <TextField
               className="banner_input_field"
@@ -89,7 +87,7 @@ export function AddEditBanner({
               id="outlined-size-small"
               size="small"
               name="title"
-              value={userType.isPoster ? blogData?.title : values.title}
+              value={values?.title}
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.title && Boolean(errors.title)}
@@ -100,7 +98,7 @@ export function AddEditBanner({
 
         <p className="banner_content_subtitle">
           {userType.isGuest ? (
-            `${blogData?.subTitle}`
+            `${blogData.subTitle}`
           ) : (
             <TextField
               className="banner_input_field"
@@ -109,7 +107,7 @@ export function AddEditBanner({
               id="outlined-size-small"
               size="small"
               name="subTitle"
-              value={userType.isPoster ? blogData?.subTitle : values?.subTitle}
+              value={values?.subTitle}
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.subTitle && Boolean(errors.subTitle)}
@@ -134,10 +132,10 @@ export function AddEditBanner({
         )}
         <img
           src={
-            userType.isPoster
-              ? `${blogData?.image}`
-              : image
+            image
               ? `${image}`
+              : values.image
+              ? `${values?.image}`
               : "https://images.unsplash.com/photo-1519638399535-1b036603ac77?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80"
           }
           alt=""

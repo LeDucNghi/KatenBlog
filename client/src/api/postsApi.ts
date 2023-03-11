@@ -12,10 +12,10 @@ const postsApi = {
     const formData = new FormData();
 
     formData.append("image", params.image!);
-    formData.append("title", params.title);
-    formData.append("subTitle", params.subTitle);
-    formData.append("categories", params.categories);
-    formData.append("content", params.content);
+    formData.append("title", params.title!);
+    formData.append("subTitle", params.subTitle!);
+    formData.append("categories", params.categories!);
+    formData.append("content", params.content!);
 
     const url = `/posts/createpost`;
     return axiosClient.post(url, formData, {
@@ -26,11 +26,23 @@ const postsApi = {
   },
 
   updatePost(params: Post): Promise<any> {
+    const formData = new FormData();
+
+    formData.append("image", params.image!);
+    formData.append("title", params.title!);
+    formData.append("subTitle", params.subTitle!);
+    formData.append("categories", params.categories!);
+    formData.append("content", params.content!);
+
     const url = `/posts/${params.id}`;
-    return axiosClient.patch(url);
+    return axiosClient.put(url, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   },
 
-  getDetailPost(id: string | number): Promise<PostData<Post>> {
+  getDetailPost(id: string | number): Promise<PostData> {
     const url = `/posts/${id}`;
     return axiosClient.get(url);
   },

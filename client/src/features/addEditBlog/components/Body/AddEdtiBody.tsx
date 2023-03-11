@@ -56,11 +56,7 @@ export function AddEditBody({
               label="Content"
               variant="outlined"
               name="content"
-              value={
-                userType.isAdd || userType.isPoster
-                  ? blogData?.content
-                  : values?.content
-              }
+              value={values.content}
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.content && Boolean(errors.content)}
@@ -70,7 +66,7 @@ export function AddEditBody({
             />
 
             <LoadingButton
-              loading={isLoading}
+              // loading={isLoading}
               className="addedit_form_button"
               variant="contained"
               type="submit"

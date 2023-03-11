@@ -43,7 +43,7 @@ function App() {
 
         <Route
           index
-          path="edit"
+          path="add"
           element={
             <Suspense fallback={<Loading />}>
               <AddEditBlog />

@@ -63,10 +63,36 @@ const postNewComment = async (req, res) => {
   res.json(post);
 };
 
+const updatePost = async (req, res) => {
+  const id = req.params.id;
+
+  const { title, subTitle, categories, content } = req.body;
+
+  const image = await uploadImage(req, res);
+
+  if (!req.body || !id) {
+    res.status(400).send({ message: "Something is missing 🤔" });
+  }
+
+  await Posts.update(
+    {
+      title,
+      image,
+      subTitle,
+      categories,
+      content,
+    },
+    { where: { id: id } }
+  );
+
+  res.status(200).json({ message: `Update blog ${id} successfully 🥳` });
+};
+
 module.exports = {
   getAllPost,
   createPost,
   getDetailPost,
+  updatePost,
   postNewComment,
   getDetailImage,
 };

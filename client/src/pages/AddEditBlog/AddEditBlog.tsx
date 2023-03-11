@@ -30,7 +30,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
     isPoster: false,
     isAdd: false,
   });
-  var [blogData, setBlogData] = useState<Post | null>(null);
+  var [blogData, setBlogData] = useState<Post>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
         blogData = await res.data.post;
         await setBlogData(blogData);
 
-        await setIsLoading(true);
+        setIsLoading(true);
       }
     } catch (error) {
       console.log(
@@ -77,22 +77,29 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
 
     await setImage(image);
 
-    const newValue = { ...values, image: image };
+    const newValue = userType.isPoster
+      ? { ...values, image: image, id: id }
+      : { ...values, image: image };
 
     try {
-      const res = await postsApi.addNewPost(newValue);
+      const res = userType.isPoster
+        ? await postsApi.updatePost(newValue)
+        : await postsApi.addNewPost(newValue);
       console.log("🚀 ~ file: AddEditBlog.tsx:25 ~ handleSubmit ~ res:", res);
       if (res) {
-        toast.success("🦄 Upload post successful 🥳", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        toast.success(
+          `🦄 ${userType.isPoster ? `Upload` : `Update`} post successful 🥳`,
+          {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          }
+        );
 
         await setIsLoading(false);
       }
@@ -106,11 +113,11 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
   };
 
   const initialValues: Post = {
-    title: "",
-    subTitle: "",
-    categories: "",
-    content: "",
-    image: "",
+    title: `${userType.isPoster ? blogData?.title : ""}`,
+    subTitle: userType.isPoster ? blogData?.subTitle : "",
+    categories: userType.isPoster ? blogData?.categories : "",
+    content: userType.isPoster ? blogData?.content : "",
+    image: userType.isPoster ? blogData?.image : "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -132,6 +139,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
 
   return (
     <Formik
+      enableReinitialize
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values, actions) => handleSubmit(values)}
@@ -139,6 +147,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
       {(formikProps) => {
         const { values, handleChange, handleBlur, touched, errors } =
           formikProps;
+
         return (
           <Form className="addeditblog_container">
             <AddEditBanner
@@ -163,7 +172,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
               isLoading={isLoading}
             />
 
-            <RelatedBlogs />
+            {(userType.isGuest || userType.isPoster) && <RelatedBlogs />}
           </Form>
         );
       }}
