@@ -1,0 +1,30 @@
+@use "../../../../assets/styles/globalStyles.scss";
+
+.comment_container {
+    position: relative;
+
+    margin: 3em 0;
+
+    width: 80%;
+
+    // background: yellow;
+
+    .comment_title {
+        color: globalStyles.$category-color;
+    }
+
+    .comment_warn {
+        font-style: italic;
+    }
+
+    .comment_button {
+        background-color: globalStyles.$button-color;
+    }
+
+    .comment_button,
+    .comment_warn,
+    .comment_title,
+    .comment_field {
+        margin: 0.7em 0;
+    }
+}

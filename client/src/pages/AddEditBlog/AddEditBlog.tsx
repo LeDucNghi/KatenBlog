@@ -9,6 +9,9 @@ import { useLocation, useParams } from "react-router-dom";
 
 import { AddEditBanner } from "../../features/addEditBlog/components/Banner/AddEditBanner";
 import { AddEditBody } from "../../features/addEditBlog/components/Body/AddEdtiBody";
+import { Box } from "@mui/material";
+import { Comment } from "../../features/addEditBlog/components/Comment/Comment";
+import { CommentList } from "../../features/addEditBlog/components/CommentList/CommentList";
 import { RelatedBlogs } from "../../features/addEditBlog/components/Related/Related";
 import postsApi from "../../api/postsApi";
 import { toast } from "react-toastify";
@@ -34,7 +37,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (pathname === "/edit") {
+    if (pathname === "/add") {
       setUserType({ ...userType, isAdd: true });
     } else {
       handleGetDetailPost();
@@ -136,46 +139,54 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
       .min(1, "Your content is too short")
       .required("Let us know your blog's content 🤔"),
   });
+  console.log(
+    "🚀 ~ file: AddEditBlog.tsx:36 ~ AddEditBlog ~ userType:",
+    userType
+  );
 
   return (
-    <Formik
-      enableReinitialize
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={(values, actions) => handleSubmit(values)}
-    >
-      {(formikProps) => {
-        const { values, handleChange, handleBlur, touched, errors } =
-          formikProps;
+    <Box className="addeditblog_container">
+      <Formik
+        enableReinitialize
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={(values, actions) => handleSubmit(values)}
+      >
+        {(formikProps) => {
+          const { values, handleChange, handleBlur, touched, errors } =
+            formikProps;
 
-        return (
-          <Form className="addeditblog_container">
-            <AddEditBanner
-              blogData={blogData!}
-              userType={userType}
-              values={values}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              imageFile={imageFile}
-              touched={touched}
-              errors={errors}
-            />
+          return (
+            <Form>
+              <AddEditBanner
+                blogData={blogData!}
+                userType={userType}
+                values={values}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                imageFile={imageFile}
+                touched={touched}
+                errors={errors}
+              />
 
-            <AddEditBody
-              blogData={blogData!}
-              userType={userType}
-              values={values}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              touched={touched}
-              errors={errors}
-              isLoading={isLoading}
-            />
+              <AddEditBody
+                blogData={blogData!}
+                userType={userType}
+                values={values}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                touched={touched}
+                errors={errors}
+                isLoading={isLoading}
+              />
+            </Form>
+          );
+        }}
+      </Formik>
 
-            {(userType.isGuest || userType.isPoster) && <RelatedBlogs />}
-          </Form>
-        );
-      }}
-    </Formik>
+      {(userType.isGuest || userType.isPoster) && <CommentList id={`${id}`} />}
+      {userType.isGuest && <Comment id={`${id}`} />}
+      {(userType.isGuest || userType.isPoster) && <RelatedBlogs />}
+    </Box>
   );
 }

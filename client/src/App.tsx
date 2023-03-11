@@ -1,10 +1,8 @@
 import "./App.css";
 
 import { Navigate, Route, Routes } from "react-router-dom";
-// import { Home } from "";
 import { Suspense, lazy, useEffect } from "react";
 
-// import { AddEditBlog } from "";
 import { Footer } from "./components/Common/Footer/Footer";
 import { Header } from "./components/Common/Header/Header";
 import { Loading } from "./components/Common/Loading/Loading";
