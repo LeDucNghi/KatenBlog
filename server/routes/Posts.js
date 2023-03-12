@@ -10,7 +10,7 @@ const {
   updatePost,
 } = require("../controllers/Post");
 
-const { Posts } = require("../models");
+const { Likes, Posts } = require("../models");
 
 // get all post
 router.get("/getallpost", getAllPost);
@@ -25,12 +25,33 @@ router.post("/createpost", [validateToken, upload], createPost);
 // router.get("/:publicId", getDetailImage);
 
 // get detail post
-router.get("/:id", validateToken, getDetailPost);
+router.get("/detail/:id", validateToken, getDetailPost);
 
 // posts comment
-router.post("/:id", validateToken, postNewComment);
+router.post("/comment/:id", validateToken, postNewComment);
 
 // update post
 router.put("/:id", [validateToken, upload], updatePost);
+
+// like post
+router.post("/like/:id", validateToken, async (req, res) => {
+  const PostId = req.params.id;
+
+  const UserId = req.user.id;
+
+  const findPostLiked = await Likes.findOne({
+    where: { PostId: PostId, UserId: UserId },
+  });
+
+  if (!findPostLiked) {
+    await Likes.create({ UserId, PostId });
+
+    res.json({ message: `Post ${PostId} is liked` });
+  } else {
+    await Likes.destroy({ where: { PostId: PostId, UserId: UserId } });
+
+    res.json({ message: `Post ${PostId} is unliked` });
+  }
+});
 
 module.exports = router;

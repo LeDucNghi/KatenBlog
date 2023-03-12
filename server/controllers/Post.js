@@ -1,4 +1,4 @@
-const { Posts } = require("../models");
+const { Posts, Likes } = require("../models");
 
 const { uploadImage } = require("../services/Posts/imageUpload");
 
@@ -37,10 +37,15 @@ const getDetailImage = async (req, res) => {
 };
 
 const getDetailPost = async (req, res) => {
+  const { postId } = req.body;
   const id = req.params.id;
+  const userId = req.user.id;
+
+  const likedPost = await Likes.findOne({
+    where: { UserId: userId, PostId: postId },
+  });
   // console.log("req.user: ", req.user);
 
-  // findByPk = find by primary key ( in the database - id is the primary key )
   const post = await Posts.findByPk(id);
 
   if (!post) res.status(404).json({ message: "Not found your blog" });

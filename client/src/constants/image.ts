@@ -1,5 +1,5 @@
-import logoBrand from "../assets/brand/brand-logo.png"
+import logoBrand from "../assets/brand/brand-logo.png";
 
 export const images = {
-logoBrand
-}
+  logoBrand,
+};

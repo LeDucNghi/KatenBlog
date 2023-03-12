@@ -31,9 +31,9 @@ module.exports = (sequalize, DataTypes) => {
       onDelete: "cascade",
     });
 
-    // Posts.hasMany(models.Likes, {
-    //   onDelete: "cascade",
-    // });
+    Posts.hasMany(models.Likes, {
+      onDelete: "cascade",
+    });
   };
 
   return Posts;

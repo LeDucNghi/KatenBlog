@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import moment from "moment";
 
 export const highestList = [
   {
@@ -52,4 +53,12 @@ export const highestList = [
 export const blogs = [...Array(6)].map((_, index) => ({
   id: faker.datatype.uuid(),
   img: faker.image.nightlife(),
+}));
+
+export const comments = [...Array(3)].map((_, index) => ({
+  id: faker.datatype.uuid(),
+  img: faker.image.avatar(),
+  name: faker.name.fullName(),
+  date: moment(faker.date.recent()).format("LL"),
+  comment: faker.lorem.paragraph(),
 }));
