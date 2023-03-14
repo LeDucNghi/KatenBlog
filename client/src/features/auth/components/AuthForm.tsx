@@ -59,6 +59,16 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
       }
     } catch (error: any) {
       if (error) {
+        toast(`${error.response.data.message} 😢`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         console.log(error.response.data.message);
       }
     }

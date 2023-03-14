@@ -8,9 +8,8 @@ const {
   getDetailPost,
   postNewComment,
   updatePost,
+  likePost,
 } = require("../controllers/Post");
-
-const { Likes, Posts } = require("../models");
 
 // get all post
 router.get("/getallpost", getAllPost);
@@ -34,24 +33,6 @@ router.post("/comment/:id", validateToken, postNewComment);
 router.put("/:id", [validateToken, upload], updatePost);
 
 // like post
-router.post("/like/:id", validateToken, async (req, res) => {
-  const PostId = req.params.id;
-
-  const UserId = req.user.id;
-
-  const findPostLiked = await Likes.findOne({
-    where: { PostId: PostId, UserId: UserId },
-  });
-
-  if (!findPostLiked) {
-    await Likes.create({ UserId, PostId });
-
-    res.json({ message: `Post ${PostId} is liked` });
-  } else {
-    await Likes.destroy({ where: { PostId: PostId, UserId: UserId } });
-
-    res.json({ message: `Post ${PostId} is unliked` });
-  }
-});
+router.post("/like/:id", validateToken, likePost);
 
 module.exports = router;

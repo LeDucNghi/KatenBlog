@@ -43,7 +43,7 @@ const postsApi = {
   },
 
   getDetailPost(id: string | number): Promise<PostData> {
-    const url = `/posts/${id}`;
+    const url = `/posts/detail/${id}`;
     return axiosClient.get(url);
   },
 

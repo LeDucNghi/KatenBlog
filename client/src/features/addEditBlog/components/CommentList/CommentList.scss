@@ -1,3 +1,5 @@
+@use "../../../../assets/styles/globalStyles.scss";
+
 .comment_list_container {
     position: relative;
 
@@ -5,7 +7,16 @@
 
     // background: red;
 
+    font-size: 15px;
+
     .comment_items {
         margin: 1em 0;
+    }
+
+    .comment_list_title {
+        font-size: 1.5em;
+        font-weight: 600;
+        text-decoration: underline;
+        color: globalStyles.$button-color;
     }
 }

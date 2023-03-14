@@ -2,6 +2,8 @@ import "./CommentList.scss";
 
 import * as React from "react";
 
+import { Paper, Typography } from "@mui/material";
+
 import Avatar from "@mui/material/Avatar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -11,7 +13,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
-import { Paper } from "@mui/material";
 import { comments } from "../../../../mock";
 
 export interface ICommentListProps {
@@ -20,6 +21,7 @@ export interface ICommentListProps {
 
 export function CommentList({ id }: ICommentListProps) {
   const [isLiked, setIsLiked] = React.useState<boolean>(false);
+  // const [commentList, setCommentList] = React.useState<comments[]>();
 
   const handleLikePost = () => {
     setIsLiked(!isLiked);
@@ -32,6 +34,11 @@ export function CommentList({ id }: ICommentListProps) {
 
   return (
     <div className="comment_list_container">
+      <Typography className="comment_list_title">
+        {comments.length < 10 ? `0${comments.length}` : `${comments.length}`}{" "}
+        Comments
+      </Typography>
+
       <List dense={false}>
         {comments.map((items, key) => {
           return (
@@ -56,9 +63,18 @@ export function CommentList({ id }: ICommentListProps) {
                   <Avatar src={items.img} />
                 </ListItemAvatar>
                 <ListItemText
-                  primary={`${items.name} - ${items.date}`}
-                  secondary={`${items.comment}`}
+                  primary={
+                    <>
+                      <span className="comment_list_username">
+                        {items.name}{" "}
+                      </span>
+                      - <span className="comment_list_time">{items.date}</span>
+                    </>
+                  }
+                  secondary={items.comment}
                 />
+
+                {/* <ListItemText primary={items.date} /> */}
               </ListItem>
             </Paper>
           );

@@ -47,6 +47,10 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
   const handleGetDetailPost = async () => {
     try {
       const res = await postsApi.getDetailPost(id!);
+      console.log(
+        "🚀 ~ file: AddEditBlog.tsx:50 ~ handleGetDetailPost ~ res:",
+        res.data
+      );
       if (res.data) {
         if (res.data.post.UserId === account.id) {
           userType = await { ...userType, isPoster: true };

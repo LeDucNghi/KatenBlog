@@ -9,7 +9,12 @@
 
     // background: yellow;
 
+    font-size: 15px;
+
     .comment_title {
+        text-decoration: underline;
+        font-size: 1.5em;
+        font-weight: 600;
         color: globalStyles.$category-color;
     }
 
@@ -26,5 +31,16 @@
     .comment_title,
     .comment_field {
         margin: 0.7em 0;
+    }
+
+    .MuiListItemText-primary {
+        .comment_list_time {
+            font-weight: 600;
+            // color: globalStyles.$time-color;
+            color: red;
+        }
+    }
+    .css-83ijpv-MuiTypography-root {
+        padding: 0 1em;
     }
 }
