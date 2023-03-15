@@ -3,7 +3,12 @@ import "./AddEdit.scss";
 import * as Yup from "yup";
 
 import { Form, Formik } from "formik";
-import { Post, Profile } from "../../models";
+import {
+  addEditPost,
+  handleGetDetailPost,
+} from "../../features/addEditBlog/addEditThunk";
+import { selectGetUserType, setUserType } from "../../features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
@@ -12,11 +17,9 @@ import { AddEditBody } from "../../features/addEditBlog/components/Body/AddEdtiB
 import { Box } from "@mui/material";
 import { Comment } from "../../features/addEditBlog/components/Comment/Comment";
 import { CommentList } from "../../features/addEditBlog/components/CommentList/CommentList";
+import { Post } from "../../models";
 import { RelatedBlogs } from "../../features/addEditBlog/components/Related/Related";
-import postsApi from "../../api/postsApi";
-import { toast } from "react-toastify";
-
-// import { AddEditBanner } from "../../features/addEditBlog/components/Banner/AddEditBanner";
+import { selectPostData } from "../../features/addEditBlog/addEditSlice";
 
 export interface IAddEditBlogProps {
   check?: "isGuest" | "isPoster" | "isAdd";
@@ -25,102 +28,23 @@ export interface IAddEditBlogProps {
 export default function AddEditBlog({ check }: IAddEditBlogProps) {
   const { id } = useParams<string>();
   const { pathname } = useLocation();
-  const account = JSON.parse(localStorage.getItem("information")!) as Profile;
+  const dispatch = useAppDispatch();
+  const blogData = useAppSelector(selectPostData);
+  const userType = useAppSelector(selectGetUserType);
 
-  var [image, setImage] = useState<File>();
-  var [userType, setUserType] = useState({
-    isGuest: false,
-    isPoster: false,
-    isAdd: false,
-  });
-  var [blogData, setBlogData] = useState<Post>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  // var [image, setImage] = useState<File>();
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (pathname === "/add") {
-      setUserType({ ...userType, isAdd: true });
+      dispatch(setUserType({ ...userType, isAdd: true }));
     } else {
-      handleGetDetailPost();
+      dispatch(handleGetDetailPost(id!));
     }
   }, [id, pathname]);
 
-  const handleGetDetailPost = async () => {
-    try {
-      const res = await postsApi.getDetailPost(id!);
-      console.log(
-        "🚀 ~ file: AddEditBlog.tsx:50 ~ handleGetDetailPost ~ res:",
-        res.data
-      );
-      if (res.data) {
-        if (res.data.post.UserId === account.id) {
-          userType = await { ...userType, isPoster: true };
-          await setUserType(userType);
-        } else if (!account || res.data.post.UserId !== account.id) {
-          userType = await { ...userType, isGuest: true };
-          await setUserType(userType);
-        }
-
-        blogData = await res.data.post;
-        await setBlogData(blogData);
-
-        setIsLoading(true);
-      }
-    } catch (error) {
-      console.log(
-        "🚀 ~ file: AddEditBlog.tsx:32 ~ handleGetDetailPost ~ error:",
-        error
-      );
-    }
-  };
-
-  const handleSubmit = async (values: Post) => {
-    await setIsLoading(true);
-
-    const newName = `blog ${image?.name} `;
-
-    const myNewFile = await new File([image!], newName);
-
-    image = await myNewFile;
-
-    await setImage(image);
-
-    const newValue = userType.isPoster
-      ? { ...values, image: image, id: id }
-      : { ...values, image: image };
-
-    try {
-      const res = userType.isPoster
-        ? await postsApi.updatePost(newValue)
-        : await postsApi.addNewPost(newValue);
-      console.log("🚀 ~ file: AddEditBlog.tsx:25 ~ handleSubmit ~ res:", res);
-      if (res) {
-        toast.success(
-          `🦄 ${userType.isPoster ? `Upload` : `Update`} post successful 🥳`,
-          {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          }
-        );
-
-        await setIsLoading(false);
-      }
-    } catch (error) {
-      console.log("🚀 ~ file: SignIn.tsx:20 ~ handleSubmit ~ error", error);
-    }
-  };
-
-  const imageFile = (file: File) => {
-    setImage(file);
-  };
-
   const initialValues: Post = {
-    title: `${userType.isPoster ? blogData?.title : ""}`,
+    title: userType.isPoster ? blogData?.title : "",
     subTitle: userType.isPoster ? blogData?.subTitle : "",
     categories: userType.isPoster ? blogData?.categories : "",
     content: userType.isPoster ? blogData?.content : "",
@@ -143,10 +67,6 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
       .min(1, "Your content is too short")
       .required("Let us know your blog's content 🤔"),
   });
-  console.log(
-    "🚀 ~ file: AddEditBlog.tsx:36 ~ AddEditBlog ~ userType:",
-    userType
-  );
 
   return (
     <Box className="addeditblog_container">
@@ -154,7 +74,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
         enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values, actions) => handleSubmit(values)}
+        onSubmit={(values, actions) => dispatch(addEditPost(values, id!))}
       >
         {(formikProps) => {
           const { values, handleChange, handleBlur, touched, errors } =
@@ -168,7 +88,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
                 values={values}
                 handleChange={handleChange}
                 handleBlur={handleBlur}
-                imageFile={imageFile}
+                // imageFile={imageFile}
                 touched={touched}
                 errors={errors}
               />
@@ -181,7 +101,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
                 handleBlur={handleBlur}
                 touched={touched}
                 errors={errors}
-                isLoading={isLoading}
+                // isLoading={isLoading}
               />
             </Form>
           );

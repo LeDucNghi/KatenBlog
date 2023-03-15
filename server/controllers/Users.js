@@ -56,11 +56,18 @@ exports.signin = async (req, res) => {
 
     const { password, ...rest } = user.dataValues;
 
-    res.json({
+    res.status(200).json({
       token: accessToken,
-      ...rest,
       message: "Signin success 🥳",
-      expiresIn: 60 * 60,
     });
   });
+};
+
+exports.getUserProfile = async (req, res) => {
+  const userProfile = req.user;
+
+  if (!userProfile)
+    return res.status(401).send({ message: "Can not find your account 🤧" });
+
+  return res.status(200).send({ userProfile });
 };

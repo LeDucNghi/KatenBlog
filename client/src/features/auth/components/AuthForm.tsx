@@ -18,6 +18,7 @@ import { Link as RouterLink } from "react-router-dom";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import authApi from "../../../api/authApi";
+import { setCookie } from "typescript-cookie";
 import { toast } from "react-toastify";
 import { useState } from "react";
 
@@ -41,6 +42,8 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
         if (isSignin) {
           localStorage.setItem("token", res.data.token!);
           localStorage.setItem("information", JSON.stringify(res.data));
+
+          saveToCookies(res.data);
         }
 
         await toast(`${res.data.message} success 🥳`, {
@@ -55,7 +58,7 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
         });
 
         await setSubmitting(false);
-        // window.location.href = await "/home";
+        window.location.href = isSignin ? "/home" : "/signin";
       }
     } catch (error: any) {
       if (error) {
@@ -72,6 +75,11 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
         console.log(error.response.data.message);
       }
     }
+  };
+
+  const saveToCookies = (data: Profile) => {
+    // Cookies.set("information", `${data}`, { expires: data.expiresIn });
+    setCookie("information", JSON.stringify(data), { expires: data.expiresIn });
   };
 
   const signInInitialValues: Profile = { name: "", password: "" };

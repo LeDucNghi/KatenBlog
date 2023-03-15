@@ -7,6 +7,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import { LoadingButton } from "@mui/lab";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import { selectPostingStatus } from "../../addEditSlice";
+import { useAppSelector } from "../../../../app/hooks";
 
 export interface IAddEditBodyProps {
   values: Post;
@@ -16,7 +18,6 @@ export interface IAddEditBodyProps {
   errors: any;
   userType: UserType;
   blogData: Post;
-  isLoading: boolean;
 }
 
 export function AddEditBody({
@@ -27,8 +28,9 @@ export function AddEditBody({
   errors,
   userType,
   blogData,
-  isLoading,
 }: IAddEditBodyProps) {
+  const isPosting = useAppSelector(selectPostingStatus);
+
   return (
     <Box className="addeditblog_body">
       <Box className="addeditblog_share_social">
@@ -66,12 +68,12 @@ export function AddEditBody({
             />
 
             <LoadingButton
-              // loading={isLoading}
+              loading={userType.isPoster ? isPosting.isEdit : isPosting.isAdd}
               className="addedit_form_button"
               variant="contained"
               type="submit"
             >
-              Create new post
+              {userType.isPoster ? `Update this post` : `Create new post`}
             </LoadingButton>
           </>
         )}

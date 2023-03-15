@@ -9,7 +9,7 @@ const getAllPost = async (req, res) => {
   res.json({ postList });
 };
 
-// create new post
+// CREATE NEW POST
 const createPost = async (req, res) => {
   const post = await req.body;
 
@@ -23,7 +23,7 @@ const createPost = async (req, res) => {
   res.status(200).json({ message: "Create post success 🥳", post });
 };
 
-// get detail post's image
+// GET POST'S DETAIL IMAGE
 const getDetailImage = async (req, res) => {
   const id = req.params.publicId;
 
@@ -39,28 +39,33 @@ const getDetailImage = async (req, res) => {
   res.status(200).json({ image: `${url}` });
 };
 
-// get detail post
+// GET DETAIL POST
 const getDetailPost = async (req, res) => {
   const PostId = req.params.id;
-  const UserId = req.user.id;
-
-  const likedPost = await Likes.findOne({
-    where: { UserId: UserId, PostId: PostId },
-  });
 
   const post = await Posts.findByPk(PostId);
 
-  if (!post) res.status(404).json({ message: "Not found your blog" });
+  if (!post) res.status(404).json({ message: "Can not find your blog" });
   else {
-    if (!likedPost) {
-      res.status(200).json({ post, liked: false });
+    if (req.user.id) {
+      const UserId = req.user.id;
+
+      const likedPost = await Likes.findOne({
+        where: { UserId: UserId, PostId: PostId },
+      });
+
+      if (!likedPost) {
+        res.status(200).json({ post, liked: false });
+      } else {
+        res.status(200).json({ post, liked: true });
+      }
     } else {
-      res.status(200).json({ post, liked: true });
+      res.status(200).json({ post });
     }
   }
 };
 
-// post's comment
+// POST'S COMMENT
 const postNewComment = async (req, res) => {
   const id = req.params.id;
 
@@ -70,7 +75,7 @@ const postNewComment = async (req, res) => {
   res.json(post);
 };
 
-// update post
+// UPDATE POST
 const updatePost = async (req, res) => {
   const id = req.params.id;
 
@@ -96,7 +101,7 @@ const updatePost = async (req, res) => {
   res.status(200).json({ message: `Update blog ${id} successfully 🥳` });
 };
 
-// like post
+// LIKE POST
 const likePost = async (req, res) => {
   const PostId = req.params.id;
 

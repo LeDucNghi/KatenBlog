@@ -21,7 +21,7 @@ module.exports = (sequalize, DataTypes) => {
     },
 
     content: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
   });

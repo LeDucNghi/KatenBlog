@@ -9,13 +9,15 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import { setImageFile } from "../../addEditSlice";
+import { useAppDispatch } from "../../../../app/hooks";
 import { useState } from "react";
 
 export interface IAddEditBannerProps {
   values: Post;
   handleChange: any;
   handleBlur: any;
-  imageFile: (file: File) => any;
+  // imageFile: (file: File) => any;
   touched: any;
   errors: any;
   userType: UserType;
@@ -26,18 +28,22 @@ export function AddEditBanner({
   values,
   handleBlur,
   handleChange,
-  imageFile,
+  // imageFile,
   touched,
   errors,
   userType,
   blogData,
 }: IAddEditBannerProps) {
+  const dispatch = useAppDispatch();
+
   var [image, setImage] = useState<File | null | string>(null);
 
   const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
-    imageFile(e.target.files![0]);
+    // imageFile(e.target.files![0]);
     image = URL.createObjectURL(e.target.files![0]);
     setImage(image);
+
+    dispatch(setImageFile(e.target.files![0]));
   };
 
   return (
