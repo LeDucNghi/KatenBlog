@@ -1,11 +1,15 @@
-import { AxiosResponse } from "axios/index";
+import { AxiosError, AxiosResponse } from "axios/index";
+
 import axios from "axios";
+
+const token = localStorage.getItem("token");
 
 const axiosClient = axios.create({
   baseURL: "http://localhost:3001",
   headers: {
     "Content-Type": "application/json",
-    accessToken: localStorage.getItem("token"),
+    Accept: "application/json",
+    accessToken: token ? token : null,
   },
 });
 
@@ -15,7 +19,7 @@ axiosClient.interceptors.request.use(
     // Do something before request is sent
     return config;
   },
-  function (error) {
+  function (error: AxiosError) {
     // Do something with request error
     return Promise.reject(error);
   }
@@ -28,7 +32,7 @@ axiosClient.interceptors.response.use(
     // Do something with response data
     return response;
   },
-  function (error) {
+  function (error: AxiosError) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return Promise.reject(error);

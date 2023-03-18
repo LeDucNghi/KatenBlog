@@ -6,7 +6,7 @@ export interface ILoadingProps {}
 
 export function Loading(props: ILoadingProps) {
   return (
-    <div>
+    <div className="loading_container">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="200px"

@@ -47,20 +47,28 @@ const getDetailPost = async (req, res) => {
 
   if (!post) res.status(404).json({ message: "Can not find your blog" });
   else {
-    if (req.user.id) {
+    // nếu như user đã login và có cả userType từ middlewares trả về
+    if (req.user && req.user.id && !req.userType) {
       const UserId = req.user.id;
+      var userType = null;
 
       const likedPost = await Likes.findOne({
         where: { UserId: UserId, PostId: PostId },
       });
 
+      if (UserId === post.UserId) userType = "isPoster";
+      else userType = "isGuest";
+
       if (!likedPost) {
-        res.status(200).json({ post, liked: false });
+        res.status(200).json({ post, liked: false, userType });
       } else {
-        res.status(200).json({ post, liked: true });
+        res.status(200).json({ post, liked: true, userType });
       }
-    } else {
-      res.status(200).json({ post });
+
+      // nếu như user ko login và middlewares trả về userType là guest
+    } else if (!req.user && req.userType) {
+      const userType = req.userType;
+      res.status(200).json({ post, userType });
     }
   }
 };

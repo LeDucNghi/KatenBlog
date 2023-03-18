@@ -16,8 +16,8 @@ export interface IAddEditBodyProps {
   handleBlur: any;
   touched: any;
   errors: any;
-  userType: UserType;
-  blogData: Post;
+  userType: UserType | null | undefined;
+  blogData: Post | null | undefined;
 }
 
 export function AddEditBody({
@@ -47,7 +47,7 @@ export function AddEditBody({
       </Box>
 
       <Box className="addedit_form">
-        {userType.isGuest ? (
+        {userType === "isGuest" ? (
           <Typography className="addedit_input_field">
             {blogData?.content}
           </Typography>
@@ -68,12 +68,14 @@ export function AddEditBody({
             />
 
             <LoadingButton
-              loading={userType.isPoster ? isPosting.isEdit : isPosting.isAdd}
+              loading={
+                userType === "isPoster" ? isPosting.isEdit : isPosting.isAdd
+              }
               className="addedit_form_button"
               variant="contained"
               type="submit"
             >
-              {userType.isPoster ? `Update this post` : `Create new post`}
+              {userType === "isPoster" ? `Update this post` : `Create new post`}
             </LoadingButton>
           </>
         )}

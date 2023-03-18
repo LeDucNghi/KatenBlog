@@ -17,12 +17,6 @@ router.get("/getallpost", getAllPost);
 // create a new post
 router.post("/createpost", [validateToken, upload], createPost);
 
-// upload image
-// router.post("/upload", upload, uploadImage);
-
-// get image
-// router.get("/:publicId", getDetailImage);
-
 // get detail post
 router.get("/detail/:id", validateToken, getDetailPost);
 
@@ -34,5 +28,12 @@ router.put("/:id", [validateToken, upload], updatePost);
 
 // like post
 router.post("/like/:id", validateToken, likePost);
+
+// test
+router.get("/test/:id", async (req, res) => {
+  const isLoggedIn = req.query.isLoggedIn;
+
+  res.status(200).json({ message: isLoggedIn });
+});
 
 module.exports = router;

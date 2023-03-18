@@ -16,3 +16,15 @@ export interface Auth<T> {
   data: T;
   token: string;
 }
+
+export interface Errors {
+  isError: boolean;
+  status?: number;
+  statusText?: string;
+
+  repsonse: {
+    data: {
+      message: string;
+    };
+  };
+}

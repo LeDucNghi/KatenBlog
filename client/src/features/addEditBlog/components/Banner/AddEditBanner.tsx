@@ -20,15 +20,14 @@ export interface IAddEditBannerProps {
   // imageFile: (file: File) => any;
   touched: any;
   errors: any;
-  userType: UserType;
-  blogData: Post;
+  userType: UserType | null | undefined;
+  blogData: Post | null | undefined;
 }
 
 export function AddEditBanner({
   values,
   handleBlur,
   handleChange,
-  // imageFile,
   touched,
   errors,
   userType,
@@ -50,8 +49,8 @@ export function AddEditBanner({
     <div className="addedit_banner_container">
       <div className="addedit_banner_content">
         <p className="banner_content_category">
-          {userType.isGuest ? (
-            `${blogData.categories}`
+          {userType === "isGuest" ? (
+            `${blogData?.categories}`
           ) : (
             <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
               <InputLabel id="demo-select-small">Categoy</InputLabel>
@@ -83,8 +82,8 @@ export function AddEditBanner({
           )}
         </p>
         <h2 className="banner_content_title">
-          {userType.isGuest ? (
-            `${blogData.title}`
+          {userType === "isGuest" ? (
+            `${blogData?.title}`
           ) : (
             <TextField
               className="banner_input_field"
@@ -103,8 +102,8 @@ export function AddEditBanner({
         </h2>
 
         <p className="banner_content_subtitle">
-          {userType.isGuest ? (
-            `${blogData.subTitle}`
+          {userType === "isGuest" ? (
+            `${blogData?.subTitle}`
           ) : (
             <TextField
               className="banner_input_field"
@@ -125,7 +124,7 @@ export function AddEditBanner({
       </div>
 
       <div className="addedit_banner_image">
-        {userType.isGuest ? null : (
+        {userType === "isGuest" ? null : (
           <Button className="banner_image_button">
             <input
               onChange={(e) => handleChangeImg(e)}

@@ -2,20 +2,22 @@ const { verify } = require("jsonwebtoken");
 
 const validateToken = (req, res, next) => {
   const accessToken = req.header("accessToken");
-  const { type } = req.body;
 
-  if (type === "isGuest") return next();
-  if (type === "isPoster" || type === "isAdd") {
-    if (!accessToken) return res.json({ error: "User not logged in 😒" });
+  // const type = req.query.type;
 
+  if (req.query && req.query.type === "isBlog" && !accessToken) {
+    req.userType = "isGuest";
+    return next();
+  } else {
     try {
       const validToken = verify(accessToken, "secret");
 
+      if (!validToken) {
+        return res.status(401).json({ message: "Invalid token 😢" });
+      }
       req.user = validToken;
 
-      if (!validToken)
-        return res.status(401).json({ message: "Invalid token 😢" });
-      else return next();
+      return next();
     } catch (error) {
       return res.status(401).json({ error });
     }

@@ -1,3 +1,6 @@
+import { Errors } from "./common";
+import { UserType } from "./auth";
+
 export interface Post {
   id?: string | number | undefined;
   title: string | undefined;
@@ -20,6 +23,9 @@ export interface LoadingState {
 export interface PostState {
   isLoading: boolean;
   isPosting: LoadingState;
+
+  errors: Errors | null | undefined;
+
   imageFile: File | null | undefined;
   postData: Post | null | undefined;
 }
@@ -27,5 +33,7 @@ export interface PostState {
 export interface PostData {
   data: {
     post: Post;
+    liked?: boolean;
+    userType?: UserType | null | undefined;
   };
 }

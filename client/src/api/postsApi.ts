@@ -42,8 +42,8 @@ const postsApi = {
     });
   },
 
-  getDetailPost(id: string | number): Promise<PostData> {
-    const url = `/posts/detail/${id}`;
+  getDetailPost(id: string | number, type: string): Promise<PostData> {
+    const url = `/posts/detail/${id}?type=${type}`;
     return axiosClient.get(url);
   },
 

@@ -1,45 +1,53 @@
-import { Post, Profile } from "../../models";
-import { getPostData, setPostingStatus } from "./addEditSlice";
+import {
+  fetchPostData,
+  fetchPostDataFailed,
+  fetchPostDataSuccess,
+  setPostingStatus,
+} from "./addEditSlice";
 
 import { AppThunk } from "../../app/store";
+import { Post } from "../../models";
 import postsApi from "../../api/postsApi";
 import { setUserType } from "../auth/authSlice";
 
 // get detail post
 export const handleGetDetailPost =
   (id: string): AppThunk =>
-  async (disptach, getState) => {
-    const account = JSON.parse(localStorage.getItem("information")!) as Profile;
+  async (dispatch, getState) => {
+    const type = "isBlog";
 
-    const userType = getState().auth.userType;
+    dispatch(fetchPostData());
 
     try {
-      const res = await postsApi.getDetailPost(id!);
+      const res = await postsApi.getDetailPost(id!, type);
+      console.log("🚀 ~ file: addEditThunk.ts:19 ~ res:", res.data);
 
       if (res.data) {
-        if (res.data.post.UserId === account.id) {
-          await disptach(
-            setUserType({
-              ...userType,
-              isPoster: true,
-            })
-          );
-        } else if (!account || res.data.post.UserId !== account.id) {
-          await disptach(
-            setUserType({
-              ...userType,
-              isGuest: true,
-            })
-          );
-        }
+        await dispatch(setUserType(res.data.userType!));
 
-        await disptach(getPostData(res.data.post));
+        await dispatch(fetchPostDataSuccess(res.data.post));
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(
-        "🚀 ~ file: AddEditBlog.tsx:32 ~ handleGetDetailPost ~ error:",
-        error
+        "🚀 ~ file: addEditThunk.ts:24 ~ error data message:",
+        error.response.data
       );
+      console.log(
+        "🚀 ~ file: addEditThunk.ts:24 ~ error status:",
+        error.response.status
+      );
+
+      if (error && error.response) {
+        const status: number = error.response.status;
+        const message: string = error.response.data.message;
+        dispatch(
+          fetchPostDataFailed({
+            status: status,
+            isError: true,
+            repsonse: { data: { message: message } },
+          })
+        );
+      }
     }
   };
 
@@ -52,7 +60,7 @@ export const addEditPost =
     var image = getState().post.imageFile;
     console.log("🚀 ~ file: AddEditThunk.ts:67 ~ image:", image);
 
-    if (userType.isPoster) {
+    if (userType === "isPoster") {
       await dispatch(setPostingStatus({ ...postingStatus, isEdit: true }));
     } else await dispatch(setPostingStatus({ ...postingStatus, isAdd: true }));
 
@@ -64,9 +72,10 @@ export const addEditPost =
 
     // await setImage(image);
 
-    const newValue = userType.isPoster
-      ? { ...values, image: image ? image : values.image, id: id }
-      : { ...values, image: image };
+    const newValue =
+      userType === "isPoster"
+        ? { ...values, image: image ? image : values.image, id: id }
+        : { ...values, image: image };
     console.log("🚀 ~ file: AddEditThunk.ts:81 ~ newValue:", newValue);
 
     // try {

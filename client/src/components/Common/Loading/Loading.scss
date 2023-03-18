@@ -1,3 +1,13 @@
+@use "../../../assets/styles/globalStyles.scss";
+
+.loading_container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+    @include globalStyles.flexCenter;
+}
+
 .pencil {
     display: block;
     width: 10em;

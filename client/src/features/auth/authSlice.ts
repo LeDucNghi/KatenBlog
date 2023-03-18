@@ -7,11 +7,7 @@ const initialState: AuthState = {
   userInformation: null,
   isLoggedIn: false,
   isLoading: false,
-  userType: {
-    isAdd: false,
-    isGuest: false,
-    isPoster: false,
-  },
+  userType: null,
 };
 
 const authSlice = createSlice({
@@ -23,10 +19,11 @@ const authSlice = createSlice({
       state.userInformation = action.payload;
     },
 
-    setUserType(state, action: PayloadAction<UserType>) {
-      state.userType.isAdd = action.payload.isAdd;
-      state.userType.isGuest = action.payload.isGuest;
-      state.userType.isPoster = action.payload.isPoster;
+    setUserType(
+      state,
+      action: PayloadAction<"isGuest" | "isAdd" | "isPoster">
+    ) {
+      state.userType = action.payload;
     },
   },
 });

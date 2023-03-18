@@ -9,24 +9,11 @@ export interface Profile {
   expiresIn?: Date | number | undefined;
 }
 
-export interface UserType {
-  isGuest: boolean;
-  isPoster: boolean;
-  isAdd: boolean;
-}
+export type UserType = "isGuest" | "isAdd" | "isPoster";
 
 export interface AuthState {
   userInformation: Profile | null | undefined;
   isLoading: boolean;
   isLoggedIn: boolean;
-  userType: UserType;
-}
-
-export interface Error {
-  data: {
-    message: string;
-  };
-
-  status: number;
-  statusText: string;
+  userType: UserType | null | undefined;
 }
