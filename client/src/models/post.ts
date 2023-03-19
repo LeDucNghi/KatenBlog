@@ -4,7 +4,7 @@ import { UserType } from "./auth";
 export interface Post {
   id?: string | number | undefined;
   title: string | undefined;
-  image?: string | File | undefined;
+  image?: string | File | null | undefined;
   subTitle: string | undefined;
   categories: string | undefined;
   content: string | undefined;
@@ -26,7 +26,7 @@ export interface PostState {
 
   errors: Errors | null | undefined;
 
-  imageFile: File | null | undefined;
+  imageFile: string | File | null | undefined;
   postData: Post | null | undefined;
 }
 

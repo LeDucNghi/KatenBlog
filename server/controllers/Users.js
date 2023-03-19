@@ -69,5 +69,5 @@ exports.getUserProfile = async (req, res) => {
   if (!userProfile)
     return res.status(401).send({ message: "Can not find your account 🤧" });
 
-  return res.status(200).send({ userProfile });
+  return res.status(200).send({ ...userProfile });
 };

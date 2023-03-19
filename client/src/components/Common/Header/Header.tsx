@@ -1,30 +1,35 @@
 import "./Header.scss";
 
-import { Box, Typography } from "@mui/material";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { useEffect, useState } from "react";
 
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import CategoryIcon from "@mui/icons-material/Category";
 import { CustomDrawer } from "../Drawer/Drawer";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import FlightIcon from "@mui/icons-material/Flight";
-import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Navbar } from "./Navbar";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
+import { getUserProfile } from "../../../features/auth/authThunk";
+import { selectUserProfile } from "../../../features/auth/authSlice";
 import { styled } from "@mui/material/styles";
+import { useLocation } from "react-router-dom";
 
 export interface IHeaderProps {}
 
 export function Header(props: IHeaderProps) {
   const { pathname } = useLocation();
+
+  const dispatch = useAppDispatch();
+  const userProfile = useAppSelector(selectUserProfile);
+  console.log("🚀 ~ file: Header.tsx:32 ~ Header ~ userProfile:", userProfile);
 
   var [width, setWidth] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
@@ -38,6 +43,10 @@ export function Header(props: IHeaderProps) {
     }
   }, [width]);
 
+  useEffect(() => {
+    dispatch(getUserProfile());
+  }, [dispatch]);
+
   const updateWindowDimensions = () => {
     const newWidth = window.innerWidth;
     width = newWidth;
@@ -46,42 +55,10 @@ export function Header(props: IHeaderProps) {
 
   if (pathname === "/signin") return <></>;
   if (pathname === "/signup") return <></>;
-  // if (pathname === "/edit") return <></>;
 
   return (
     <Box className="header_container">
-      <Box className="header_above">
-        <Button
-          component={RouterLink}
-          to="/signin"
-          className="header_button"
-          startIcon={<PersonIcon className="header_icon_button" />}
-        >
-          Sign In
-        </Button>
-
-        <Typography
-          component={RouterLink}
-          to="/home"
-          className="header_brand_name"
-          variant="h4"
-        >
-          Zyro
-        </Typography>
-
-        <Button
-          className="header_button"
-          startIcon={<SearchIcon className="header_icon_button" />}
-        >
-          Search
-        </Button>
-
-        {width <= 320 && (
-          <IconButton component="label" onClick={() => setOpen(!open)}>
-            <MenuIcon className="header_menu" />
-          </IconButton>
-        )}
-      </Box>
+      <Navbar width={width} setOpen={setOpen} open={open} />
 
       {width >= 1024 && (
         <Box className="header_below">

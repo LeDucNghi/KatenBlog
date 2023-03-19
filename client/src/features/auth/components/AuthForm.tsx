@@ -82,8 +82,12 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
     setCookie("information", JSON.stringify(data), { expires: data.expiresIn });
   };
 
-  const signInInitialValues: Profile = { name: "", password: "" };
-  const signUpInitialValues: Profile = { name: "", password: "", fullname: "" };
+  const signInInitialValues: Profile = { username: "", password: "" };
+  const signUpInitialValues: Profile = {
+    username: "",
+    password: "",
+    fullname: "",
+  };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -139,11 +143,11 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
               variant="outlined"
               name="name"
               autoFocus={true}
-              value={values.name}
+              value={values.username}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={touched.name && Boolean(errors.name)}
-              helperText={touched.name && errors.name}
+              error={touched.username && Boolean(errors.username)}
+              helperText={touched.username && errors.username}
             />
 
             <TextField

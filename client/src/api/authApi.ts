@@ -9,9 +9,13 @@ const authApi = {
   },
 
   signin(params: Profile): Promise<Auth<Profile>> {
-    console.log("🚀 ~ file: authApi.ts:12 ~ signin ~ params:", params);
     const url = `/users/signin`;
     return axiosClient.post(url, params);
+  },
+
+  getProfile(): Promise<Auth<Profile>> {
+    const url = `/users/profile`;
+    return axiosClient.get(url);
   },
 };
 
