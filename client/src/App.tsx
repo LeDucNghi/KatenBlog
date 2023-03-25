@@ -1,4 +1,5 @@
 import "./App.css";
+import "react-quill/dist/quill.snow.css";
 
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Suspense, lazy, useEffect } from "react";
@@ -8,9 +9,9 @@ import { Header } from "./components/Common/Header/Header";
 import { Loading } from "./components/Common/Loading/Loading";
 import { SignIn } from "./pages/SignIn/SignIn";
 import { SignUp } from "./pages/SignUp/SignUp";
-// import { getCookie } from "typescript-cookie";
 import postsApi from "./api/postsApi";
 
+// import { getCookie } from "typescript-cookie";
 function App() {
   useEffect(() => {
     postsApi.getAll().then((res) => console.log("res", res.data));

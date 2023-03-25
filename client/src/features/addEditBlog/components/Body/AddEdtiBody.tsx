@@ -3,9 +3,11 @@ import "./AddEdtiBody.scss";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { Post, UserType } from "../../../../models";
 
+import { ErrorMessage } from "formik";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { LoadingButton } from "@mui/lab";
 import PinterestIcon from "@mui/icons-material/Pinterest";
+import ReactQuill from "react-quill";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { selectPostingStatus } from "../../addEditSlice";
 import { useAppSelector } from "../../../../app/hooks";
@@ -14,20 +16,17 @@ export interface IAddEditBodyProps {
   values: Post;
   handleChange: any;
   handleBlur: any;
-  touched: any;
-  errors: any;
   userType: UserType | null | undefined;
   blogData: Post | null | undefined;
+  setFieldValue: any;
 }
 
 export function AddEditBody({
   values,
   handleBlur,
-  handleChange,
-  touched,
-  errors,
   userType,
   blogData,
+  setFieldValue,
 }: IAddEditBodyProps) {
   const isPosting = useAppSelector(selectPostingStatus);
 
@@ -45,15 +44,15 @@ export function AddEditBody({
           <PinterestIcon />
         </Button>
       </Box>
-
       <Box className="addedit_form">
         {userType === "isGuest" ? (
-          <Typography className="addedit_input_field">
-            {blogData?.content}
-          </Typography>
+          // <Typography className="addedit_input_field">
+          //   {blogData?.content}
+          // </Typography>
+          <Box className="addedit_input_field">{blogData?.content}</Box>
         ) : (
           <>
-            <TextField
+            {/* <TextField
               className="addedit_input_field"
               label="Content"
               variant="outlined"
@@ -65,7 +64,17 @@ export function AddEditBody({
               helperText={touched.content && errors.content}
               multiline
               rows={10}
+            /> */}
+            <ReactQuill
+              className="addedit_input_field isPoster"
+              placeholder="Content"
+              theme="snow"
+              value={values.content}
+              onChange={(e) => setFieldValue("content", e)}
+              onBlur={handleBlur}
             />
+
+            {/* <ErrorMessage name="content" /> */}
 
             <LoadingButton
               loading={

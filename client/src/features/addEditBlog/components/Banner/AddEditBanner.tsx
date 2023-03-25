@@ -9,6 +9,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import moment from "moment";
 import { setImageFile } from "../../addEditSlice";
 import { useAppDispatch } from "../../../../app/hooks";
 import { useState } from "react";
@@ -17,7 +18,6 @@ export interface IAddEditBannerProps {
   values: Post;
   handleChange: any;
   handleBlur: any;
-  // imageFile: (file: File) => any;
   touched: any;
   errors: any;
   userType: UserType | null | undefined;
@@ -38,7 +38,6 @@ export function AddEditBanner({
   var [image, setImage] = useState<File | null | string>(null);
 
   const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // imageFile(e.target.files![0]);
     image = URL.createObjectURL(e.target.files![0]);
     setImage(image);
 
@@ -75,9 +74,7 @@ export function AddEditBanner({
                 })}
               </Select>
 
-              {/* <FormHelperText> */}
               <p>{touched.categories && errors.categories}</p>
-              {/* </FormHelperText> */}
             </FormControl>
           )}
         </p>
@@ -120,7 +117,9 @@ export function AddEditBanner({
             />
           )}
         </p>
-        <p className="banner_content_time">May 10, 2020 • 5 mins read</p>
+        <p className="banner_content_time">
+          {moment(values.createdAt).format("ll")} • 5 mins read
+        </p>
       </div>
 
       <div className="addedit_banner_image">

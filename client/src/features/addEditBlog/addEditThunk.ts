@@ -47,6 +47,7 @@ export const handleGetDetailPost =
 export const addEditPost =
   (values: Post, id: string): AppThunk =>
   async (dispatch, getState) => {
+    console.log("🚀 ~ file: addEditThunk.ts:49 ~ values:", values);
     const userType = getState().auth.userType;
     const postingStatus = getState().post.isPosting;
     var image = getState().post.imageFile;

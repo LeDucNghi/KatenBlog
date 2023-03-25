@@ -49,11 +49,11 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
   }, [id, pathname]);
 
   const initialValues: Post = {
-    title: userType === "isPoster" ? blogData?.title : "",
-    subTitle: userType === "isPoster" ? blogData?.subTitle : "",
-    categories: userType === "isPoster" ? blogData?.categories : "",
-    content: userType === "isPoster" ? blogData?.content : "",
-    image: userType === "isPoster" ? blogData?.image : "",
+    title: blogData?.title,
+    subTitle: blogData?.subTitle,
+    categories: blogData?.categories,
+    content: blogData?.content,
+    image: blogData?.image,
   };
 
   const validationSchema = Yup.object().shape({
@@ -92,8 +92,18 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
         onSubmit={(values, actions) => dispatch(addEditPost(values, id!))}
       >
         {(formikProps) => {
-          const { values, handleChange, handleBlur, touched, errors } =
-            formikProps;
+          const {
+            values,
+            handleChange,
+            handleBlur,
+            touched,
+            errors,
+            setFieldValue,
+          } = formikProps;
+          console.log(
+            "🚀 ~ file: AddEditBlog.tsx:103 ~ AddEditBlog ~ values:",
+            values
+          );
 
           return (
             <Form>
@@ -108,13 +118,12 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
               />
 
               <AddEditBody
+                setFieldValue={setFieldValue}
                 blogData={blogData}
                 userType={userType}
                 values={values}
                 handleChange={handleChange}
                 handleBlur={handleBlur}
-                touched={touched}
-                errors={errors}
               />
             </Form>
           );

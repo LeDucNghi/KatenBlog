@@ -15,6 +15,14 @@ export interface Post {
   UserId?: number | string | undefined;
 }
 
+export type TextStyle =
+  | "bold"
+  | "underline"
+  | "italic"
+  | "upper"
+  | null
+  | undefined;
+
 export interface LoadingState {
   isAdd: boolean;
   isEdit: boolean;
