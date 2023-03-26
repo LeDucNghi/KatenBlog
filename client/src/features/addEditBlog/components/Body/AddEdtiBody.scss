@@ -8,8 +8,6 @@
     display: flex;
     justify-content: space-between;
 
-    // background: violet;
-
     margin: 7em auto 0 auto;
 
     .addedit_form {
@@ -18,10 +16,19 @@
 
         @include globalStyles.flexColumn;
 
-        // background: yellow;
-
         .addedit_input_field {
             margin-bottom: 1em;
+        }
+
+        .addedit_input_field.isGuest {
+            .ql-container.ql-snow {
+                border: none;
+                font-size: 18px;
+            }
+
+            .ql-toolbar.ql-snow {
+                display: none;
+            }
         }
 
         .addedit_form_button {
@@ -32,8 +39,6 @@
     .addeditblog_share_social {
         position: relative;
         width: 10%;
-
-        // background: #fff;
 
         display: flex;
         flex-direction: column;
@@ -53,12 +58,9 @@
         position: relative;
         width: 20%;
 
-        // background: red;
-
         @include globalStyles.flexCenter;
 
         .advertise_container {
-            // position: fixed;
             z-index: 2;
 
             width: 15em;
@@ -96,7 +98,6 @@
             .advertise_subtitle {
                 margin: 1em 0;
                 font-size: 0.8em;
-                // color: #fff;
                 font-weight: 500;
             }
 
@@ -112,7 +113,6 @@
 @media only screen and (max-width: 320px) {
     .addeditblog_body {
         flex-direction: column;
-        // background: pink;
 
         .addedit_form {
             width: 100%;

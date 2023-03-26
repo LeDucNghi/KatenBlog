@@ -3,7 +3,6 @@ import "./AddEdtiBody.scss";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { Post, UserType } from "../../../../models";
 
-import { ErrorMessage } from "formik";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { LoadingButton } from "@mui/lab";
 import PinterestIcon from "@mui/icons-material/Pinterest";
@@ -45,48 +44,30 @@ export function AddEditBody({
         </Button>
       </Box>
       <Box className="addedit_form">
-        {userType === "isGuest" ? (
-          // <Typography className="addedit_input_field">
-          //   {blogData?.content}
-          // </Typography>
-          <Box className="addedit_input_field">{blogData?.content}</Box>
-        ) : (
-          <>
-            {/* <TextField
-              className="addedit_input_field"
-              label="Content"
-              variant="outlined"
-              name="content"
-              value={values.content}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.content && Boolean(errors.content)}
-              helperText={touched.content && errors.content}
-              multiline
-              rows={10}
-            /> */}
-            <ReactQuill
-              className="addedit_input_field isPoster"
-              placeholder="Content"
-              theme="snow"
-              value={values.content}
-              onChange={(e) => setFieldValue("content", e)}
-              onBlur={handleBlur}
-            />
+        <ReactQuill
+          className={
+            userType === "isGuest"
+              ? "addedit_input_field isGuest"
+              : "addedit_input_field"
+          }
+          placeholder="Content"
+          theme="snow"
+          value={values.content}
+          onChange={(e) => setFieldValue("content", e)}
+          onBlur={handleBlur}
+        />
 
-            {/* <ErrorMessage name="content" /> */}
-
-            <LoadingButton
-              loading={
-                userType === "isPoster" ? isPosting.isEdit : isPosting.isAdd
-              }
-              className="addedit_form_button"
-              variant="contained"
-              type="submit"
-            >
-              {userType === "isPoster" ? `Update this post` : `Create new post`}
-            </LoadingButton>
-          </>
+        {userType !== "isGuest" && (
+          <LoadingButton
+            loading={
+              userType === "isPoster" ? isPosting.isEdit : isPosting.isAdd
+            }
+            className="addedit_form_button"
+            variant="contained"
+            type="submit"
+          >
+            {userType === "isPoster" ? `Update this post` : `Create new post`}
+          </LoadingButton>
         )}
       </Box>
 
