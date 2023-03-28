@@ -10,11 +10,17 @@ export interface Profile {
   token?: string | undefined;
   expiresIn?: Date | number | undefined;
 
-  exp?: number | undefined | null;
+  exp?: number | undefined | Date;
   iat?: number | undefined | null;
 }
 
 export type UserType = "isGuest" | "isAdd" | "isPoster";
+
+export interface Token {
+  token: string | null;
+  message?: string | null;
+  expiresDate: number | null;
+}
 
 export interface AuthState {
   userProfile: Profile | null | undefined;

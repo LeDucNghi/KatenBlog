@@ -1,5 +1,6 @@
 import "./Header.scss";
 
+import { logout, selectIsLoggedIn } from "../../../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { useEffect, useState } from "react";
 
@@ -18,7 +19,6 @@ import { Navbar } from "./Navbar";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import SearchIcon from "@mui/icons-material/Search";
 import { getUserProfile } from "../../../features/auth/authThunk";
-import { selectUserProfile } from "../../../features/auth/authSlice";
 import { styled } from "@mui/material/styles";
 import { useLocation } from "react-router-dom";
 
@@ -26,13 +26,20 @@ export interface IHeaderProps {}
 
 export function Header(props: IHeaderProps) {
   const { pathname } = useLocation();
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const dispatch = useAppDispatch();
-  const userProfile = useAppSelector(selectUserProfile);
-  console.log("🚀 ~ file: Header.tsx:32 ~ Header ~ userProfile:", userProfile);
+
+  const token = JSON.parse(localStorage.getItem("token")!);
 
   var [width, setWidth] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!token) {
+      dispatch(logout());
+    }
+  }, [dispatch, token]);
 
   useEffect(() => {
     if (width === 0) setWidth(window.innerWidth);
@@ -44,8 +51,9 @@ export function Header(props: IHeaderProps) {
   }, [width]);
 
   useEffect(() => {
+    if (!isLoggedIn) return;
     dispatch(getUserProfile());
-  }, [dispatch]);
+  }, [dispatch, isLoggedIn]);
 
   const updateWindowDimensions = () => {
     const newWidth = window.innerWidth;

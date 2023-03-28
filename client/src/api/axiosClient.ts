@@ -2,14 +2,14 @@ import { AxiosError, AxiosResponse } from "axios/index";
 
 import axios from "axios";
 
-const token = localStorage.getItem("token");
+const token = JSON.parse(localStorage.getItem("token")!);
 
 const axiosClient = axios.create({
   baseURL: "http://localhost:3001",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
-    accessToken: token ? token : null,
+    accessToken: token ? token.token : null,
   },
 });
 

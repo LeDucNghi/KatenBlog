@@ -17,9 +17,8 @@ import { Profile } from "../../../models";
 import { Link as RouterLink } from "react-router-dom";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import authApi from "../../../api/authApi";
-import { setCookie } from "typescript-cookie";
-import { toast } from "react-toastify";
+import { handleAuthForm } from "../authThunk";
+import { useAppDispatch } from "../../../app/hooks";
 import { useState } from "react";
 
 export interface ISignInFormProps {
@@ -27,60 +26,9 @@ export interface ISignInFormProps {
 }
 
 export function AuthForm({ isSignin }: ISignInFormProps) {
+  const dispatch = useAppDispatch();
+
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleSubmit = async (values: Profile, { setSubmitting }: any) => {
-    try {
-      var res;
-      if (isSignin) {
-        res = await authApi.signin(values);
-      } else {
-        res = await authApi.signup(values);
-      }
-
-      if (res.data) {
-        if (isSignin) {
-          localStorage.setItem("token", res.data.token!);
-          localStorage.setItem("information", JSON.stringify(res.data));
-
-          saveToCookies(res.data);
-        }
-
-        await toast(`${res.data.message} success 🥳`, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-
-        await setSubmitting(false);
-        window.location.href = isSignin ? "/home" : "/signin";
-      }
-    } catch (error: any) {
-      if (error) {
-        toast(`${error.response.data.message} 😢`, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        console.log(error.response.data.message);
-      }
-    }
-  };
-
-  const saveToCookies = (data: Profile) => {
-    // Cookies.set("information", `${data}`, { expires: data.expiresIn });
-    setCookie("information", JSON.stringify(data), { expires: data.expiresIn });
-  };
 
   const signInInitialValues: Profile = { username: "", password: "" };
   const signUpInitialValues: Profile = {
@@ -103,9 +51,7 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
       enableReinitialize={true}
       initialValues={isSignin ? signInInitialValues : signUpInitialValues}
       validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting }) =>
-        handleSubmit(values, { setSubmitting })
-      }
+      onSubmit={(values) => dispatch(handleAuthForm(values, isSignin))}
     >
       {(formikProps) => {
         const {

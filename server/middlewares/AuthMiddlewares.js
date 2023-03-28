@@ -3,8 +3,6 @@ const { verify } = require("jsonwebtoken");
 const validateToken = (req, res, next) => {
   const accessToken = req.header("accessToken");
 
-  // const type = req.query.type;
-
   if (req.query && req.query.type === "isBlog" && !accessToken) {
     req.userType = "isGuest";
     return next();

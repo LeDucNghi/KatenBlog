@@ -1,4 +1,4 @@
-import { AuthState, Profile } from "../../models";
+import { AuthState, Profile, UserType } from "../../models";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { RootState } from "./../../app/store";
@@ -19,17 +19,19 @@ const authSlice = createSlice({
       state.userProfile = action.payload;
     },
 
-    setUserType(
-      state,
-      action: PayloadAction<"isGuest" | "isAdd" | "isPoster">
-    ) {
+    logout(state) {
+      state.isLoggedIn = false;
+    },
+
+    setUserType(state, action: PayloadAction<UserType>) {
       state.userType = action.payload;
     },
   },
 });
 
-export const { loginSuccess, setUserType } = authSlice.actions;
+export const { loginSuccess, setUserType, logout } = authSlice.actions;
 
+export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
 export const selectIsLoading = (state: RootState) => state.auth.isLoading;
 export const selectUserProfile = (state: RootState) => state.auth.userProfile;
 export const selectGetUserType = (state: RootState) => state.auth.userType;

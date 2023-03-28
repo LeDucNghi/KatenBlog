@@ -100,10 +100,6 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
             errors,
             setFieldValue,
           } = formikProps;
-          console.log(
-            "🚀 ~ file: AddEditBlog.tsx:103 ~ AddEditBlog ~ values:",
-            values
-          );
 
           return (
             <Form>

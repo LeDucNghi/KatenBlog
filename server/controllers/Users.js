@@ -51,15 +51,25 @@ exports.signin = async (req, res) => {
     };
 
     const accessToken = sign(tokenPayload, "secret", {
-      expiresIn: 60 * 60,
+      expiresIn: "24h",
     });
 
     const { password, ...rest } = user.dataValues;
 
-    res.status(200).json({
-      token: accessToken,
-      message: "Signin success 🥳",
-    });
+    const d = new Date();
+    const hour = d.getUTCHours();
+
+    if (accessToken) {
+      return res.status(200).json({
+        token: accessToken,
+        message: "Signin success 🥳",
+        expiresIn: new Date(Date.now() + 24 * 60 * 60 * 1000),
+      });
+    } else {
+      return res.status(401).json({
+        message: "Please Login 😢",
+      });
+    }
   });
 };
 

@@ -11,13 +11,13 @@ const {
   likePost,
 } = require("../controllers/Post");
 
-// get all post
+// GET ALL POST
 router.get("/getallpost", getAllPost);
 
-// create a new post
+// CREATE A NEW POST
 router.post("/createpost", [validateToken, upload], createPost);
 
-// get detail post
+// GET DETAIL POST
 router.get("/detail/:id", validateToken, getDetailPost);
 
 // posts comment

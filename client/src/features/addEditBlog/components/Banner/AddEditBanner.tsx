@@ -118,7 +118,7 @@ export function AddEditBanner({
           )}
         </p>
         <p className="banner_content_time">
-          {moment(values.createdAt).format("ll")} • 5 mins read
+          {moment(blogData?.createdAt).format("LL")} • 5 mins read
         </p>
       </div>
 

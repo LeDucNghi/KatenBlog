@@ -11,7 +11,7 @@ import postsApi from "../../api/postsApi";
 import { setUserType } from "../auth/authSlice";
 import { toast } from "react-toastify";
 
-// get detail post
+// GET DETAIL POST
 export const handleGetDetailPost =
   (id: string): AppThunk =>
   async (dispatch, getState) => {
