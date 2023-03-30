@@ -67,7 +67,6 @@ export function Header(props: IHeaderProps) {
   return (
     <Box className="header_container">
       <Navbar width={width} setOpen={setOpen} open={open} />
-
       {width >= 1024 && (
         <Box className="header_below">
           {navbarList.map((items, key) => {

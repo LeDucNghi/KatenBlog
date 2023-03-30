@@ -37,6 +37,7 @@ export function Navbar({ width, setOpen, open }: INavbarProps) {
       <Button
         className="header_button"
         startIcon={<SearchIcon className="header_icon_button" />}
+        onClick={() => setOpen(!open)}
       >
         Search
       </Button>

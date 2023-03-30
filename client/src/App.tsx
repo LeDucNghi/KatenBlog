@@ -1,5 +1,5 @@
 import "react-quill/dist/quill.snow.css";
-import "./assets/styles/globalStyles.scss"
+import "./assets/styles/globalStyles.scss";
 
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
@@ -13,6 +13,7 @@ import { SignUp } from "./pages/SignUp/SignUp";
 function App() {
   const Home = lazy(() => import("./pages/Home/Home"));
   const AddEditBlog = lazy(() => import("./pages/AddEditBlog/AddEditBlog"));
+  const Search = lazy(() => import("./pages/Search/Search"));
 
   return (
     <>
@@ -41,6 +42,16 @@ function App() {
           element={
             <Suspense>
               <AddEditBlog />
+            </Suspense>
+          }
+        />
+
+        <Route
+          index
+          path="search"
+          element={
+            <Suspense>
+              <Search />
             </Suspense>
           }
         />

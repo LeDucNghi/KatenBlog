@@ -1,0 +1,105 @@
+@use "../../assets/styles/globalStyles.scss";
+
+.search_container {
+    position: relative;
+
+    width: 90%;
+
+    margin: 1em auto;
+
+    font-size: 15px;
+
+    .search_head {
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        width: 100%;
+        height: 30%;
+
+        .search_field {
+            width: 40%;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+    }
+
+    .search_body {
+        position: relative;
+        width: 100%;
+        height: 70%;
+
+        .search_list_count {
+            text-align: center;
+        }
+
+        .search_list_content {
+            position: relative;
+
+            width: 100%;
+            height: 90%;
+
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+
+            .search_list_items {
+                position: relative;
+
+                width: 24%;
+                height: 100%;
+
+                margin: 1em 0;
+
+                line-height: 1.6em;
+
+                .css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .items_time,
+                .items_categories {
+                    margin-bottom: 0.5em;
+                }
+
+                .items_img {
+                    margin: 0 auto 0.5em auto;
+                    width: 100%;
+                    height: 12em;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+
+                        object-fit: cover;
+                        border-radius: 1em;
+                    }
+                }
+
+                .items_title {
+                    font-size: 1.2em;
+                    margin-bottom: 0.5em;
+                }
+
+                .items_text {
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+
+                    padding: 0 0.5em;
+                }
+            }
+        }
+    }
+}
