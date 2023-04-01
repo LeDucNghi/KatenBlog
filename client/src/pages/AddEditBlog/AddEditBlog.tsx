@@ -9,7 +9,6 @@ import {
 } from "../../features/addEditBlog/addEditThunk";
 import {
   selectFetchPostFailed,
-  selectLoading,
   selectPostData,
 } from "../../features/addEditBlog/addEditSlice";
 import { selectGetUserType, setUserType } from "../../features/auth/authSlice";
@@ -38,7 +37,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
   const blogData = useAppSelector(selectPostData);
   const userType = useAppSelector(selectGetUserType);
   const isError = useAppSelector(selectFetchPostFailed);
-  const isLoading = useAppSelector(selectLoading);
+  // const isLoading = useAppSelector(selectLoading);
 
   useEffect(() => {
     if (pathname === "/add") {
@@ -73,7 +72,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
       .required("Let us know your blog's content 🤔"),
   });
 
-  if (isLoading) return <Loading />;
+  // if (isLoading) return <Loading />;
 
   if (isError?.isError)
     return (

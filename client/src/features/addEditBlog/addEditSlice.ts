@@ -6,6 +6,7 @@ import { RootState } from "../../app/store";
 const initialState: PostState = {
   errors: {
     isError: false,
+
     repsonse: {
       data: {
         message: "",
@@ -14,13 +15,18 @@ const initialState: PostState = {
     status: 0,
   },
 
-  isLoading: false,
+  isFetChing: {
+    isPostDetail: false,
+    isPostList: false,
+  },
+
   isPosting: {
     isAdd: false,
     isEdit: false,
   },
 
   imageFile: null,
+  postList: [],
   postData: null,
 };
 
@@ -29,16 +35,25 @@ const postSlice = createSlice({
   initialState,
   reducers: {
     fetchPostData(state) {
-      state.isLoading = true;
+      state.isFetChing.isPostDetail = true;
+    },
+
+    fetchPostList(state) {
+      state.isFetChing.isPostList = true;
+    },
+
+    fetchPostListSuccess(state, action: PayloadAction<Post[]>) {
+      state.isFetChing.isPostList = true;
+      state.postList = action.payload;
     },
 
     fetchPostDataSuccess(state, action: PayloadAction<Post>) {
-      state.isLoading = false;
+      state.isFetChing.isPostDetail = false;
       state.postData = action.payload;
     },
 
     fetchPostDataFailed(state, action: PayloadAction<Errors>) {
-      state.isLoading = false;
+      state.isFetChing.isPostDetail = false;
       state.errors!.status = action.payload.status;
       state.errors!.isError = action.payload.isError;
       state.errors!.repsonse.data.message =
@@ -57,9 +72,11 @@ const postSlice = createSlice({
 });
 
 export const {
-  fetchPostDataFailed,
   fetchPostData,
+  fetchPostList,
   fetchPostDataSuccess,
+  fetchPostListSuccess,
+  fetchPostDataFailed,
   setImageFile,
   setPostingStatus,
 } = postSlice.actions;
@@ -68,6 +85,8 @@ export const selectPostData = (state: RootState) => state.post.postData;
 export const selectImageFile = (state: RootState) => state.post.imageFile;
 export const selectPostingStatus = (state: RootState) => state.post.isPosting;
 export const selectFetchPostFailed = (state: RootState) => state.post.errors;
-export const selectLoading = (state: RootState) => state.post.isLoading;
+export const selectIsFetchingPostList = (state: RootState) =>
+  state.post.isFetChing;
+export const selectPostList = (state: RootState) => state.post.postList;
 
 export const postReducer = postSlice.reducer;

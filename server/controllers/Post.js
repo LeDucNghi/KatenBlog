@@ -2,7 +2,7 @@ const { Posts, Likes } = require("../models");
 
 const { uploadImage } = require("../services/Posts/imageUpload");
 
-// get all post
+// GET ALL POST
 const getAllPost = async (req, res) => {
   const postList = await Posts.findAll();
 
@@ -15,12 +15,22 @@ const createPost = async (req, res) => {
 
   const image = await uploadImage(req, res);
 
-  post.UserId = req.user.id;
-  post.image = image;
+  if (
+    post.categories !== "Food and Drink" ||
+    post.categories !== "Lifestyle" ||
+    post.categories !== "Travel"
+  ) {
+    return res
+      .status(404)
+      .json({ message: "Invalid Category 🤔 Please choose another" });
+  } else {
+    post.UserId = req.user.id;
+    post.image = image;
 
-  await Posts.create(post);
+    await Posts.create(post);
 
-  res.status(200).json({ message: "Create post success 🥳", post });
+    res.status(200).json({ message: "Create post success 🥳", post });
+  }
 };
 
 // GET POST'S DETAIL IMAGE

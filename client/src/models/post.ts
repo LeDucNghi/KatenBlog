@@ -28,13 +28,20 @@ export interface LoadingState {
   isEdit: boolean;
 }
 
+export interface FetchingState {
+  isPostList: boolean;
+  isPostDetail: boolean;
+}
+
 export interface PostState {
-  isLoading: boolean;
+  isFetChing: FetchingState;
   isPosting: LoadingState;
 
   errors: Errors | null | undefined;
 
   imageFile: string | File | null | undefined;
+
+  postList: Post[] ;
   postData: Post | null | undefined;
 }
 

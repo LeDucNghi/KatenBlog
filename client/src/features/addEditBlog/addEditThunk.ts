@@ -1,15 +1,33 @@
+import { Post, PostListRes } from "../../models";
 import {
   fetchPostData,
   fetchPostDataFailed,
   fetchPostDataSuccess,
+  fetchPostList,
+  fetchPostListSuccess,
   setPostingStatus,
 } from "./addEditSlice";
 
 import { AppThunk } from "../../app/store";
-import { Post } from "../../models";
 import postsApi from "../../api/postsApi";
 import { setUserType } from "../auth/authSlice";
 import { toast } from "react-toastify";
+
+export const handleGetAllPost = (): AppThunk => async (dispatch, getState) => {
+  dispatch(fetchPostList());
+  try {
+    const {
+      data: { postList },
+    } = await postsApi.getAll();
+
+    dispatch(fetchPostListSuccess(postList));
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: addEditThunk.ts:19 ~ handleGetAllPost ~ error:",
+      error
+    );
+  }
+};
 
 // GET DETAIL POST
 export const handleGetDetailPost =
@@ -43,7 +61,7 @@ export const handleGetDetailPost =
     }
   };
 
-// add / edit post
+// ADD / EDIT POST
 export const addEditPost =
   (values: Post, id: string): AppThunk =>
   async (dispatch, getState) => {

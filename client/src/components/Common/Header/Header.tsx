@@ -19,6 +19,7 @@ import { Navbar } from "./Navbar";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import SearchIcon from "@mui/icons-material/Search";
 import { getUserProfile } from "../../../features/auth/authThunk";
+import { handleGetAllPost } from "../../../features/addEditBlog/addEditThunk";
 import { styled } from "@mui/material/styles";
 import { useLocation } from "react-router-dom";
 
@@ -54,6 +55,10 @@ export function Header(props: IHeaderProps) {
     if (!isLoggedIn) return;
     dispatch(getUserProfile());
   }, [dispatch, isLoggedIn]);
+
+    useEffect(() => {
+      dispatch(handleGetAllPost())
+    }, [dispatch]);
 
   const updateWindowDimensions = () => {
     const newWidth = window.innerWidth;

@@ -3,6 +3,9 @@ $time-color: #c0b9b6;
 $category-color: #c1a57b;
 $button-color: #c1a57b;
 
+// FONTS
+$fontMontserrat: "Montserrat", sans-serif;
+
 @mixin flexCenter {
     display: flex;
     justify-content: center;
