@@ -1,7 +1,7 @@
 export interface PaginationParams {
-  _limit: number;
-  _page: number;
-  _total: number;
+  page: number;
+  limit: number;
+  totalRows: number;
 }
 
 export interface PostListRes<T> {
@@ -11,7 +11,10 @@ export interface PostListRes<T> {
 }
 
 export interface PostListComment<T> {
-  data: T[];
+  data: {
+    data: T[];
+    pagination: PaginationParams;
+  };
 }
 
 export interface Auth<T> {

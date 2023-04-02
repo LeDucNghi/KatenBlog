@@ -9,14 +9,6 @@ exports.postNewComment = async (req, res) => {
 
   await Comments.create(comment);
 
-  //   Comments table create a row :
-  //   {
-  //     content : comment.content;
-  //     image : comment.image;
-  //     UserId : req.user.id;
-  //     PostId : req.params.id;
-  //   }
-
   res.json(comment);
 };
 
@@ -24,7 +16,6 @@ exports.postNewComment = async (req, res) => {
 exports.getPostComment = async (req, res) => {
   const id = req.params.id;
 
-  // findByPk = find by primary key ( in the database - id is the primary key )
   const comment = await Comments.findAll({ where: { PostId: id } });
 
   const page = parseInt(req.query.page);
@@ -34,24 +25,17 @@ exports.getPostComment = async (req, res) => {
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
 
-  const results = {};
-  if (endIndex < comment.length) {
-    results.next = {
-      page: page + 1,
-      limit: limit,
-    };
-  }
+  const data = {};
 
-  if (startIndex > 0) {
-    results.previous = {
-      page: page - 1,
-      limit: limit,
-    };
-  }
+  data.pagination = {
+    page,
+    limit,
+    totalRows: comment.length,
+  };
 
-  results.results = comment.slice(startIndex, endIndex);
+  data.data = comment.slice(startIndex, endIndex);
 
-  res.paginatedResults = results;
+  res.paginatedResults = data;
 
   res.json(res.paginatedResults);
 };

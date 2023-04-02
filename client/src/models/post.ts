@@ -1,3 +1,4 @@
+import { Comment } from "./comment";
 import { Errors } from "./common";
 import { UserType } from "./auth";
 
@@ -31,6 +32,7 @@ export interface LoadingState {
 export interface FetchingState {
   isPostList: boolean;
   isPostDetail: boolean;
+  isComment : boolean
 }
 
 export interface PostState {
@@ -41,8 +43,10 @@ export interface PostState {
 
   imageFile: string | File | null | undefined;
 
-  postList: Post[] ;
+  postList: Post[];
   postData: Post | null | undefined;
+
+  commentList: Comment[] | null | undefined;
 }
 
 export interface PostData {

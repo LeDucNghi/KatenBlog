@@ -1,4 +1,4 @@
-import { Errors, LoadingState, Post, PostState } from "../../models";
+import { Comment, Errors, LoadingState, Post, PostState } from "../../models";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { RootState } from "../../app/store";
@@ -18,6 +18,7 @@ const initialState: PostState = {
   isFetChing: {
     isPostDetail: false,
     isPostList: false,
+    isComment: false,
   },
 
   isPosting: {
@@ -25,8 +26,10 @@ const initialState: PostState = {
     isEdit: false,
   },
 
-  imageFile: null,
   postList: [],
+  commentList: [],
+
+  imageFile: null,
   postData: null,
 };
 
@@ -42,6 +45,10 @@ const postSlice = createSlice({
       state.isFetChing.isPostList = true;
     },
 
+    fetchCommentList(state) {
+      state.isFetChing.isComment = true;
+    },
+
     fetchPostListSuccess(state, action: PayloadAction<Post[]>) {
       state.isFetChing.isPostList = true;
       state.postList = action.payload;
@@ -50,6 +57,11 @@ const postSlice = createSlice({
     fetchPostDataSuccess(state, action: PayloadAction<Post>) {
       state.isFetChing.isPostDetail = false;
       state.postData = action.payload;
+    },
+
+    fetchCommentListSuccess(state, action: PayloadAction<Comment[]>) {
+      state.isFetChing.isComment = false;
+      state.commentList = action.payload;
     },
 
     fetchPostDataFailed(state, action: PayloadAction<Errors>) {
@@ -74,8 +86,10 @@ const postSlice = createSlice({
 export const {
   fetchPostData,
   fetchPostList,
+  fetchCommentList,
   fetchPostDataSuccess,
   fetchPostListSuccess,
+  fetchCommentListSuccess,
   fetchPostDataFailed,
   setImageFile,
   setPostingStatus,
@@ -88,5 +102,6 @@ export const selectFetchPostFailed = (state: RootState) => state.post.errors;
 export const selectIsFetchingPostList = (state: RootState) =>
   state.post.isFetChing;
 export const selectPostList = (state: RootState) => state.post.postList;
+export const selectCommentList = (state: RootState) => state.post.commentList;
 
 export const postReducer = postSlice.reducer;

@@ -17,6 +17,11 @@ const authApi = {
     const url = `/users/profile`;
     return axiosClient.get(url);
   },
+
+  getCommentProfile(id: string): Promise<Profile> {
+    const url = `/users/profile/comment/${id}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default authApi;

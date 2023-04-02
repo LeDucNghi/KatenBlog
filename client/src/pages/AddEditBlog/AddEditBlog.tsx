@@ -6,8 +6,10 @@ import { Form, Formik } from "formik";
 import {
   addEditPost,
   handleGetDetailPost,
+  handleGetPostComment,
 } from "../../features/addEditBlog/addEditThunk";
 import {
+  selectCommentList,
   selectFetchPostFailed,
   selectPostData,
 } from "../../features/addEditBlog/addEditSlice";
@@ -20,7 +22,6 @@ import { AddEditBody } from "../../features/addEditBlog/components/Body/AddEdtiB
 import { Box } from "@mui/material";
 import { Comment } from "../../features/addEditBlog/components/Comment/Comment";
 import { CommentList } from "../../features/addEditBlog/components/CommentList/CommentList";
-import { Loading } from "../../components/Common/Loading/Loading";
 import NotFound from "../../components/Common/NotFound/NotFound";
 import { Post } from "../../models";
 import { RelatedBlogs } from "../../features/addEditBlog/components/Related/Related";
@@ -37,6 +38,11 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
   const blogData = useAppSelector(selectPostData);
   const userType = useAppSelector(selectGetUserType);
   const isError = useAppSelector(selectFetchPostFailed);
+  const commentList = useAppSelector(selectCommentList);
+  console.log(
+    "🚀 ~ file: AddEditBlog.tsx:42 ~ AddEditBlog ~ commentList:",
+    commentList
+  );
   // const isLoading = useAppSelector(selectLoading);
 
   useEffect(() => {
@@ -44,15 +50,16 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
       dispatch(setUserType("isAdd"));
     } else {
       dispatch(handleGetDetailPost(id!));
+      dispatch(handleGetPostComment(id!));
     }
   }, [id, pathname]);
 
   const initialValues: Post = {
-    title: blogData?.title,
-    subTitle: blogData?.subTitle,
-    categories: blogData?.categories,
-    content: blogData?.content,
-    image: blogData?.image,
+    title: blogData ? blogData?.title : "",
+    subTitle: blogData ? blogData?.subTitle : "",
+    categories: blogData ? blogData?.categories : "",
+    content: blogData ? blogData?.content : "",
+    image: blogData ? blogData?.image : "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -126,7 +133,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
       </Formik>
 
       {(userType === "isGuest" || userType === "isPoster") && (
-        <CommentList id={`${id}`} />
+        <CommentList commentList={commentList} id={`${id}`} />
       )}
       {userType === "isGuest" && <Comment id={`${id}`} />}
       {(userType === "isGuest" || userType === "isPoster") && <RelatedBlogs />}

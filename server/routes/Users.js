@@ -15,14 +15,14 @@ router.post("/signin", signin);
 router.get("/profile", validateToken, getUserProfile);
 
 // UPDATE USER PROFILE
-router.put("/update/:userId", validateToken, async (req, res) => {
+router.put("/profile/update/:userId", validateToken, async (req, res) => {
   const userId = req.params.userId;
   const { fullname, username, avatar } = req.body;
-  if (!req.body || !id) {
+  if (!req.body || !userId) {
     res.status(401).send({ message: "Something is missing 🤔" });
   }
 
-  await Users.update(
+  const newProfile = await Users.update(
     {
       fullname,
       username,
@@ -30,6 +30,18 @@ router.put("/update/:userId", validateToken, async (req, res) => {
     },
     { where: { id: userId } }
   );
+
+  res.status(200).send({ fullname, username, avatar });
+});
+
+router.get("/profile/comment/:userId", async (req, res) => {
+  const userId = req.params.userId;
+
+  const userProfile = await Users.findByPk(userId, {
+    attributes: { exclude: ["password"] },
+  });
+
+  res.json({ userProfile });
 });
 
 module.exports = router;

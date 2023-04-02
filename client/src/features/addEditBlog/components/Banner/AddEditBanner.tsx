@@ -52,7 +52,11 @@ export function AddEditBanner({
             `${blogData?.categories}`
           ) : (
             <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
-              <InputLabel id="demo-select-small">Categoy</InputLabel>
+              <p>
+                <InputLabel component="span" id="demo-select-small">
+                  Category
+                </InputLabel>
+              </p>
               <Select
                 name="categories"
                 className="banner_input_field"

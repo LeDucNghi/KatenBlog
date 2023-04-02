@@ -1,5 +1,6 @@
-import { Post, PostListRes } from "../../models";
 import {
+  fetchCommentList,
+  fetchCommentListSuccess,
   fetchPostData,
   fetchPostDataFailed,
   fetchPostDataSuccess,
@@ -9,6 +10,8 @@ import {
 } from "./addEditSlice";
 
 import { AppThunk } from "../../app/store";
+import { Post } from "../../models";
+import commentApi from "../../api/commentApi";
 import postsApi from "../../api/postsApi";
 import { setUserType } from "../auth/authSlice";
 import { toast } from "react-toastify";
@@ -39,7 +42,6 @@ export const handleGetDetailPost =
 
     try {
       const res = await postsApi.getDetailPost(id!, type);
-      console.log("🚀 ~ file: addEditThunk.ts:19 ~ res:", res.data);
 
       if (res.data) {
         await dispatch(setUserType(res.data.userType!));
@@ -109,5 +111,41 @@ export const addEditPost =
       }
     } catch (error) {
       console.log("🚀 ~ file: SignIn.tsx:20 ~ handleSubmit ~ error", error);
+    }
+  };
+
+export const handleGetPostComment =
+  (id: string): AppThunk =>
+  async (dispatch, getState) => {
+    dispatch(fetchCommentList());
+    try {
+      const res = await commentApi.getComment(id);
+      console.log("🚀 ~ file: addEditThunk.ts:122 ~ res:", res.data);
+
+      dispatch(fetchCommentListSuccess(res.data.data));
+      // const userProfile = await authApi.getCommentProfile(res.data);
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: Comment.tsx:35 ~ handleGetPostComment ~ error",
+        error
+      );
+    }
+  };
+
+export const handlePostComment =
+  (id: string, comment: string): AppThunk =>
+  async (dispatch, getState) => {
+    // e.preventDefault();
+
+    const content = comment;
+
+    try {
+      const res = await commentApi.comment({ id, content });
+      console.log("🚀 ~ file: Comment.tsx:20 ~ handlePostComment ~ res", res);
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: Comment.tsx:22 ~ handlePostComment ~ error",
+        error
+      );
     }
   };

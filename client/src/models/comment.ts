@@ -1,3 +1,5 @@
+import { Profile } from "./auth";
+
 export interface Comment {
   id?: string;
   content: string;
@@ -5,6 +7,8 @@ export interface Comment {
 
   UserId?: string;
   PostId?: string;
+
+  user?: Profile
 
   createdAt?: string;
   updatedAt?: string;

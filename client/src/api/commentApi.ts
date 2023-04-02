@@ -10,7 +10,7 @@ const commentApi = {
   },
 
   getComment(id: string): Promise<PostListComment<Comment>> {
-    const url = `/comment/${id}`;
+    const url = `/comment/${id}?page=1&limit=2`;
     return axiosClient.get(url);
   },
 };
