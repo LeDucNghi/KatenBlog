@@ -2,6 +2,7 @@ import "./Highlight.scss";
 
 import { Button, Paper, TextField, Typography } from "@mui/material";
 
+import { BlogItems } from "../../../../components/Common/BlogItems/BlogItems";
 import { highestList } from "../../../../mock";
 
 export interface IHighlightProps {}
@@ -17,14 +18,14 @@ export function Highlight(props: IHighlightProps) {
             return (
               <div key={key} className="highlight_highest_items">
                 <div className="highest_img">
-                  <img src={items.img} alt="" />
+                  <img src={items.image as string} alt="" />
                 </div>
 
                 <div className="highest_text">
                   <p className="highest_categories">{items.categories} </p>
                   <h2 className="highest_title">{items.title}</h2>
-                  <p className="highest_time">{items.time} </p>
-                  <p className="highest_subtitle">{items.subtitle}</p>
+                  <p className="highest_time">{items.createdAt} </p>
+                  <p className="highest_subtitle">{items.subTitle}</p>
                 </div>
               </div>
             );
@@ -33,18 +34,19 @@ export function Highlight(props: IHighlightProps) {
           <div className="highlight_attach">
             {highestList.slice(2, 6).map((items, key) => {
               return (
-                <div key={key} className="highlight_attach_items">
-                  <div className="attach_img">
-                    <img src={items.img} alt="" />
-                  </div>
+                <BlogItems direction="horizontal" items={items} key={key} />
+                // <div key={key} className="highlight_attach_items">
+                //   <div className="attach_img">
+                //     <img src={items.img} alt="" />
+                //   </div>
 
-                  <div className="attach_text">
-                    <p className="attach_categories">{items.categories} </p>
-                    <h2 className="attach_title">{items.title}</h2>
-                    <p className="attach_time">{items.time} </p>
-                    <p className="attach_subtitle">{items.subtitle}</p>
-                  </div>
-                </div>
+                //   <div className="attach_text">
+                //     <p className="attach_categories">{items.categories} </p>
+                //     <h2 className="attach_title">{items.title}</h2>
+                //     <p className="attach_time">{items.createdAt} </p>
+                //     <p className="attach_subtitle">{items.subTitle}</p>
+                //   </div>
+                // </div>
               );
             })}
           </div>

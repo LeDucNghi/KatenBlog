@@ -1,0 +1,87 @@
+@use "../../assets/styles/globalStyles.scss";
+
+.category_items {
+    position: relative;
+
+    width: 100%;
+
+    margin: 3em auto;
+
+    display: flex;
+
+    font-family: globalStyles.$fontMontserrat;
+
+    .items_img {
+        img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            border-radius: 1em;
+        }
+    }
+    .items_text {
+        .items_title {
+            font-size: 1.2em;
+        }
+
+        .items_categories {
+            color: globalStyles.$category-color;
+        }
+
+        .items_time {
+            color: globalStyles.$time-color;
+        }
+    }
+}
+
+// VERTICAL - ĐỨNG
+.category_items.vertical {
+    width: 24%;
+
+    // background: red;
+
+    .css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root {
+        padding: 1em;
+
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+    }
+
+    .items_img {
+        width: 18em;
+        height: 12em;
+    }
+
+    .items_text {
+        .items_subtitle,
+        .items_time,
+        .items_categories,
+        .items_title {
+            margin-top: 0.5em;
+        }
+    }
+}
+
+// HORIZONTAL - NGANG
+.category_items.horizontal {
+    width: 100%;
+    justify-content: space-between;
+
+    .items_img {
+        width: 19em;
+        height: 12em;
+    }
+
+    .items_text {
+        margin-left: 1em;
+
+        .items_subtitle,
+        .items_time,
+        .items_categories,
+        .items_title {
+            margin-top: 0.5em;
+        }
+    }
+}

@@ -39,11 +39,6 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
   const userType = useAppSelector(selectGetUserType);
   const isError = useAppSelector(selectFetchPostFailed);
   const commentList = useAppSelector(selectCommentList);
-  console.log(
-    "🚀 ~ file: AddEditBlog.tsx:42 ~ AddEditBlog ~ commentList:",
-    commentList
-  );
-  // const isLoading = useAppSelector(selectLoading);
 
   useEffect(() => {
     if (pathname === "/add") {

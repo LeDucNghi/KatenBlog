@@ -8,7 +8,7 @@ export interface Post {
   image?: string | File | null | undefined;
   subTitle: string | undefined;
   categories: string | undefined;
-  content: string | undefined;
+  content?: string | undefined;
 
   createdAt?: string | undefined;
   updatedAt?: string | undefined;
@@ -32,7 +32,7 @@ export interface LoadingState {
 export interface FetchingState {
   isPostList: boolean;
   isPostDetail: boolean;
-  isComment : boolean
+  isComment: boolean;
 }
 
 export interface PostState {

@@ -58,6 +58,8 @@ export const handleAuthForm =
   };
 
 export const getUserProfile = (): AppThunk => async (dispatch, getState) => {
+  console.log("is logged in");
+
   try {
     const res = await authApi.getProfile();
 

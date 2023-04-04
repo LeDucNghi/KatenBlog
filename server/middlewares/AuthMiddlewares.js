@@ -2,6 +2,10 @@ const { verify } = require("jsonwebtoken");
 
 const validateToken = (req, res, next) => {
   const accessToken = req.header("accessToken");
+  console.log(
+    "🚀 ~ file: AuthMiddlewares.js:5 ~ validateToken ~ accessToken:",
+    accessToken
+  );
 
   if (req.query && req.query.type === "isBlog" && !accessToken) {
     req.userType = "isGuest";
@@ -11,7 +15,7 @@ const validateToken = (req, res, next) => {
       const validToken = verify(accessToken, "secret");
 
       if (!validToken) {
-        return res.status(401).json({ message: "Invalid token 😢" });
+        return res.status(401).send({ message: "Invalid token 😢" });
       }
       req.user = validToken;
 

@@ -52,13 +52,13 @@ export function Header(props: IHeaderProps) {
   }, [width]);
 
   useEffect(() => {
-    if (!isLoggedIn) return;
+    // if (!isLoggedIn) return;
     dispatch(getUserProfile());
   }, [dispatch, isLoggedIn]);
 
-    useEffect(() => {
-      dispatch(handleGetAllPost())
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(handleGetAllPost());
+  }, [dispatch]);
 
   const updateWindowDimensions = () => {
     const newWidth = window.innerWidth;

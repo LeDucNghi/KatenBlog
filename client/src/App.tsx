@@ -7,8 +7,10 @@ import { Suspense, lazy } from "react";
 import { Footer } from "./components/Common/Footer/Footer";
 import { Header } from "./components/Common/Header/Header";
 import { Loading } from "./components/Common/Loading/Loading";
+import NotFound from "./components/Common/NotFound/NotFound";
 import { SignIn } from "./pages/SignIn/SignIn";
 import { SignUp } from "./pages/SignUp/SignUp";
+import { Test } from "./pages/test/test";
 
 function App() {
   const Home = lazy(() => import("./pages/Home/Home"));
@@ -65,6 +67,10 @@ function App() {
             </Suspense>
           }
         />
+
+        <Route index path="test" element={<Test direction="horizontal" />} />
+
+        <Route index path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />

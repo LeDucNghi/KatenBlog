@@ -47,12 +47,13 @@ export function CommentList({ id, commentList }: ICommentListProps) {
       <List dense={false}>
         {commentList?.length === 0 ? (
           <div className="comment_list_empty">
+            <div className="comment_list_empty_img">
+              <img src={images.notask} alt="" />
+            </div>
+
             <p className="comment_list_empty_title">
               There are currently no reviews yet
             </p>
-            <div className="comment_list_empty_img">
-              <img src={images.openBook} alt="" />
-            </div>
           </div>
         ) : (
           commentList!.map((items, key) => {

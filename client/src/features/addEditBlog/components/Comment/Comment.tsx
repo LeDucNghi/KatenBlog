@@ -13,10 +13,9 @@ export interface ICommentProps {
 }
 
 export function Comment({ id }: ICommentProps) {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const [comment, setComment] = React.useState("");
-
 
   return (
     <Box className="comment_container">
@@ -27,7 +26,6 @@ export function Comment({ id }: ICommentProps) {
         label="Your comment"
         multiline
         rows={4}
-        // defaultValue="Default Value"
         className="comment_field"
         variant="standard"
       />
@@ -37,9 +35,7 @@ export function Comment({ id }: ICommentProps) {
       </Typography>
 
       <Button
-        onClick={() =>
-          dispatch(handlePostComment( id, comment))
-        }
+        onClick={() => dispatch(handlePostComment(id, comment))}
         className="comment_button"
         variant="contained"
       >

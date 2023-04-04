@@ -7,9 +7,11 @@
 
     width: 80%;
 
-    // background: yellow;
-
     font-size: 15px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
     .comment_title {
         text-decoration: underline;
@@ -23,14 +25,18 @@
     }
 
     .comment_button {
+        margin: 0.7em auto;
         background-color: globalStyles.$button-color;
     }
 
-    .comment_button,
     .comment_warn,
     .comment_title,
     .comment_field {
         margin: 0.7em 0;
+    }
+
+    .comment_field {
+        width: 70%;
     }
 
     .MuiListItemText-primary {

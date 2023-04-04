@@ -49,6 +49,7 @@ export const handleGetDetailPost =
         await dispatch(fetchPostDataSuccess(res.data.post));
       }
     } catch (error: any) {
+      console.log("🚀 ~ file: addEditThunk.ts:52 ~ error:", error)
       if (error && error.response) {
         const status: number = error.response.status;
         const message: string = error.response.data.message;
