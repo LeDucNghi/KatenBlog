@@ -1,5 +1,5 @@
 module.exports = (sequalize, DataTypes) => {
-  const Posts = sequalize.define("Posts", {
+  const posts = sequalize.define("posts", {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -26,15 +26,15 @@ module.exports = (sequalize, DataTypes) => {
     },
   });
 
-  Posts.associate = (models) => {
-    Posts.hasMany(models.Comments, {
+  posts.associate = (models) => {
+    posts.hasMany(models.comments, {
       onDelete: "cascade",
     });
 
-    Posts.hasMany(models.Likes, {
+    posts.hasMany(models.likes, {
       onDelete: "cascade",
     });
   };
 
-  return Posts;
+  return posts;
 };

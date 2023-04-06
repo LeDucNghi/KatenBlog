@@ -16,6 +16,12 @@ export interface Profile {
 
 export type UserType = "isGuest" | "isAdd" | "isPoster";
 
+export interface CommentProfile {
+  data: {
+    userProfile: Profile;
+  };
+}
+
 export interface Token {
   token: string | null;
   message?: string | null;

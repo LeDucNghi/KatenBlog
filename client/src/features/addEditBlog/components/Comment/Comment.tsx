@@ -28,6 +28,7 @@ export function Comment({ id }: ICommentProps) {
         rows={4}
         className="comment_field"
         variant="standard"
+        onChange={(e) => setComment(e.target.value)}
       />
 
       <Typography className="comment_warn">

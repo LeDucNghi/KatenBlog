@@ -1,4 +1,4 @@
-import { Auth, Profile } from "../models";
+import { Auth, CommentProfile, Profile } from "../models";
 
 import axiosClient from "./axiosClient";
 
@@ -18,7 +18,7 @@ const authApi = {
     return axiosClient.get(url);
   },
 
-  getCommentProfile(id: string): Promise<Profile> {
+  getCommentProfile(id: string): Promise<CommentProfile> {
     const url = `/users/profile/comment/${id}`;
     return axiosClient.get(url);
   },

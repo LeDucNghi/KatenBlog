@@ -1,17 +1,18 @@
 // const { DataTypes } = require("sequelize")
 
 module.exports = (sequalize, DataTypes) => {
-  const Comments = sequalize.define("Comments", {
+  const comments = sequalize.define("comments", {
     content: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-
-    image: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
   });
 
-  return Comments;
+  comments.associate = (models) => {
+    comments.belongsTo(models.users, {
+      onDelete: "cascade",
+    });
+  };
+
+  return comments;
 };

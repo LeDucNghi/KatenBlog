@@ -23,6 +23,10 @@ export interface ICommentListProps {
 }
 
 export function CommentList({ id, commentList }: ICommentListProps) {
+  console.log(
+    "🚀 ~ file: CommentList.tsx:26 ~ CommentList ~ commentList:",
+    commentList
+  );
   const [isLiked, setIsLiked] = React.useState<boolean>(false);
   // const [commentList, setCommentList] = React.useState<comments[]>();
 
@@ -76,14 +80,13 @@ export function CommentList({ id, commentList }: ICommentListProps) {
                   }
                 >
                   <ListItemAvatar>
-                    <Avatar src={items.image} />
+                    <Avatar src={items.user?.avatar} />
                   </ListItemAvatar>
                   <ListItemText
                     primary={
                       <>
                         <span className="comment_list_username">
-                          {/* {items.name}{" "} */}
-                          hi
+                          {items.user?.fullname}{" "}
                         </span>{" "}
                         -{" "}
                         <span className="comment_list_time">

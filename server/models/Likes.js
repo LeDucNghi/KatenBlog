@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Likes = sequelize.define("Likes");
+  const likes = sequelize.define("likes");
 
-  return Likes;
+  return likes;
 };

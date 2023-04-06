@@ -1,10 +1,10 @@
 import { Box, Typography } from "@mui/material";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
-import { Link as RouterLink } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 
 export interface INavbarProps {
@@ -14,6 +14,8 @@ export interface INavbarProps {
 }
 
 export function Navbar({ width, setOpen, open }: INavbarProps) {
+  const navigate = useNavigate();
+
   return (
     <Box className="header_above">
       <Button
@@ -37,7 +39,7 @@ export function Navbar({ width, setOpen, open }: INavbarProps) {
       <Button
         className="header_button"
         startIcon={<SearchIcon className="header_icon_button" />}
-        onClick={() => setOpen(!open)}
+        onClick={() => navigate(`/search`)}
       >
         Search
       </Button>

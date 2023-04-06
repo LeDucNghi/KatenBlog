@@ -1,13 +1,13 @@
-const { Comments } = require("../models");
+const { comments, users } = require("../models");
 
 // UPLOAD NEW COMMENT
 exports.postNewComment = async (req, res) => {
   const comment = req.body;
 
-  comment.UserId = req.user.id;
-  comment.PostId = req.params.id;
+  comment.userId = req.user.id;
+  comment.postId = req.params.id;
 
-  await Comments.create(comment);
+  await comments.create(comment);
 
   res.json(comment);
 };
@@ -16,12 +16,17 @@ exports.postNewComment = async (req, res) => {
 exports.getPostComment = async (req, res) => {
   const id = req.params.id;
 
-  const comment = await Comments.findAll({ where: { PostId: id } });
+  const comment = await comments.findAll({
+    where: { postId: id },
+    include: {
+      model: users,
+      attributes: { exclude: ["password", "createdAt", "updatedAt", "username"] },
+    },
+  });
 
   const page = parseInt(req.query.page);
   const limit = parseInt(req.query.limit);
 
-  // calculating the starting and ending index
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
 
@@ -34,7 +39,6 @@ exports.getPostComment = async (req, res) => {
   };
 
   data.data = comment.slice(startIndex, endIndex);
-
   res.paginatedResults = data;
 
   res.json(res.paginatedResults);

@@ -25,6 +25,7 @@ import { CommentList } from "../../features/addEditBlog/components/CommentList/C
 import NotFound from "../../components/Common/NotFound/NotFound";
 import { Post } from "../../models";
 import { RelatedBlogs } from "../../features/addEditBlog/components/Related/Related";
+import { ScrollToTop } from "../../components/Common/ScrollToTop/ScrollToTop";
 import { useEffect } from "react";
 
 export interface IAddEditBlogProps {
@@ -86,6 +87,8 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
 
   return (
     <Box className="addeditblog_container">
+      <ScrollToTop />
+
       <Formik
         enableReinitialize
         initialValues={initialValues}

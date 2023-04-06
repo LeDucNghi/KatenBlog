@@ -1,10 +1,10 @@
-const { Posts, Likes } = require("../models");
+const { posts, likes } = require("../models");
 
 const { uploadImage } = require("../services/Posts/imageUpload");
 
 // GET ALL POST
 const getAllPost = async (req, res) => {
-  const postList = await Posts.findAll();
+  const postList = await posts.findAll();
 
   res.json({ postList });
 };
@@ -16,8 +16,8 @@ const createPost = async (req, res) => {
   const image = await uploadImage(req, res);
 
   if (
-    post.categories !== "Food and Drink" ||
-    post.categories !== "Lifestyle" ||
+    // post.categories !== "Food and Drink" ||
+    // post.categories !== "Lifestyle" ||
     post.categories !== "Travel"
   ) {
     return res
@@ -27,7 +27,7 @@ const createPost = async (req, res) => {
     post.UserId = req.user.id;
     post.image = image;
 
-    await Posts.create(post);
+    await posts.create(post);
 
     res.status(200).json({ message: "Create post success 🥳", post });
   }
@@ -53,7 +53,7 @@ const getDetailImage = async (req, res) => {
 const getDetailPost = async (req, res) => {
   const PostId = req.params.id;
 
-  const post = await Posts.findByPk(PostId);
+  const post = await posts.findByPk(PostId);
 
   if (!post) res.status(404).json({ message: "Can not find your blog" });
   else {
@@ -62,7 +62,7 @@ const getDetailPost = async (req, res) => {
       const UserId = req.user.id;
       var userType = null;
 
-      const likedPost = await Likes.findOne({
+      const likedPost = await likes.findOne({
         where: { UserId: UserId, PostId: PostId },
       });
 
@@ -88,7 +88,7 @@ const postNewComment = async (req, res) => {
   const id = req.params.id;
 
   // findByPk = find by primary key ( in the database - id is the primary key )
-  const post = await Posts.findByPk(id);
+  const post = await posts.findByPk(id);
 
   res.json(post);
 };
@@ -105,7 +105,7 @@ const updatePost = async (req, res) => {
     res.status(400).send({ message: "Something is missing 🤔" });
   }
 
-  await Posts.update(
+  await posts.update(
     {
       title,
       image,
@@ -125,16 +125,16 @@ const likePost = async (req, res) => {
 
   const UserId = req.user.id;
 
-  const findPostLiked = await Likes.findOne({
+  const findPostLiked = await likes.findOne({
     where: { PostId: PostId, UserId: UserId },
   });
 
   if (!findPostLiked) {
-    await Likes.create({ UserId, PostId });
+    await likes.create({ UserId, PostId });
 
     res.json({ message: `Post ${PostId} is liked` });
   } else {
-    await Likes.destroy({ where: { PostId: PostId, UserId: UserId } });
+    await likes.destroy({ where: { PostId: PostId, UserId: UserId } });
 
     res.json({ message: `Post ${PostId} is unliked` });
   }

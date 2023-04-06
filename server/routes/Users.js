@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const { signup, signin, getUserProfile } = require("../controllers/Users");
+const { signup, signin, getUserProfile } = require("../controllers/users");
 const { validateToken } = require("../middlewares/AuthMiddlewares");
-const { Users } = require("../models");
+const { users } = require("../models");
 
 // SIGN UP
 router.post("/signup", signup);
@@ -22,7 +22,7 @@ router.put("/profile/update/:userId", validateToken, async (req, res) => {
     res.status(401).send({ message: "Something is missing 🤔" });
   }
 
-  const newProfile = await Users.update(
+  const newProfile = await users.update(
     {
       fullname,
       username,
@@ -37,7 +37,7 @@ router.put("/profile/update/:userId", validateToken, async (req, res) => {
 router.get("/profile/comment/:userId", async (req, res) => {
   const userId = req.params.userId;
 
-  const userProfile = await Users.findByPk(userId, {
+  const userProfile = await users.findByPk(userId, {
     attributes: { exclude: ["password"] },
   });
 

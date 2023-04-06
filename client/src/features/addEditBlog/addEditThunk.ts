@@ -11,6 +11,7 @@ import {
 
 import { AppThunk } from "../../app/store";
 import { Post } from "../../models";
+import authApi from "../../api/authApi";
 import commentApi from "../../api/commentApi";
 import postsApi from "../../api/postsApi";
 import { setUserType } from "../auth/authSlice";
@@ -49,7 +50,7 @@ export const handleGetDetailPost =
         await dispatch(fetchPostDataSuccess(res.data.post));
       }
     } catch (error: any) {
-      console.log("🚀 ~ file: addEditThunk.ts:52 ~ error:", error)
+      console.log("🚀 ~ file: addEditThunk.ts:52 ~ error:", error);
       if (error && error.response) {
         const status: number = error.response.status;
         const message: string = error.response.data.message;
@@ -68,7 +69,6 @@ export const handleGetDetailPost =
 export const addEditPost =
   (values: Post, id: string): AppThunk =>
   async (dispatch, getState) => {
-    console.log("🚀 ~ file: addEditThunk.ts:49 ~ values:", values);
     const userType = getState().auth.userType;
     const postingStatus = getState().post.isPosting;
     var image = getState().post.imageFile;
@@ -121,10 +121,8 @@ export const handleGetPostComment =
     dispatch(fetchCommentList());
     try {
       const res = await commentApi.getComment(id);
-      console.log("🚀 ~ file: addEditThunk.ts:122 ~ res:", res.data);
 
       dispatch(fetchCommentListSuccess(res.data.data));
-      // const userProfile = await authApi.getCommentProfile(res.data);
     } catch (error) {
       console.log(
         "🚀 ~ file: Comment.tsx:35 ~ handleGetPostComment ~ error",
@@ -133,20 +131,63 @@ export const handleGetPostComment =
     }
   };
 
+const handleGetCommentProfile = async (userId: string) => {
+  var userProfile = null;
+  try {
+    const res = await authApi.getCommentProfile(userId);
+
+    userProfile = res.data.userProfile;
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: addEditThunk.ts:138 ~ handleGetCommentProfile ~ error:",
+      error
+    );
+  }
+
+  return userProfile;
+};
+
 export const handlePostComment =
   (id: string, comment: string): AppThunk =>
   async (dispatch, getState) => {
     // e.preventDefault();
 
-    const content = comment;
+    const isLoggedIn = getState().auth.isLoggedIn;
 
-    try {
-      const res = await commentApi.comment({ id, content });
-      console.log("🚀 ~ file: Comment.tsx:20 ~ handlePostComment ~ res", res);
-    } catch (error) {
-      console.log(
-        "🚀 ~ file: Comment.tsx:22 ~ handlePostComment ~ error",
-        error
-      );
+    if (!isLoggedIn) {
+      toast("Please let us know who you are🤔", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      const content = comment;
+
+      try {
+        const res = await commentApi.comment({ id, content });
+        console.log("🚀 ~ file: Comment.tsx:20 ~ handlePostComment ~ res", res);
+        if (res.data) {
+          toast("Your comment upload successfully 🥳", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      } catch (error) {
+        console.log(
+          "🚀 ~ file: Comment.tsx:22 ~ handlePostComment ~ error",
+          error
+        );
+      }
     }
   };

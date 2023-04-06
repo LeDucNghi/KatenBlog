@@ -4,6 +4,7 @@ import * as React from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
+import { ScrollToTop } from "../../components/Common/ScrollToTop/ScrollToTop";
 import { SearchField } from "../../features/search/components/SearchField";
 import { SearchList } from "../../features/search/components/SearchList";
 import { handleGetAllPost } from "../../features/addEditBlog/addEditThunk";
@@ -24,6 +25,8 @@ export default function SearchSection(props: ISearchSectionProps) {
 
   return (
     <div className="search_container">
+      <ScrollToTop />
+
       <SearchField setKeyWord={setKeyword} />
 
       <SearchList postList={postList} keyword={`${keyword}`} />

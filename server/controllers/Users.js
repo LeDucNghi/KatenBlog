@@ -1,4 +1,4 @@
-const { Users } = require("../models");
+const { users } = require("../models");
 const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
@@ -6,7 +6,7 @@ exports.signup = async (req, res) => {
   const { name, password, avatar, fullname } = req.body;
 
   try {
-    const existedUser = await Users.findOne({ where: { username: name } });
+    const existedUser = await users.findOne({ where: { username: name } });
 
     if (!name || !password || !fullname) {
       res.status(401).send({ message: "Some fields are missing 🤔" });
@@ -14,7 +14,7 @@ exports.signup = async (req, res) => {
       res.status(401).send({ message: "This user already existed 🤧" });
     }
     await bcrypt.hash(password, 10).then((hash) => {
-      Users.create({
+      users.create({
         username: name,
         avatar: avatar,
         fullname: fullname,
@@ -34,7 +34,7 @@ exports.signin = async (req, res) => {
   if (!name || !password)
     res.status(401).send({ message: "Something is missing 😢" });
 
-  const user = await Users.findOne({ where: { username: name } });
+  const user = await users.findOne({ where: { username: name } });
 
   if (!user)
     return res.status(401).json({ message: "Can not find your account!" });

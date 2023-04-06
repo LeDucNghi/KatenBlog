@@ -3,6 +3,7 @@ import "./Header.scss";
 import { logout, selectIsLoggedIn } from "../../../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -21,7 +22,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import { getUserProfile } from "../../../features/auth/authThunk";
 import { handleGetAllPost } from "../../../features/addEditBlog/addEditThunk";
 import { styled } from "@mui/material/styles";
-import { useLocation } from "react-router-dom";
 
 export interface IHeaderProps {}
 

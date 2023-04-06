@@ -1,5 +1,5 @@
 module.exports = (sequalize, DataTypes) => {
-  const Users = sequalize.define("Users", {
+  const users = sequalize.define("users", {
     fullname: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -21,19 +21,19 @@ module.exports = (sequalize, DataTypes) => {
     },
   });
 
-  Users.associate = (models) => {
-    Users.hasMany(models.Posts, {
+  users.associate = (models) => {
+    users.hasMany(models.posts, {
       onDelete: "cascade",
     });
 
-    Users.hasMany(models.Comments, {
+    users.hasMany(models.comments, {
       onDelete: "cascade",
     });
 
-    Users.hasMany(models.Likes, {
+    users.hasMany(models.likes, {
       onDelete: "cascade",
     });
   };
 
-  return Users;
+  return users;
 };
