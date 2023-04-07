@@ -2,11 +2,7 @@ import "./CommentList.scss";
 
 import * as React from "react";
 
-import { Pagination, Paper, Typography } from "@mui/material";
-import {
-  fetchCommentListPagination,
-  selectCommentListPaginate,
-} from "../../addEditSlice";
+import { Paper, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 
 import Avatar from "@mui/material/Avatar";
@@ -23,6 +19,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { handleGetPostComment } from "../../addEditThunk";
 import { images } from "../../../../constants/image";
 import moment from "moment";
+import { selectCommentListPaginate } from "../../addEditSlice";
 
 export interface ICommentListProps {
   id: string;
@@ -105,8 +102,6 @@ export function CommentList({ id, commentList }: ICommentListProps) {
                     }
                     secondary={items.content}
                   />
-
-                  {/* <ListItemText primary={items.date} /> */}
                 </ListItem>
               </Paper>
             );
