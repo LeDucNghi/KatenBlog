@@ -1,7 +1,8 @@
 export interface PaginationParams {
   page: number;
   limit: number;
-  totalRows: number;
+  totalRows?: number;
+  totalPages?: number;
 }
 
 export interface PostListRes<T> {

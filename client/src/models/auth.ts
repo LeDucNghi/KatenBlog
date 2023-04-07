@@ -29,7 +29,7 @@ export interface Token {
 }
 
 export interface AuthState {
-  userProfile: Profile | null | undefined;
+  userProfile: Profile | null;
   isLoading: boolean;
   isLoggedIn: boolean;
   userType: UserType | null | undefined;

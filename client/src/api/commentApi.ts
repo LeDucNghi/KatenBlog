@@ -1,6 +1,7 @@
-import { Comment, PostListComment } from "../models";
+import { Comment, PaginationParams, PostListComment } from "../models";
 
 import axiosClient from "./axiosClient";
+import queryString from "query-string";
 
 const commentApi = {
   comment(params: Comment): Promise<any> {
@@ -9,8 +10,14 @@ const commentApi = {
     return axiosClient.post(url, { ...rest });
   },
 
-  getComment(id: string): Promise<PostListComment<Comment>> {
-    const url = `/comment/${id}?page=1&limit=2`;
+  getComment(
+    id: string,
+    params: PaginationParams
+  ): Promise<PostListComment<Comment>> {
+    const { page, limit } = params;
+
+    const paramString = queryString.stringify({ page, limit });
+    const url = `/comment/${id}?${paramString}`;
     return axiosClient.get(url);
   },
 };

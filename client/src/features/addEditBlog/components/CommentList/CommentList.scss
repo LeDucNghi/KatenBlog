@@ -9,6 +9,14 @@
 
     font-size: 15px;
 
+    .comment_list_paginate {
+        position: relative;
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+    }
+
     .comment_items {
         margin: 1em 0;
     }

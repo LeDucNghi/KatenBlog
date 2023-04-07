@@ -1,4 +1,11 @@
-import { Comment, Errors, LoadingState, Post, PostState } from "../../models";
+import {
+  Comment,
+  Errors,
+  LoadingState,
+  PaginationParams,
+  Post,
+  PostState,
+} from "../../models";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { RootState } from "../../app/store";
@@ -24,6 +31,13 @@ const initialState: PostState = {
   isPosting: {
     isAdd: false,
     isEdit: false,
+  },
+
+  pagination: {
+    page: 1,
+    limit: 3,
+    totalRows: 0,
+    totalPages: 0,
   },
 
   postList: [],
@@ -64,6 +78,13 @@ const postSlice = createSlice({
       state.commentList = action.payload;
     },
 
+    fetchCommentListPagination(state, action: PayloadAction<PaginationParams>) {
+      state.pagination.page = action.payload.page;
+      state.pagination.limit = action.payload.limit;
+      state.pagination.totalRows = action.payload.totalRows;
+      state.pagination.totalPages = action.payload.totalPages;
+    },
+
     fetchPostDataFailed(state, action: PayloadAction<Errors>) {
       state.isFetChing.isPostDetail = false;
       state.errors!.status = action.payload.status;
@@ -90,6 +111,7 @@ export const {
   fetchPostDataSuccess,
   fetchPostListSuccess,
   fetchCommentListSuccess,
+  fetchCommentListPagination,
   fetchPostDataFailed,
   setImageFile,
   setPostingStatus,
@@ -103,5 +125,7 @@ export const selectIsFetchingPostList = (state: RootState) =>
   state.post.isFetChing;
 export const selectPostList = (state: RootState) => state.post.postList;
 export const selectCommentList = (state: RootState) => state.post.commentList;
+export const selectCommentListPaginate = (state: RootState) =>
+  state.post.pagination;
 
 export const postReducer = postSlice.reducer;

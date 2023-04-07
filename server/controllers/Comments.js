@@ -20,12 +20,16 @@ exports.getPostComment = async (req, res) => {
     where: { postId: id },
     include: {
       model: users,
-      attributes: { exclude: ["password", "createdAt", "updatedAt", "username"] },
+      attributes: {
+        exclude: ["password", "createdAt", "updatedAt", "username"],
+      },
     },
   });
 
   const page = parseInt(req.query.page);
   const limit = parseInt(req.query.limit);
+  const totalRows = comment.length;
+  const totalPages = Math.ceil(totalRows / limit);
 
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
@@ -35,7 +39,8 @@ exports.getPostComment = async (req, res) => {
   data.pagination = {
     page,
     limit,
-    totalRows: comment.length,
+    totalRows,
+    totalPages,
   };
 
   data.data = comment.slice(startIndex, endIndex);

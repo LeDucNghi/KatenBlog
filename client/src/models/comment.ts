@@ -4,10 +4,10 @@ export interface Comment {
   id?: string;
   content: string;
 
-  UserId?: string;
-  PostId?: string;
+  userId?: string;
+  postId?: string;
 
-  user?: Profile;
+  user?: Profile | null;
 
   createdAt?: string;
   updatedAt?: string;

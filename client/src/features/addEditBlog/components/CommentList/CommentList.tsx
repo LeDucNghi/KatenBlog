@@ -2,10 +2,16 @@ import "./CommentList.scss";
 
 import * as React from "react";
 
-import { Paper, Typography } from "@mui/material";
+import { Pagination, Paper, Typography } from "@mui/material";
+import {
+  fetchCommentListPagination,
+  selectCommentListPaginate,
+} from "../../addEditSlice";
+import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 
 import Avatar from "@mui/material/Avatar";
 import { Comment } from "../../../../models";
+import { CustomPagination } from "../../../../components/Common/Pagination/Pagination";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -14,6 +20,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
+import { handleGetPostComment } from "../../addEditThunk";
 import { images } from "../../../../constants/image";
 import moment from "moment";
 
@@ -23,20 +30,22 @@ export interface ICommentListProps {
 }
 
 export function CommentList({ id, commentList }: ICommentListProps) {
-  console.log(
-    "🚀 ~ file: CommentList.tsx:26 ~ CommentList ~ commentList:",
-    commentList
-  );
+  const dispatch = useAppDispatch();
+  const commentListPaginate = useAppSelector(selectCommentListPaginate);
+
   const [isLiked, setIsLiked] = React.useState<boolean>(false);
-  // const [commentList, setCommentList] = React.useState<comments[]>();
 
   const handleLikePost = () => {
     setIsLiked(!isLiked);
-    // try {
+  };
 
-    // } catch (error) {
-
-    // }
+  const handlePageChange = (value: number) => {
+    dispatch(
+      handleGetPostComment(id, {
+        page: value,
+        limit: commentListPaginate.limit,
+      })
+    );
   };
 
   return (
@@ -104,6 +113,13 @@ export function CommentList({ id, commentList }: ICommentListProps) {
           })
         )}
       </List>
+
+      <div className="comment_list_paginate">
+        <CustomPagination
+          paginate={commentListPaginate}
+          handlePageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 }

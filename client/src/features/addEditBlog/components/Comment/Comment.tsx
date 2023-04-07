@@ -4,7 +4,6 @@ import * as React from "react";
 
 import { Box, Button, TextField, Typography } from "@mui/material";
 
-import commentApi from "../../../../api/commentApi";
 import { handlePostComment } from "../../addEditThunk";
 import { useAppDispatch } from "../../../../app/hooks";
 

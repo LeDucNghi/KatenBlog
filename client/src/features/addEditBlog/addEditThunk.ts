@@ -1,5 +1,7 @@
+import { Comment, PaginationParams, Post, Profile } from "../../models";
 import {
   fetchCommentList,
+  fetchCommentListPagination,
   fetchCommentListSuccess,
   fetchPostData,
   fetchPostDataFailed,
@@ -10,7 +12,6 @@ import {
 } from "./addEditSlice";
 
 import { AppThunk } from "../../app/store";
-import { Post } from "../../models";
 import authApi from "../../api/authApi";
 import commentApi from "../../api/commentApi";
 import postsApi from "../../api/postsApi";
@@ -116,13 +117,14 @@ export const addEditPost =
   };
 
 export const handleGetPostComment =
-  (id: string): AppThunk =>
+  (id: string, params: PaginationParams): AppThunk =>
   async (dispatch, getState) => {
     dispatch(fetchCommentList());
     try {
-      const res = await commentApi.getComment(id);
+      const res = await commentApi.getComment(id, params);
 
       dispatch(fetchCommentListSuccess(res.data.data));
+      dispatch(fetchCommentListPagination(res.data.pagination));
     } catch (error) {
       console.log(
         "🚀 ~ file: Comment.tsx:35 ~ handleGetPostComment ~ error",
@@ -131,26 +133,13 @@ export const handleGetPostComment =
     }
   };
 
-const handleGetCommentProfile = async (userId: string) => {
-  var userProfile = null;
-  try {
-    const res = await authApi.getCommentProfile(userId);
-
-    userProfile = res.data.userProfile;
-  } catch (error) {
-    console.log(
-      "🚀 ~ file: addEditThunk.ts:138 ~ handleGetCommentProfile ~ error:",
-      error
-    );
-  }
-
-  return userProfile;
-};
-
 export const handlePostComment =
   (id: string, comment: string): AppThunk =>
   async (dispatch, getState) => {
     // e.preventDefault();
+
+    const listComment: Comment[] = getState().post.commentList;
+    const profile: Profile | null = getState().auth.userProfile;
 
     const isLoggedIn = getState().auth.isLoggedIn;
 
@@ -170,8 +159,17 @@ export const handlePostComment =
 
       try {
         const res = await commentApi.comment({ id, content });
-        console.log("🚀 ~ file: Comment.tsx:20 ~ handlePostComment ~ res", res);
         if (res.data) {
+          const newListComment = await [...listComment];
+
+          await newListComment.push({
+            id: listComment[listComment.length - 1].id! + 1,
+            content: comment,
+            user: profile,
+          });
+
+          await dispatch(fetchCommentListSuccess(newListComment));
+
           toast("Your comment upload successfully 🥳", {
             position: "top-center",
             autoClose: 5000,
