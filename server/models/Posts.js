@@ -24,6 +24,11 @@ module.exports = (sequalize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+
+    visit: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
 
   posts.associate = (models) => {
@@ -32,6 +37,10 @@ module.exports = (sequalize, DataTypes) => {
     });
 
     posts.hasMany(models.likes, {
+      onDelete: "cascade",
+    });
+
+    posts.belongsTo(models.users, {
       onDelete: "cascade",
     });
   };

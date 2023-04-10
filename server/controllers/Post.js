@@ -1,4 +1,4 @@
-const { posts, likes } = require("../models");
+const { posts, likes, users } = require("../models");
 
 const { uploadImage } = require("../services/Posts/imageUpload");
 
@@ -15,22 +15,13 @@ const createPost = async (req, res) => {
 
   const image = await uploadImage(req, res);
 
-  if (
-    // post.categories !== "Food and Drink" ||
-    // post.categories !== "Lifestyle" ||
-    post.categories !== "Travel"
-  ) {
-    return res
-      .status(404)
-      .json({ message: "Invalid Category 🤔 Please choose another" });
-  } else {
-    post.UserId = req.user.id;
-    post.image = image;
+  post.userId = req.user.id;
+  post.image = image;
 
-    await posts.create(post);
+  await posts.create(post);
 
-    res.status(200).json({ message: "Create post success 🥳", post });
-  }
+  res.status(200).json({ message: "Create post success 🥳", post });
+  // }
 };
 
 // GET POST'S DETAIL IMAGE
@@ -51,28 +42,44 @@ const getDetailImage = async (req, res) => {
 
 // GET DETAIL POST
 const getDetailPost = async (req, res) => {
-  const PostId = req.params.id;
+  const postId = req.params.id;
 
-  const post = await posts.findByPk(PostId);
+  const post = await posts.findOne({
+    where: { id: postId },
+    include: [
+      {
+        model: users,
+        attributes: {
+          exclude: ["password", "createdAt", "updatedAt", "username"],
+        },
+      },
+      {
+        model: likes,
+        // attributes: {
+        //   exclude: ["password", "createdAt", "updatedAt", "username"],
+        // },
+      },
+    ],
+  });
 
   if (!post) res.status(404).json({ message: "Can not find your blog" });
   else {
     // nếu như user đã login và có cả userType từ middlewares trả về
     if (req.user && req.user.id && !req.userType) {
-      const UserId = req.user.id;
+      const userId = req.user.id;
       var userType = null;
 
-      const likedPost = await likes.findOne({
-        where: { UserId: UserId, PostId: PostId },
-      });
+      // const likedPost = await likes.findOne({
+      //   where: { userId: userId, PostId: PostId },
+      // });
 
-      if (UserId === post.UserId) userType = "isPoster";
+      if (userId === post.userId) userType = "isPoster";
       else userType = "isGuest";
 
       if (!likedPost) {
-        res.status(200).json({ post, liked: false, userType });
+        res.status(200).json({ post, userType });
       } else {
-        res.status(200).json({ post, liked: true, userType });
+        res.status(200).json({ post, userType });
       }
 
       // nếu như user ko login và middlewares trả về userType là guest
@@ -121,23 +128,52 @@ const updatePost = async (req, res) => {
 
 // LIKE POST
 const likePost = async (req, res) => {
-  const PostId = req.params.id;
+  const postId = req.params.id;
 
-  const UserId = req.user.id;
+  const userId = req.user.id;
 
   const findPostLiked = await likes.findOne({
-    where: { PostId: PostId, UserId: UserId },
+    where: { postId: postId, userId: userId },
   });
 
   if (!findPostLiked) {
-    await likes.create({ UserId, PostId });
+    await likes.create({ userId, postId });
 
-    res.json({ message: `Post ${PostId} is liked` });
+    res.json({ message: `Post ${postId} is liked` });
   } else {
-    await likes.destroy({ where: { PostId: PostId, UserId: UserId } });
+    await likes.destroy({ where: { postId: postId, userId: userId } });
 
-    res.json({ message: `Post ${PostId} is unliked` });
+    res.json({ message: `Post ${postId} is unliked` });
   }
+};
+
+// INCREASE BLOG'S VIEW
+const increaseBlogView = async (req, res) => {
+  const id = req.params.id;
+
+  const post = await posts.findOne({ where: { id: id } });
+
+  await posts.update(
+    {
+      visit: post.visit + 1,
+    },
+    { where: { id: id } }
+  );
+
+  res.status(200).json({ message: "view + 1" });
+};
+
+// TRENDING LIST
+const findTrendingList = async (req, res) => {
+  const postList = await posts.findAll();
+
+  const sortPostList = await postList.sort((a, b) => {
+    return b.visit - a.visit;
+  });
+
+  const trendingList = await sortPostList.slice(0, 3);
+
+  res.status(200).json({ trendingList });
 };
 
 module.exports = {
@@ -148,4 +184,6 @@ module.exports = {
   likePost,
   postNewComment,
   getDetailImage,
+  increaseBlogView,
+  findTrendingList,
 };

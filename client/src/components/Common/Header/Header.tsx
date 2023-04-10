@@ -1,9 +1,6 @@
 import "./Header.scss";
 
-import { logout, selectIsLoggedIn } from "../../../features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -21,13 +18,15 @@ import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import SearchIcon from "@mui/icons-material/Search";
 import { getUserProfile } from "../../../features/auth/authThunk";
 import { handleGetAllPost } from "../../../features/addEditBlog/addEditThunk";
+import { logout } from "../../../features/auth/authSlice";
 import { styled } from "@mui/material/styles";
+import { useAppDispatch } from "../../../app/hooks";
+import { useLocation } from "react-router-dom";
 
 export interface IHeaderProps {}
 
 export function Header(props: IHeaderProps) {
   const { pathname } = useLocation();
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const dispatch = useAppDispatch();
 
@@ -52,9 +51,8 @@ export function Header(props: IHeaderProps) {
   }, [width]);
 
   useEffect(() => {
-    // if (!isLoggedIn) return;
     dispatch(getUserProfile());
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(handleGetAllPost());
@@ -71,7 +69,9 @@ export function Header(props: IHeaderProps) {
 
   return (
     <Box className="header_container">
+      {/* NAVBAR */}
       <Navbar width={width} setOpen={setOpen} open={open} />
+
       {width >= 1024 && (
         <Box className="header_below">
           {navbarList.map((items, key) => {

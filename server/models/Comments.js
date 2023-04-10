@@ -1,5 +1,3 @@
-// const { DataTypes } = require("sequelize")
-
 module.exports = (sequalize, DataTypes) => {
   const comments = sequalize.define("comments", {
     content: {

@@ -47,6 +47,11 @@ const postsApi = {
     return axiosClient.get(url);
   },
 
+  increasePostView(id: string | number): Promise<any> {
+    const url = `/posts/view/${id}`;
+    return axiosClient.put(url);
+  },
+
   deletePost(id: string): Promise<any> {
     const url = `/posts/${id}`;
     return axiosClient.delete(url);

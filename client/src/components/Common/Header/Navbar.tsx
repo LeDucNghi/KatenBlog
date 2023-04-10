@@ -5,7 +5,10 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
+import { ProfileMenu } from "./ProfileDropdown";
 import SearchIcon from "@mui/icons-material/Search";
+import { selectIsLoggedIn } from "../../../features/auth/authSlice";
+import { useAppSelector } from "../../../app/hooks";
 
 export interface INavbarProps {
   width: number;
@@ -15,16 +18,16 @@ export interface INavbarProps {
 
 export function Navbar({ width, setOpen, open }: INavbarProps) {
   const navigate = useNavigate();
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (
     <Box className="header_above">
       <Button
-        component={RouterLink}
-        to="/signin"
         className="header_button"
-        startIcon={<PersonIcon className="header_icon_button" />}
+        startIcon={<SearchIcon className="header_icon_button" />}
+        onClick={() => navigate(`/search`)}
       >
-        Sign In
+        Search
       </Button>
 
       <Typography
@@ -36,13 +39,18 @@ export function Navbar({ width, setOpen, open }: INavbarProps) {
         Zyro
       </Typography>
 
-      <Button
-        className="header_button"
-        startIcon={<SearchIcon className="header_icon_button" />}
-        onClick={() => navigate(`/search`)}
-      >
-        Search
-      </Button>
+      {isLoggedIn ? (
+        <ProfileMenu />
+      ) : (
+        <Button
+          component={RouterLink}
+          to="/signin"
+          className="header_button"
+          startIcon={<PersonIcon className="header_icon_button" />}
+        >
+          Sign In
+        </Button>
+      )}
 
       {width <= 320 && (
         <IconButton component="label" onClick={() => setOpen(!open)}>

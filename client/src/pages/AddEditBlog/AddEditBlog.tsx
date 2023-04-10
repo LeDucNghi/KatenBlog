@@ -49,6 +49,8 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
     } else {
       dispatch(handleGetDetailPost(id!));
       dispatch(handleGetPostComment(id!, commentListPaginate));
+
+      if (userType === "isPoster") console.log();
     }
   }, [id, pathname]);
 

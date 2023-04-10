@@ -109,12 +109,14 @@ export function CommentList({ id, commentList }: ICommentListProps) {
         )}
       </List>
 
-      <div className="comment_list_paginate">
-        <CustomPagination
-          paginate={commentListPaginate}
-          handlePageChange={handlePageChange}
-        />
-      </div>
+      {commentList?.length !== 0 && (
+        <div className="comment_list_paginate">
+          <CustomPagination
+            paginate={commentListPaginate}
+            handlePageChange={handlePageChange}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -44,6 +44,7 @@ export const handleGetDetailPost =
 
     try {
       const res = await postsApi.getDetailPost(id!, type);
+      await postsApi.increasePostView(id!);
 
       if (res.data) {
         await dispatch(setUserType(res.data.userType!));
