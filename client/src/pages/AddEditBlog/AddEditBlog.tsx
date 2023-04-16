@@ -20,6 +20,7 @@ import { useLocation, useParams } from "react-router-dom";
 
 import { AddEditBanner } from "../../features/addEditBlog/components/Banner/AddEditBanner";
 import { AddEditBody } from "../../features/addEditBlog/components/Body/AddEdtiBody";
+import { Author } from "../../features/addEditBlog/components/Author/Author";
 import { Box } from "@mui/material";
 import { Comment } from "../../features/addEditBlog/components/Comment/Comment";
 import { CommentList } from "../../features/addEditBlog/components/CommentList/CommentList";
@@ -133,6 +134,8 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
           );
         }}
       </Formik>
+
+      <Author author={blogData?.user} />
 
       {(userType === "isGuest" || userType === "isPoster") && (
         <CommentList commentList={commentList} id={`${id}`} />

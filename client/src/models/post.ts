@@ -1,7 +1,7 @@
 import { Errors, PaginationParams } from "./common";
+import { Profile, UserType } from "./auth";
 
 import { Comment } from "./comment";
-import { UserType } from "./auth";
 
 export interface Post {
   id?: string | number | undefined;
@@ -15,6 +15,7 @@ export interface Post {
   updatedAt?: string | undefined;
 
   userId?: number | string | undefined;
+  user?: Profile;
 }
 
 export type TextStyle =
@@ -48,7 +49,7 @@ export interface PostState {
   postData: Post | null | undefined;
 
   commentList: Comment[];
-  pagination : PaginationParams
+  pagination: PaginationParams;
 }
 
 export interface PostData {

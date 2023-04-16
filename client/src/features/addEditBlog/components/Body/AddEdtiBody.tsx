@@ -3,11 +3,9 @@ import "./AddEdtiBody.scss";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { Post, UserType } from "../../../../models";
 
-import FacebookIcon from "@mui/icons-material/Facebook";
+import { Icons } from "../../../../components/Common/Icons/Icons";
 import { LoadingButton } from "@mui/lab";
-import PinterestIcon from "@mui/icons-material/Pinterest";
 import ReactQuill from "react-quill";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import { selectPostingStatus } from "../../addEditSlice";
 import { useAppSelector } from "../../../../app/hooks";
 
@@ -34,13 +32,13 @@ export function AddEditBody({
       <Box className="addeditblog_share_social">
         <Typography>Share</Typography>
         <Button className="social_button" variant="outlined">
-          <FacebookIcon />
+          <Icons iconName="facebook" />
         </Button>
         <Button className="social_button" variant="outlined">
-          <TwitterIcon />
+          <Icons iconName="twitter" />
         </Button>
         <Button className="social_button" variant="outlined">
-          <PinterestIcon />
+          <Icons iconName="pinterest" />
         </Button>
       </Box>
       <Box className="addedit_form">

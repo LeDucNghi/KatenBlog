@@ -69,19 +69,10 @@ const getDetailPost = async (req, res) => {
       const userId = req.user.id;
       var userType = null;
 
-      // const likedPost = await likes.findOne({
-      //   where: { userId: userId, PostId: PostId },
-      // });
-
       if (userId === post.userId) userType = "isPoster";
       else userType = "isGuest";
 
-      if (!likedPost) {
-        res.status(200).json({ post, userType });
-      } else {
-        res.status(200).json({ post, userType });
-      }
-
+      res.status(200).json({ post, userType });
       // nếu như user ko login và middlewares trả về userType là guest
     } else if (!req.user && req.userType) {
       const userType = req.userType;
