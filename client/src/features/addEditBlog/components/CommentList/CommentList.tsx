@@ -27,6 +27,7 @@ export interface ICommentListProps {
 }
 
 export function CommentList({ id, commentList }: ICommentListProps) {
+  console.log("🚀 ~ file: CommentList.tsx:30 ~ CommentList ~ commentList:", commentList)
   const dispatch = useAppDispatch();
   const commentListPaginate = useAppSelector(selectCommentListPaginate);
 

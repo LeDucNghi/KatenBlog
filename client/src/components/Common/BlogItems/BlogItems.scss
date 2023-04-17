@@ -3,7 +3,7 @@
 .category_items {
     position: relative;
 
-    width: 100%;
+    width: 90%;
 
     margin: 1em auto;
 
@@ -11,7 +11,12 @@
 
     font-family: globalStyles.$fontMontserrat;
 
+    background: yellow;
+
     .items_img {
+        width: 1em;
+        height: 1.5em;
+
         img {
             width: 100%;
             height: 100%;
@@ -38,8 +43,6 @@
 // VERTICAL - ĐỨNG
 .category_items.vertical {
     width: 24%;
-
-    // background: red;
 
     .css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root {
         padding: 1em;
