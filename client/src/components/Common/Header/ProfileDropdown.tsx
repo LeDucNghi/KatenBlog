@@ -11,11 +11,16 @@ import MenuItem from "@mui/material/MenuItem";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Tooltip from "@mui/material/Tooltip";
+import { selectUserProfile } from "../../../features/auth/authSlice";
+import { useAppSelector } from "../../../app/hooks";
 
 export interface IProfileMenuProps {}
 
 export function ProfileMenu(props: IProfileMenuProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const userProfile = useAppSelector(selectUserProfile)
+
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -36,7 +41,7 @@ export function ProfileMenu(props: IProfileMenuProps) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 32, height: 32 }} src={`${userProfile?.avatar}`} />
           </IconButton>
         </Tooltip>
       </Box>

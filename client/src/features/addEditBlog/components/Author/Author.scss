@@ -3,8 +3,8 @@
 .author_container {
     position: relative;
 
-    width: 60%;
-    height: 190px;
+    width: 75%;
+    height: 12.7em;
 
     font-size: 15px;
 
@@ -42,16 +42,23 @@
 
         .author_contact_social {
             width: 100%;
-            height: 2em;
+            padding: 0.5em 0;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
 
             a {
                 width: 0.6em;
-                height: 0.6em;
 
-                margin: 0 0.5em;
+                margin: 0 1em;
 
                 color: #203656;
                 line-height: 0.8em;
+
+                &:first-child {
+                    margin-left: 0;
+                }
             }
         }
     }

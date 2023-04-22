@@ -12,7 +12,6 @@ import {
 } from "./addEditSlice";
 
 import { AppThunk } from "../../app/store";
-import authApi from "../../api/authApi";
 import commentApi from "../../api/commentApi";
 import postsApi from "../../api/postsApi";
 import { setUserType } from "../auth/authSlice";

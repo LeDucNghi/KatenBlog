@@ -11,6 +11,7 @@ import NotFound from "./components/Common/NotFound/NotFound";
 import { SignIn } from "./pages/SignIn/SignIn";
 import { SignUp } from "./pages/SignUp/SignUp";
 import { Test } from "./pages/test/test";
+import { UserProfile } from "./features/auth/components/UserProfile/UserProfile";
 
 function App() {
   const Home = lazy(() => import("./pages/Home/Home"));
@@ -64,6 +65,16 @@ function App() {
           element={
             <Suspense>
               <AddEditBlog />
+            </Suspense>
+          }
+        />
+
+        <Route
+          index
+          path="profile"
+          element={
+            <Suspense>
+              <UserProfile />
             </Suspense>
           }
         />
