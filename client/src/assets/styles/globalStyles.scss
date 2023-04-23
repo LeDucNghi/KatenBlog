@@ -2,6 +2,7 @@ $h2-font-size: 1.5em;
 $time-color: #c0b9b6;
 $category-color: #c1a57b;
 $button-color: #c1a57b;
+$social-icons-color: #fe4f70;
 
 // FONTS
 $fontMontserrat: "Montserrat", sans-serif;
@@ -28,6 +29,12 @@ $fontPoppins: "Poppins", sans-serif;
 @mixin flexColumn {
     display: flex;
     flex-direction: column;
+}
+
+@mixin flexSpaceCenter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 @mixin imageCover {
@@ -68,4 +75,14 @@ $fontPoppins: "Poppins", sans-serif;
 
 a {
     text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    outline: none;
+    border: none;
+    cursor: pointer;
 }

@@ -1,0 +1,216 @@
+@use "../../../assets/styles/globalStyles.scss";
+
+.profile_section {
+    position: relative;
+
+    width: 100%;
+    height: 63em;
+
+    background-image: url("../../../assets/images/user-bg.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .section_blur {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        background-color: rgba(36, 62, 97, 0.7);
+    }
+
+    .profile_header {
+        position: relative;
+
+        width: 100%;
+
+        @include globalStyles.flexCenter;
+
+        flex-direction: column;
+
+        .top_header {
+            width: 100%;
+
+            .top_header_main {
+                width: 90%;
+
+                margin: 0 auto;
+
+                padding: 1em;
+
+                @include globalStyles.flexSpaceCenter;
+
+                .header_main_items {
+                    width: 30%;
+                }
+
+                .main_social {
+                    display: flex;
+                    align-items: center;
+
+                    li {
+                        @include globalStyles.flexCenter;
+
+                        margin-left: 1em;
+
+                        cursor: pointer;
+
+                        .main_social_icon {
+                            color: #fff;
+                            transition: all 0.3s ease-in-out;
+
+                            &:hover {
+                                color: globalStyles.$social-icons-color;
+                                transition: all 0.3s ease-in-out;
+                            }
+                        }
+                    }
+                }
+
+                .main_user {
+                    @include globalStyles.flexCenter;
+
+                    flex-direction: column;
+
+                    .user_slogan {
+                        color: rgb(144, 155, 173);
+                        font-size: 0.9em;
+                    }
+
+                    .user_name {
+                        color: rgb(255, 255, 255);
+
+                        font-family: globalStyles.$fontPoppins;
+                        font-weight: 700;
+                        font-size: 2em;
+                    }
+                }
+
+                .main_button {
+                    display: flex;
+                    justify-content: flex-end;
+
+                    .icon_button {
+                        @include globalStyles.flexCenter;
+
+                        width: 3em;
+                        height: 3em;
+
+                        background-image: linear-gradient(
+                            to top,
+                            rgb(255, 163, 135) 0%,
+                            rgb(254, 79, 112) 51%,
+                            rgb(255, 163, 135) 100%
+                        );
+                        background-size: auto 200%;
+
+                        box-shadow: #000000 0px 2px 4px 0px;
+
+                        color: #ffffff;
+
+                        border-radius: 50%;
+
+                        margin-right: 1em;
+                    }
+                }
+            }
+        }
+
+        .nav_header {
+            position: relative;
+
+            @include globalStyles.flexCenter;
+
+            width: 85%;
+            height: 4em;
+
+            border-color: rgb(144, 155, 173);
+            border-style: solid none none;
+            border-width: 0.1em;
+
+            .nav_items {
+                width: 6.4em;
+                height: 2.5em;
+
+                margin: 0 0.5em;
+
+                background: linear-gradient(to right, #fe4f70 0%, #ffa387 100%);
+
+                border-radius: 3em;
+
+                @include globalStyles.flexCenter;
+
+                font-size: 0.9em;
+                color: #fff;
+            }
+        }
+    }
+
+    .profile_about {
+        position: relative;
+
+        margin: 4em auto;
+
+        width: 47em;
+        height: 23em;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-direction: column;
+
+        h2 {
+            color: rgb(255, 255, 255);
+            font-size: 3.2em;
+            font-weight: 700;
+            line-height: 2em;
+        }
+
+        p {
+            color: #c6c4c9;
+            font-size: 1.2em;
+            text-align: center;
+            line-height: 2em;
+        }
+
+        button {
+            width: 9em;
+            height: 3em;
+
+            border: 0.1em solid #ffffff;
+            border-radius: 2em;
+
+            color: #ffffff;
+
+            font-size: 0.9em;
+            text-align: center;
+            text-transform: capitalize;
+
+            transition: all 0.3s ease-in-out;
+
+            background: transparent;
+
+            &:hover {
+                transition: all 0.3s ease-in-out;
+
+                background: #fff;
+                color: #000000;
+            }
+        }
+    }
+
+    .profile_foot {
+        position: relative;
+
+        top: 1em;
+
+        background: transparent;
+        height: 16em;
+
+        img {
+            display: inline;
+            fill: #ffffff;
+        }
+    }
+}

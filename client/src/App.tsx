@@ -1,26 +1,29 @@
 import "react-quill/dist/quill.snow.css";
 import "./assets/styles/globalStyles.scss";
 
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
 import { Footer } from "./components/Common/Footer/Footer";
 import { Header } from "./components/Common/Header/Header";
 import { Loading } from "./components/Common/Loading/Loading";
 import NotFound from "./components/Common/NotFound/NotFound";
+import { ProfileHeader } from "./components/Common/Header/ProfileHeader";
 import { SignIn } from "./pages/SignIn/SignIn";
 import { SignUp } from "./pages/SignUp/SignUp";
 import { Test } from "./pages/test/test";
-import { UserProfile } from "./features/auth/components/UserProfile/UserProfile";
+import { UserProfile } from "./pages/Profile/UserProfile";
 
 function App() {
+  const { pathname } = useLocation();
+
   const Home = lazy(() => import("./pages/Home/Home"));
   const AddEditBlog = lazy(() => import("./pages/AddEditBlog/AddEditBlog"));
   const Search = lazy(() => import("./pages/Search/Search"));
 
   return (
     <>
-      <Header />
+      {pathname !== "/profile" ? <Header /> : <ProfileHeader />}
 
       <Routes>
         <Route index path="/" element={<Navigate to="home" />} />
