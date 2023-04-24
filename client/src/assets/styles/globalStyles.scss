@@ -5,8 +5,11 @@ $button-color: #c1a57b;
 $social-icons-color: #fe4f70;
 
 // FONTS
-$fontMontserrat: "Montserrat", sans-serif;
-$fontPoppins: "Poppins", sans-serif;
+$montserratFont: "Montserrat", sans-serif;
+$poppinFont: "Poppins", sans-serif;
+$robotoFont: "Roboto", sans-serif;
+
+$transition: all 0.3s ease-in-out;
 
 @mixin flexCenter {
     display: flex;

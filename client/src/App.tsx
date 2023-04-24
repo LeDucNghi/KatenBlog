@@ -82,7 +82,7 @@ function App() {
           }
         />
 
-        <Route index path="test" element={<Test direction="horizontal" />} />
+        <Route index path="test" element={<Test direction="vertical" />} />
 
         <Route index path="*" element={<NotFound />} />
       </Routes>

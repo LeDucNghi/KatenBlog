@@ -1,7 +1,7 @@
 export interface Profile {
   id?: string | number | undefined;
 
-  username: string | undefined;
+  username?: string | undefined;
   fullname?: string | undefined;
   avatar?: string | undefined;
   password?: string | undefined;
