@@ -1,0 +1,49 @@
+@use "../../assets/styles/globalStyles.scss";
+
+.about_widget {
+    width: 90%;
+    height: 80%;
+
+    text-align: center;
+    // line-height: 1.7em;
+
+    // padding: 0.5em;
+
+    .about {
+        margin-bottom: 1.6em;
+    }
+
+    .about_author {
+        font-size: 2em;
+        color: globalStyles.$title-color;
+        font-family: globalStyles.$poppinFont;
+        font-weight: 700;
+    }
+
+    .about_description {
+        font-size: 0.9em;
+        font-family: globalStyles.$robotoFont;
+        color: globalStyles.$light-grey;
+    }
+
+    .about_social_button {
+        background: yellow;
+        // @include globalStyles.flexCenter;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 0 2em;
+
+        li {
+            .social_button_items {
+                color: globalStyles.$title-color;
+                transition: globalStyles.$transition;
+                &:hover {
+                    transition: globalStyles.$transition;
+                    color: globalStyles.$light-red;
+                }
+            }
+        }
+    }
+}

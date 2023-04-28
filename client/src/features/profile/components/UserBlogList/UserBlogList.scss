@@ -1,0 +1,26 @@
+@use "../../../../assets/styles/globalStyles.scss";
+
+.blog_list {
+    position: relative;
+
+    width: 70%;
+
+    background: yellow;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    padding: 0.5em;
+
+    .blog_items {
+        position: relative;
+
+        width: 45%;
+        height: 30em;
+
+        @include globalStyles.flexCenter;
+
+        margin: 1em auto;
+    }
+}

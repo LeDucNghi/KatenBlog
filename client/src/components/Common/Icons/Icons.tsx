@@ -5,9 +5,11 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import HeadphonesOutlinedIcon from "@mui/icons-material/HeadphonesOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import MenuIcon from "@mui/icons-material/Menu";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PhotoOutlinedIcon from "@mui/icons-material/PhotoOutlined";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import SearchIcon from "@mui/icons-material/Search";
+import ShareIcon from "@mui/icons-material/Share";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -24,7 +26,9 @@ type IconName =
   | "search"
   | "image"
   | "headphone"
-  | "video";
+  | "video"
+  | "share"
+  | "option";
 
 type IconsFontSize = "large" | "medium" | "small";
 
@@ -66,6 +70,10 @@ export function Icons({ iconName, className, fontSize }: IIconsProps) {
     return <MenuIcon className={`${className}`} fontSize={fontSize} />;
   if (iconName === "search")
     return <SearchIcon className={`${className}`} fontSize={fontSize} />;
+  if (iconName === "share")
+    return <ShareIcon className={`${className}`} fontSize={fontSize} />;
+  if (iconName === "option")
+    return <MoreHorizIcon className={`${className}`} fontSize={fontSize} />;
 
   return null;
 }

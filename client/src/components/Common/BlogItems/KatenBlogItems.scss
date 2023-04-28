@@ -1,15 +1,10 @@
-@use "../../assets/styles/globalStyles.scss";
+@use "../../../assets/styles/globalStyles.scss";
 
 .category_items {
     position: relative;
 
-    width: 90%;
-
-    margin: 3em auto;
-
     display: flex;
-
-    font-family: globalStyles.$montserratFont;
+    height: 100%;
 
     .items_container {
         .items_img {
@@ -76,6 +71,8 @@
             }
 
             .items_meta {
+                width: 100%;
+
                 li {
                     position: relative;
 
@@ -95,6 +92,12 @@
                     &:first-child::before {
                         display: none;
                     }
+
+                    .text {
+                        white-space: nowrap;
+                        overflow: hidden !important;
+                        text-overflow: ellipsis;
+                    }
                 }
             }
         }
@@ -103,10 +106,10 @@
 
 // VERTICAL - ĐỨNG
 .category_items.vertical {
-    width: 24%;
+    width: 100%;
 
     .items_container {
-        padding: 1em;
+        // padding: 1em;
 
         width: 100%;
         height: 100%;
@@ -222,6 +225,7 @@
 
                     img {
                         @include globalStyles.imageCover;
+                        border-radius: 50%;
                     }
                 }
 

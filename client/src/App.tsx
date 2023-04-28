@@ -82,7 +82,11 @@ function App() {
           }
         />
 
-        <Route index path="test" element={<Test direction="vertical" />} />
+        <Route
+          index
+          path="test"
+          element={<Test direction="vertical" isThumbedNail={true} />}
+        />
 
         <Route index path="*" element={<NotFound />} />
       </Routes>

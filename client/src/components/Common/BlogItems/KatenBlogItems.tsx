@@ -1,3 +1,5 @@
+import "./KatenBlogItems.scss";
+
 import * as React from "react";
 
 import { ListItemButton, Paper } from "@mui/material";
@@ -11,12 +13,16 @@ export interface IKatenBlogItemsProps {
   direction: "horizontal" | "vertical";
   shape?: "circle" | "square";
   items: Post;
+  size?: "small" | "big";
+  isThumbedNail?: boolean;
 }
 
 export function KatenBlogItems({
   direction,
   shape,
   items,
+  size,
+  isThumbedNail,
 }: IKatenBlogItemsProps) {
   return (
     <Paper
@@ -27,7 +33,13 @@ export function KatenBlogItems({
           : "category_items horizontal"
       }`}
     >
-      <ListItemButton>
+      <ListItemButton
+        className={`${
+          direction === "horizontal" && size === "big"
+            ? "items_container large_horizontal"
+            : "items_container"
+        }`}
+      >
         <div
           className={`${
             direction === "horizontal" && shape === "circle"
@@ -35,32 +47,84 @@ export function KatenBlogItems({
               : "items_img square"
           }`}
         >
-          <p>{items.categories}</p>
+          <p
+            className={
+              isThumbedNail
+                ? "items_categories thumbednail_categories"
+                : "items_categories"
+            }
+          >
+            {items.categories}
+          </p>
 
-          <span>
-            <Icons iconName="image" />
-          </span>
+          {!isThumbedNail && (
+            <span>
+              <Icons iconName="image" />
+            </span>
+          )}
 
           <img src={items.image as string} alt="" />
-        </div>
 
-        <div className="items_text">
-          <div className="items_meta">
-            <div className="meta_author_avt">
-              <img src={items.image as string} alt="" />
+          {direction === "vertical" && isThumbedNail && (
+            <div className="items_thumbednail">
+              <p className="thumbednail_title thumbednail_text">
+                {items.title}{" "}
+              </p>
+              <ul className="thumbednail_meta">
+                <li className="thumbednail_author thumbednail_text">
+                  {items.user?.fullname}{" "}
+                </li>
+                <li className="thumbednail_time thumbednail_text">
+                  {items.createdAt}{" "}
+                </li>
+              </ul>
+              k
             </div>
-
-            <p className="meta_author">{items.user!.fullname} </p>
-
-            <div className="meta_time">{items.createdAt}</div>
-          </div>
-
-          <h2 className="items_title">{items.title}</h2>
-
-          <p className="items_time">{items.createdAt} </p>
-
-          <p className="items_subtitle">{items.subTitle}</p>
+          )}
         </div>
+
+        {!isThumbedNail && (
+          <div className="items_text">
+            <ul className="items_meta">
+              <li>
+                <div className="meta_author_avt">
+                  <img src={items.image as string} alt="" />
+                </div>
+
+                <p className="meta_author text">{items.user?.fullname} </p>
+              </li>
+
+              {direction === "horizontal" && size === "big" && (
+                <li>
+                  <p className="meta_categories text">{items.categories}</p>
+                </li>
+              )}
+
+              <li>
+                <p className="meta_time text">{items.createdAt}</p>
+              </li>
+            </ul>
+
+            <h2 className="items_title">{items.title}</h2>
+
+            {direction === "horizontal" && !size && (
+              <p className="items_time">{items.createdAt} </p>
+            )}
+
+            {(direction === "horizontal" && size === "big") ||
+            direction === "vertical" ? (
+              <p className="items_subtitle">{items.subTitle}</p>
+            ) : null}
+
+            {direction === "horizontal" && size === "big" && (
+              <div className="items_share_button">
+                <Icons iconName="share" />
+
+                <Icons iconName="option" />
+              </div>
+            )}
+          </div>
+        )}
       </ListItemButton>
     </Paper>
   );
