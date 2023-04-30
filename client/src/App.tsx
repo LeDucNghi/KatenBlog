@@ -74,7 +74,7 @@ function App() {
 
         <Route
           index
-          path="profile"
+          path="profile/:id"
           element={
             <Suspense>
               <UserProfile />

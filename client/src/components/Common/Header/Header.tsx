@@ -66,6 +66,7 @@ export function Header(props: IHeaderProps) {
 
   if (pathname === "/signin") return <></>;
   if (pathname === "/signup") return <></>;
+  if (pathname === "/profile/*") return <></>;
 
   return (
     <Box className="header_container">

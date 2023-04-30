@@ -3,8 +3,8 @@ import "./test.scss";
 import { ListItemButton, Paper } from "@mui/material";
 
 import { Icons } from "../../components/Common/Icons/Icons";
+import { Images } from "../../constants/image";
 import { highestList } from "../../mock";
-import { images } from "../../constants/image";
 
 export interface ITestProps {
   // horizontal : ngang
@@ -83,7 +83,7 @@ export function Test({ direction, shape, size, isThumbedNail }: ITestProps) {
                   <ul className="items_meta">
                     <li>
                       <div className="meta_author_avt">
-                        <img src={images.avatar} alt="" />
+                        <img src={Images.avatar} alt="" />
                       </div>
 
                       <p className="meta_author text">{items.user.fullname} </p>

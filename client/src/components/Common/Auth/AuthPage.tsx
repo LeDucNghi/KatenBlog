@@ -6,7 +6,7 @@ import { Box, Button, Divider, Paper, Typography } from "@mui/material";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
-import { images } from "../../../constants/image";
+import { Images } from "../../../constants/image";
 
 export interface IAuthPageProps {
   brandTitle: string;
@@ -30,7 +30,7 @@ export default function AuthPage({
           </Typography>
 
           <div className="auth_brand_logo">
-            <img src={images.logoBrand} alt="" />
+            <img src={Images.logoBrand} alt="" />
           </div>
         </Paper>
       </Box>

@@ -1,7 +1,7 @@
 import "./ProfileHeader.scss";
 
 import { Icons } from "../Icons/Icons";
-import { images } from "../../../constants/image";
+import { Images } from "../../../constants/image";
 
 export interface IProfileHeaderProps {}
 
@@ -52,7 +52,7 @@ export function ProfileHeader(props: IProfileHeaderProps) {
 
             <div className="main_user header_main_items">
               <div className="user_avatar">
-                <img src={images.avatar} alt="" />
+                <img src={Images.avatar} alt="" />
               </div>
 
               <h2 className="user_name">Katen</h2>
@@ -94,7 +94,7 @@ export function ProfileHeader(props: IProfileHeaderProps) {
       </div>
 
       <div className="profile_foot">
-        <img src={images.wave} alt="" />
+        <img src={Images.wave} alt="" />
       </div>
     </section>
   );

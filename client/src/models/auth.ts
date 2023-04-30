@@ -7,6 +7,8 @@ export interface Profile {
   password?: string | undefined;
   message?: string | undefined;
 
+  description?: string | undefined;
+
   token?: string | undefined;
   expiresIn?: Date | number | undefined;
 

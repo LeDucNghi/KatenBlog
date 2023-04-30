@@ -5,7 +5,7 @@ import notfound from "../assets/svg/illustration_404.svg";
 import openBook from "../assets/images/open-book.png";
 import wave from "../assets/svg/wave.svg";
 
-export const images = {
+export const Images = {
   logoBrand,
   notfound,
   openBook,

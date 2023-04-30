@@ -1,8 +1,8 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 
+import { Images } from "../../../constants/image";
 import PropTypes from "prop-types";
 import { Link as RouterLink } from "react-router-dom";
-import { images } from "../../../constants/image";
 import { styled } from "@mui/material/styles";
 
 // NotFound.propTypes = {
@@ -66,7 +66,7 @@ export default function NotFound({
 
         <Box
           component="img"
-          src={images.notfound}
+          src={Images.notfound}
           sx={{ height: 260, mx: "auto", my: { xs: 5, sm: 10 } }}
         />
 

@@ -3,55 +3,74 @@ import "./AboutWidget.scss";
 import * as React from "react";
 
 import { Icons } from "../../components/Common/Icons/Icons";
+import { Profile } from "../../models";
 
-export interface IAboutWidgetProps {}
+export interface IAboutWidgetProps {
+  user: Profile;
+}
 
-export function AboutWidget(props: IAboutWidgetProps) {
+export function AboutWidget({ user }: IAboutWidgetProps) {
   return (
     <div className="about_widget">
-      <h2 className="about about_author">Katen</h2>
+      <h2 className="about about_author">{user.fullname} </h2>
 
       <p className="about about_description">
-        Hello, We’re content writer who is fascinated by content fashion,
-        celebrity and lifestyle. We helps clients bring the right content to the
-        right people.
+        {user.description
+          ? user.description
+          : "Hello, We’re content writer who is fascinated by content fashion,celebrity and lifestyle. We helps clients bring the right content to the right people."}
       </p>
 
       <ul className="about about_social_button">
         <li>
-          <Icons
-            iconName="facebook"
-            className="social_button_items"
-            fontSize="small"
-          />{" "}
+          <a
+            href="https://www.facebook.com/nghile.genji/"
+            rel="noreferrer noopener"
+          >
+            <Icons
+              iconName="facebook"
+              className="social_button_items"
+              fontSize="small"
+            />{" "}
+          </a>
         </li>
         <li>
-          <Icons
-            iconName="twitter"
-            className="social_button_items"
-            fontSize="small"
-          />{" "}
+          <a href="https://github.com/LeDucNghi" rel="noreferrer noopener">
+            <Icons
+              iconName="github"
+              className="social_button_items"
+              fontSize="small"
+            />{" "}
+          </a>
         </li>
         <li>
-          <Icons
-            iconName="instagram"
-            className="social_button_items"
-            fontSize="small"
-          />{" "}
+          <a
+            href="https://www.instagram.com/dnn___2812/"
+            rel="noreferrer noopener"
+          >
+            <Icons
+              iconName="instagram"
+              className="social_button_items"
+              fontSize="small"
+            />{" "}
+          </a>
         </li>
         <li>
-          <Icons
-            iconName="pinterest"
-            className="social_button_items"
-            fontSize="small"
-          />{" "}
+          <a href="/" rel="noreferrer noopener">
+            <Icons
+              iconName="pinterest"
+              className="social_button_items"
+              fontSize="small"
+            />{" "}
+          </a>
         </li>
         <li>
-          <Icons
-            iconName="youtube"
-            className="social_button_items"
-            fontSize="small"
-          />{" "}
+          <a href="/" rel="noreferrer noopener">
+            <Icons
+              iconName="youtube"
+              className="social_button_items"
+              fontSize="small"
+            />{" "}
+          </a>
         </li>
       </ul>
     </div>

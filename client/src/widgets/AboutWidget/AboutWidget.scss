@@ -1,16 +1,18 @@
 @use "../../assets/styles/globalStyles.scss";
 
 .about_widget {
-    width: 90%;
+    width: 80%;
     height: 80%;
 
     text-align: center;
-    // line-height: 1.7em;
-
-    // padding: 0.5em;
+    padding: 0 1em;
 
     .about {
-        margin-bottom: 1.6em;
+        margin-bottom: 1.5em;
+
+        &:first-child {
+            margin-bottom: 0.5em;
+        }
     }
 
     .about_author {
@@ -27,8 +29,6 @@
     }
 
     .about_social_button {
-        background: yellow;
-        // @include globalStyles.flexCenter;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -39,6 +39,7 @@
             .social_button_items {
                 color: globalStyles.$title-color;
                 transition: globalStyles.$transition;
+                cursor: pointer;
                 &:hover {
                     transition: globalStyles.$transition;
                     color: globalStyles.$light-red;

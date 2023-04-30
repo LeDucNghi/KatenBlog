@@ -12,12 +12,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
+import { Images } from "../../../../constants/image";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import { handleGetPostComment } from "../../addEditThunk";
-import { images } from "../../../../constants/image";
 import moment from "moment";
 import { selectCommentListPaginate } from "../../addEditSlice";
 
@@ -27,7 +27,10 @@ export interface ICommentListProps {
 }
 
 export function CommentList({ id, commentList }: ICommentListProps) {
-  console.log("🚀 ~ file: CommentList.tsx:30 ~ CommentList ~ commentList:", commentList)
+  console.log(
+    "🚀 ~ file: CommentList.tsx:30 ~ CommentList ~ commentList:",
+    commentList
+  );
   const dispatch = useAppDispatch();
   const commentListPaginate = useAppSelector(selectCommentListPaginate);
 
@@ -59,7 +62,7 @@ export function CommentList({ id, commentList }: ICommentListProps) {
         {commentList?.length === 0 ? (
           <div className="comment_list_empty">
             <div className="comment_list_empty_img">
-              <img src={images.notask} alt="" />
+              <img src={Images.notask} alt="" />
             </div>
 
             <p className="comment_list_empty_title">

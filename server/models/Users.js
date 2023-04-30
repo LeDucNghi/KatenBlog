@@ -15,6 +15,11 @@ module.exports = (sequalize, DataTypes) => {
       allowNull: true,
     },
 
+    // description: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    // },
+
     password: {
       type: DataTypes.STRING,
       allowNull: false,
