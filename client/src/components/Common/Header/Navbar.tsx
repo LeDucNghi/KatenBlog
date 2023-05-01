@@ -9,15 +9,16 @@ import { ProfileMenu } from "./ProfileDropdown";
 import SearchIcon from "@mui/icons-material/Search";
 import { selectIsLoggedIn } from "../../../features/auth/authSlice";
 import { useAppSelector } from "../../../app/hooks";
+import { useWindowSize } from "../../../custom-hook/useWindowSize";
 
 export interface INavbarProps {
-  width: number;
   open: boolean;
   setOpen: any;
 }
 
-export function Navbar({ width, setOpen, open }: INavbarProps) {
+export function Navbar({ setOpen, open }: INavbarProps) {
   const navigate = useNavigate();
+  const { windowInnerWidth } = useWindowSize();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (
@@ -52,7 +53,7 @@ export function Navbar({ width, setOpen, open }: INavbarProps) {
         </Button>
       )}
 
-      {width <= 320 && (
+      {windowInnerWidth <= 320 && (
         <IconButton component="label" onClick={() => setOpen(!open)}>
           <MenuIcon className="header_menu" />
         </IconButton>

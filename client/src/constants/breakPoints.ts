@@ -1,17 +1,21 @@
 export const BREAK_POINTS = {
   xs: "480px",
-  sm: "576px",
-  md: "768px",
-  lg: "992px",
-  xl: "1200px",
-  xxl: "1600px",
+  sm: "600px",
+  md: "900px",
+  lg: "1200px",
+  xl: "1536px",
 };
 
 export const BREAK_POINTS_NUMBER = {
   xs: 480,
-  sm: 576,
-  md: 768,
-  lg: 992,
-  xl: 1200,
-  xxl: 1600,
+  sm: 600,
+  md: 900,
+  lg: 1200,
+  xl: 1536,
 };
+
+// xs: extra-small
+// sm: small
+// md: medium
+// lg: large
+// xl: extra-large

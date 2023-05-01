@@ -2,6 +2,7 @@ import "./Header.scss";
 
 import { useEffect, useState } from "react";
 
+import { BREAK_POINTS_NUMBER } from "../../../constants/breakPoints";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import CategoryIcon from "@mui/icons-material/Category";
@@ -19,20 +20,21 @@ import SearchIcon from "@mui/icons-material/Search";
 import { getUserProfile } from "../../../features/auth/authThunk";
 import { handleGetAllPost } from "../../../features/addEditBlog/addEditThunk";
 import { logout } from "../../../features/auth/authSlice";
-import { styled } from "@mui/material/styles";
 import { useAppDispatch } from "../../../app/hooks";
 import { useLocation } from "react-router-dom";
+import { useWindowSize } from "../../../custom-hook/useWindowSize";
 
 export interface IHeaderProps {}
 
 export function Header(props: IHeaderProps) {
   const { pathname } = useLocation();
 
+  const { windowInnerWidth } = useWindowSize();
+
   const dispatch = useAppDispatch();
 
   const token = JSON.parse(localStorage.getItem("token")!);
 
-  var [width, setWidth] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -42,27 +44,12 @@ export function Header(props: IHeaderProps) {
   }, [dispatch, token]);
 
   useEffect(() => {
-    if (width === 0) setWidth(window.innerWidth);
-    else {
-      window.addEventListener("resize", updateWindowDimensions);
-
-      return () => window.removeEventListener("resize", updateWindowDimensions);
-    }
-  }, [width]);
-
-  useEffect(() => {
     dispatch(getUserProfile());
   }, [dispatch]);
 
   useEffect(() => {
     dispatch(handleGetAllPost());
   }, [dispatch]);
-
-  const updateWindowDimensions = () => {
-    const newWidth = window.innerWidth;
-    width = newWidth;
-    setWidth(width);
-  };
 
   if (pathname === "/signin") return <></>;
   if (pathname === "/signup") return <></>;
@@ -71,9 +58,9 @@ export function Header(props: IHeaderProps) {
   return (
     <Box className="header_container">
       {/* NAVBAR */}
-      <Navbar width={width} setOpen={setOpen} open={open} />
+      <Navbar setOpen={setOpen} open={open} />
 
-      {width >= 1024 && (
+      {windowInnerWidth > BREAK_POINTS_NUMBER.md && (
         <Box className="header_below">
           {navbarList.map((items, key) => {
             return (
@@ -89,20 +76,18 @@ export function Header(props: IHeaderProps) {
         </Box>
       )}
 
-      {width <= 320 && (
+      {windowInnerWidth <= BREAK_POINTS_NUMBER.xs && (
         <CustomDrawer anchor="right" open={open} close={() => setOpen(!open)}>
-          <Demo>
-            <List dense={false}>
-              {navbarList.map((items, key) => {
-                return (
-                  <ListItem key={key}>
-                    <ListItemIcon>{items.icon}</ListItemIcon>
-                    <ListItemText primary={items.name} />
-                  </ListItem>
-                );
-              })}
-            </List>
-          </Demo>
+          <List dense={false}>
+            {navbarList.map((items, key) => {
+              return (
+                <ListItem key={key}>
+                  <ListItemIcon>{items.icon}</ListItemIcon>
+                  <ListItemText primary={items.name} />
+                </ListItem>
+              );
+            })}
+          </List>
         </CustomDrawer>
       )}
     </Box>
@@ -141,7 +126,3 @@ const navbarList = [
     icon: <PermContactCalendarIcon />,
   },
 ];
-
-const Demo = styled("div")(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-}));
