@@ -1,0 +1,44 @@
+@use "../../assets/styles/globalStyles.scss";
+
+.rounded_widget {
+    position: relative;
+
+    width: 90%;
+
+    border: 0.1em solid #ebebeb;
+    border-radius: 0.5em;
+
+    @include globalStyles.flexCenter;
+    flex-direction: column;
+
+    margin: 0 auto 2.7em auto;
+
+    padding: 2em 0;
+
+    .widget_header {
+        width: 80%;
+
+        text-align: center;
+
+        .widget_title {
+            font-size: 1.2em;
+            color: globalStyles.$title-color;
+            font-weight: 700;
+        }
+
+        img {
+            margin: 0 auto;
+
+            object-fit: cover;
+        }
+    }
+
+    .widget_content {
+        position: relative;
+
+        width: 80%;
+        height: 80%;
+
+        margin: 0 auto;
+    }
+}

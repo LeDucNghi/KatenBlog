@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const routes = require("./routes/index");
+require("dotenv").config();
 
 const db = require("./models");
 
@@ -9,9 +9,6 @@ app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// routers
-// app.use("/api", routes);
 
 const userRouter = require("./routes/Users");
 const postRouter = require("./routes/Posts");

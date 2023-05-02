@@ -15,6 +15,7 @@ export interface IKatenBlogItemsProps {
   items: Post;
   size?: "small" | "big";
   isThumbedNail?: boolean;
+  fontSize?: string;
 }
 
 export function KatenBlogItems({
@@ -23,6 +24,7 @@ export function KatenBlogItems({
   items,
   size,
   isThumbedNail,
+  fontSize,
 }: IKatenBlogItemsProps) {
   return (
     <Paper
@@ -39,6 +41,9 @@ export function KatenBlogItems({
             ? "items_container large_horizontal"
             : "items_container"
         }`}
+        style={{
+          fontSize: fontSize,
+        }}
       >
         <div
           className={`${
