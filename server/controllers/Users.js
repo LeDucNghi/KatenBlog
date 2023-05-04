@@ -81,3 +81,22 @@ exports.getUserProfile = async (req, res) => {
 
   return res.status(200).send({ ...userProfile });
 };
+
+exports.updateUserProfile = async (req, res) => {
+  const userId = req.params.userId;
+  const { fullname, username, avatar } = req.body;
+  if (!req.body || !userId) {
+    res.status(401).send({ message: "Something is missing 🤔" });
+  }
+
+  await users.update(
+    {
+      fullname,
+      username,
+      avatar,
+    },
+    { where: { id: userId } }
+  );
+
+  res.status(200).send({ fullname, username, avatar });
+};
