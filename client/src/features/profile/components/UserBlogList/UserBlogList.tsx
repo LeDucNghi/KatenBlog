@@ -19,6 +19,7 @@ export function UserBlogList({ userBlogList }: IUserBlogListProps) {
               items={blogs}
               direction="vertical"
               isThumbedNail={false}
+              showBadge={false}
             />
           </div>
         );

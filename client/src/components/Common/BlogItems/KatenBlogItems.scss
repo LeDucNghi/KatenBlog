@@ -4,7 +4,6 @@
     position: relative;
 
     display: flex;
-    // height: 100%;
 
     .items_container {
         .items_img {
@@ -256,6 +255,8 @@
 .category_items.horizontal {
     width: 100%;
     justify-content: space-between;
+
+    background: yellow;
 
     .items_img {
         p,

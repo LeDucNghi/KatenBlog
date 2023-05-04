@@ -15,6 +15,10 @@ export function PopularPosts(props: IPopularPostsProps) {
             direction="horizontal"
             shape="circle"
             items={items}
+            showBadge={true}
+            style={{
+              margin: "1em 0",
+            }}
           />
         );
       })}

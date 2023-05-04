@@ -20,10 +20,6 @@ const uploadImage = async (req, res) => {
       const imageLink = await uploadCloudinary(req.file.path);
 
       return imageLink;
-
-      // await res.status(200).json({ message: "File uploaded", imageLink });
-      // req.body.image = imageLink;
-      // next();
     } else res.status(400).json({ message: "No file uploaded" });
   } catch (error) {
     console.log("🚀 ~ file: Posts.js:46 ~ router.post ~ error:", error);

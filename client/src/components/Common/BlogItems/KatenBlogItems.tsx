@@ -2,7 +2,7 @@ import "./KatenBlogItems.scss";
 
 import * as React from "react";
 
-import { ListItemButton, Paper } from "@mui/material";
+import { Badge, ListItemButton, Paper } from "@mui/material";
 
 import { Icons } from "../Icons/Icons";
 import { Post } from "../../../models";
@@ -16,6 +16,8 @@ export interface IKatenBlogItemsProps {
   size?: "small" | "big";
   isThumbedNail?: boolean;
   fontSize?: string;
+  style?: React.CSSProperties;
+  showBadge: boolean;
 }
 
 export function KatenBlogItems({
@@ -25,6 +27,8 @@ export function KatenBlogItems({
   size,
   isThumbedNail,
   fontSize,
+  style,
+  showBadge,
 }: IKatenBlogItemsProps) {
   return (
     <Paper
@@ -34,6 +38,7 @@ export function KatenBlogItems({
           ? "category_items vertical"
           : "category_items horizontal"
       }`}
+      style={style}
     >
       <ListItemButton
         className={`${
@@ -67,6 +72,8 @@ export function KatenBlogItems({
               <Icons iconName="image" />
             </span>
           )}
+
+          <Badge badgeContent={items.id} />
 
           <img src={items.image as string} alt="" />
 

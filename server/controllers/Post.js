@@ -14,6 +14,7 @@ const createPost = async (req, res) => {
   const post = await req.body;
 
   const image = await uploadImage(req, res);
+  console.log("🚀 ~ file: Post.js:17 ~ createPost ~ image:", image);
 
   post.userId = req.user.id;
   post.image = image;

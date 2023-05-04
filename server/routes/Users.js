@@ -22,7 +22,7 @@ router.put("/profile/update/:userId", validateToken, async (req, res) => {
     res.status(401).send({ message: "Something is missing 🤔" });
   }
 
-  const newProfile = await users.update(
+  await users.update(
     {
       fullname,
       username,
