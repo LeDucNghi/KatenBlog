@@ -8,7 +8,7 @@ import { highestList } from "../../mock";
 
 export interface IUserProfileProps {}
 
-export function UserProfile(props: IUserProfileProps) {
+export default function UserProfile(props: IUserProfileProps) {
   return (
     <div className="profile_main_content">
       <div className="profile_container">

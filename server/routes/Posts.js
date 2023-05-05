@@ -58,7 +58,7 @@ router.get("/userpostlist/:id", async (req, res) => {
   } else {
     if (postListType === "all") {
       res.status(200).json({ postList: userPostList });
-    } else {
+    } else if(postListType === "popular") {
       const popularList = await userPostList.sort((a, b) => {
         return b.visit - a.visit;
       });
