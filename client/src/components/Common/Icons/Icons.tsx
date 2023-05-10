@@ -3,6 +3,7 @@ import * as React from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import HeadphonesOutlinedIcon from "@mui/icons-material/HeadphonesOutlined";
+import { IIconsProps } from "../../../models";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -13,30 +14,6 @@ import ShareIcon from "@mui/icons-material/Share";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-
-type IconName =
-  | "facebook"
-  | "instagram"
-  | "github"
-  | "twitter"
-  | "pinterest"
-  | "search"
-  | "youtube"
-  | "burger"
-  | "search"
-  | "image"
-  | "headphone"
-  | "video"
-  | "share"
-  | "option";
-
-type IconsFontSize = "large" | "medium" | "small";
-
-export interface IIconsProps {
-  iconName: IconName;
-  className?: string;
-  fontSize?: IconsFontSize;
-}
 
 export function Icons({ iconName, className, fontSize }: IIconsProps) {
   // SOCIAL

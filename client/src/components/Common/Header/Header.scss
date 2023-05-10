@@ -1,10 +1,12 @@
+@use "../../../themes/widgets.scss";
+@use "../../../assets/styles/globalStyles.scss";
+@use "../../../themes/general.scss";
+
 .header_container {
     position: relative;
 
     width: 100%;
     height: 8em;
-
-    background: red;
 
     display: flex;
     align-items: center;
@@ -15,17 +17,96 @@
         width: 100%;
         height: 3em;
 
-        background: yellow;
-
         .navbar_container {
             position: relative;
 
             width: 80%;
             height: 100%;
 
-            background: blue;
-
             margin: 0 auto;
+
+            @include general.flexSpaceCenter;
+
+            .navbar_brand {
+                width: 10%;
+            }
+
+            .navbar_collapse {
+                display: flex;
+                flex-direction: row;
+
+                width: 50%;
+
+                .nav_link {
+                    @include general.flexCenter;
+
+                    width: 7em;
+                    height: 2.7em;
+
+                    color: #c7ccd6;
+
+                    transition: globalStyles.$transition;
+
+                    font-family: globalStyles.$poppinFont;
+                    font-size: 0.9em;
+
+                    &:hover {
+                        color: #000;
+                        transition: globalStyles.$transition;
+                    }
+
+                    &:first-child {
+                        @include widgets.nav_links;
+
+                        font-weight: 600;
+                        font-family: globalStyles.$poppinFont;
+                        font-size: 0.9em;
+                    }
+                }
+            }
+
+            .navbar_right {
+                @include general.flexSpaceCenter;
+
+                width: 35%;
+
+                .navbar_icon {
+                    display: flex;
+
+                    .nav_icon_items {
+                        margin: 0 0.8em;
+
+                        &:first-child {
+                            margin-left: 0;
+                        }
+
+                        .icon {
+                            color: #000;
+                            &:hover {
+                                color: globalStyles.$social-icons-color;
+                                transition: globalStyles.$transition;
+                            }
+                        }
+                    }
+                }
+
+                .navbar_buttons {
+                    display: flex;
+
+                    .icon_button {
+                        width: 2.7em;
+                        height: 2.7em;
+
+                        &:last-child {
+                            margin-right: 0;
+                        }
+
+                        @include general.flexCenter;
+
+                        @include widgets.icon_buttons;
+                    }
+                }
+            }
         }
     }
 }

@@ -1,19 +1,22 @@
 import "./Header.scss";
 
 import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
+import { CustomDrawer } from "../Drawer/Drawer";
+import { HeaderDrawer } from "./Drawer";
 import { Navbar } from "./Navbar";
 import { getUserProfile } from "../../../features/auth/authThunk";
 import { handleGetAllPost } from "../../../features/addEditBlog/addEditThunk";
 import { logout } from "../../../features/auth/authSlice";
 import { useAppDispatch } from "../../../app/hooks";
-import { useLocation } from "react-router-dom";
-import { useWindowSize } from "../../../custom-hook/useWindowSize";
+import { useWindowSize } from "../../../hooks/useWindowSize";
 
 export interface IHeaderProps {}
 
 export function Header(props: IHeaderProps) {
   const { pathname } = useLocation();
+  const { id } = useParams();
 
   const { windowInnerWidth } = useWindowSize();
 
@@ -39,11 +42,20 @@ export function Header(props: IHeaderProps) {
 
   if (pathname === "/signin") return <></>;
   if (pathname === "/signup") return <></>;
-  if (pathname === "/profile/*") return <></>;
+  if (pathname === `/profile/${id}`) return <></>;
 
   return (
     <div className="header_container">
-      <Navbar />
+      <Navbar open={open} setOpen={setOpen} />
+
+      <CustomDrawer
+        width={300}
+        open={open}
+        close={() => setOpen(!open)}
+        anchor="right"
+      >
+        <HeaderDrawer />
+      </CustomDrawer>
     </div>
   );
 }
