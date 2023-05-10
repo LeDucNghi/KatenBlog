@@ -1,0 +1,29 @@
+@mixin icon_buttons {
+    width: 3em;
+    height: 3em;
+
+    background-image: linear-gradient(to top, rgb(255, 163, 135) 0%, rgb(254, 79, 112) 51%, rgb(255, 163, 135) 100%);
+    background-size: auto 200%;
+
+    box-shadow: #000000 0px 2px 4px 0px;
+
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    margin-right: 1em;
+}
+
+@mixin nav_links {
+    width: 6.4em;
+    height: 2.5em;
+
+    margin: 0 0.5em;
+
+    background: linear-gradient(to right, #fe4f70 0%, #ffa387 100%);
+
+    border-radius: 3em;
+
+    font-size: 0.9em;
+    color: #fff;
+}

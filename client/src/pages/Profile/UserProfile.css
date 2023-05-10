@@ -1,0 +1,13 @@
+.profile_main_content {
+  position: relative;
+  width: 100%;
+  background: orange;
+}
+.profile_main_content .profile_container {
+  position: relative;
+  display: flex;
+  width: 90%;
+  height: 100%;
+  margin: 1em auto;
+  background: #fff;
+}/*# sourceMappingURL=UserProfile.css.map */

@@ -1,4 +1,4 @@
-@use "../../../../assets/styles/globalStyles.scss";
+@use "../../../../themes/general.scss";
 
 .blog_list {
     position: relative;
@@ -19,7 +19,7 @@
         width: 45%;
         height: 30em;
 
-        @include globalStyles.flexCenter;
+        @include general.flexCenter;
 
         margin: 1em auto;
     }

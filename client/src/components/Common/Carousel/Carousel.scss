@@ -1,4 +1,4 @@
-@use "../../../assets/styles/globalStyles.scss";
+@use "../../../themes/general.scss";
 
 .carousel_container {
     position: relative;
@@ -33,7 +33,7 @@
         .carousel_items_content {
             position: absolute;
 
-            @include globalStyles.flexCenter;
+            @include general.flexCenter;
             flex-direction: column;
 
             bottom: 1em;

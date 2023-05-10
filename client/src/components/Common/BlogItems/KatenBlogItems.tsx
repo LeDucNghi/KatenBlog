@@ -14,9 +14,9 @@ export interface IKatenBlogItemsProps {
   shape?: "circle" | "square";
   items: Post;
   size?: "small" | "big";
+  style?: React.CSSProperties;
   isThumbedNail?: boolean;
   fontSize?: string;
-  style?: React.CSSProperties;
   showBadge: boolean;
 }
 
@@ -73,7 +73,9 @@ export function KatenBlogItems({
             </span>
           )}
 
-          <Badge badgeContent={items.id} />
+          {direction === "horizontal" && shape === "circle" && showBadge && (
+            <Badge className="items_badge" badgeContent={items.id} />
+          )}
 
           <img src={items.image as string} alt="" />
 

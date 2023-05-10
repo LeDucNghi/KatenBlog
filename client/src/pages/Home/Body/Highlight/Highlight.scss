@@ -1,5 +1,3 @@
-@use "../../../../assets/styles/globalStyles.scss";
-
 .highlight_container {
     position: relative;
 
@@ -133,8 +131,6 @@
         .highlight_advertise {
             position: relative;
             width: 30%;
-
-            // @include globalStyles.flexCenter;
 
             .advertise_container {
                 // position: fixed;

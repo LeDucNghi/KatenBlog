@@ -1,0 +1,205 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background-color: #555; */
+  /* border-radius: 5px; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 15px;
+  opacity: 0.5;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.profile_section {
+  position: relative;
+  width: 100%;
+  height: 63em;
+  background-image: url("../../../assets/images/user-bg.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.profile_section .section_blur {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(36, 62, 97, 0.7);
+}
+.profile_section .profile_header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.profile_section .profile_header .top_header {
+  width: 100%;
+}
+.profile_section .profile_header .top_header .top_header_main {
+  width: 90%;
+  margin: 0 auto;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile_section .profile_header .top_header .top_header_main .header_main_items {
+  width: 30%;
+}
+.profile_section .profile_header .top_header .top_header_main .main_social {
+  display: flex;
+  align-items: center;
+}
+.profile_section .profile_header .top_header .top_header_main .main_social li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1em;
+  cursor: pointer;
+}
+.profile_section .profile_header .top_header .top_header_main .main_social li .main_social_icon {
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+.profile_section .profile_header .top_header .top_header_main .main_social li .main_social_icon:hover {
+  color: #fe4f70;
+  transition: all 0.3s ease-in-out;
+}
+.profile_section .profile_header .top_header .top_header_main .main_user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.profile_section .profile_header .top_header .top_header_main .main_user .user_slogan {
+  color: rgb(144, 155, 173);
+  font-size: 0.9em;
+}
+.profile_section .profile_header .top_header .top_header_main .main_user .user_name {
+  color: rgb(255, 255, 255);
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 2em;
+}
+.profile_section .profile_header .top_header .top_header_main .main_button {
+  display: flex;
+  justify-content: flex-end;
+}
+.profile_section .profile_header .top_header .top_header_main .main_button .icon_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3em;
+  height: 3em;
+  background-image: linear-gradient(to top, rgb(255, 163, 135) 0%, rgb(254, 79, 112) 51%, rgb(255, 163, 135) 100%);
+  background-size: auto 200%;
+  box-shadow: #000000 0px 2px 4px 0px;
+  color: #ffffff;
+  border-radius: 50%;
+  margin-right: 1em;
+}
+.profile_section .profile_header .nav_header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  height: 4em;
+  border-color: rgb(144, 155, 173);
+  border-style: solid none none;
+  border-width: 0.1em;
+}
+.profile_section .profile_header .nav_header .nav_items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6.4em;
+  height: 2.5em;
+  margin: 0 0.5em;
+  background: linear-gradient(to right, #fe4f70 0%, #ffa387 100%);
+  border-radius: 3em;
+  font-size: 0.9em;
+  color: #fff;
+}
+.profile_section .profile_about {
+  position: relative;
+  margin: 4em auto;
+  width: 47em;
+  height: 23em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+}
+.profile_section .profile_about h2 {
+  color: rgb(255, 255, 255);
+  font-size: 3.2em;
+  font-weight: 700;
+  line-height: 2em;
+}
+.profile_section .profile_about p {
+  color: #c6c4c9;
+  font-size: 1.2em;
+  text-align: center;
+  line-height: 2em;
+}
+.profile_section .profile_about button {
+  width: 9em;
+  height: 3em;
+  border: 0.1em solid #ffffff;
+  border-radius: 2em;
+  color: #ffffff;
+  font-size: 0.9em;
+  text-align: center;
+  text-transform: capitalize;
+  transition: all 0.3s ease-in-out;
+  background: transparent;
+}
+.profile_section .profile_about button:hover {
+  transition: all 0.3s ease-in-out;
+  background: #fff;
+  color: #000000;
+}
+.profile_section .profile_foot {
+  position: relative;
+  top: 1em;
+  background: transparent;
+  height: 16em;
+}
+.profile_section .profile_foot img {
+  display: inline;
+  fill: #ffffff;
+}/*# sourceMappingURL=ProfileHeader.css.map */

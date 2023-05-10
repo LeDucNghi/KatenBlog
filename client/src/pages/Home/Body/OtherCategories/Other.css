@@ -1,0 +1,132 @@
+.other_categories_container {
+  position: relative;
+  width: 90%;
+  margin: 3em auto;
+  font-size: 15px;
+}
+.other_categories_container .categories_above {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.other_categories_container .categories_above .category {
+  width: 49%;
+}
+.other_categories_container .categories_above .category .category_title {
+  z-index: 2;
+}
+.other_categories_container .categories_above .category .category_title::before {
+  content: "";
+  position: absolute;
+  top: 0.8em;
+  width: 10%;
+  height: 0.5em;
+  background: #c1a57b;
+  z-index: -1;
+}
+.other_categories_container .categories_above .category .category_items {
+  position: relative;
+  width: 100%;
+  margin: 1em 0;
+  display: flex;
+  line-height: 1.5em;
+}
+.other_categories_container .categories_above .category .category_items .items_img {
+  width: 19em;
+  height: 12em;
+}
+.other_categories_container .categories_above .category .category_items .items_img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 1em;
+}
+.other_categories_container .categories_above .category .category_items .items_title {
+  font-size: 1.2em;
+}
+.other_categories_container .categories_above .category .category_items .items_text {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 1em;
+}
+.other_categories_container .food_category {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  line-height: 2em;
+  margin-top: 2em;
+}
+.other_categories_container .food_category .category_title {
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+.other_categories_container .food_category .category_title::before {
+  content: "";
+  position: absolute;
+  top: 1em;
+  width: 110%;
+  height: 0.5em;
+  background: #c1a57b;
+  z-index: -1;
+}
+.other_categories_container .food_category .category_content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.other_categories_container .food_category .category_content .category_items {
+  width: 24%;
+  display: flex;
+  flex-direction: column;
+}
+.other_categories_container .food_category .category_content .category_items .items_img {
+  width: 18em;
+  height: 12em;
+}
+.other_categories_container .food_category .category_content .category_items .items_img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 1em;
+}
+.other_categories_container .food_category .category_content .category_items .items_text {
+  padding-right: 1em;
+}
+.other_categories_container .food_category .category_content .category_items .items_text .items_title {
+  font-size: 1.2em;
+}
+
+@media only screen and (max-width: 320px) {
+  .other_categories_container .categories_above {
+    flex-direction: column;
+  }
+  .other_categories_container .categories_above .category {
+    width: 100%;
+  }
+  .other_categories_container .categories_above .category .category_title::before {
+    width: 35%;
+  }
+  .other_categories_container .categories_above .category .category_items {
+    flex-direction: column;
+  }
+  .other_categories_container .categories_above .category .category_items .items_img {
+    height: 19em;
+  }
+  .other_categories_container .categories_above .category .category_items .items_text {
+    margin-top: 0.5em;
+    padding: 0;
+  }
+  .other_categories_container .food_category .category_content {
+    flex-direction: column;
+  }
+  .other_categories_container .food_category .category_content .category_items {
+    width: 100%;
+    margin: 0.5em auto;
+  }
+}/*# sourceMappingURL=Other.css.map */

@@ -1,4 +1,4 @@
-@use "../../../assets/styles/globalStyles.scss";
+@use "../../../themes/general.scss";
 
 footer {
     position: relative;
@@ -29,7 +29,7 @@ footer {
     .footer_social {
         position: relative;
 
-        @include globalStyles.flexCenter;
+        @include general.flexCenter;
         margin: 0 auto;
 
         width: 50%;

@@ -1,4 +1,4 @@
-@use "../../../assets/styles/globalStyles.scss";
+@use "../../../themes/general.scss";
 
 .auth_container {
     position: relative;
@@ -25,7 +25,7 @@
             width: 90%;
             height: 90%;
 
-            @include globalStyles.flexCenter;
+            @include general.flexCenter;
 
             flex-direction: column;
 
@@ -60,7 +60,7 @@
         width: 70%;
         height: 100%;
 
-        @include globalStyles.flexCenter;
+        @include general.flexCenter;
         flex-direction: column;
 
         .auth_form_title {

@@ -12,10 +12,6 @@ export interface IUserAboutProps {}
 
 export function UserAbout(props: IUserAboutProps) {
   const userProfile = useAppSelector(selectUserProfile);
-  console.log(
-    "🚀 ~ file: UserAbout.tsx:14 ~ UserAbout ~ userProfile:",
-    userProfile
-  );
 
   return (
     <div className="about_user">

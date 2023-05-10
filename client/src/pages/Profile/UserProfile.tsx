@@ -2,6 +2,7 @@ import "./UserProfile.scss";
 
 import * as React from "react";
 
+import { DocTitle } from "../../widgets/DocTitle/DocTitle";
 import { UserAbout } from "../../features/profile/components/UserAbout/UserAbout";
 import { UserBlogList } from "../../features/profile/components/UserBlogList/UserBlogList";
 import { highestList } from "../../mock";

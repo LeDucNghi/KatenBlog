@@ -1,4 +1,5 @@
 @use "../../assets/styles/globalStyles.scss";
+@use "../../themes/general.scss";
 
 .rounded_widget {
     position: relative;
@@ -8,7 +9,7 @@
     border: 0.1em solid #ebebeb;
     border-radius: 0.5em;
 
-    @include globalStyles.flexCenter;
+    @include general.flexCenter;
     flex-direction: column;
 
     margin: 0 auto 2.7em auto;

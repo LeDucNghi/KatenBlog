@@ -1,4 +1,5 @@
 import avatar from "../assets/images/avatar.png";
+import logo from "../assets/svg/logo.svg";
 import logoBrand from "../assets/brand/brand-logo.png";
 import notask from "../assets/images/no-task.png";
 import notfound from "../assets/svg/illustration_404.svg";
@@ -14,4 +15,5 @@ export const Images = {
   wave,
   avatar,
   titleWave,
+  logo
 };

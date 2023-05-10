@@ -9,7 +9,7 @@ import { highestList } from "../../mock";
 export interface ITestProps {
   // horizontal : ngang
   // vertical : đứng
-  direction: "horizontal" | "vertical";
+  direction?: "horizontal" | "vertical";
   shape?: "circle" | "square";
   size?: "small" | "big";
   isThumbedNail?: boolean;

@@ -1,0 +1,75 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background-color: #555; */
+  /* border-radius: 5px; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 15px;
+  opacity: 0.5;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rounded_widget {
+  position: relative;
+  width: 90%;
+  border: 0.1em solid #ebebeb;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto 2.7em auto;
+  padding: 2em 0;
+}
+.rounded_widget .widget_header {
+  width: 80%;
+  text-align: center;
+}
+.rounded_widget .widget_header .widget_title {
+  font-size: 1.2em;
+  color: #203656;
+  font-weight: 700;
+}
+.rounded_widget .widget_header img {
+  margin: 0 auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.rounded_widget .widget_content {
+  position: relative;
+  width: 90%;
+  height: 80%;
+  margin: 0 auto;
+}/*# sourceMappingURL=RoundedWidget.css.map */

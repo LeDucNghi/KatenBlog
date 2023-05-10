@@ -4,7 +4,7 @@ import "./assets/styles/globalStyles.scss";
 import { Footer } from "./components/Common/Footer/Footer";
 import { Header } from "./components/Common/Header/Header";
 import { ProfileHeader } from "./components/Common/Header/ProfileHeader";
-import { PublicRoutes } from "./routes/publicRoutes";
+import { Router } from "./routes/router";
 import { useLocation } from "react-router-dom";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
     <>
       {pathname !== "/profile" ? <Header /> : <ProfileHeader />}
 
-      <PublicRoutes />
+      <Router />
 
       <Footer />
     </>

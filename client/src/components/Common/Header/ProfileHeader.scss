@@ -1,4 +1,6 @@
 @use "../../../assets/styles/globalStyles.scss";
+@use "../../../themes/widgets.scss";
+@use "../../../themes/general.scss";
 
 .profile_section {
     position: relative;
@@ -25,7 +27,7 @@
 
         width: 100%;
 
-        @include globalStyles.flexCenter;
+        @include general.flexCenter;
 
         flex-direction: column;
 
@@ -39,7 +41,7 @@
 
                 padding: 1em;
 
-                @include globalStyles.flexSpaceCenter;
+                @include general.flexSpaceCenter;
 
                 .header_main_items {
                     width: 30%;
@@ -50,7 +52,7 @@
                     align-items: center;
 
                     li {
-                        @include globalStyles.flexCenter;
+                        @include general.flexCenter;
 
                         margin-left: 1em;
 
@@ -69,7 +71,7 @@
                 }
 
                 .main_user {
-                    @include globalStyles.flexCenter;
+                    @include general.flexCenter;
 
                     flex-direction: column;
 
@@ -92,26 +94,9 @@
                     justify-content: flex-end;
 
                     .icon_button {
-                        @include globalStyles.flexCenter;
+                        @include general.flexCenter;
 
-                        width: 3em;
-                        height: 3em;
-
-                        background-image: linear-gradient(
-                            to top,
-                            rgb(255, 163, 135) 0%,
-                            rgb(254, 79, 112) 51%,
-                            rgb(255, 163, 135) 100%
-                        );
-                        background-size: auto 200%;
-
-                        box-shadow: #000000 0px 2px 4px 0px;
-
-                        color: #ffffff;
-
-                        border-radius: 50%;
-
-                        margin-right: 1em;
+                        @include widgets.icon_buttons;
                     }
                 }
             }
@@ -120,7 +105,7 @@
         .nav_header {
             position: relative;
 
-            @include globalStyles.flexCenter;
+            @include general.flexCenter;
 
             width: 85%;
             height: 4em;
@@ -130,19 +115,9 @@
             border-width: 0.1em;
 
             .nav_items {
-                width: 6.4em;
-                height: 2.5em;
+                @include general.flexCenter;
 
-                margin: 0 0.5em;
-
-                background: linear-gradient(to right, #fe4f70 0%, #ffa387 100%);
-
-                border-radius: 3em;
-
-                @include globalStyles.flexCenter;
-
-                font-size: 0.9em;
-                color: #fff;
+                @include widgets.nav_links;
             }
         }
     }
