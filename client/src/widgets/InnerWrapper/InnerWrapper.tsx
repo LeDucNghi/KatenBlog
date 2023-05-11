@@ -32,6 +32,30 @@ export function InnerWrapper({ width }: IInnerWrapperProps) {
           <CustomAccordion topic={BlogTopicWidget} />
         </div>
       </RoundedWidget>
+
+      <RoundedWidget title="Newsletter">
+        <div className="inner_subscribe">
+          <span>Join 70,000 subscribers!</span>
+
+          <input type="text" placeholder="Email address..." />
+
+          <button type="button">Sign Up </button>
+
+          <span>
+            By signing up, you agree to our <a href="/">Privacy Policy</a>{" "}
+          </span>
+        </div>
+      </RoundedWidget>
+
+      <RoundedWidget title="Tag Clouds">
+        <div className="inner_tags">
+          <a href="/">#Trending</a>
+          <a href="/">#Video</a>
+          <a href="/">#Featured</a>
+          <a href="/">#Gallery</a>
+          <a href="/">#Celebrities</a>
+        </div>
+      </RoundedWidget>
     </div>
   );
 }

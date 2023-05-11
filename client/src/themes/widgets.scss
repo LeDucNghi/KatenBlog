@@ -26,3 +26,10 @@
     font-size: 0.9em;
     color: #fff;
 }
+
+@mixin background_right {
+    background: linear-gradient(to right, #fe4f70 0%, #ffa387 100%);
+    background-size: 200%;
+
+    color: #fff;
+}

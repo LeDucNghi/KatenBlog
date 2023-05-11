@@ -1,7 +1,95 @@
+@use "../../assets/styles/globalStyles.scss";
+@use "../../themes/widgets.scss";
+
 .inner_wrapper {
     position: relative;
 
     margin: 0 auto;
 
-    // background: blue;
+    text-align: center;
+
+    .inner_subscribe {
+        input {
+            width: 100%;
+            height: 2.7em;
+
+            margin-bottom: 0.5em;
+
+            text-align: center;
+
+            border: 0.1em solid globalStyles.$social-icons-color;
+            border-radius: 1.5em;
+
+            color: globalStyles.$time-color;
+            line-height: 1.5em;
+        }
+
+        button {
+            width: 100%;
+            height: 2.7em;
+
+            margin-bottom: 0.5em;
+
+            @include widgets.background_right;
+
+            font-size: 0.9em;
+            font-family: globalStyles.$robotoFont;
+            text-align: center;
+            font-weight: 600;
+
+            border-radius: 1.5em;
+        }
+
+        span {
+            width: 100%;
+
+            &:first-child {
+                font-size: 1em;
+                color: globalStyles.$title-color;
+                font-weight: 700;
+                line-height: 2em;
+            }
+
+            &:last-child {
+                color: globalStyles.$time-color;
+                font-size: 0.9em;
+
+                a {
+                    color: globalStyles.$social-icons-color;
+                    display: inline;
+                    font-family: globalStyles.$robotoFont;
+                }
+            }
+        }
+    }
+
+    .inner_tags {
+        width: 100%;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        a {
+            border-radius: 2em;
+
+            padding: 0.5em 1em;
+
+            color: #8f9bad;
+            font-family: globalStyles.$robotoFont;
+            font-size: 0.8em;
+
+            border: 0.1em solid #ebebeb;
+
+            transition: globalStyles.$transition;
+
+            margin: 0.5em 0.3em;
+
+            &:hover {
+                color: globalStyles.$social-icons-color;
+                border-color: globalStyles.$social-icons-color;
+
+                transition: globalStyles.$transition;
+            }
+        }
+    }
 }
