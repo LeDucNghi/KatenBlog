@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { HomeBanner } from "../components/Common/Banners/HomeBanner";
 import NotFound from "../components/Common/NotFound/NotFound";
 import { SignIn } from "../pages/SignIn/SignIn";
 import { SignUp } from "../pages/SignUp/SignUp";
@@ -17,6 +18,7 @@ export const routes = [
     title: "Home",
     element: <Home />,
     loadingTimeout: 1000,
+    isLandingLayout: true,
   },
 
   {
@@ -24,6 +26,7 @@ export const routes = [
     title: "Sign In",
     element: <SignIn />,
     loadingTimeout: 500,
+    isLandingLayout: true,
   },
 
   {
@@ -31,6 +34,7 @@ export const routes = [
     title: "Sign Up",
     element: <SignUp />,
     loadingTimeout: 500,
+    isLandingLayout: true,
   },
 
   {
@@ -38,6 +42,7 @@ export const routes = [
     title: "Create New Blog",
     element: <AddEditBlog />,
     loadingTimeout: 500,
+    isLandingLayout: true,
   },
 
   {
@@ -45,6 +50,7 @@ export const routes = [
     title: "Our Blog",
     element: <AddEditBlog />,
     loadingTimeout: 1000,
+    isLandingLayout: true,
   },
 
   {
@@ -52,6 +58,7 @@ export const routes = [
     title: "Profile",
     element: <UserProfile />,
     loadingTimeout: 1000,
+    isLandingLayout: true,
   },
 
   {
@@ -59,6 +66,7 @@ export const routes = [
     title: "Find Your Blog",
     element: <Search />,
     loadingTimeout: 1000,
+    isLandingLayout: true,
   },
 
   {
@@ -66,5 +74,6 @@ export const routes = [
     title: "404 - Not Found",
     element: <NotFound />,
     loadingTimeout: 0,
+    isLandingLayout: true,
   },
 ];

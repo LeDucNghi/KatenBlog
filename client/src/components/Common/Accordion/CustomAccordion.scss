@@ -1,0 +1,31 @@
+@use "../../../assets/styles/globalStyles.scss";
+
+.accordion {
+    background: transparent;
+
+    margin: 0.5em 0;
+    border-radius: 0.5em;
+
+    .css-v84d5j-MuiSvgIcon-root {
+        color: globalStyles.$social-icons-color;
+    }
+
+    .accordion_summary {
+        font-family: globalStyles.$robotoFont;
+
+        .accordion_title {
+            color: globalStyles.$title-color;
+            font-weight: 700;
+            font-size: 1em;
+        }
+
+        .accordion_count {
+            color: #8f9bad;
+        }
+
+        .MuiAccordionSummary-content {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

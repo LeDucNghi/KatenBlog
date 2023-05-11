@@ -1,3 +1,26 @@
+@use "../../assets/styles/globalStyles.scss";
+@use "../../themes/general.scss";
+
 .icons_widget {
     position: relative;
+
+    @include general.flexCenter;
+
+    margin: 0 auto;
+
+    .icon_items {
+        margin: 0 0.8em;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        .icon {
+            color: #000;
+            &:hover {
+                color: globalStyles.$social-icons-color;
+                transition: globalStyles.$transition;
+            }
+        }
+    }
 }

@@ -1,3 +1,5 @@
+import { BlogsSample } from "../mock";
+
 export const IconsWidgets = [
   {
     id: 1,
@@ -68,5 +70,38 @@ export const NavbarWidget = [
     id: 5,
     name: "Contact",
     route: "/",
+  },
+];
+
+export const BlogTopicWidget = [
+  {
+    id: 1,
+    topicTitle: "LifeStyle",
+    topicContent: BlogsSample,
+  },
+  {
+    id: 2,
+    topicTitle: "Inspiration",
+    topicContent: BlogsSample,
+  },
+  {
+    id: 3,
+    topicTitle: "Fashion",
+    topicContent: BlogsSample,
+  },
+  {
+    id: 4,
+    topicTitle: "Politic",
+    topicContent: BlogsSample,
+  },
+  {
+    id: 5,
+    topicTitle: "Trending",
+    topicContent: BlogsSample,
+  },
+  {
+    id: 6,
+    topicTitle: "Culture",
+    topicContent: BlogsSample,
   },
 ];

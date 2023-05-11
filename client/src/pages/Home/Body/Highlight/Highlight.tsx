@@ -3,7 +3,7 @@ import "./Highlight.scss";
 import { Button, Paper, TextField, Typography } from "@mui/material";
 
 import { BlogItems } from "../../../../components/Common/BlogItems/BlogItems";
-import { highestList } from "../../../../mock";
+import { BlogsSample } from "../../../../mock";
 
 export interface IHighlightProps {}
 
@@ -14,7 +14,7 @@ export function Highlight(props: IHighlightProps) {
 
       <div className="highlight_blog">
         <div className="highlight_highest">
-          {highestList.slice(0, 2).map((items, key) => {
+          {BlogsSample.slice(0, 2).map((items, key) => {
             return (
               <div key={key} className="highlight_highest_items">
                 <div className="highest_img">
@@ -32,7 +32,7 @@ export function Highlight(props: IHighlightProps) {
           })}
 
           <div className="highlight_attach">
-            {highestList.slice(2, 6).map((items, key) => {
+            {BlogsSample.slice(2, 6).map((items, key) => {
               return (
                 <BlogItems direction="horizontal" items={items} key={key} />
                 // <div key={key} className="highlight_attach_items">

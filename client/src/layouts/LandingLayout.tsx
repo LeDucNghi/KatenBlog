@@ -1,12 +1,19 @@
-import * as React from 'react';
+import { Footer } from "../components/Common/Footer/Footer";
+import { Header } from "../components/Common/Header/Header";
+import { InnerWrapper } from "../widgets/InnerWrapper/InnerWrapper";
 
 export interface ILandingLayoutProps {
+  children: JSX.Element;
 }
 
-export function LandingLayout (props: ILandingLayoutProps) {
+export function LandingLayout({ children }: ILandingLayoutProps) {
   return (
-    <div>
-      
-    </div>
+    <>
+      <Header />
+
+      <div className="body_layout">{children}</div>
+
+      <Footer />
+    </>
   );
 }

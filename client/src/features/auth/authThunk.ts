@@ -38,7 +38,7 @@ export const handleAuthForm =
         });
 
         // await setSubmitting(false);
-        window.location.href = isSignin ? "/home" : "/signin";
+        window.location.href = isSignin ? "/" : "/signin";
       }
     } catch (error: any) {
       if (error) {

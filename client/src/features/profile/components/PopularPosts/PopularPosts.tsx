@@ -1,14 +1,14 @@
 import * as React from "react";
 
+import { BlogsSample } from "../../../../mock";
 import { KatenBlogItems } from "../../../../components/Common/BlogItems/KatenBlogItems";
-import { highestList } from "../../../../mock";
 
 export interface IPopularPostsProps {}
 
 export function PopularPosts(props: IPopularPostsProps) {
   return (
     <>
-      {highestList.slice(0, 3).map((items, key) => {
+      {BlogsSample.slice(0, 3).map((items, key) => {
         return (
           <KatenBlogItems
             key={key}

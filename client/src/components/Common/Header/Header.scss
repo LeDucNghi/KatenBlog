@@ -70,26 +70,6 @@
 
                 width: 35%;
 
-                .navbar_icon {
-                    display: flex;
-
-                    .nav_icon_items {
-                        margin: 0 0.8em;
-
-                        &:first-child {
-                            margin-left: 0;
-                        }
-
-                        .icon {
-                            color: #000;
-                            &:hover {
-                                color: globalStyles.$social-icons-color;
-                                transition: globalStyles.$transition;
-                            }
-                        }
-                    }
-                }
-
                 .navbar_buttons {
                     display: flex;
 

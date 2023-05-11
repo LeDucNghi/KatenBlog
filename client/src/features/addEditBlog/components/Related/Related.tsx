@@ -3,7 +3,7 @@ import "./Related.scss";
 import { Box, Typography } from "@mui/material";
 
 import { BlogItems } from "../../../../components/Common/BlogItems/BlogItems";
-import { highestList } from "../../../../mock";
+import { BlogsSample } from "../../../../mock";
 
 export interface IRelatedBlogsProps {}
 
@@ -13,7 +13,7 @@ export function RelatedBlogs(props: IRelatedBlogsProps) {
       <Typography className="foot_title">RELATED ARTICLES</Typography>
 
       <Box className="foot_blogs_related">
-        {highestList.slice(0, 4).map((items, key) => {
+        {BlogsSample.slice(0, 4).map((items, key) => {
           return (
             <BlogItems
               direction="vertical"

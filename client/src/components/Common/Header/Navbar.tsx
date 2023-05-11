@@ -1,16 +1,10 @@
 import "./Header.scss";
 
-import {
-  BREAK_POINTS_NUMBER,
-  IconsWidgets,
-  NavbarWidget,
-} from "../../../constants";
-import { IconName, IconsFontSize } from "../../../models";
+import { BREAK_POINTS_NUMBER, NavbarWidget } from "../../../constants";
 
 import { Icons } from "../Icons/Icons";
+import { IconsListWidget } from "../../../widgets/IconsListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
-import { selectIsLoggedIn } from "../../../features/auth/authSlice";
-import { useAppSelector } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 
@@ -22,7 +16,14 @@ export interface INavbarProps {
 export function Navbar({ open, setOpen }: INavbarProps) {
   const navigate = useNavigate();
   const { windowInnerWidth } = useWindowSize();
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
+  const onclick = () => {
+    if (windowInnerWidth <= BREAK_POINTS_NUMBER.sm) {
+      setOpen(!open);
+    } else {
+      navigate(`/signin`);
+    }
+  };
 
   return (
     <nav className="header_navbar">
@@ -44,35 +45,22 @@ export function Navbar({ open, setOpen }: INavbarProps) {
         )}
 
         <div className="navbar_right">
-          {windowInnerWidth > BREAK_POINTS_NUMBER.sm && (
-            <ul className="navbar_icon">
-              {IconsWidgets.map((icons, key) => {
-                return (
-                  <li className="nav_icon_items" key={key}>
-                    <a
-                      rel="noreferrer noopener"
-                      target="_blank"
-                      href={icons.route}
-                    >
-                      <Icons
-                        iconName={`${icons.icon}` as IconName}
-                        className={`${icons.className}`}
-                        fontSize={`${icons.fontSize}` as IconsFontSize}
-                      />
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+          {windowInnerWidth > BREAK_POINTS_NUMBER.sm && <IconsListWidget />}
 
           <div className="navbar_buttons">
-            <button className="icon_button">
+            <button className="icon_button" onClick={() => navigate(`/search`)}>
               <Icons fontSize="medium" iconName="search" />
             </button>
 
-            <button className="icon_button" onClick={() => setOpen(!open)}>
-              <Icons fontSize="medium" iconName="burger" />
+            <button className="icon_button" onClick={onclick}>
+              <Icons
+                fontSize="medium"
+                iconName={
+                  windowInnerWidth < BREAK_POINTS_NUMBER.sm
+                    ? "burger"
+                    : "person"
+                }
+              />
             </button>
           </div>
         </div>

@@ -12,7 +12,8 @@ export type IconName =
   | "headphone"
   | "video"
   | "share"
-  | "option";
+  | "option"
+  | "person";
 
 export type IconsFontSize = "large" | "medium" | "small";
 

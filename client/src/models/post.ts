@@ -59,3 +59,10 @@ export interface PostData {
     userType?: UserType | null | undefined;
   };
 }
+
+export interface PostTopicWidget {
+  id: number;
+  topicTitle: string;
+
+  topicContent: Post[];
+}

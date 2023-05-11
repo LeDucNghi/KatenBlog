@@ -7,6 +7,7 @@ import { IIconsProps } from "../../../models";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import PersonIcon from "@mui/icons-material/Person";
 import PhotoOutlinedIcon from "@mui/icons-material/PhotoOutlined";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import SearchIcon from "@mui/icons-material/Search";
@@ -51,6 +52,8 @@ export function Icons({ iconName, className, fontSize }: IIconsProps) {
     return <ShareIcon className={`${className}`} fontSize={fontSize} />;
   if (iconName === "option")
     return <MoreHorizIcon className={`${className}`} fontSize={fontSize} />;
+  if (iconName === "person")
+    return <PersonIcon className={`${className}`} fontSize={fontSize} />;
 
   return null;
 }

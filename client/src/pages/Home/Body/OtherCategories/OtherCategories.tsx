@@ -3,7 +3,7 @@ import "./Other.scss";
 import * as React from "react";
 
 import { BlogItems } from "../../../../components/Common/BlogItems/BlogItems";
-import { highestList } from "../../../../mock";
+import { BlogsSample } from "../../../../mock";
 
 export interface IOtherProps {}
 
@@ -13,7 +13,7 @@ export function Other(props: IOtherProps) {
       <div className="categories_above">
         <div className="category life">
           <h3 className="category_title">LIFESTYLE</h3>
-          {highestList.slice(0, 3).map((items, key) => {
+          {BlogsSample.slice(0, 3).map((items, key) => {
             return (
               <BlogItems
                 direction="horizontal"
@@ -26,7 +26,7 @@ export function Other(props: IOtherProps) {
         </div>
         <div className="category travel">
           <h3 className="category_title">TRAVEL</h3>
-          {highestList.slice(0, 3).map((items, key) => {
+          {BlogsSample.slice(0, 3).map((items, key) => {
             return (
               <BlogItems
                 direction="horizontal"
@@ -42,7 +42,7 @@ export function Other(props: IOtherProps) {
         <h3 className="category_title">FOOD AND DRINK</h3>
 
         <div className="category_content">
-          {highestList.slice(0, 4).map((items, key) => {
+          {BlogsSample.slice(0, 4).map((items, key) => {
             return (
               <BlogItems
                 direction="vertical"

@@ -2,9 +2,9 @@ import "./test.scss";
 
 import { ListItemButton, Paper } from "@mui/material";
 
+import { BlogsSample } from "../../mock";
 import { Icons } from "../../components/Common/Icons/Icons";
 import { Images } from "../../constants/image";
-import { highestList } from "../../mock";
 
 export interface ITestProps {
   // horizontal : ngang
@@ -18,7 +18,7 @@ export interface ITestProps {
 export function Test({ direction, shape, size, isThumbedNail }: ITestProps) {
   return (
     <>
-      {highestList.slice(0, 3).map((items, key) => {
+      {BlogsSample.slice(0, 3).map((items, key) => {
         return (
           <Paper
             elevation={8}
