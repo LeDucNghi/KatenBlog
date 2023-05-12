@@ -23,17 +23,17 @@ export function InnerWrapper({ width }: IInnerWrapperProps) {
         <AboutWidget user={userProfile!} />
       </RoundedWidget>
 
-      <RoundedWidget title="Popular Posts">
+      <RoundedWidget isDivider title="Popular Posts">
         <PopularPosts />
       </RoundedWidget>
 
-      <RoundedWidget title="Explore Topics">
+      <RoundedWidget isDivider title="Explore Topics">
         <div className="topic_contents">
           <CustomAccordion topic={BlogTopicWidget} />
         </div>
       </RoundedWidget>
 
-      <RoundedWidget title="Newsletter">
+      <RoundedWidget isDivider title="Newsletter">
         <div className="inner_subscribe">
           <span>Join 70,000 subscribers!</span>
 
@@ -47,7 +47,7 @@ export function InnerWrapper({ width }: IInnerWrapperProps) {
         </div>
       </RoundedWidget>
 
-      <RoundedWidget title="Tag Clouds">
+      <RoundedWidget isDivider title="Tag Clouds">
         <div className="inner_tags">
           <a href="/">#Trending</a>
           <a href="/">#Video</a>

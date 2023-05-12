@@ -19,6 +19,7 @@ export function PopularPosts(props: IPopularPostsProps) {
             style={{
               margin: "1em 0",
             }}
+            fontSize="14px"
           />
         );
       })}
