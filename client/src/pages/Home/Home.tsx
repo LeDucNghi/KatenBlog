@@ -1,5 +1,5 @@
 import { Body } from "./Body";
-import { HomeBanner } from "../../components/Common/Banners/HomeBanner";
+import { HomeBanner } from "../../components/Common/Banners/HomeBanner/HomeBanner";
 import { ScrollToTop } from "../../components/Common/ScrollToTop/ScrollToTop";
 
 export interface IHomeProps {}

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { HomeBanner } from "../components/Common/Banners/HomeBanner";
+import { HomeBanner } from "../components/Common/Banners/HomeBanner/HomeBanner";
 import NotFound from "../components/Common/NotFound/NotFound";
 import { SignIn } from "../pages/SignIn/SignIn";
 import { SignUp } from "../pages/SignUp/SignUp";

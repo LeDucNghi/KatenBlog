@@ -5,18 +5,25 @@ import * as React from "react";
 import { Images } from "../../constants/image";
 
 export interface IRoundedWidgetProps {
-  children: string | JSX.Element;
-  title?: string;
+  children: React.ReactNode;
+  title?: string | React.ReactNode;
+  isDivider?: boolean;
+  style?: React.CSSProperties;
 }
 
-export function RoundedWidget({ children, title }: IRoundedWidgetProps) {
+export function RoundedWidget({
+  children,
+  title,
+  isDivider,
+  style,
+}: IRoundedWidgetProps) {
   return (
-    <div className="rounded_widget">
+    <div className="rounded_widget" style={style}>
       {title && (
         <div className="widget_header">
           <h3 className="widget_title">{title}</h3>
 
-          <img src={Images.titleWave} alt="" />
+          {isDivider && <img src={Images.titleWave} alt="" />}
         </div>
       )}
 
