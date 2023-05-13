@@ -31,9 +31,23 @@ export function HomeBanner(props: IHomeBannerProps) {
     <div className="homebanner_wrapper">
       <div className="homebanner_container">
         <div className="homebanner_thumbnail">
-          <div className="thumbnail_img">
-            <img src={Images.thumbnail} alt="" />
-          </div>
+          {/* <img src={Images.thumbnail} alt="" /> */}
+          {BlogsSample.slice(0, 1).map((blogs, key) => {
+            return (
+              <KatenBlogItems
+                key={key}
+                items={blogs}
+                direction="vertical"
+                isThumbedNail={true}
+                showBadge={false}
+                style={{
+                  height: "100%",
+                  padding: 0,
+                }}
+                fontSize="20px"
+              />
+            );
+          })}
         </div>
 
         <div className="homebanner_post_tabs">
@@ -48,28 +62,33 @@ export function HomeBanner(props: IHomeBannerProps) {
             close={() => setOpenBackdrop(!openBackdrop)}
           />
           <RoundedWidget
-            title={
-              <div className="post_tabs_nav">
-                <button
-                  className={
-                    isActive === 1 ? "nav_buttons isActive" : "nav_buttons"
-                  }
-                  onClick={() => activeNavButtons(1)}
-                >
-                  Popular
-                </button>
-                <button
-                  className={
-                    isActive === 2 ? "nav_buttons isActive" : "nav_buttons"
-                  }
-                  onClick={() => activeNavButtons(2)}
-                >
-                  Recent
-                </button>
-              </div>
-            }
+            // title={
+
+            // }
             isDivider={false}
+            style={{
+              height: "100%",
+            }}
           >
+            <div className="post_tabs_nav">
+              <button
+                className={
+                  isActive === 1 ? "nav_buttons isActive" : "nav_buttons"
+                }
+                onClick={() => activeNavButtons(1)}
+              >
+                Popular
+              </button>
+              <button
+                className={
+                  isActive === 2 ? "nav_buttons isActive" : "nav_buttons"
+                }
+                onClick={() => activeNavButtons(2)}
+              >
+                Recent
+              </button>
+            </div>
+
             {BlogsSample.slice(0, 4).map((blogs, key) => {
               return (
                 <KatenBlogItems
@@ -79,7 +98,7 @@ export function HomeBanner(props: IHomeBannerProps) {
                   direction="horizontal"
                   isThumbedNail={false}
                   showBadge={false}
-                  fontSize="12px"
+                  fontSize="13px"
                   style={{
                     margin: "1em 0",
                   }}

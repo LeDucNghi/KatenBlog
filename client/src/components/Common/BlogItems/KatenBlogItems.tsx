@@ -4,6 +4,7 @@ import * as React from "react";
 
 import { Badge, ListItemButton, Paper } from "@mui/material";
 
+import { DetailClearFix } from "../../../widgets/DetailClearFix/DetailClearFix";
 import { Icons } from "../Icons/Icons";
 import { Post } from "../../../models";
 
@@ -57,43 +58,22 @@ export function KatenBlogItems({
               : "items_img square"
           }`}
         >
-          <p
-            className={
-              isThumbedNail
-                ? "items_categories thumbednail_categories"
-                : "items_categories"
-            }
-          >
-            {items.categories}
-          </p>
-
           {!isThumbedNail && (
-            <span>
-              <Icons iconName="image" />
-            </span>
-          )}
+            <>
+              <p className="items_categories">{items.categories}</p>
 
-          {direction === "horizontal" && shape === "circle" && showBadge && (
-            <Badge className="items_badge" badgeContent={items.id} />
+              <span>
+                <Icons iconName="image" />
+              </span>
+
+              <p className="items_categories">{items.categories}</p>
+            </>
           )}
 
           <img src={items.image as string} alt="" />
 
           {direction === "vertical" && isThumbedNail && (
-            <div className="items_thumbednail">
-              <p className="thumbednail_title thumbednail_text">
-                {items.title}{" "}
-              </p>
-              <ul className="thumbednail_meta">
-                <li className="thumbednail_author thumbednail_text">
-                  {items.user?.fullname}{" "}
-                </li>
-                <li className="thumbednail_time thumbednail_text">
-                  {items.createdAt}{" "}
-                </li>
-              </ul>
-              k
-            </div>
+            <DetailClearFix items={items} isThumbedNail={isThumbedNail} />
           )}
         </div>
 

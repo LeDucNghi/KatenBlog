@@ -1,0 +1,73 @@
+@use "../../themes/widgets.scss";
+@use "../../assets/styles/globalStyles.scss";
+@use "../../themes/colors.scss";
+@use "../../themes/general.scss";
+
+.detail_clearfix_thumbnail {
+    position: absolute;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 90%;
+
+    bottom: 2em;
+
+    display: flex;
+    flex-direction: column;
+
+    .thumbnail_categories {
+        @include widgets.background_right;
+
+        display: inline-block;
+
+        font-size: 13px;
+        font-family: globalStyles.$robotoFont;
+        text-align: center;
+
+        padding: 0.5em 1em;
+
+        border-radius: 1em;
+
+        max-width: 20%;
+    }
+
+    .thumbnail_items {
+        margin: 0.3em 0;
+    }
+
+    .thumbnail_title {
+        color: #fff;
+        font-family: globalStyles.$poppinFont;
+
+        font-size: 32px;
+    }
+
+    .thumbnail_meta_list {
+        display: flex;
+        font-size: 14px;
+
+        li {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+
+            color: colors.$light-grey;
+
+            &::before {
+                content: "\2022";
+
+                color: globalStyles.$light-red;
+                font-weight: bold;
+                display: inline-block;
+
+                margin: 0 1em;
+            }
+
+            &:first-child::before {
+                display: none;
+            }
+        }
+    }
+}

@@ -23,7 +23,7 @@ export function InnerWrapper({ width }: IInnerWrapperProps) {
         <AboutWidget user={userProfile!} />
       </RoundedWidget>
 
-      <RoundedWidget isDivider title="Popular Posts">
+      <RoundedWidget isDivider title="Popular Posts" >
         <PopularPosts />
       </RoundedWidget>
 

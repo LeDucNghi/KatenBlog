@@ -17,7 +17,7 @@
 
             text-align: center;
 
-            border: 0.1em solid globalStyles.$social-icons-color;
+            border: 0.1em solid globalStyles.$light-red;
             border-radius: 1.5em;
 
             color: globalStyles.$time-color;
@@ -55,7 +55,7 @@
                 font-size: 0.9em;
 
                 a {
-                    color: globalStyles.$social-icons-color;
+                    color: globalStyles.$light-red;
                     display: inline;
                     font-family: globalStyles.$robotoFont;
                 }
@@ -85,8 +85,8 @@
             margin: 0.5em 0.3em;
 
             &:hover {
-                color: globalStyles.$social-icons-color;
-                border-color: globalStyles.$social-icons-color;
+                color: globalStyles.$light-red;
+                border-color: globalStyles.$light-red;
 
                 transition: globalStyles.$transition;
             }

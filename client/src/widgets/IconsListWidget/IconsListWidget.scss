@@ -18,7 +18,7 @@
         .icon {
             color: #000;
             &:hover {
-                color: globalStyles.$social-icons-color;
+                color: globalStyles.$light-red;
                 transition: globalStyles.$transition;
             }
         }

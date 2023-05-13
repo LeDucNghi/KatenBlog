@@ -4,6 +4,7 @@ import { HomeBanner } from "../components/Common/Banners/HomeBanner/HomeBanner";
 import NotFound from "../components/Common/NotFound/NotFound";
 import { SignIn } from "../pages/SignIn/SignIn";
 import { SignUp } from "../pages/SignUp/SignUp";
+import { Test } from "../pages/test/test";
 
 const Home = React.lazy(() => import("../pages/Home/Home"));
 const AddEditBlog = React.lazy(
@@ -73,6 +74,14 @@ export const routes = [
     path: "*",
     title: "404 - Not Found",
     element: <NotFound />,
+    loadingTimeout: 0,
+    isLandingLayout: true,
+  },
+
+  {
+    path: "test",
+    title: "Test page",
+    element: <Test />,
     loadingTimeout: 0,
     isLandingLayout: true,
   },

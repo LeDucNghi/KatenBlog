@@ -8,6 +8,8 @@
     width: 100%;
     height: 37em;
 
+    margin-bottom: 2em;
+
     .homebanner_container {
         display: flex;
         justify-content: space-between;
@@ -21,12 +23,10 @@
             width: 70%;
             height: 100%;
 
-            .thumbnail_img {
-                img {
-                    border-radius: 0.5em;
+            img {
+                border-radius: 0.5em;
 
-                    @include general.imageCover;
-                }
+                @include general.imageCover;
             }
         }
 
