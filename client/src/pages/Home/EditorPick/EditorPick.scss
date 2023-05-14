@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    .left_side {
+        width: 48%;
+    }
+
+    .right_side {
+        width: 48%;
+    }
+}

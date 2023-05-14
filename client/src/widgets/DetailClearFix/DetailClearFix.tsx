@@ -43,6 +43,14 @@ export function DetailClearFix({
         <div className="detail_createdAt">{items.createdAt}</div>
       </div>
     );
+  else if (direction === "vertical" && !isThumbedNail)
+    return (
+      <div className="detail_clearfix">
+        <div className="detail_post_title">{items.title}</div>
+
+        <div className="detail_createdAt">{items.createdAt}</div>
+      </div>
+    );
 
   return null;
 }

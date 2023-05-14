@@ -2,7 +2,7 @@ import "./KatenBlogItems.scss";
 
 import * as React from "react";
 
-import { Badge, ListItemButton, Paper } from "@mui/material";
+import { ListItemButton, Paper } from "@mui/material";
 
 import { DetailClearFix } from "../../../widgets/DetailClearFix/DetailClearFix";
 import { Icons } from "../Icons/Icons";
@@ -81,7 +81,7 @@ export function KatenBlogItems({
           <DetailClearFix
             items={items}
             isThumbedNail={isThumbedNail}
-            direction="horizontal"
+            direction={direction}
           />
         )}
       </ListItemButton>
