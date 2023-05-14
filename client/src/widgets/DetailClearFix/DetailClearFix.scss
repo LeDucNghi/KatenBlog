@@ -71,3 +71,70 @@
         }
     }
 }
+
+.detail_clearfix_normal {
+    .clearfix_text {
+        margin-top: 0.5em;
+    }
+
+    .clearfix_title {
+        font-size: 1em;
+        font-weight: 700;
+        line-height: 1.4em;
+        font-family: globalStyles.$poppinFont;
+        color: globalStyles.$title-color;
+        transition: globalStyles.$transition;
+
+        &:hover {
+            color: globalStyles.$light-red;
+            transition: globalStyles.$transition;
+        }
+    }
+
+    .clearfix_subtitle {
+        color: globalStyles.$light-grey;
+        font-family: globalStyles.$robotoFont;
+    }
+
+    .clearfix_categories {
+        color: globalStyles.$category-color;
+    }
+
+    .clearfix_time {
+        color: globalStyles.$light-grey;
+        font-family: globalStyles.$robotoFont;
+        font-size: 0.9em;
+    }
+}
+
+.detail_clearfix {
+    display: flex;
+    flex-direction: column;
+
+    width: 70%;
+
+    .detail_post_title {
+        font-size: 1em;
+        color: colors.$title-color;
+        font-weight: 700;
+
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Number of lines to show */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        transition: globalStyles.$transition;
+
+        &:hover {
+            color: globalStyles.$light-red;
+            transition: globalStyles.$transition;
+        }
+    }
+
+    .detail_createdAt {
+        color: colors.$light-grey;
+        font-size: 0.9em;
+        font-family: globalStyles.$robotoFont;
+    }
+}

@@ -78,46 +78,11 @@ export function KatenBlogItems({
         </div>
 
         {!isThumbedNail && (
-          <div className="items_text">
-            <ul className="items_meta">
-              <li>
-                <div className="meta_author_avt">
-                  <img src={items.image as string} alt="" />
-                </div>
-
-                <p className="meta_author text">{items.user?.fullname} </p>
-              </li>
-
-              {direction === "horizontal" && size === "big" && (
-                <li>
-                  <p className="meta_categories text">{items.categories}</p>
-                </li>
-              )}
-
-              <li>
-                <p className="meta_time text">{items.createdAt}</p>
-              </li>
-            </ul>
-
-            <h2 className="items_title">{items.title}</h2>
-
-            {direction === "horizontal" && !size && (
-              <p className="items_time">{items.createdAt} </p>
-            )}
-
-            {(direction === "horizontal" && size === "big") ||
-            direction === "vertical" ? (
-              <p className="items_subtitle">{items.subTitle}</p>
-            ) : null}
-
-            {direction === "horizontal" && size === "big" && (
-              <div className="items_share_button">
-                <Icons iconName="share" />
-
-                <Icons iconName="option" />
-              </div>
-            )}
-          </div>
+          <DetailClearFix
+            items={items}
+            isThumbedNail={isThumbedNail}
+            direction="horizontal"
+          />
         )}
       </ListItemButton>
     </Paper>

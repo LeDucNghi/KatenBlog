@@ -2,18 +2,23 @@ import "./DetailClearFix.scss";
 
 import * as React from "react";
 
+import { Icons } from "../../components/Common/Icons/Icons";
 import { Post } from "../../models";
 
 export interface IDetailClearFixProps {
   isThumbedNail?: boolean;
   style?: React.CSSProperties;
   items: Post;
+  direction?: "horizontal" | "vertical";
+  size?: "small" | "big";
 }
 
 export function DetailClearFix({
   isThumbedNail,
   style,
   items,
+  direction,
+  size,
 }: IDetailClearFixProps) {
   if (isThumbedNail)
     return (
@@ -30,10 +35,14 @@ export function DetailClearFix({
         </ul>
       </div>
     );
-  else
+  else if (direction === "horizontal" && !size)
     return (
-      <div className="detail_clearfix_normal" style={style}>
-        <div className="categories_badge">{items.categories}</div>
+      <div className="detail_clearfix">
+        <div className="detail_post_title">{items.title}</div>
+
+        <div className="detail_createdAt">{items.createdAt}</div>
       </div>
     );
+
+  return null;
 }

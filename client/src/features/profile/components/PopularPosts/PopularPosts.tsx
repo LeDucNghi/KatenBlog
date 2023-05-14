@@ -16,10 +16,11 @@ export function PopularPosts(props: IPopularPostsProps) {
             shape="circle"
             items={items}
             showBadge={true}
+            fontSize="15px"
             style={{
               margin: "1em 0",
+              height: "6.5em",
             }}
-            fontSize="15px"
           />
         );
       })}
