@@ -1,4 +1,4 @@
-import "./EditorPick.scss";
+import "./Body.scss";
 
 import * as React from "react";
 
@@ -10,9 +10,14 @@ export interface IEditorPickProps {}
 
 export function EditorPick(props: IEditorPickProps) {
   return (
-    <RoundedWidget title="Editor's Pick" isDivider style={{ width: "100%" }}>
-      <div className="container">
-        <div className="left_side">
+    <RoundedWidget
+      title="Editor's Pick"
+      anchorTitle="left"
+      isDivider
+      style={{ width: "100%" }}
+    >
+      <div className="child_container">
+        <div className="side">
           {BlogsSample.slice(0, 1).map((blogs, key) => {
             return (
               <KatenBlogItems
@@ -25,8 +30,8 @@ export function EditorPick(props: IEditorPickProps) {
           })}
         </div>
 
-        <div className="right_side">
-          {BlogsSample.slice(0, 3).map((blogs, key) => {
+        <div className="side">
+          {BlogsSample.slice(0, 4).map((blogs, key) => {
             return (
               <KatenBlogItems
                 key={key}
@@ -37,7 +42,7 @@ export function EditorPick(props: IEditorPickProps) {
                 fontSize="14px"
                 style={{
                   marginBottom: "1em",
-                  height: "7em",
+                  height: "6.5em",
                 }}
               />
             );

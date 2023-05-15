@@ -89,6 +89,7 @@ export function KatenBlogItems({
             items={items}
             isThumbedNail={isThumbedNail}
             direction={direction}
+            size={size}
           />
         )}
       </ListItemButton>

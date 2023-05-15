@@ -14,7 +14,6 @@
         .items_img {
             position: relative;
 
-            // @include general.flexCenter;
             img {
                 @include general.imageCover;
             }

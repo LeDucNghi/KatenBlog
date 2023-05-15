@@ -24,7 +24,14 @@ export function DetailWidget({
 }: IDetailWidgetProps) {
   if (isThumbedNail)
     return (
-      <div className="detail_widget_thumbnail" style={style}>
+      <div
+        className={
+          size === "small"
+            ? "detail_widget_thumbnail"
+            : "detail_widget_thumbnail small"
+        }
+        style={style}
+      >
         <p className="thumbnail_items thumbnail_categories">
           {items.categories}
         </p>
@@ -56,16 +63,6 @@ export function DetailWidget({
   else if (direction === "vertical" && !isThumbedNail)
     return (
       <div className="detail_widget">
-        {/* <div className="detail_badge ">
-          <a href="/" className="detail_categories">
-            {items.categories}
-          </a>
-
-          <div className="detail_post_format">
-            <Icons iconName="image" />
-          </div>
-        </div> */}
-
         <ul className="detail_meta_list meta_list widget_items">
           <li>
             <div className="meta_author">
@@ -80,6 +77,32 @@ export function DetailWidget({
           <h3 className="detail_title post_title">{items.title}</h3>
 
           <div className="detail_subtitle">{items.subTitle}</div>
+        </div>
+      </div>
+    );
+  else if (direction === "horizontal" && size === "big")
+    return (
+      <div className="detail_widget_big">
+        <ul className="meta_list widget_items">
+          <li>
+            <div className="meta_author">
+              <img src={items.user?.avatar} alt="" />
+            </div>
+            {items.user?.fullname}{" "}
+          </li>
+          <li>{items.categories}</li>
+          <li>{items.createdAt}</li>
+        </ul>
+
+        <div className="detail_content widget_items">
+          <h3 className="detail_title post_title">{items.title}</h3>
+
+          <div className="detail_subtitle post_subtitle">{items.subTitle}</div>
+        </div>
+
+        <div className="detail_share_buttons widget_items">
+          <button>{<Icons iconName="share" />}</button>
+          <button>{<Icons iconName="option" />}</button>
         </div>
       </div>
     );

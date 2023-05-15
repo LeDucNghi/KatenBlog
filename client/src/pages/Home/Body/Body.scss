@@ -10,6 +10,15 @@
 
     .left_side {
         width: 60%;
+
+        .child_container {
+            display: flex;
+            justify-content: space-between;
+
+            .side {
+                width: 48%;
+            }
+        }
     }
 
     .right_side {

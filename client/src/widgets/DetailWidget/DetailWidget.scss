@@ -4,15 +4,35 @@
 @use "../../themes/general.scss";
 
 .meta_list {
+    width: 100%;
     display: flex;
 
     li {
         @include widgets.meta_list;
+
+        .meta_author {
+            width: 2em;
+            height: 2em;
+
+            margin-right: 0.5em;
+
+            img {
+                @include general.imageCover;
+                border-radius: 50%;
+            }
+        }
     }
 }
 
 .post_title {
     @include widgets.post_title;
+}
+
+.post_subtitle {
+    font-weight: 400;
+    color: #8f9bad;
+
+    @include general.line_clamp_text(2);
 }
 
 // VERTICAL THUMBNAIL
@@ -28,6 +48,16 @@
 
     display: flex;
     flex-direction: column;
+
+    &.small {
+        .thumbnail_title {
+            font-size: 16px;
+        }
+
+        .thumbnail_categories {
+            max-width: 50%;
+        }
+    }
 
     .thumbnail_categories {
         @include widgets.background_right;
@@ -94,18 +124,6 @@
 
     .detail_meta_list {
         font-size: 14px;
-
-        .meta_author {
-            width: 2em;
-            height: 2em;
-
-            margin-right: 0.5em;
-
-            img {
-                @include general.imageCover;
-                border-radius: 50%;
-            }
-        }
     }
 
     .detail_content {
@@ -114,10 +132,35 @@
             margin-bottom: 1em;
             text-transform: capitalize;
         }
+    }
+}
 
-        .detail_subtitle {
-            font-weight: 400;
-            color: #8f9bad;
+// HORIZONTAL WITH SIZE
+.detail_widget_big {
+    width: 50%;
+
+    .widget_items {
+        margin-bottom: 0.5em;
+    }
+
+    .meta_list {
+        li {
+            font-size: 10px;
+        }
+    }
+
+    .detail_content {
+        .detail_title {
+            margin-bottom: 0.5em;
+        }
+    }
+
+    .detail_share_buttons {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            background: transparent;
         }
     }
 }
