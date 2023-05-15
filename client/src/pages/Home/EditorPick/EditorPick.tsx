@@ -10,7 +10,7 @@ export interface IEditorPickProps {}
 
 export function EditorPick(props: IEditorPickProps) {
   return (
-    <RoundedWidget title="Editor's Pick" isDivider>
+    <RoundedWidget title="Editor's Pick" isDivider style={{ width: "100%" }}>
       <div className="container">
         <div className="left_side">
           {BlogsSample.slice(0, 1).map((blogs, key) => {
@@ -34,9 +34,10 @@ export function EditorPick(props: IEditorPickProps) {
                 shape="square"
                 showBadge={false}
                 items={blogs}
-                fontSize="13px"
+                fontSize="14px"
                 style={{
-                  margin: "1em 0",
+                  marginBottom: "1em",
+                  height: "7em",
                 }}
               />
             );

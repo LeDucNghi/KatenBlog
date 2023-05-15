@@ -14,79 +14,18 @@
         .items_img {
             position: relative;
 
-            @include general.flexCenter;
+            // @include general.flexCenter;
             img {
                 @include general.imageCover;
             }
         }
 
-        .items_text {
-            .items_subtitle,
-            .items_time,
-            .items_categories,
-            .items_title {
-                margin-top: 0.5em;
-            }
+        .section_blur {
+            top: 0;
+            left: 0;
+            border-radius: 1em;
 
-            .items_title {
-                font-size: 1em;
-                font-weight: 700;
-                line-height: 1.4em;
-                font-family: globalStyles.$poppinFont;
-                color: globalStyles.$title-color;
-                transition: globalStyles.$transition;
-
-                &:hover {
-                    color: globalStyles.$light-red;
-                    transition: globalStyles.$transition;
-                }
-            }
-
-            .items_subtitle {
-                color: globalStyles.$light-grey;
-                font-family: globalStyles.$robotoFont;
-            }
-
-            .items_categories {
-                color: globalStyles.$category-color;
-            }
-
-            .items_time {
-                color: globalStyles.$light-grey;
-                font-family: globalStyles.$robotoFont;
-                font-size: 0.9em;
-            }
-
-            .items_meta {
-                width: 100%;
-
-                li {
-                    position: relative;
-
-                    width: 50%;
-
-                    display: flex;
-                    align-items: center;
-
-                    &::before {
-                        content: "\2022";
-
-                        color: globalStyles.$light-red;
-                        font-weight: bold;
-                        display: inline-block;
-                    }
-
-                    &:first-child::before {
-                        display: none;
-                    }
-
-                    .text {
-                        white-space: nowrap;
-                        overflow: hidden !important;
-                        text-overflow: ellipsis;
-                    }
-                }
-            }
+            @include widgets.section_blur;
         }
     }
 }
@@ -96,8 +35,6 @@
     width: 100%;
 
     .items_container {
-        // padding: 1em;
-
         width: 100%;
         height: 100%;
         flex-direction: column;
@@ -125,99 +62,34 @@
                 color: #ffffff;
             }
 
-            .items_categories {
-                @include widgets.background_right;
-
-                border-radius: 3em;
-
-                font-family: globalStyles.$robotoFont;
-                font-size: 0.7em;
-                font-family: globalStyles.$robotoFont;
-
-                padding: 0.6em 1em;
-
-                z-index: 10;
-            }
-
-            .items_thumbednail {
+            .detail_badge {
                 position: absolute;
-
-                top: 0;
-                left: 0;
 
                 width: 100%;
                 height: 100%;
 
-                background-color: rgba(36, 62, 97, 0.4);
+                .detail_categories {
+                    @include widgets.categories_badge;
+                    position: absolute;
 
-                display: flex;
-                justify-content: flex-end;
-                flex-direction: column;
-                flex-wrap: wrap;
-
-                padding: 0.5em 1em;
-
-                border-radius: 1em;
-
-                .thumbednail_meta {
-                    display: flex;
-                    justify-content: space-between;
-                    color: globalStyles.$light-grey;
-                    font-size: 0.9em;
+                    top: 1em;
+                    left: 1em;
                 }
 
-                .thumbednail_text {
-                    position: relative;
-                    text-align: left;
-                }
+                .detail_post_format {
+                    @include widgets.background_top;
+                    @include general.flexCenter;
 
-                .thumbednail_title {
-                    color: #ffffff;
-                    font-size: 1.2em;
-                    font-weight: 700;
-                    font-family: globalStyles.$poppinFont;
-                }
-            }
-        }
+                    position: absolute;
 
-        .items_text {
-            .items_title {
-                font-size: 1.3em;
-            }
+                    width: 3.3em;
+                    height: 3.3em;
 
-            .items_meta {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                    bottom: -1em;
+                    right: 0;
 
-                padding: 1em 0.5em 0 0;
-
-                .meta_author_avt {
-                    width: 2em;
-                    height: 2em;
-
-                    img {
-                        @include general.imageCover;
-                        border-radius: 50%;
-                    }
-                }
-
-                li {
-                    .text {
-                        font-size: 0.9em;
-                        font-family: globalStyles.$robotoFont;
-                        color: globalStyles.$light-grey;
-
-                        padding: 0 0.9em;
-                    }
-
-                    .meta_author {
-                        transition: globalStyles.$transition;
-
-                        &:hover {
-                            transition: globalStyles.$transition;
-                            color: globalStyles.$light-red;
-                        }
+                    .post_format_icon {
+                        color: #fff;
                     }
                 }
             }
@@ -238,8 +110,8 @@
     }
 
     .items_img.circle {
-        width: 4em;
-        height: 4em;
+        width: 5em;
+        height: 5em;
 
         img {
             border-radius: 50%;
@@ -247,24 +119,11 @@
     }
 
     .items_img.square {
-        width: 7.3em;
-        height: 5.3em;
+        width: 7em;
+        height: 5em;
 
         img {
-            border-radius: 2em;
-        }
-    }
-
-    // HORIZONTAL - MINI
-    .items_text {
-        margin-left: 1em;
-
-        .items_title {
-            font-size: 1em;
-        }
-
-        .items_meta {
-            display: none;
+            border-radius: 1em;
         }
     }
 
@@ -273,61 +132,6 @@
         .items_img.square {
             width: 17em;
             height: 13em;
-        }
-
-        .items_text {
-            .items_title {
-                margin-bottom: 0.5em;
-                font-size: 1.3em;
-            }
-
-            .items_time {
-                display: none;
-            }
-
-            .items_subtitle {
-                margin-top: 0.5em;
-            }
-
-            .items_meta {
-                display: block;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                padding: 1em 0.5em 0 0;
-
-                .meta_author_avt {
-                    width: 2em;
-                    height: 2em;
-
-                    img {
-                        @include general.imageCover;
-                    }
-                }
-
-                li {
-                    width: 30%;
-
-                    .text {
-                        font-size: 0.9em;
-                        font-family: globalStyles.$robotoFont;
-                        color: globalStyles.$light-grey;
-                        padding-left: 3em;
-
-                        text-align: center;
-                    }
-
-                    .meta_author {
-                        transition: globalStyles.$transition;
-
-                        &:hover {
-                            transition: globalStyles.$transition;
-                            color: globalStyles.$light-red;
-                        }
-                    }
-                }
-            }
         }
 
         .items_share_button {

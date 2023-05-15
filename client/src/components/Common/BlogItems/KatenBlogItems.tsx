@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { ListItemButton, Paper } from "@mui/material";
 
-import { DetailClearFix } from "../../../widgets/DetailClearFix/DetailClearFix";
+import { DetailWidget } from "../../../widgets/DetailWidget/DetailWidget";
 import { Icons } from "../Icons/Icons";
 import { Post } from "../../../models";
 
@@ -58,27 +58,34 @@ export function KatenBlogItems({
               : "items_img square"
           }`}
         >
-          {!isThumbedNail && (
-            <>
-              <p className="items_categories">{items.categories}</p>
+          {direction === "vertical" && !size && !isThumbedNail && (
+            <div className="detail_badge ">
+              <a href="/" className="detail_categories">
+                {items.categories}
+              </a>
 
-              <span>
-                <Icons iconName="image" />
-              </span>
+              <div className="detail_post_format">
+                <Icons iconName="image" className="post_format_icon" />
+              </div>
+            </div>
+          )}
 
-              <p className="items_categories">{items.categories}</p>
-            </>
+          {direction === "vertical" && !isThumbedNail && (
+            <DetailWidget items={items} isThumbedNail={isThumbedNail} />
           )}
 
           <img src={items.image as string} alt="" />
 
           {direction === "vertical" && isThumbedNail && (
-            <DetailClearFix items={items} isThumbedNail={isThumbedNail} />
+            <>
+              <div className="section_blur"></div>
+              <DetailWidget items={items} isThumbedNail={isThumbedNail} />
+            </>
           )}
         </div>
 
         {!isThumbedNail && (
-          <DetailClearFix
+          <DetailWidget
             items={items}
             isThumbedNail={isThumbedNail}
             direction={direction}

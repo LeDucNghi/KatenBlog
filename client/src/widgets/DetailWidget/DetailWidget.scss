@@ -1,0 +1,123 @@
+@use "../../themes/widgets.scss";
+@use "../../assets/styles/globalStyles.scss";
+@use "../../themes/colors.scss";
+@use "../../themes/general.scss";
+
+.meta_list {
+    display: flex;
+
+    li {
+        @include widgets.meta_list;
+    }
+}
+
+.post_title {
+    @include widgets.post_title;
+}
+
+// VERTICAL THUMBNAIL
+.detail_widget_thumbnail {
+    position: absolute;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 90%;
+
+    bottom: 2em;
+
+    display: flex;
+    flex-direction: column;
+
+    .thumbnail_categories {
+        @include widgets.background_right;
+
+        display: inline-block;
+
+        font-size: 13px;
+        font-family: globalStyles.$robotoFont;
+        text-align: center;
+
+        padding: 0.5em 1em;
+
+        border-radius: 1em;
+
+        max-width: 20%;
+    }
+
+    .thumbnail_items {
+        margin: 0.3em 0;
+    }
+
+    .thumbnail_title {
+        color: #fff;
+        font-family: globalStyles.$poppinFont;
+
+        font-size: 32px;
+    }
+
+    .thumbnail_meta_list {
+        font-size: 14px;
+    }
+}
+
+// HORIZONTAL WITHOUT SIZE
+.detail_widget_normal {
+    display: flex;
+    flex-direction: column;
+
+    width: 70%;
+
+    padding: 0 1em;
+
+    .detail_post_title {
+        font-size: 1em;
+
+        @include general.line_clamp_text(2);
+    }
+
+    .detail_createdAt {
+        color: colors.$light-grey;
+        font-size: 0.9em;
+        font-family: globalStyles.$robotoFont;
+    }
+}
+
+// VERTICAL WITHOUT THUMBNAIL
+.detail_widget {
+    width: 100%;
+    height: 100%;
+
+    .widget_items {
+        margin: 1em 0;
+    }
+
+    .detail_meta_list {
+        font-size: 14px;
+
+        .meta_author {
+            width: 2em;
+            height: 2em;
+
+            margin-right: 0.5em;
+
+            img {
+                @include general.imageCover;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    .detail_content {
+        .detail_title {
+            font-size: 1.2em;
+            margin-bottom: 1em;
+            text-transform: capitalize;
+        }
+
+        .detail_subtitle {
+            font-weight: 400;
+            color: #8f9bad;
+        }
+    }
+}
