@@ -8,11 +8,7 @@
     width: 100%;
     height: 63em;
 
-    background-image: url("../../../assets/images/user-bg.jpg");
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    @include widgets.background_image("../../../assets/images/user-bg.jpg");
 
     .section_blur {
         position: absolute;
@@ -39,7 +35,7 @@
 
                 margin: 0 auto;
 
-                padding: 1em;
+                padding: 2em 1em;
 
                 @include general.flexSpaceCenter;
 
@@ -47,31 +43,9 @@
                     width: 30%;
                 }
 
-                .main_social {
-                    display: flex;
-                    align-items: center;
-
-                    li {
-                        @include general.flexCenter;
-
-                        margin-left: 1em;
-
-                        cursor: pointer;
-
-                        .main_social_icon {
-                            color: #fff;
-                            transition: all 0.3s ease-in-out;
-
-                            &:hover {
-                                color: globalStyles.$light-red;
-                                transition: all 0.3s ease-in-out;
-                            }
-                        }
-                    }
-                }
-
                 .main_user {
                     @include general.flexCenter;
+                    margin: 0 auto;
 
                     flex-direction: column;
 
@@ -123,8 +97,14 @@
 
                 @include general.flexCenter;
 
-                @include widgets.nav_links;
+                color: #fff;
+
+                &.isActive {
+                    @include widgets.nav_links;
+                }
             }
+
+            // .nav_items
         }
     }
 

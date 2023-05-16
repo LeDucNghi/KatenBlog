@@ -21,4 +21,5 @@ export interface IIconsProps {
   iconName: IconName;
   className?: string;
   fontSize?: IconsFontSize;
+  style?: React.CSSProperties;
 }

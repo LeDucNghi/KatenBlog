@@ -16,44 +16,116 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
-export function Icons({ iconName, className, fontSize }: IIconsProps) {
+export function Icons({ iconName, className, fontSize, style }: IIconsProps) {
   // SOCIAL
   if (iconName === "facebook")
-    return <FacebookIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <FacebookIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
   if (iconName === "instagram")
-    return <InstagramIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <InstagramIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
   if (iconName === "github")
-    return <GitHubIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <GitHubIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
   if (iconName === "pinterest")
-    return <PinterestIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <PinterestIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
   if (iconName === "twitter")
-    return <TwitterIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <TwitterIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
   if (iconName === "youtube")
-    return <YouTubeIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <YouTubeIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
 
   // CATEGORIES
   if (iconName === "image")
-    return <PhotoOutlinedIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <PhotoOutlinedIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
   if (iconName === "headphone")
     return (
-      <HeadphonesOutlinedIcon className={`${className}`} fontSize={fontSize} />
+      <HeadphonesOutlinedIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
     );
   if (iconName === "video")
     return (
-      <VideocamOutlinedIcon className={`${className}`} fontSize={fontSize} />
+      <VideocamOutlinedIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
     );
 
   // OTHER
   if (iconName === "burger")
-    return <MenuIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <MenuIcon className={`${className}`} fontSize={fontSize} style={style} />
+    );
   if (iconName === "search")
-    return <SearchIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <SearchIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
   if (iconName === "share")
-    return <ShareIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <ShareIcon className={`${className}`} fontSize={fontSize} style={style} />
+    );
   if (iconName === "option")
-    return <MoreHorizIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <MoreHorizIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
   if (iconName === "person")
-    return <PersonIcon className={`${className}`} fontSize={fontSize} />;
+    return (
+      <PersonIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
 
   return null;
 }

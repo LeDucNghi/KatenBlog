@@ -99,3 +99,11 @@
 
     background-color: rgba(36, 62, 97, 0.7);
 }
+
+@mixin background_image($image: "../assets/images/user-bg.jpg") {
+    background-image: url($image);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

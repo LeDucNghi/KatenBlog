@@ -1,7 +1,9 @@
 import "./ProfileHeader.scss";
 
 import { Icons } from "../Icons/Icons";
+import { IconsListWidget } from "../../../widgets/IconsListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
+import { NavbarWidget } from "../../../constants";
 
 export interface IProfileHeaderProps {}
 
@@ -12,43 +14,12 @@ export function ProfileHeader(props: IProfileHeaderProps) {
       <div className="profile_header">
         <div className="top_header">
           <div className="top_header_main">
-            <ul className="main_social header_main_items">
-              <li>
-                <Icons
-                  className="main_social_icon"
-                  iconName="facebook"
-                  fontSize="medium"
-                />{" "}
-              </li>
-              <li>
-                <Icons
-                  className="main_social_icon"
-                  iconName="twitter"
-                  fontSize="medium"
-                />{" "}
-              </li>
-              <li>
-                <Icons
-                  className="main_social_icon"
-                  iconName="instagram"
-                  fontSize="medium"
-                />{" "}
-              </li>
-              <li>
-                <Icons
-                  className="main_social_icon"
-                  iconName="pinterest"
-                  fontSize="medium"
-                />{" "}
-              </li>
-              <li>
-                <Icons
-                  className="main_social_icon"
-                  iconName="youtube"
-                  fontSize="medium"
-                />{" "}
-              </li>
-            </ul>
+            <IconsListWidget
+              style={{
+                width: "20%",
+              }}
+              // color="#fff"
+            />
 
             <div className="main_user header_main_items">
               <div className="user_avatar">
@@ -75,11 +46,17 @@ export function ProfileHeader(props: IProfileHeaderProps) {
         </div>
 
         <div className="nav_header">
-          <div className="nav_items">Home</div>
-          <div className="nav_items">Lifestyle</div>
-          <div className="nav_items">Inspiration</div>
-          <div className="nav_items">Pages</div>
-          <div className="nav_items">Contact</div>
+          {NavbarWidget.map((nav, key) => {
+            return (
+              <a
+                key={key}
+                href={nav.route}
+                className={nav.id === 1 ? "nav_items isActive" : "nav_items"}
+              >
+                {nav.name}{" "}
+              </a>
+            );
+          })}
         </div>
       </div>
 

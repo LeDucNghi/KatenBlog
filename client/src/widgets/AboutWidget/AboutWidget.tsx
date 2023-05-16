@@ -21,7 +21,12 @@ export function AboutWidget({ user }: IAboutWidgetProps) {
           : "Hello, We’re content writer who is fascinated by content fashion,celebrity and lifestyle. We helps clients bring the right content to the right people."}
       </p>
 
-      <IconsListWidget width="100%" height="2em" />
+      <IconsListWidget
+        style={{
+          width: "100%",
+          height: "2em",
+        }}
+      />
     </div>
   );
 }

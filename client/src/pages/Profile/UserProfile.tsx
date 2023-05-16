@@ -3,8 +3,7 @@ import "./UserProfile.scss";
 import * as React from "react";
 
 import { BlogsSample } from "../../mock";
-import { DocTitle } from "../../widgets/DocTitle/DocTitle";
-import { UserAbout } from "../../features/profile/components/UserAbout/UserAbout";
+import { InnerWrapper } from "../../widgets/InnerWrapper/InnerWrapper";
 import { UserBlogList } from "../../features/profile/components/UserBlogList/UserBlogList";
 
 export interface IUserProfileProps {}
@@ -15,7 +14,7 @@ export default function UserProfile(props: IUserProfileProps) {
       <div className="profile_container">
         <UserBlogList userBlogList={BlogsSample} />
 
-        <UserAbout />
+        <InnerWrapper width="30%" />
       </div>
     </div>
   );

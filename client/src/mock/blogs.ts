@@ -78,6 +78,54 @@ export const BlogsSample = [
         "https://images.unsplash.com/photo-1608889175123-8ee362201f81?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
     },
   },
+
+  {
+    id: 6,
+    image: faker.image.image(),
+    categories: "Food and Drink",
+    title: "Far far away behind the Word Mountains far from Away.",
+    createdAt: "May 10, 2020",
+    subTitle:
+      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    user: {
+      id: 6,
+      fullname: faker.name.fullName(),
+      avatar:
+        "https://images.unsplash.com/photo-1608889175123-8ee362201f81?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
+    },
+  },
+
+  {
+    id: 7,
+    image: faker.image.image(),
+    categories: "Food and Drink",
+    title: "Far far away behind the Word Mountains far from Away.",
+    createdAt: "May 10, 2020",
+    subTitle:
+      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    user: {
+      id: 7,
+      fullname: faker.name.fullName(),
+      avatar:
+        "https://images.unsplash.com/photo-1608889175123-8ee362201f81?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
+    },
+  },
+
+  {
+    id: 8,
+    image: faker.image.image(),
+    categories: "Food and Drink",
+    title: "Far far away behind the Word Mountains far from Away.",
+    createdAt: "May 10, 2020",
+    subTitle:
+      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    user: {
+      id: 8,
+      fullname: faker.name.fullName(),
+      avatar:
+        "https://images.unsplash.com/photo-1608889175123-8ee362201f81?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
+    },
+  },
 ];
 
 export const blogs = [...Array(6)].map((_, index) => ({

@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { HomeBanner } from "../components/Common/Banners/HomeBanner/HomeBanner";
 import NotFound from "../components/Common/NotFound/NotFound";
 import { SignIn } from "../pages/SignIn/SignIn";
 import { SignUp } from "../pages/SignUp/SignUp";
@@ -16,7 +15,7 @@ const UserProfile = React.lazy(() => import("../pages/Profile/UserProfile"));
 export const routes = [
   {
     path: "/",
-    title: "Home",
+    title: "Katen.",
     element: <Home />,
     loadingTimeout: 1000,
     isLandingLayout: true,
