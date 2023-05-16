@@ -13,7 +13,8 @@ export type IconName =
   | "video"
   | "share"
   | "option"
-  | "person";
+  | "person"
+  | "arrowup";
 
 export type IconsFontSize = "large" | "medium" | "small";
 

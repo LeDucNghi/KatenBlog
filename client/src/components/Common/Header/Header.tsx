@@ -1,7 +1,6 @@
 import "./Header.scss";
 
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
 
 import { CustomDrawer } from "../Drawer/Drawer";
 import { HeaderDrawer } from "./Drawer";
@@ -10,15 +9,12 @@ import { getUserProfile } from "../../../features/auth/authThunk";
 import { handleGetAllPost } from "../../../features/addEditBlog/addEditThunk";
 import { logout } from "../../../features/auth/authSlice";
 import { useAppDispatch } from "../../../app/hooks";
-import { useWindowSize } from "../../../hooks/useWindowSize";
+import { useLocation } from "react-router-dom";
 
 export interface IHeaderProps {}
 
 export function Header(props: IHeaderProps) {
   const { pathname } = useLocation();
-  const { id } = useParams();
-
-  const { windowInnerWidth } = useWindowSize();
 
   const dispatch = useAppDispatch();
 
@@ -42,7 +38,6 @@ export function Header(props: IHeaderProps) {
 
   if (pathname === "/signin") return <></>;
   if (pathname === "/signup") return <></>;
-  if (pathname === `/profile/${id}`) return <></>;
 
   return (
     <div className="header_container">

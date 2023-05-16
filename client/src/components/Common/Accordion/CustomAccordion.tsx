@@ -57,6 +57,10 @@ export function CustomAccordion({ topic }: ICustomAccordionProps) {
                     items={topic}
                     showBadge={false}
                     shape="circle"
+                    fontSize="13px"
+                    style={{
+                      margin: "1em 0",
+                    }}
                   />
                 );
               })}

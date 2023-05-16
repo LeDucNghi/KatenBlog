@@ -4,10 +4,27 @@ import { Icons } from "../Icons/Icons";
 import { IconsListWidget } from "../../../widgets/IconsListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
 import { NavbarWidget } from "../../../constants";
+import { getUserProfile } from "../../../features/auth/authThunk";
+import { logout } from "../../../features/auth/authSlice";
+import { useAppDispatch } from "../../../app/hooks";
+import { useEffect } from "react";
 
 export interface IProfileHeaderProps {}
 
 export function ProfileHeader(props: IProfileHeaderProps) {
+  const dispatch = useAppDispatch();
+  const token = JSON.parse(localStorage.getItem("token")!);
+
+  useEffect(() => {
+    if (!token) {
+      dispatch(logout());
+    }
+  }, [dispatch, token]);
+
+  useEffect(() => {
+    dispatch(getUserProfile());
+  }, [dispatch]);
+
   return (
     <section className="profile_section">
       <div className="section_blur"></div>
@@ -18,7 +35,6 @@ export function ProfileHeader(props: IProfileHeaderProps) {
               style={{
                 width: "20%",
               }}
-              // color="#fff"
             />
 
             <div className="main_user header_main_items">

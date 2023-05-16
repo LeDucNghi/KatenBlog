@@ -5,6 +5,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import HeadphonesOutlinedIcon from "@mui/icons-material/HeadphonesOutlined";
 import { IIconsProps } from "../../../models";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PersonIcon from "@mui/icons-material/Person";
@@ -121,6 +122,14 @@ export function Icons({ iconName, className, fontSize, style }: IIconsProps) {
   if (iconName === "person")
     return (
       <PersonIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
+  if (iconName === "arrowup")
+    return (
+      <KeyboardArrowUpIcon
         className={`${className}`}
         fontSize={fontSize}
         style={style}

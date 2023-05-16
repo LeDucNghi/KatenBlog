@@ -16,6 +16,10 @@ export interface IInnerWrapperProps {
 
 export function InnerWrapper({ width }: IInnerWrapperProps) {
   const userProfile = useAppSelector(selectUserProfile);
+  console.log(
+    "🚀 ~ file: InnerWrapper.tsx:19 ~ InnerWrapper ~ userProfile:",
+    userProfile
+  );
 
   return (
     <div className="inner_wrapper" style={{ width: width }}>
@@ -23,7 +27,7 @@ export function InnerWrapper({ width }: IInnerWrapperProps) {
         <AboutWidget user={userProfile!} />
       </RoundedWidget>
 
-      <RoundedWidget isDivider title="Popular Posts" >
+      <RoundedWidget isDivider title="Popular Posts">
         <PopularPosts />
       </RoundedWidget>
 

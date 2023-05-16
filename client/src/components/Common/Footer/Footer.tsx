@@ -1,12 +1,9 @@
 import "./Footer.scss";
 
-import { IconButton, Typography } from "@mui/material";
-import { Link as RouterLink, useLocation } from "react-router-dom";
-
-import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import { Icons } from "../Icons/Icons";
+import { IconsListWidget } from "../../../widgets/IconsListWidget/IconsListWidget";
+import { Typography } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 export interface IFooterProps {}
 
@@ -14,60 +11,24 @@ export function Footer(props: IFooterProps) {
   const { pathname } = useLocation();
 
   if (pathname === "/signin") return <></>;
-  // if (pathname === "/edit") return <></>;
   if (pathname === "/signup") return <></>;
 
   return (
     <footer>
-      <div className="footer_social">
-        {links.map((items, key) => {
-          return (
-            <IconButton
-              key={key}
-              color="primary"
-              component={RouterLink}
-              target="_blank"
-              to={items.route}
-              className="footer_social_button"
-            >
-              {items.icon}
-            </IconButton>
-          );
-        })}
-      </div>
-
-      <Typography className="footer_copyright" variant="h5">
+      <Typography className="footer_copyright footer_items" variant="h5">
         Copyright ©2023 All rights reserved
       </Typography>
 
-      <div className="footer_term_policy">
-        <Typography>Terms & Conditions</Typography> /{" "}
-        <Typography>Privacy Policy</Typography>
+      <div className="footer_social footer_items">
+        <IconsListWidget />
+      </div>
+
+      <div className="footer_term_policy footer_items">
+        <button>
+          <Icons iconName="arrowup" />
+          Back to top
+        </button>
       </div>
     </footer>
   );
 }
-
-const links = [
-  {
-    id: 1,
-    icon: <FacebookIcon />,
-    route: "https://www.facebook.com/nghile.genji/",
-  },
-  {
-    id: 2,
-    icon: <LinkedInIcon />,
-    route:
-      "https://www.linkedin.com/in/ngh%E1%BB%8B-%C4%91%E1%BB%A9c-85a19b254/",
-  },
-  {
-    id: 3,
-    icon: <TwitterIcon />,
-    route: "",
-  },
-  {
-    id: 4,
-    icon: <YouTubeIcon />,
-    route: "",
-  },
-];

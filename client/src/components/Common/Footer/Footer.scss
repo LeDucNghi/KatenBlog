@@ -1,4 +1,6 @@
 @use "../../../themes/general.scss";
+@use "../../../themes/colors.scss";
+@use "../../../assets/styles/globalStyles.scss";
 
 footer {
     position: relative;
@@ -8,22 +10,45 @@ footer {
     width: 90%;
     height: 10em;
 
-    font-size: 15px;
     padding: 1.5em 0;
-    // background: red;
 
     border-top: 0.1em solid #ccc;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     .footer_term_policy {
         display: flex;
         justify-content: center;
+        transition: globalStyles.$transition;
 
-        margin: 1em auto;
+        button {
+            display: flex;
+            align-items: center;
+
+            background: transparent;
+
+            border: 0.1em solid colors.$light-grey;
+
+            padding: 0.5em 1em;
+            border-radius: 2em;
+
+            color: colors.$light-grey;
+
+            &:hover {
+                border-color: colors.$light-red;
+                color: colors.$light-red;
+
+                transition: globalStyles.$transition;
+            }
+        }
     }
 
     .footer_copyright {
         font-size: 1em;
         text-align: center;
+        color: colors.$light-grey;
     }
 
     .footer_social {
@@ -33,24 +58,5 @@ footer {
         margin: 0 auto;
 
         width: 50%;
-
-        // background: pink;
-
-        .footer_social_button {
-            width: 2em;
-            height: 2em;
-
-            margin: 0 0.1em;
-
-            color: #808080;
-
-            background: #fff;
-            border-radius: 1em;
-
-            &:hover {
-                color: #000;
-                transition: all 0.5s ease-in-out 0;
-            }
-        }
     }
 }
