@@ -1,29 +1,24 @@
 import "./ProfileHeader.scss";
 
-import { Icons } from "../Icons/Icons";
-import { IconsListWidget } from "../../../widgets/IconsListWidget/IconsListWidget";
+import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
+import { CustomDrawer } from "../Drawer/Drawer";
+import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
 import { NavbarWidget } from "../../../constants";
-import { getUserProfile } from "../../../features/auth/authThunk";
-import { logout } from "../../../features/auth/authSlice";
-import { useAppDispatch } from "../../../app/hooks";
-import { useEffect } from "react";
+import { selectUserProfile } from "../../../features/auth/authSlice";
+import { useAppSelector } from "../../../app/hooks";
+import { useState } from "react";
 
 export interface IProfileHeaderProps {}
 
 export function ProfileHeader(props: IProfileHeaderProps) {
-  const dispatch = useAppDispatch();
-  const token = JSON.parse(localStorage.getItem("token")!);
+  const userProfile = useAppSelector(selectUserProfile);
 
-  useEffect(() => {
-    if (!token) {
-      dispatch(logout());
-    }
-  }, [dispatch, token]);
+  const [open, setOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    dispatch(getUserProfile());
-  }, [dispatch]);
+  const onclick = () => {
+    setOpen(!open);
+  };
 
   return (
     <section className="profile_section">
@@ -39,25 +34,31 @@ export function ProfileHeader(props: IProfileHeaderProps) {
 
             <div className="main_user header_main_items">
               <div className="user_avatar">
-                <img src={Images.avatar} alt="" />
+                <img
+                  src={
+                    userProfile && userProfile.avatar
+                      ? userProfile.avatar
+                      : Images.avatar
+                  }
+                  alt=""
+                />
               </div>
 
-              <h2 className="user_name">Katen</h2>
+              <h2 className="user_name">
+                {userProfile ? userProfile.fullname : "Katen"}{" "}
+              </h2>
 
               <div className="user_slogan">
                 Professional Writer & Personal Blogger
               </div>
             </div>
 
-            <div className="main_button header_main_items">
-              <button className="icon_button">
-                <Icons iconName="search" />
-              </button>
-
-              <button className="icon_button">
-                <Icons iconName="burger" />
-              </button>
-            </div>
+            <ButtonsListWidget
+              style={{
+                width: "30%",
+              }}
+              onclick={onclick}
+            />
           </div>
         </div>
 
@@ -77,7 +78,7 @@ export function ProfileHeader(props: IProfileHeaderProps) {
       </div>
 
       <div className="profile_about">
-        <h2>I'm Katen Doe.</h2>
+        <h2>I'm {userProfile ? userProfile.fullname : "Katen"}.</h2>
         <p>
           Hello, I’m a content writer who is fascinated by content fashion,
           celebrity and lifestyle. She helps clients bring the right content to
@@ -89,6 +90,15 @@ export function ProfileHeader(props: IProfileHeaderProps) {
       <div className="profile_foot">
         <img src={Images.wave} alt="" />
       </div>
+
+      <CustomDrawer
+        width={300}
+        anchor="right"
+        open={open}
+        close={() => setOpen(!open)}
+      >
+        <h1>Profile drawer</h1>
+      </CustomDrawer>
     </section>
   );
 }

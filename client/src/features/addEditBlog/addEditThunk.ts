@@ -136,7 +136,6 @@ export const handleGetPostComment =
 export const handlePostComment =
   (id: string, comment: string): AppThunk =>
   async (dispatch, getState) => {
-    // e.preventDefault();
 
     const listComment: Comment[] = getState().post.commentList;
     const profile: Profile | null = getState().auth.userProfile;
@@ -189,3 +188,11 @@ export const handlePostComment =
       }
     }
   };
+
+export const handleGetUserPost = (id: string | number, type: string) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+}

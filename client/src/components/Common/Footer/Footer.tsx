@@ -1,7 +1,7 @@
 import "./Footer.scss";
 
 import { Icons } from "../Icons/Icons";
-import { IconsListWidget } from "../../../widgets/IconsListWidget/IconsListWidget";
+import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 

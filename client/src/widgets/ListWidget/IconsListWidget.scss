@@ -4,6 +4,8 @@
 .icons_widget {
     position: relative;
 
+    width: 100%;
+
     @include general.flexCenter;
 
     margin: 0 auto;

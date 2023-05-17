@@ -74,6 +74,11 @@ const postsApi = {
       },
     });
   },
+
+  getUserPost(id: string | number, type: string): Promise<any> {
+    const url = `/posts/userpostlist/${id}?type=${type}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default postsApi;

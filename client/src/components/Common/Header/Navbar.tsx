@@ -2,8 +2,9 @@ import "./Header.scss";
 
 import { BREAK_POINTS_NUMBER, NavbarWidget } from "../../../constants";
 
+import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
 import { Icons } from "../Icons/Icons";
-import { IconsListWidget } from "../../../widgets/IconsListWidget/IconsListWidget";
+import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
 import { useNavigate } from "react-router-dom";
 import { useWindowSize } from "../../../hooks/useWindowSize";
@@ -48,20 +49,7 @@ export function Navbar({ open, setOpen }: INavbarProps) {
           {windowInnerWidth > BREAK_POINTS_NUMBER.sm && <IconsListWidget />}
 
           <div className="navbar_buttons">
-            <button className="icon_button" onClick={() => navigate(`/search`)}>
-              <Icons fontSize="medium" iconName="search" />
-            </button>
-
-            <button className="icon_button" onClick={onclick}>
-              <Icons
-                fontSize="medium"
-                iconName={
-                  windowInnerWidth < BREAK_POINTS_NUMBER.sm
-                    ? "burger"
-                    : "person"
-                }
-              />
-            </button>
+            <ButtonsListWidget onclick={onclick} style={{ fontSize: "12px" }} />
           </div>
         </div>
       </div>

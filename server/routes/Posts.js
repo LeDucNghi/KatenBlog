@@ -13,6 +13,7 @@ const {
   findTrendingList,
 } = require("../controllers/Post");
 const { posts } = require("../models");
+const { handlePaginate } = require("../services/Posts/Pagination");
 
 // GET ALL POST
 router.get("/getallpost", getAllPost);
@@ -57,13 +58,16 @@ router.get("/userpostlist/:id", async (req, res) => {
     });
   } else {
     if (postListType === "all") {
-      res.status(200).json({ postList: userPostList });
-    } else if(postListType === "popular") {
+      const paginatedResults = handlePaginate(req, userPostList);
+      res.status(200).json({ ...paginatedResults });
+    } else if (postListType === "popular") {
       const popularList = await userPostList.sort((a, b) => {
         return b.visit - a.visit;
       });
 
-      res.status(200).json({ postList: popularList });
+      const paginatedResults = handlePaginate(req, popularList);
+
+      res.status(200).json({ ...paginatedResults });
     }
   }
 });

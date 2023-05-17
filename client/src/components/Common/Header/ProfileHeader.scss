@@ -57,6 +57,17 @@
                         font-weight: 700;
                         font-size: 2em;
                     }
+
+                    .user_avatar {
+                        width: 5.3em;
+                        height: 5.3em;
+
+                        img {
+                            @include general.imageCover;
+
+                            border-radius: 50%;
+                        }
+                    }
                 }
 
                 .main_button {

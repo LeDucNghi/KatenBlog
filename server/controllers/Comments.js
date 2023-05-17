@@ -1,4 +1,5 @@
 const { comments, users } = require("../models");
+const { handlePaginate } = require("../services/Posts/Pagination");
 
 // UPLOAD NEW COMMENT
 exports.postNewComment = async (req, res) => {
@@ -26,25 +27,7 @@ exports.getPostComment = async (req, res) => {
     },
   });
 
-  const page = parseInt(req.query.page);
-  const limit = parseInt(req.query.limit);
-  const totalRows = comment.length;
-  const totalPages = Math.ceil(totalRows / limit);
+  const paginatedResults = handlePaginate(req, comment);
 
-  const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
-
-  const data = {};
-
-  data.pagination = {
-    page,
-    limit,
-    totalRows,
-    totalPages,
-  };
-
-  data.data = comment.slice(startIndex, endIndex);
-  res.paginatedResults = data;
-
-  res.json(res.paginatedResults);
+  res.json(paginatedResults);
 };

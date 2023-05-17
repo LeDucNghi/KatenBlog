@@ -9,6 +9,7 @@
 
     li {
         @include widgets.meta_list;
+        @include general.text_overflow;
 
         .meta_author {
             width: 2em;
