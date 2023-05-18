@@ -8,7 +8,6 @@ import {
 } from "../../features/addEditBlog/addEditSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
-import { BlogsSample } from "../../mock";
 import { InnerWrapper } from "../../widgets/InnerWrapper/InnerWrapper";
 import { UserBlogList } from "../../features/profile/components/UserBlogList/UserBlogList";
 import { handleGetUserPost } from "../../features/addEditBlog/addEditThunk";
@@ -21,10 +20,6 @@ export default function UserProfile(props: IUserProfileProps) {
   const dispatch = useAppDispatch();
   const paginate = useAppSelector(selectPaginate);
   const userBlogList = useAppSelector(selectUserPostList);
-  console.log(
-    "🚀 ~ file: UserProfile.tsx:21 ~ UserProfile ~ userBlogList:",
-    userBlogList
-  );
 
   React.useEffect(() => {
     dispatch(handleGetUserPost(id!, "popular", paginate));
@@ -33,7 +28,7 @@ export default function UserProfile(props: IUserProfileProps) {
   return (
     <div className="profile_main_content">
       <div className="profile_container">
-        <UserBlogList userBlogList={BlogsSample} id={`${id}`} />
+        <UserBlogList userBlogList={userBlogList} id={`${id}`} />
 
         <InnerWrapper width="30%" />
       </div>

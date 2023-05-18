@@ -176,6 +176,12 @@ const findUserPost = async (req, res) => {
 
   const userPostList = await posts.findAll({
     where: { userId: userId },
+    include: {
+      model: users,
+      attributes: {
+        exclude: ["password", "createdAt", "updatedAt", "username"],
+      },
+    },
   });
 
   // this has 2 types of post lists to response

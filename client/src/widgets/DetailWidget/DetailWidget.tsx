@@ -4,6 +4,7 @@ import * as React from "react";
 
 import { Icons } from "../../components/Common/Icons/Icons";
 import { Post } from "../../models";
+import moment from "moment";
 
 export interface IDetailWidgetProps {
   isThumbedNail?: boolean;
@@ -42,7 +43,7 @@ export function DetailWidget({
 
         <ul className="thumbnail_items thumbnail_meta_list meta_list">
           <li>{items.user?.fullname} </li>
-          <li>{items.createdAt} </li>
+          <li>{moment(items.createdAt).format("LL")} </li>
         </ul>
       </div>
     );
@@ -57,7 +58,9 @@ export function DetailWidget({
       >
         <div className="detail_post_title post_title">{items.title}</div>
 
-        <div className="detail_createdAt">{items.createdAt}</div>
+        <div className="detail_createdAt">
+          {moment(items.createdAt).format("LL")}
+        </div>
       </div>
     );
   else if (direction === "vertical" && !isThumbedNail)
@@ -70,7 +73,7 @@ export function DetailWidget({
             </div>
             {items.user?.fullname}{" "}
           </li>
-          <li>{items.createdAt} </li>
+          <li>{moment(items.createdAt).format("LL")} </li>
         </ul>
 
         <div className="detail_content widget_items">
@@ -91,7 +94,7 @@ export function DetailWidget({
             {items.user?.fullname}{" "}
           </li>
           <li>{items.categories}</li>
-          <li>{items.createdAt}</li>
+          <li>{moment(items.createdAt).format("LL")}</li>
         </ul>
 
         <div className="detail_content widget_items">
