@@ -6,7 +6,6 @@
     position: relative;
 
     width: 100%;
-    // height: 63em;
 
     @include widgets.background_image("../../../assets/images/user-bg.jpg");
 
@@ -118,10 +117,9 @@
     .profile_about {
         position: relative;
 
-        margin: 4em auto;
+        margin: 5em auto;
 
-        width: 47em;
-        height: 23em;
+        width: 50%;
 
         display: flex;
         justify-content: flex-end;

@@ -7,6 +7,7 @@ import { KatenBlogItems } from "../../../../components/Common/BlogItems/KatenBlo
 import { Post } from "../../../../models";
 import { handleGetUserPost } from "../../../addEditBlog/addEditThunk";
 import { selectPaginate } from "../../../addEditBlog/addEditSlice";
+import { useNavigate } from "react-router-dom";
 
 export interface IUserBlogListProps {
   userBlogList: Post[];
@@ -17,6 +18,7 @@ export function UserBlogList({ userBlogList, id }: IUserBlogListProps) {
   const userBlogListPaginate = useAppSelector(selectPaginate);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handlePageChange = (value: number) => {
     dispatch(
@@ -39,6 +41,7 @@ export function UserBlogList({ userBlogList, id }: IUserBlogListProps) {
                 direction="vertical"
                 isThumbedNail={false}
                 showBadge={false}
+                onclick={() => navigate(`/post/${blogs.id}`)}
               />
             </div>
           );

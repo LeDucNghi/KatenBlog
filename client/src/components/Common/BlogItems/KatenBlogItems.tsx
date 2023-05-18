@@ -19,6 +19,7 @@ export interface IKatenBlogItemsProps {
   isThumbedNail?: boolean;
   fontSize?: string;
   showBadge: boolean;
+  onclick?: any;
 }
 
 export function KatenBlogItems({
@@ -30,6 +31,7 @@ export function KatenBlogItems({
   fontSize,
   style,
   showBadge,
+  onclick,
 }: IKatenBlogItemsProps) {
   return (
     <Paper
@@ -50,6 +52,7 @@ export function KatenBlogItems({
         style={{
           fontSize: fontSize,
         }}
+        onClick={onclick}
       >
         <div
           className={`${

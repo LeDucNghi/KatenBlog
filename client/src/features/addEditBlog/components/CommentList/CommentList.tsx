@@ -17,6 +17,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
+import { RoundedWidget } from "../../../../widgets/RoundedWidget/RoundedWidgets";
 import { handleGetPostComment } from "../../addEditThunk";
 import moment from "moment";
 import { selectPaginate } from "../../addEditSlice";
@@ -50,77 +51,83 @@ export function CommentList({ id, commentList }: ICommentListProps) {
   };
 
   return (
-    <div className="comment_list_container">
-      <Typography className="comment_list_title">
-        {commentList!.length < 10
-          ? `0${commentList!.length}`
-          : `${commentList!.length}`}{" "}
-        Comments
-      </Typography>
+    <RoundedWidget
+      title={
+        <div>
+          {commentList!.length < 10
+            ? `0${commentList!.length}`
+            : `${commentList!.length}`}{" "}
+          Comments
+        </div>
+      }
+      isDivider
+      anchorTitle="left"
+    >
+      <div className="comment_list_container">
+        <List dense={false}>
+          {commentList?.length === 0 ? (
+            <div className="comment_list_empty">
+              <div className="comment_list_empty_img">
+                <img src={Images.notask} alt="" />
+              </div>
 
-      <List dense={false}>
-        {commentList?.length === 0 ? (
-          <div className="comment_list_empty">
-            <div className="comment_list_empty_img">
-              <img src={Images.notask} alt="" />
+              <p className="comment_list_empty_title">
+                There are currently no reviews yet
+              </p>
             </div>
-
-            <p className="comment_list_empty_title">
-              There are currently no reviews yet
-            </p>
-          </div>
-        ) : (
-          commentList!.map((items, key) => {
-            return (
-              <Paper key={key} elevation={5} className="comment_items">
-                <ListItem
-                  secondaryAction={
-                    <>
-                      <IconButton
-                        onClick={handleLikePost}
-                        edge="end"
-                        aria-label="delete"
-                      >
-                        {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                      </IconButton>
-                      <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon />
-                      </IconButton>
-                    </>
-                  }
-                >
-                  <ListItemAvatar>
-                    <Avatar src={items.user?.avatar} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={
+          ) : (
+            commentList!.map((items, key) => {
+              return (
+                <Paper key={key} elevation={5} className="comment_items">
+                  <ListItem
+                    secondaryAction={
                       <>
-                        <span className="comment_list_username">
-                          {items.user?.fullname}{" "}
-                        </span>{" "}
-                        -{" "}
-                        <span className="comment_list_time">
-                          {moment(items.createdAt).startOf("day").fromNow()}
-                        </span>
+                        <IconButton
+                          onClick={handleLikePost}
+                          edge="end"
+                          aria-label="delete"
+                        >
+                          {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                        </IconButton>
+                        <IconButton edge="end" aria-label="delete">
+                          <DeleteIcon />
+                        </IconButton>
                       </>
                     }
-                    secondary={items.content}
-                  />
-                </ListItem>
-              </Paper>
-            );
-          })
-        )}
-      </List>
+                  >
+                    <ListItemAvatar>
+                      <Avatar src={items.user?.avatar} />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={
+                        <>
+                          <span className="comment_list_username">
+                            {items.user?.fullname}{" "}
+                          </span>{" "}
+                          -{" "}
+                          <span className="comment_list_time">
+                            {moment(items.createdAt).startOf("day").fromNow()}
+                          </span>
+                        </>
+                      }
+                      secondary={items.content}
+                    />
+                  </ListItem>
+                </Paper>
+              );
+            })
+          )}
+        </List>
 
-      {commentList?.length !== 0 && (
-        <div className="comment_list_paginate">
-          <CustomPagination
-            paginate={commentListPaginate}
-            handlePageChange={handlePageChange}
-          />
-        </div>
-      )}
-    </div>
+        {commentList?.length !== 0 && (
+          <div className="comment_list_paginate">
+            <CustomPagination
+              paginate={commentListPaginate}
+              handlePageChange={handlePageChange}
+            />
+          </div>
+        )}
+      </div>
+    </RoundedWidget>
   );
 }

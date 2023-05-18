@@ -3,26 +3,40 @@ import "./Header.scss";
 import { BREAK_POINTS_NUMBER, NavbarWidget } from "../../../constants";
 
 import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
-import { Icons } from "../Icons/Icons";
 import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
+import { selectIsLoggedIn } from "../../../features/auth/authSlice";
+import { useAppSelector } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 
 export interface INavbarProps {
-  open: boolean;
-  setOpen: any;
+  openDrawer: boolean;
+  setOpenDrawer: any;
+
+  openMenu: boolean;
+  setOpenMenu: any;
 }
 
-export function Navbar({ open, setOpen }: INavbarProps) {
+export function Navbar({
+  openDrawer,
+  setOpenDrawer,
+  openMenu,
+  setOpenMenu,
+}: INavbarProps) {
   const navigate = useNavigate();
   const { windowInnerWidth } = useWindowSize();
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const onclick = () => {
     if (windowInnerWidth <= BREAK_POINTS_NUMBER.sm) {
-      setOpen(!open);
+      setOpenDrawer(!openDrawer);
     } else {
-      navigate(`/signin`);
+      if (isLoggedIn) {
+        setOpenMenu(!openMenu);
+      } else {
+        navigate(`/signin`);
+      }
     }
   };
 

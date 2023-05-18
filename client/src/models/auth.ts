@@ -36,3 +36,10 @@ export interface AuthState {
   isLoggedIn: boolean;
   userType: UserType | null | undefined;
 }
+
+export interface AccountMenuProps {
+  id: string | number;
+  name: string;
+  route: string;
+  icon: string;
+}

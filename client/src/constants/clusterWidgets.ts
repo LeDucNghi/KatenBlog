@@ -105,3 +105,31 @@ export const BlogTopicWidget = [
     topicContent: BlogsSample,
   },
 ];
+
+export const AccountMenuWidget = [
+  {
+    id: 1,
+    name: "Profile",
+    route: "/profile/1",
+    icon: "AccountCircleIcon",
+  },
+  {
+    id: 2,
+    name: "Your Blogs",
+    route: "/about",
+    icon: "LibraryBooksIcon",
+  },
+  {
+    id: 3,
+    name: "Settings",
+    route: "/",
+    icon: "Settings",
+  },
+
+  {
+    id: 4,
+    name: "Logout",
+    route: "/",
+    icon: "Logout",
+  },
+];

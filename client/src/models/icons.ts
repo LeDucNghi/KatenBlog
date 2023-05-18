@@ -14,12 +14,17 @@ export type IconName =
   | "share"
   | "option"
   | "person"
-  | "arrowup";
+  | "arrowup"
+  | "book"
+  | "setting"
+  | "logout"
+  | "avatar";
 
 export type IconsFontSize = "large" | "medium" | "small";
 
 export interface IIconsProps {
-  iconName: IconName;
+  icon: string;
+  iconName?: IconName;
   className?: string;
   fontSize?: IconsFontSize;
   style?: React.CSSProperties;

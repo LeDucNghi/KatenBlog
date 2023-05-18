@@ -3,6 +3,8 @@ import "./Header.scss";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
+import AccountMenu from "./AccountMenu";
+import { AccountMenuWidget } from "../../../constants";
 import { CustomDrawer } from "../Drawer/Drawer";
 import { HeaderDrawer } from "./Drawer";
 import { Navbar } from "./Navbar";
@@ -21,7 +23,8 @@ export function Header(props: IHeaderProps) {
 
   const token = JSON.parse(localStorage.getItem("token")!);
 
-  const [open, setOpen] = useState<boolean>(false);
+  const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   useEffect(() => {
     if (!token) {
@@ -44,16 +47,27 @@ export function Header(props: IHeaderProps) {
 
   return (
     <div className="header_container">
-      <Navbar open={open} setOpen={setOpen} />
+      <Navbar
+        openMenu={openMenu}
+        setOpenMenu={setOpenMenu}
+        openDrawer={openDrawer}
+        setOpenDrawer={setOpenDrawer}
+      />
 
       <CustomDrawer
         width={300}
-        open={open}
-        close={() => setOpen(!open)}
+        open={openDrawer}
+        close={() => setOpenDrawer(!openDrawer)}
         anchor="right"
       >
         <HeaderDrawer />
       </CustomDrawer>
+
+      <AccountMenu
+        listItems={AccountMenuWidget}
+        open={openMenu}
+        close={() => setOpenMenu(!openMenu)}
+      />
     </div>
   );
 }

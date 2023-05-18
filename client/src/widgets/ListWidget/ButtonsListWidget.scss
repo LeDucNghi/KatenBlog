@@ -12,5 +12,11 @@
         @include general.flexCenter;
 
         @include widgets.icon_buttons;
+
+        img {
+            @include general.imageCover;
+
+            border-radius: 50%;
+        }
     }
 }
