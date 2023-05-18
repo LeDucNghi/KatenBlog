@@ -1,34 +1,56 @@
 import "./UserBlogList.scss";
 
-import * as React from "react";
+import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 
-import { BlogsSample } from "../../../../mock";
 import { CustomPagination } from "../../../../components/Common/Pagination/Pagination";
 import { KatenBlogItems } from "../../../../components/Common/BlogItems/KatenBlogItems";
 import { Post } from "../../../../models";
+import { handleGetUserPost } from "../../../addEditBlog/addEditThunk";
+import { selectPaginate } from "../../../addEditBlog/addEditSlice";
 
 export interface IUserBlogListProps {
   userBlogList: Post[];
+  id: string;
 }
 
-export function UserBlogList({ userBlogList }: IUserBlogListProps) {
-  return (
-    <div className="blog_list">
-      {BlogsSample.map((blogs, key) => {
-        return (
-          <div className="blog_items" key={key}>
-            <KatenBlogItems
-              key={key}
-              items={blogs}
-              direction="vertical"
-              isThumbedNail={false}
-              showBadge={false}
-            />
-          </div>
-        );
-      })}
+export function UserBlogList({ userBlogList, id }: IUserBlogListProps) {
+  const userBlogListPaginate = useAppSelector(selectPaginate);
 
-      {/* <CustomPagination /> */}
+  const dispatch = useAppDispatch();
+
+  const handlePageChange = (value: number) => {
+    dispatch(
+      handleGetUserPost(id, "popular", {
+        page: value,
+        limit: userBlogListPaginate.limit,
+      })
+    );
+  };
+
+  return (
+    <div className="blog_list_wrapper">
+      <div className="blog_list">
+        {userBlogList.map((blogs, key) => {
+          return (
+            <div className="blog_items" key={key}>
+              <KatenBlogItems
+                key={key}
+                items={blogs}
+                direction="vertical"
+                isThumbedNail={false}
+                showBadge={false}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="blog_list_paginate">
+        <CustomPagination
+          paginate={userBlogListPaginate}
+          handlePageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 }

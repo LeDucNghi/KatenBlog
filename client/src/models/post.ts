@@ -46,6 +46,7 @@ export interface PostState {
   imageFile: string | File | null | undefined;
 
   postList: Post[];
+  userPostList: Post[];
   postData: Post | null | undefined;
 
   commentList: Comment[];

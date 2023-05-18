@@ -10,8 +10,8 @@ import {
 } from "../../features/addEditBlog/addEditThunk";
 import {
   selectCommentList,
-  selectCommentListPaginate,
   selectFetchPostFailed,
+  selectPaginate,
   selectPostData,
 } from "../../features/addEditBlog/addEditSlice";
 import { selectGetUserType, setUserType } from "../../features/auth/authSlice";
@@ -42,7 +42,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
   const userType = useAppSelector(selectGetUserType);
   const isError = useAppSelector(selectFetchPostFailed);
   const commentList = useAppSelector(selectCommentList);
-  const commentListPaginate = useAppSelector(selectCommentListPaginate);
+  const commentListPaginate = useAppSelector(selectPaginate);
 
   useEffect(() => {
     if (pathname === "/add") {

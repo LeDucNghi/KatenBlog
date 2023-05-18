@@ -6,7 +6,7 @@
     position: relative;
 
     width: 100%;
-    height: 63em;
+    // height: 63em;
 
     @include widgets.background_image("../../../assets/images/user-bg.jpg");
 
@@ -173,12 +173,13 @@
 
         bottom: 1em;
 
-        background: transparent;
         height: 16em;
 
         img {
             display: inline;
             fill: #ffffff;
+
+            margin-bottom: 5em;
         }
     }
 }

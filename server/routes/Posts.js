@@ -11,6 +11,7 @@ const {
   likePost,
   increaseBlogView,
   findTrendingList,
+  findUserPost,
 } = require("../controllers/Post");
 const { posts } = require("../models");
 const { handlePaginate } = require("../services/Posts/Pagination");
@@ -40,37 +41,7 @@ router.put("/view/:id", increaseBlogView);
 router.get("/trending", findTrendingList);
 
 // USER's POST
-router.get("/userpostlist/:id", async (req, res) => {
-  const userId = req.params.id;
-  const postListType = req.query.type;
-
-  const userPostList = await posts.findAll({
-    where: { userId: userId },
-  });
-
-  // this has 2 types of post lists to response
-  // 1st is all post : reponse all user's post list
-  // 2nd is the popular post : response popular's post list
-
-  if (!userPostList) {
-    res.status(404).json({
-      message: "Not found any blog or this user has not shared any blog yet🤔",
-    });
-  } else {
-    if (postListType === "all") {
-      const paginatedResults = handlePaginate(req, userPostList);
-      res.status(200).json({ ...paginatedResults });
-    } else if (postListType === "popular") {
-      const popularList = await userPostList.sort((a, b) => {
-        return b.visit - a.visit;
-      });
-
-      const paginatedResults = handlePaginate(req, popularList);
-
-      res.status(200).json({ ...paginatedResults });
-    }
-  }
-});
+router.get("/userpostlist/:id", findUserPost);
 
 // test
 router.get("/test/:id", async (req, res) => {

@@ -7,7 +7,8 @@ export interface PaginationParams {
 
 export interface PostListRes<T> {
   data: {
-    postList: T[];
+    data: T[];
+    pagination?: PaginationParams;
   };
 }
 

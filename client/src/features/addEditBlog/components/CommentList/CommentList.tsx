@@ -19,7 +19,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import { handleGetPostComment } from "../../addEditThunk";
 import moment from "moment";
-import { selectCommentListPaginate } from "../../addEditSlice";
+import { selectPaginate } from "../../addEditSlice";
 
 export interface ICommentListProps {
   id: string;
@@ -32,7 +32,7 @@ export function CommentList({ id, commentList }: ICommentListProps) {
     commentList
   );
   const dispatch = useAppDispatch();
-  const commentListPaginate = useAppSelector(selectCommentListPaginate);
+  const commentListPaginate = useAppSelector(selectPaginate);
 
   const [isLiked, setIsLiked] = React.useState<boolean>(false);
 

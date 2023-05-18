@@ -1,13 +1,14 @@
 import { Comment, PaginationParams, Post, Profile } from "../../models";
 import {
   fetchCommentList,
-  fetchCommentListPagination,
   fetchCommentListSuccess,
+  fetchPagination,
   fetchPostData,
   fetchPostDataFailed,
   fetchPostDataSuccess,
   fetchPostList,
   fetchPostListSuccess,
+  fetchUserPostList,
   setPostingStatus,
 } from "./addEditSlice";
 
@@ -21,10 +22,10 @@ export const handleGetAllPost = (): AppThunk => async (dispatch, getState) => {
   dispatch(fetchPostList());
   try {
     const {
-      data: { postList },
+      data: { data },
     } = await postsApi.getAll();
 
-    dispatch(fetchPostListSuccess(postList));
+    dispatch(fetchPostListSuccess(data));
   } catch (error) {
     console.log(
       "🚀 ~ file: addEditThunk.ts:19 ~ handleGetAllPost ~ error:",
@@ -116,6 +117,7 @@ export const addEditPost =
     }
   };
 
+// POST'S COMMENT
 export const handleGetPostComment =
   (id: string, params: PaginationParams): AppThunk =>
   async (dispatch, getState) => {
@@ -124,7 +126,7 @@ export const handleGetPostComment =
       const res = await commentApi.getComment(id, params);
 
       dispatch(fetchCommentListSuccess(res.data.data));
-      dispatch(fetchCommentListPagination(res.data.pagination));
+      dispatch(fetchPagination(res.data.pagination));
     } catch (error) {
       console.log(
         "🚀 ~ file: Comment.tsx:35 ~ handleGetPostComment ~ error",
@@ -133,10 +135,10 @@ export const handleGetPostComment =
     }
   };
 
+// POST NEW COMMENT
 export const handlePostComment =
   (id: string, comment: string): AppThunk =>
   async (dispatch, getState) => {
-
     const listComment: Comment[] = getState().post.commentList;
     const profile: Profile | null = getState().auth.userProfile;
 
@@ -189,10 +191,23 @@ export const handlePostComment =
     }
   };
 
-export const handleGetUserPost = (id: string | number, type: string) => {
-  try {
-    
-  } catch (error) {
-    
-  }
-}
+// USER'S POST
+export const handleGetUserPost =
+  (
+    id: string | number,
+    type: string,
+    { page, limit }: PaginationParams
+  ): AppThunk =>
+  async (dispatch, getState) => {
+    try {
+      const res = await postsApi.getUserPost(id, type, { page, limit });
+
+      dispatch(fetchUserPostList(res.data.data));
+      dispatch(fetchPagination(res.data.pagination!));
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: addEditThunk.ts:199 ~ handleGetUserPost ~ error:",
+        error
+      );
+    }
+  };

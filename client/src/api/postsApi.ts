@@ -1,4 +1,4 @@
-import { Post, PostData, PostListRes } from "../models";
+import { PaginationParams, Post, PostData, PostListRes } from "../models";
 
 import axiosClient from "./axiosClient";
 
@@ -75,8 +75,13 @@ const postsApi = {
     });
   },
 
-  getUserPost(id: string | number, type: string): Promise<any> {
-    const url = `/posts/userpostlist/${id}?type=${type}`;
+  getUserPost(
+    id: string | number,
+    type: string,
+    { page, limit }: PaginationParams
+  ): Promise<PostListRes<Post>> {
+    const url = `/posts/userpostlist/${id}?page=${page}&limit=${limit}&type=${type}`;
+    // console.log("🚀 ~ file: postsApi.ts:85 ~ url:", url);
     return axiosClient.get(url);
   },
 };

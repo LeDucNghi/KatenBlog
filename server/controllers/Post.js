@@ -1,4 +1,5 @@
 const { posts, likes, users } = require("../models");
+const { handlePaginate } = require("../services/Posts/Pagination");
 
 const { uploadImage } = require("../services/Posts/imageUpload");
 
@@ -168,6 +169,40 @@ const findTrendingList = async (req, res) => {
   res.status(200).json({ trendingList });
 };
 
+// USER'S POST
+const findUserPost = async (req, res) => {
+  const userId = req.params.id;
+  const postListType = req.query.type;
+
+  const userPostList = await posts.findAll({
+    where: { userId: userId },
+  });
+
+  // this has 2 types of post lists to response
+  // 1st is all post : reponse all user's post list
+  // 2nd is the popular post : response popular's post list
+
+  if (!userPostList) {
+    res.status(404).json({
+      message: "Not found any blog or this user has not shared any blog yet🤔",
+    });
+  } else {
+    if (postListType === "all") {
+      const paginatedResults = await handlePaginate(req, userPostList);
+
+      res.status(200).json({ ...paginatedResults });
+    } else if (postListType === "popular") {
+      const popularList = await userPostList.sort((a, b) => {
+        return b.visit - a.visit;
+      });
+
+      const paginatedResults = await handlePaginate(req, popularList);
+
+      res.status(200).json({ ...paginatedResults });
+    }
+  }
+};
+
 module.exports = {
   getAllPost,
   createPost,
@@ -178,4 +213,5 @@ module.exports = {
   getDetailImage,
   increaseBlogView,
   findTrendingList,
+  findUserPost,
 };
