@@ -2,8 +2,8 @@ import "./Body.scss";
 
 import * as React from "react";
 
+import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
 import { BlogsSample } from "../../../mock";
-import { KatenBlogItems } from "../../../components/Common/BlogItems/KatenBlogItems";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
 
 export interface IEditorPickProps {}
@@ -20,7 +20,7 @@ export function EditorPick(props: IEditorPickProps) {
         <div className="side">
           {BlogsSample.slice(0, 1).map((blogs, key) => {
             return (
-              <KatenBlogItems
+              <BlogItems
                 key={key}
                 direction="vertical"
                 showBadge={false}
@@ -33,7 +33,7 @@ export function EditorPick(props: IEditorPickProps) {
         <div className="side">
           {BlogsSample.slice(0, 4).map((blogs, key) => {
             return (
-              <KatenBlogItems
+              <BlogItems
                 key={key}
                 direction="horizontal"
                 shape="square"

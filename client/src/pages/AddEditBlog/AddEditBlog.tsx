@@ -80,8 +80,6 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
       .required("Let us know your blog's content 🤔"),
   });
 
-  // if (isLoading) return <Loading />;
-
   if (isError?.isError)
     return (
       <NotFound

@@ -2,6 +2,8 @@ import "./InnerWrapper.scss";
 
 import * as React from "react";
 
+import { useLocation, useParams } from "react-router-dom";
+
 import { AboutWidget } from "../AboutWidget/AboutWidget";
 import { BlogTopicWidget } from "../../constants";
 import { CustomAccordion } from "../../components/Common/Accordion/CustomAccordion";
@@ -16,12 +18,16 @@ export interface IInnerWrapperProps {
 
 export function InnerWrapper({ width }: IInnerWrapperProps) {
   const userProfile = useAppSelector(selectUserProfile);
+  const { pathname } = useLocation();
+  const { id } = useParams();
 
   return (
     <div className="inner_wrapper" style={{ width: width }}>
-      <RoundedWidget>
-        <AboutWidget user={userProfile!} />
-      </RoundedWidget>
+      {pathname === `/profile/${id}` && (
+        <RoundedWidget>
+          <AboutWidget user={userProfile!} />
+        </RoundedWidget>
+      )}
 
       <RoundedWidget isDivider title="Popular Posts">
         <PopularPosts />

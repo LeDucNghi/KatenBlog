@@ -142,18 +142,45 @@ export const comments = [...Array(3)].map((_, index) => ({
 }));
 
 export const BlogsData = [
-  ...Array(4).map((index) => ({
-    id: faker.datatype.uuid(),
+  ...Array(10).map((index) => ({
+    id: faker.helpers.arrayElement([
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+    ]),
     title: "THIS IS MY THIRD BLOG",
     subTitle: "HOPE YOU GUYS ENJOY IT AGAIN & AGAIN",
     image: faker.image.image(),
-    categories: [
+    categories: faker.helpers.arrayElement([
       "LifeStyle",
       "Inspiration",
       "Fashion",
       "Politic",
       "Trending",
       "Culture",
-    ],
+    ]),
+    user: {
+      id: faker.helpers.arrayElement([
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+      ]),
+      fullname: faker.name.fullName(),
+      avatar: faker.image.avatar(),
+    },
   })),
 ];

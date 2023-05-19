@@ -13,13 +13,16 @@ export function RelatedBlogs(props: IRelatedBlogsProps) {
       <Typography className="foot_title">RELATED ARTICLES</Typography>
 
       <Box className="foot_blogs_related">
-        {BlogsSample.slice(0, 4).map((items, key) => {
+        {BlogsSample.slice(0, 4).map((blogs, key) => {
           return (
             <BlogItems
               direction="vertical"
-              items={items}
+              items={blogs}
               key={key}
-              route={`/post/${items.id}`}
+              showBadge={false}
+              style={{
+                margin: "0 1em",
+              }}
             />
           );
         })}

@@ -23,7 +23,7 @@ export type IconName =
 export type IconsFontSize = "large" | "medium" | "small";
 
 export interface IIconsProps {
-  icon: string;
+  icon?: string;
   iconName?: IconName;
   className?: string;
   fontSize?: IconsFontSize;

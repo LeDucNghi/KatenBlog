@@ -2,8 +2,8 @@ import "./UserBlogList.scss";
 
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 
+import { BlogItems } from "../../../../components/Common/BlogItems/BlogItems";
 import { CustomPagination } from "../../../../components/Common/Pagination/Pagination";
-import { KatenBlogItems } from "../../../../components/Common/BlogItems/KatenBlogItems";
 import { Post } from "../../../../models";
 import { handleGetUserPost } from "../../../addEditBlog/addEditThunk";
 import { selectPaginate } from "../../../addEditBlog/addEditSlice";
@@ -35,7 +35,7 @@ export function UserBlogList({ userBlogList, id }: IUserBlogListProps) {
         {userBlogList.map((blogs, key) => {
           return (
             <div className="blog_items" key={key}>
-              <KatenBlogItems
+              <BlogItems
                 key={key}
                 items={blogs}
                 direction="vertical"

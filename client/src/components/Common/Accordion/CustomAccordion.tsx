@@ -8,7 +8,7 @@ import MuiAccordionSummary, {
 } from "@mui/material/AccordionSummary";
 
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
-import { KatenBlogItems } from "../BlogItems/KatenBlogItems";
+import { BlogItems } from "../BlogItems/BlogItems";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { PostTopicWidget } from "../../../models";
 import Typography from "@mui/material/Typography";
@@ -51,7 +51,7 @@ export function CustomAccordion({ topic }: ICustomAccordionProps) {
             <AccordionDetails>
               {topic.topicContent.slice(0, 3).map((topic, index) => {
                 return (
-                  <KatenBlogItems
+                  <BlogItems
                     key={index}
                     direction="horizontal"
                     items={topic}

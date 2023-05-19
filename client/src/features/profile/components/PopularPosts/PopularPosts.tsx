@@ -1,7 +1,7 @@
 import * as React from "react";
 
+import { BlogItems } from "../../../../components/Common/BlogItems/BlogItems";
 import { BlogsSample } from "../../../../mock";
-import { KatenBlogItems } from "../../../../components/Common/BlogItems/KatenBlogItems";
 
 export interface IPopularPostsProps {}
 
@@ -10,7 +10,7 @@ export function PopularPosts(props: IPopularPostsProps) {
     <>
       {BlogsSample.slice(0, 3).map((items, key) => {
         return (
-          <KatenBlogItems
+          <BlogItems
             key={key}
             direction="horizontal"
             shape="circle"

@@ -1,7 +1,7 @@
 import * as React from "react";
 
+import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
 import { BlogsSample } from "../../../mock";
-import { KatenBlogItems } from "../../../components/Common/BlogItems/KatenBlogItems";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
 
 export interface ILatestPostProps {}
@@ -16,7 +16,7 @@ export function LatestPost(props: ILatestPostProps) {
     >
       {BlogsSample.slice(0, 4).map((blogs, key) => {
         return (
-          <KatenBlogItems
+          <BlogItems
             key={key}
             direction="horizontal"
             size="big"

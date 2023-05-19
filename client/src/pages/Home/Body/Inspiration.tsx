@@ -2,8 +2,8 @@ import "./Body.scss";
 
 import * as React from "react";
 
+import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
 import { BlogsSample } from "../../../mock";
-import { KatenBlogItems } from "../../../components/Common/BlogItems/KatenBlogItems";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
 
 export interface IInspirationProps {}
@@ -22,7 +22,7 @@ export function Inspiration(props: IInspirationProps) {
         <div className="side">
           {BlogsSample.slice(0, 1).map((blogs, key) => {
             return (
-              <KatenBlogItems
+              <BlogItems
                 direction="vertical"
                 isThumbedNail
                 items={blogs}
@@ -37,7 +37,7 @@ export function Inspiration(props: IInspirationProps) {
         <div className="side">
           {BlogsSample.slice(0, 1).map((blogs, key) => {
             return (
-              <KatenBlogItems
+              <BlogItems
                 direction="vertical"
                 isThumbedNail
                 items={blogs}

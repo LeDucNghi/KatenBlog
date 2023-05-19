@@ -2,9 +2,10 @@ import "./HomeBanner.scss";
 
 import * as React from "react";
 
-import { BlogsSample } from "../../../../mock";
+import { BlogsData, BlogsSample } from "../../../../mock";
+
+import { BlogItems } from "../../BlogItems/BlogItems";
 import { CustomBackdrop } from "../../Backdrop/CustomBackdrop";
-import { KatenBlogItems } from "../../BlogItems/KatenBlogItems";
 import { RoundedWidget } from "../../../../widgets/RoundedWidget/RoundedWidgets";
 
 export interface IHomeBannerProps {}
@@ -32,7 +33,7 @@ export function HomeBanner(props: IHomeBannerProps) {
         <div className="homebanner_thumbnail">
           {BlogsSample.slice(0, 1).map((blogs, key) => {
             return (
-              <KatenBlogItems
+              <BlogItems
                 key={key}
                 items={blogs}
                 direction="vertical"
@@ -87,9 +88,9 @@ export function HomeBanner(props: IHomeBannerProps) {
               padding: 0,
             }}
           >
-            {BlogsSample.slice(0, 4).map((blogs, key) => {
+            {BlogsData.slice(0, 4).map((blogs, key) => {
               return (
-                <KatenBlogItems
+                <BlogItems
                   key={key}
                   items={blogs}
                   shape="circle"
