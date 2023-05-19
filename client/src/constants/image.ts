@@ -1,6 +1,6 @@
 import avatar from "../assets/images/avatar.png";
 import logo from "../assets/images/svg/logo.svg";
-import logoBrand from "../assets/brand/brand-logo.png";
+import logoBrand from "../assets/images/brand/brand-logo.png";
 import notask from "../assets/images/no-task.png";
 import notfound from "../assets/images/svg/illustration_404.svg";
 import openBook from "../assets/images/open-book.png";
