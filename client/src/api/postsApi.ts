@@ -3,8 +3,8 @@ import { PaginationParams, Post, PostData, PostListRes } from "../models";
 import axiosClient from "./axiosClient";
 
 const postsApi = {
-  getAll(): Promise<PostListRes<Post>> {
-    const url = "/posts/getallpost";
+  getAll({ page, limit }: PaginationParams): Promise<PostListRes<Post>> {
+    const url = `/posts/getallpost?page=${page}&limit=${limit}`;
     return axiosClient.get(url);
   },
 
@@ -81,7 +81,6 @@ const postsApi = {
     { page, limit }: PaginationParams
   ): Promise<PostListRes<Post>> {
     const url = `/posts/userpostlist/${id}?page=${page}&limit=${limit}&type=${type}`;
-    // console.log("🚀 ~ file: postsApi.ts:85 ~ url:", url);
     return axiosClient.get(url);
   },
 };

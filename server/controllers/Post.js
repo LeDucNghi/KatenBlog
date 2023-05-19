@@ -7,6 +7,8 @@ const { uploadImage } = require("../services/Posts/imageUpload");
 const getAllPost = async (req, res) => {
   const postList = await posts.findAll();
 
+  // const
+
   res.json({ postList });
 };
 
@@ -15,7 +17,6 @@ const createPost = async (req, res) => {
   const post = await req.body;
 
   const image = await uploadImage(req, res);
-  console.log("🚀 ~ file: Post.js:17 ~ createPost ~ image:", image);
 
   post.userId = req.user.id;
   post.image = image;
@@ -57,9 +58,6 @@ const getDetailPost = async (req, res) => {
       },
       {
         model: likes,
-        // attributes: {
-        //   exclude: ["password", "createdAt", "updatedAt", "username"],
-        // },
       },
     ],
   });
