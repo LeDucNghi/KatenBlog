@@ -1,4 +1,4 @@
-import { AxiosError, AxiosResponse } from "axios/index";
+import { AxiosError, AxiosResponse } from "axios";
 
 import axios from "axios";
 

@@ -1,5 +1,5 @@
-import { Footer } from "../components/Common/Footer/Footer";
-import { Header } from "../components/Common/Header/Header";
+import { Footer } from "../Common/Footer/Footer";
+import { Header } from "../Common/Header/Header";
 
 export interface ILandingLayoutProps {
   children: JSX.Element;

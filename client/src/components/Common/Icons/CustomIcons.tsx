@@ -1,17 +1,17 @@
-import "@mui/icons-material/";
+// import "@mui/icons-material/";
 
-import * as React from "react";
+// import * as React from "react";
 
-import { IIconsProps } from "../../../models";
+// import { IIconsProps } from "../../../models";
 
-export function CustomIcons({
-  icon,
-  iconName,
-  fontSize,
-  className,
-  style,
-}: IIconsProps) {
-  const Icons = React.lazy(() => import(`@mui/icons-material/${icon}`));
+// export function CustomIcons({
+//   icon,
+//   iconName,
+//   fontSize,
+//   className,
+//   style,
+// }: IIconsProps) {
+//   // const Icons = React.lazy(() => );
 
-  return <Icons className={`${className}`} fontSize={fontSize} style={style} />;
-}
+//   return import(`@mui/icons-material/${icon}`);
+// }
