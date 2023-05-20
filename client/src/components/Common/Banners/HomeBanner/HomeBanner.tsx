@@ -88,7 +88,7 @@ export function HomeBanner(props: IHomeBannerProps) {
               padding: 0,
             }}
           >
-            {BlogsData.slice(0, 4).map((blogs, key) => {
+            {BlogsSample.slice(0, 4).map((blogs, key) => {
               return (
                 <BlogItems
                   key={key}

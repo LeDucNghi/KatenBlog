@@ -15,7 +15,8 @@ export interface ISearchSectionProps {}
 export default function SearchSection(props: ISearchSectionProps) {
   const dispatch = useAppDispatch();
 
-  const postList = useAppSelector(selectPostList);
+  // const postList = useAppSelector(selectPostList);
+  // console.log("🚀 ~ file: Search.tsx:19 ~ SearchSection ~ postList:", postList);
 
   const [keyword, setKeyword] = React.useState("");
 
@@ -29,7 +30,7 @@ export default function SearchSection(props: ISearchSectionProps) {
 
       <SearchField setKeyWord={setKeyword} />
 
-      <SearchList postList={postList} keyword={`${keyword}`} />
+      {/* <SearchList postList={postList} keyword={`${keyword}`} /> */}
     </div>
   );
 }

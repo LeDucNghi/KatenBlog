@@ -6,6 +6,7 @@ import { ListItemButton, Paper } from "@mui/material";
 
 import { DetailWidget } from "../../../widgets/DetailWidget/DetailWidget";
 import { Icons } from "../Icons/Icons";
+import { Images } from "../../../constants";
 import { Post } from "../../../models";
 
 export interface IBlogItemsProps {
@@ -64,7 +65,7 @@ export function BlogItems({
           {direction === "vertical" && !size && !isThumbedNail && (
             <div className="detail_badge ">
               <a href="/" className="detail_categories">
-                {items.categories}
+                {items?.categories}
               </a>
 
               <div className="detail_post_format">
@@ -77,7 +78,7 @@ export function BlogItems({
             <DetailWidget items={items} isThumbedNail={isThumbedNail} />
           )}
 
-          <img src={items.image as string} alt="" />
+          <img src={items?.image as string} alt="" />
 
           {direction === "vertical" && isThumbedNail && (
             <>

@@ -51,7 +51,7 @@ export function SearchList({ keyword, postList }: ISearchListProps) {
                 direction="vertical"
                 items={items}
                 key={key}
-                route={`/post/${items.id}`}
+                showBadge={false}
               />
             );
           })

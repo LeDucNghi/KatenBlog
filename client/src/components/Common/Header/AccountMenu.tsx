@@ -1,8 +1,10 @@
 import { AccountMenuProps } from "../../../models";
-import { CustomIcons } from "../Icons/CustomIcons";
+import { Icons } from "../Icons/Icons";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+
+// import { CustomIcons } from "../Icons/CustomIcons";
 
 export interface IAccountMenuProps {
   open: boolean;
@@ -63,35 +65,12 @@ export default function AccountMenu({
         return (
           <MenuItem key={key} onClick={close}>
             <ListItemIcon>
-              <CustomIcons icon={items.icon} />
+              <Icons iconName="facebook" />
             </ListItemIcon>
             {items.name}
           </MenuItem>
         );
       })}
-
-      {/* <MenuItem onClick={close}>
-        <Avatar /> Profile
-      </MenuItem>
-      <Divider />
-      <MenuItem onClick={close}>
-        <ListItemIcon>
-          <LibraryBooksIcon fontSize="small" />
-        </ListItemIcon>
-        Your Blog
-      </MenuItem>
-      <MenuItem onClick={close}>
-        <ListItemIcon>
-          <Settings fontSize="small" />
-        </ListItemIcon>
-        Settings
-      </MenuItem>
-      <MenuItem onClick={close}>
-        <ListItemIcon>
-          <Logout fontSize="small" />
-        </ListItemIcon>
-        Logout
-      </MenuItem> */}
     </Menu>
   );
 }

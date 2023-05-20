@@ -34,16 +34,16 @@ export function DetailWidget({
         style={style}
       >
         <p className="thumbnail_items thumbnail_categories">
-          {items.categories}
+          {items?.categories}
         </p>
 
         <h2 className="thumbnail_items thumbnail_title post_title">
-          {items.title}
+          {items?.title}
         </h2>
 
         <ul className="thumbnail_items thumbnail_meta_list meta_list">
-          <li>{items.user?.fullname} </li>
-          <li>{moment(items.createdAt).format("LL")} </li>
+          <li>{items?.user?.fullname} </li>
+          <li>{moment(items?.createdAt).format("LL")} </li>
         </ul>
       </div>
     );
@@ -56,10 +56,10 @@ export function DetailWidget({
             : "detail_widget_normal"
         }
       >
-        <div className="detail_post_title post_title">{items.title}</div>
+        <div className="detail_post_title post_title">{items?.title}</div>
 
         <div className="detail_createdAt">
-          {moment(items.createdAt).format("LL")}
+          {moment(items?.createdAt).format("LL")}
         </div>
       </div>
     );
@@ -69,17 +69,17 @@ export function DetailWidget({
         <ul className="detail_meta_list meta_list widget_items">
           <li>
             <div className="meta_author">
-              <img src={items.user?.avatar} alt="" />
+              <img src={items?.user?.avatar} alt="" />
             </div>
-            {items.user?.fullname}{" "}
+            {items?.user?.fullname}{" "}
           </li>
-          <li>{moment(items.createdAt).format("LL")} </li>
+          <li>{moment(items?.createdAt).format("LL")} </li>
         </ul>
 
         <div className="detail_content widget_items">
-          <h3 className="detail_title post_title">{items.title}</h3>
+          <h3 className="detail_title post_title">{items?.title}</h3>
 
-          <div className="detail_subtitle">{items.subTitle}</div>
+          <div className="detail_subtitle">{items?.subTitle}</div>
         </div>
       </div>
     );
@@ -89,18 +89,18 @@ export function DetailWidget({
         <ul className="meta_list widget_items">
           <li>
             <div className="meta_author">
-              <img src={items.user?.avatar} alt="" />
+              <img src={items?.user?.avatar} alt="" />
             </div>
-            {items.user?.fullname}{" "}
+            {items?.user?.fullname}{" "}
           </li>
-          <li>{items.categories}</li>
-          <li>{moment(items.createdAt).format("LL")}</li>
+          <li>{items?.categories}</li>
+          <li>{moment(items?.createdAt).format("LL")}</li>
         </ul>
 
         <div className="detail_content widget_items">
-          <h3 className="detail_title post_title">{items.title}</h3>
+          <h3 className="detail_title post_title">{items?.title}</h3>
 
-          <div className="detail_subtitle post_subtitle">{items.subTitle}</div>
+          <div className="detail_subtitle post_subtitle">{items?.subTitle}</div>
         </div>
 
         <div className="detail_share_buttons widget_items">
