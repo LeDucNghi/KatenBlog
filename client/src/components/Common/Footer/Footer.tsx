@@ -20,7 +20,7 @@ export function Footer(props: IFooterProps) {
       </Typography>
 
       <div className="footer_social footer_items">
-        <IconsListWidget />
+        <IconsListWidget iconsSpace="0 0.5em" />
       </div>
 
       <div className="footer_term_policy footer_items">

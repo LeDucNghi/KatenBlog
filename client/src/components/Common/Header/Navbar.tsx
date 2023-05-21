@@ -1,12 +1,7 @@
 import "./Header.scss";
 
-import {
-  AccountMenuWidget,
-  BREAK_POINTS_NUMBER,
-  NavbarWidget,
-} from "../../../constants";
+import { BREAK_POINTS_NUMBER, NavbarWidget } from "../../../constants";
 
-import AccountMenu from "./AccountMenu";
 import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
 import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
@@ -65,7 +60,9 @@ export function Navbar({
         )}
 
         <div className="navbar_right">
-          {windowInnerWidth > BREAK_POINTS_NUMBER.sm && <IconsListWidget />}
+          {windowInnerWidth > BREAK_POINTS_NUMBER.sm && (
+            <IconsListWidget iconsSpace="0 0.5em" />
+          )}
 
           <div className="navbar_buttons">
             <ButtonsListWidget onclick={onclick} style={{ fontSize: "12px" }} />

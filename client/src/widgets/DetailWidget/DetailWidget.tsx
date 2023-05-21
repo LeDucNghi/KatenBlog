@@ -42,7 +42,7 @@ export function DetailWidget({
         </h2>
 
         <ul className="thumbnail_items thumbnail_meta_list meta_list">
-          <li>{items?.user?.fullname} </li>
+          <li className="meta_author_name">{items?.user?.fullname} </li>
           <li>{moment(items?.createdAt).format("LL")} </li>
         </ul>
       </div>
@@ -71,7 +71,7 @@ export function DetailWidget({
             <div className="meta_author">
               <img src={items?.user?.avatar} alt="" />
             </div>
-            {items?.user?.fullname}{" "}
+            <span className="meta_author_name">{items?.user?.fullname} </span>
           </li>
           <li>{moment(items?.createdAt).format("LL")} </li>
         </ul>
@@ -87,7 +87,7 @@ export function DetailWidget({
     return (
       <div className="detail_widget_big">
         <ul className="meta_list widget_items">
-          <li>
+          <li className="meta_author_name">
             <div className="meta_author">
               <img src={items?.user?.avatar} alt="" />
             </div>

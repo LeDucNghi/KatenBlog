@@ -48,7 +48,7 @@
         .search_list_content {
             position: relative;
 
-            max-width: 100%;
+            max-width: 80%;
 
             margin: 0 auto;
 
@@ -56,54 +56,6 @@
             justify-content: space-between;
             flex-direction: row;
             flex-wrap: wrap;
-
-            .search_list_items {
-                position: relative;
-
-                width: 24%;
-                height: 100%;
-
-                margin: 1em 0;
-
-                line-height: 1.6em;
-
-                .css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root {
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                .items_time,
-                .items_categories {
-                    margin-bottom: 0.5em;
-                }
-
-                .items_img {
-                    margin: 0 auto 0.5em auto;
-                    width: 100%;
-                    height: 12em;
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-
-                        object-fit: cover;
-                        border-radius: 1em;
-                    }
-                }
-
-                .items_title {
-                    font-size: 1.2em;
-                    margin-bottom: 0.5em;
-                }
-
-                .items_text {
-                    display: flex;
-                    justify-content: center;
-                    flex-direction: column;
-
-                    padding: 0 0.5em;
-                }
-            }
         }
     }
 }

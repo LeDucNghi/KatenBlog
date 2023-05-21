@@ -4,15 +4,11 @@
 .icons_widget {
     position: relative;
 
-    width: 100%;
-
     @include general.flexCenter;
 
     margin: 0 auto;
 
     .icon_items {
-        margin: 0 0.8em;
-
         &:first-child {
             margin-left: 0;
         }

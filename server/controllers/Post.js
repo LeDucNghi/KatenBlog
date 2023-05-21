@@ -5,11 +5,16 @@ const { uploadImage } = require("../services/Posts/imageUpload");
 
 // GET ALL POST
 const getAllPost = async (req, res) => {
-  const postList = await posts.findAll();
+  const data = await posts.findAll({
+    include: {
+      model: users,
+      attributes: {
+        exclude: ["password", "createdAt", "updatedAt", "username"],
+      },
+    },
+  });
 
-  // const
-
-  res.json({ postList });
+  res.json({ data });
 };
 
 // CREATE NEW POST
@@ -24,7 +29,6 @@ const createPost = async (req, res) => {
   await posts.create(post);
 
   res.status(200).json({ message: "Create post success 🥳", post });
-  // }
 };
 
 // GET POST'S DETAIL IMAGE

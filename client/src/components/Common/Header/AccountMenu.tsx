@@ -1,6 +1,5 @@
-import { Avatar, Box, IconButton, Tooltip, Typography } from "@mui/material";
+import { Avatar, Box, IconButton, Tooltip } from "@mui/material";
 
-import { AccountMenuProps } from "../../../models";
 import { AccountMenuWidget } from "../../../constants";
 import { Icons } from "../Icons/Icons";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -9,8 +8,6 @@ import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 import { selectUserProfile } from "../../../features/auth/authSlice";
 import { useAppSelector } from "../../../app/hooks";
-
-// import { CustomIcons } from "../Icons/CustomIcons";
 
 export interface IAccountMenuProps {}
 

@@ -3,8 +3,6 @@ import "./Header.scss";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
-import AccountMenu from "./AccountMenu";
-import { AccountMenuWidget } from "../../../constants";
 import { CustomDrawer } from "../Drawer/Drawer";
 import { HeaderDrawer } from "./Drawer";
 import { Navbar } from "./Navbar";
@@ -62,12 +60,6 @@ export function Header(props: IHeaderProps) {
       >
         <HeaderDrawer />
       </CustomDrawer>
-
-      {/* <AccountMenu
-        listItems={AccountMenuWidget}
-        // open={openMenu}
-        // close={() => setOpenMenu(!openMenu)}
-      /> */}
     </div>
   );
 }

@@ -6,7 +6,6 @@ import { ListItemButton, Paper } from "@mui/material";
 
 import { DetailWidget } from "../../../widgets/DetailWidget/DetailWidget";
 import { Icons } from "../Icons/Icons";
-import { Images } from "../../../constants";
 import { Post } from "../../../models";
 
 export interface IBlogItemsProps {

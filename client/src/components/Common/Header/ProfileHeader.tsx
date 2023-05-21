@@ -2,6 +2,7 @@ import "./ProfileHeader.scss";
 
 import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
 import { CustomDrawer } from "../Drawer/Drawer";
+import { HeaderDrawer } from "./Drawer";
 import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
 import { NavbarWidget } from "../../../constants";
@@ -30,6 +31,7 @@ export function ProfileHeader(props: IProfileHeaderProps) {
               style={{
                 width: "20%",
               }}
+              iconsSpace="0 0.5em"
             />
 
             <div className="main_user header_main_items">
@@ -97,7 +99,7 @@ export function ProfileHeader(props: IProfileHeaderProps) {
         open={open}
         close={() => setOpen(!open)}
       >
-        <h1>Profile drawer</h1>
+        <HeaderDrawer />
       </CustomDrawer>
     </section>
   );

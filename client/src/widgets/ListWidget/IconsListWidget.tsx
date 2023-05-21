@@ -10,9 +10,14 @@ import { IconsWidgets } from "../../constants/clusterWidgets";
 export interface IIconsListWidgetProps {
   style?: React.CSSProperties;
   color?: string;
+  iconsSpace?: string;
 }
 
-export function IconsListWidget({ style, color }: IIconsListWidgetProps) {
+export function IconsListWidget({
+  style,
+  color,
+  iconsSpace,
+}: IIconsListWidgetProps) {
   return (
     <ul className="icons_widget" style={style}>
       {IconsWidgets.map((icons, key) => {
@@ -25,6 +30,7 @@ export function IconsListWidget({ style, color }: IIconsListWidgetProps) {
                 fontSize={`${icons.fontSize}` as IconsFontSize}
                 style={{
                   color: color,
+                  margin: iconsSpace,
                 }}
               />
             </a>

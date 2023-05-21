@@ -9,7 +9,6 @@
 
     li {
         @include widgets.meta_list;
-        @include general.text_overflow;
 
         .meta_author {
             width: 2em;
@@ -133,6 +132,19 @@
             margin-bottom: 1em;
             text-transform: capitalize;
         }
+    }
+
+    .meta_author_name {
+        width: 50%;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .meta_author {
+        width: 2em;
+        height: 2em;
     }
 }
 

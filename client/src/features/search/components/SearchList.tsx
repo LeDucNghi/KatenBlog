@@ -6,6 +6,7 @@ import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
 import List from "@mui/material/List";
 import { Loading } from "../../../components/Common/Loading/Loading";
 import { Post } from "../../../models";
+import { useNavigate } from "react-router-dom";
 
 export interface ISearchListProps {
   keyword: string;
@@ -13,12 +14,18 @@ export interface ISearchListProps {
 }
 
 export function SearchList({ keyword, postList }: ISearchListProps) {
-  const [listPost, setListPost] = React.useState(postList);
+  const navigate = useNavigate();
+
+  const [listPost, setListPost] = React.useState<Post[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     handleSearchPost();
   }, [keyword]);
+
+  React.useEffect(() => {
+    setListPost(postList);
+  }, [postList]);
 
   const handleSearchPost = async () => {
     setIsLoading(true);
@@ -40,18 +47,24 @@ export function SearchList({ keyword, postList }: ISearchListProps) {
 
   return (
     <div className="search_body">
-      <p className="search_list_count">{listPost.length} Results</p>
+      <p className="search_list_count">{listPost?.length} Results</p>
       <List className="search_list_content">
         {isLoading ? (
           <Loading />
         ) : (
-          listPost.map((items, key) => {
+          listPost.map((blogs, key) => {
             return (
               <BlogItems
-                direction="vertical"
-                items={items}
                 key={key}
+                items={blogs}
+                direction="vertical"
+                isThumbedNail={false}
                 showBadge={false}
+                onclick={() => navigate(`/post/${blogs.id}`)}
+                style={{
+                  width: "25%",
+                  margin: "1em 0.5em",
+                }}
               />
             );
           })

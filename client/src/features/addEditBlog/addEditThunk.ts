@@ -25,6 +25,11 @@ export const handleGetAllPost = (): AppThunk => async (dispatch, getState) => {
       data: { data },
     } = await postsApi.getAll();
 
+    console.log(
+      "🚀 ~ file: addEditThunk.ts:26 ~ handleGetAllPost ~ data:",
+      data
+    );
+
     dispatch(fetchPostListSuccess(data));
   } catch (error) {
     console.log(
