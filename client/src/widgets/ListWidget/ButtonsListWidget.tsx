@@ -8,8 +8,10 @@ import {
 } from "../../features/auth/authSlice";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+import AccountMenu from "../../components/Common/Header/AccountMenu";
 import { BREAK_POINTS_NUMBER } from "../../constants";
 import { Icons } from "../../components/Common/Icons/Icons";
+import { Tooltip } from "@mui/material";
 import { useAppSelector } from "../../app/hooks";
 import { useWindowSize } from "../../hooks/useWindowSize";
 
@@ -24,17 +26,18 @@ export function ButtonsListWidget({ style, onclick }: IListButtonsWidgetProps) {
   const { pathname } = useLocation();
   const { windowInnerWidth } = useWindowSize();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
-  const userProfile = useAppSelector(selectUserProfile);
 
   return (
     <div className="buttons_widget" style={style}>
-      <button className="icon_button" onClick={() => navigate(`/search`)}>
-        <Icons iconName="search" />
-      </button>
+      <Tooltip title="Find your favorite blogs" arrow>
+        <button className="icon_button" onClick={() => navigate(`/search`)}>
+          <Icons iconName="search" />
+        </button>
+      </Tooltip>
 
       <button className="icon_button" onClick={onclick}>
-        {isLoggedIn && pathname !== `/profile/${id}` ? (
-          <img src={userProfile?.avatar} alt="" />
+        {isLoggedIn ? (
+          <AccountMenu />
         ) : (
           <Icons
             iconName={

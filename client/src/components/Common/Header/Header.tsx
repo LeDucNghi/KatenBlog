@@ -63,11 +63,11 @@ export function Header(props: IHeaderProps) {
         <HeaderDrawer />
       </CustomDrawer>
 
-      <AccountMenu
+      {/* <AccountMenu
         listItems={AccountMenuWidget}
-        open={openMenu}
-        close={() => setOpenMenu(!openMenu)}
-      />
+        // open={openMenu}
+        // close={() => setOpenMenu(!openMenu)}
+      /> */}
     </div>
   );
 }

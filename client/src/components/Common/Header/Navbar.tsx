@@ -1,7 +1,12 @@
 import "./Header.scss";
 
-import { BREAK_POINTS_NUMBER, NavbarWidget } from "../../../constants";
+import {
+  AccountMenuWidget,
+  BREAK_POINTS_NUMBER,
+  NavbarWidget,
+} from "../../../constants";
 
+import AccountMenu from "./AccountMenu";
 import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
 import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
