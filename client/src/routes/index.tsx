@@ -1,12 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 
+import { AuthenticatedLayout } from "../components/Layouts/AuthenticatedLayout";
 import CustomSuspense from "../components/Common/Suspense/CustomSuspense";
 import { DocTitle } from "../widgets/DocTitle/DocTitle";
 import { LandingLayout } from "../components/Layouts/LandingLayout";
 import { Loading } from "../components/Common/Loading/Loading";
 import { routes } from "./routes";
-
-// import { AuthenticatedLayout } from "../components/Layouts/AuthenticatedLayout";
 
 // export interface IRouterProps {}
 
@@ -23,12 +22,12 @@ export function Router() {
               fallback={<Loading />}
             >
               <DocTitle title={`${route.title}`}>
-                {/* {route.isLandingLayout ? (
+                {route.isLandingLayout ? (
                   <LandingLayout>{route.element}</LandingLayout>
                 ) : (
                   <AuthenticatedLayout>{route.element}</AuthenticatedLayout>
-                )} */}
-                <LandingLayout>{route.element}</LandingLayout>
+                )}
+                {/* <LandingLayout>{route.element}</LandingLayout> */}
               </DocTitle>
             </CustomSuspense>
           }
