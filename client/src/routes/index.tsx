@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 
-import { AuthenticatedLayout } from "../components/Layouts/AuthenticatedLayout";
+import { AuthenticatedLayout } from "../components/layouts/AuthenticatedLayout";
 import CustomSuspense from "../components/Common/Suspense/CustomSuspense";
 import { DocTitle } from "../widgets/DocTitle/DocTitle";
-import { LandingLayout } from "../components/Layouts/LandingLayout";
+import { LandingLayout } from "../components/layouts/LandingLayout";
 import { Loading } from "../components/Common/Loading/Loading";
 import { routes } from "./routes";
 
