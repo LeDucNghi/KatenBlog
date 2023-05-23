@@ -27,7 +27,6 @@ export function Router() {
                 ) : (
                   <AuthenticatedLayout>{route.element}</AuthenticatedLayout>
                 )}
-                {/* <LandingLayout>{route.element}</LandingLayout> */}
               </DocTitle>
             </CustomSuspense>
           }

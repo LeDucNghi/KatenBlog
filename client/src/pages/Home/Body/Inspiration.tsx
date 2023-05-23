@@ -1,7 +1,5 @@
 import "./Body.scss";
 
-import * as React from "react";
-
 import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
 import { BlogsSample } from "../../../mock";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
@@ -29,6 +27,10 @@ export function Inspiration(props: IInspirationProps) {
                 showBadge={false}
                 key={key}
                 size="small"
+                style={{
+                  margin: "0.5em 0",
+                }}
+                fontSize="13px"
               />
             );
           })}
@@ -44,6 +46,10 @@ export function Inspiration(props: IInspirationProps) {
                 showBadge={false}
                 key={key}
                 size="small"
+                style={{
+                  margin: "0.5em 0",
+                }}
+                fontSize="13px"
               />
             );
           })}

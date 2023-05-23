@@ -140,3 +140,26 @@
         }
     }
 }
+
+@media only screen and (max-width: 500px) {
+    .category_items.vertical {
+        margin-bottom: 2em;
+    }
+
+    .category_items.horizontal {
+        .items_container.large_horizontal {
+            display: flex;
+            flex-direction: column;
+
+            .items_img.square {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 501px) and (max-width: 1024px) {
+    .category_items.vertical {
+        margin-bottom: 2em;
+    }
+}

@@ -2,9 +2,8 @@ import "./HomeBanner.scss";
 
 import * as React from "react";
 
-import { BlogsData, BlogsSample } from "../../../../mock";
-
 import { BlogItems } from "../../BlogItems/BlogItems";
+import { BlogsSample } from "../../../../mock";
 import { CustomBackdrop } from "../../Backdrop/CustomBackdrop";
 import { RoundedWidget } from "../../../../widgets/RoundedWidget/RoundedWidgets";
 
@@ -43,7 +42,6 @@ export function HomeBanner(props: IHomeBannerProps) {
                   height: "100%",
                   padding: 0,
                 }}
-                fontSize="20px"
               />
             );
           })}

@@ -19,7 +19,7 @@ export function Body(props: IBodyProps) {
       </div>
 
       <div className="right_side">
-        <InnerWrapper width="90%" />
+        <InnerWrapper width="100%" />
       </div>
     </div>
   );

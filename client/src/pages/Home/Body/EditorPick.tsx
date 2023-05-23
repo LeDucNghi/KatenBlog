@@ -1,7 +1,5 @@
 import "./Body.scss";
 
-import * as React from "react";
-
 import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
 import { BlogsSample } from "../../../mock";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
@@ -25,6 +23,9 @@ export function EditorPick(props: IEditorPickProps) {
                 direction="vertical"
                 showBadge={false}
                 items={blogs}
+                style={{
+                  marginBottom: "1em",
+                }}
               />
             );
           })}

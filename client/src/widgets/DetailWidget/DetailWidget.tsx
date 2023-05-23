@@ -79,7 +79,7 @@ export function DetailWidget({
         <div className="detail_content widget_items">
           <h3 className="detail_title post_title">{items?.title}</h3>
 
-          <div className="detail_subtitle">{items?.subTitle}</div>
+          <div className="detail_subtitle post_subtitle">{items?.subTitle}</div>
         </div>
       </div>
     );

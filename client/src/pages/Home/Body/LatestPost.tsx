@@ -26,6 +26,7 @@ export function LatestPost(props: ILatestPostProps) {
             style={{
               marginBottom: "1em",
             }}
+            fontSize="13px"
           />
         );
       })}

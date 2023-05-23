@@ -60,7 +60,7 @@ export function Navbar({
         )}
 
         <div className="navbar_right">
-          {windowInnerWidth > BREAK_POINTS_NUMBER.sm && (
+          {windowInnerWidth > BREAK_POINTS_NUMBER.md && (
             <IconsListWidget iconsSpace="0 0.5em" />
           )}
 

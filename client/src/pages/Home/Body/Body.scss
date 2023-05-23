@@ -26,3 +26,41 @@
         height: 100%;
     }
 }
+
+@media only screen and (max-width: 500px) {
+    .body_container {
+        width: 90%;
+        flex-direction: column;
+
+        .left_side {
+            width: 100%;
+
+            .child_container {
+                flex-direction: column;
+
+                .side {
+                    width: 100%;
+                }
+            }
+        }
+
+        .right_side {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (min-width: 501px) and (max-width: 1024px) {
+    .body_container {
+        width: 90%;
+        flex-direction: column;
+
+        .left_side {
+            width: 100%;
+        }
+
+        .right_side {
+            width: 100%;
+        }
+    }
+}
