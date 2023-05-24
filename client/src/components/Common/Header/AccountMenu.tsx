@@ -1,27 +1,35 @@
 import { Avatar, Box, IconButton, Tooltip } from "@mui/material";
 
-import { AccountMenuWidget } from "../../../constants";
 import { Icons } from "../Icons/Icons";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
+import { accountMenuWidget } from "../../../constants";
 import { selectUserProfile } from "../../../features/auth/authSlice";
 import { useAppSelector } from "../../../app/hooks";
+import { useNavigate } from "react-router-dom";
 
 export interface IAccountMenuProps {}
 
 export default function AccountMenu(props: IAccountMenuProps) {
+  const navigate = useNavigate();
+  const userProfile = useAppSelector(selectUserProfile);
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const userProfile = useAppSelector(selectUserProfile);
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleClick = (event?: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event!.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const menuItemsClick = (route: string) => {
+    handleClose();
+    navigate(route);
   };
 
   return (
@@ -89,11 +97,11 @@ export default function AccountMenu(props: IAccountMenuProps) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {AccountMenuWidget.map((items, key) => {
+        {accountMenuWidget(userProfile?.id!).map((items, key) => {
           return (
-            <MenuItem key={key} onClick={handleClose}>
+            <MenuItem key={key} onClick={() => menuItemsClick(items.route)}>
               <ListItemIcon>
-                <Icons iconName="facebook" />
+                <Icons iconName={items.icon} />
               </ListItemIcon>
               {items.name}
             </MenuItem>

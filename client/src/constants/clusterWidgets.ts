@@ -1,4 +1,5 @@
 import { BlogsSample } from "../mock";
+import { IconName } from "../models";
 
 export const IconsWidgets = [
   {
@@ -106,30 +107,34 @@ export const BlogTopicWidget = [
   },
 ];
 
-export const AccountMenuWidget = [
-  {
-    id: 1,
-    name: "Profile",
-    route: "/profile/1",
-    icon: "AccountCircleIcon",
-  },
-  {
-    id: 2,
-    name: "Your Blogs",
-    route: "/about",
-    icon: "LibraryBooksIcon",
-  },
-  {
-    id: 3,
-    name: "Settings",
-    route: "/",
-    icon: "Settings",
-  },
+export const accountMenuWidget = (id: string | number) => {
+  const menu = [
+    {
+      id: 1,
+      name: "Profile",
+      route: `/profile/${id}`,
+      icon: "person" as IconName ,
+    },
+    {
+      id: 2,
+      name: "Your Blogs",
+      route: "/about",
+      icon: "book" as IconName ,
+    },
+    {
+      id: 3,
+      name: "Settings",
+      route: "/",
+      icon: "setting" as IconName ,
+    },
 
-  {
-    id: 4,
-    name: "Logout",
-    route: "/",
-    icon: "Logout",
-  },
-];
+    {
+      id: 4,
+      name: "Logout",
+      route: "/",
+      icon: "logout" as IconName ,
+    },
+  ];
+
+  return menu
+}

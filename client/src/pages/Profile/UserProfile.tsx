@@ -30,7 +30,9 @@ export default function UserProfile(props: IUserProfileProps) {
       <div className="profile_container">
         <UserBlogList userBlogList={userBlogList} id={`${id}`} />
 
-        <InnerWrapper width="30%" />
+        <div className="profile_right">
+          <InnerWrapper />
+        </div>
       </div>
     </div>
   );

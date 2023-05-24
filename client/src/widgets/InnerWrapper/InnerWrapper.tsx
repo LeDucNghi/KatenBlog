@@ -13,7 +13,7 @@ import { selectUserProfile } from "../../features/auth/authSlice";
 import { useAppSelector } from "../../app/hooks";
 
 export interface IInnerWrapperProps {
-  width: string;
+  width?: string;
 }
 
 export function InnerWrapper({ width }: IInnerWrapperProps) {

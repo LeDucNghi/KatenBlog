@@ -18,14 +18,7 @@
         padding: 0.5em;
 
         .blog_items {
-            position: relative;
-
             width: 45%;
-            height: 30em;
-
-            @include general.flexCenter;
-
-            margin: 1em auto;
         }
     }
 
@@ -35,5 +28,23 @@
         margin-top: 2.7em;
 
         @include general.flexCenter;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .blog_list_wrapper {
+        width: 100%;
+
+        .blog_list {
+            .blog_items {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .blog_list_wrapper {
+        width: 100%;
     }
 }

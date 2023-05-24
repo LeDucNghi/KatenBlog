@@ -36,7 +36,6 @@ export function UserBlogList({ userBlogList, id }: IUserBlogListProps) {
           return (
             <div className="blog_items" key={key}>
               <BlogItems
-                key={key}
                 items={blogs}
                 direction="vertical"
                 isThumbedNail={false}
