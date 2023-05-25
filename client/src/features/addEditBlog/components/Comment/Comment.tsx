@@ -18,30 +18,35 @@ export function Comment({ id }: ICommentProps) {
   const [comment, setComment] = React.useState("");
 
   return (
-    <RoundedWidget title="Leave Comment" isDivider anchorTitle="left">
-      <Box className="comment_container">
-        <TextField
-          id="standard-multiline-static"
-          label="Your comment"
-          multiline
-          rows={4}
-          className="comment_field"
-          variant="outlined"
-          onChange={(e) => setComment(e.target.value)}
-        />
+    <RoundedWidget
+      title={<h3>Leave Comment</h3>}
+      style={{
+        width: "100%",
+      }}
+      isDivider
+      anchorTitle="left"
+    >
+      <TextField
+        id="standard-multiline-static"
+        label="Your comment"
+        multiline
+        rows={4}
+        className="comment_field"
+        variant="outlined"
+        onChange={(e) => setComment(e.target.value)}
+      />
 
-        <Typography className="comment_warn">
-          Please note, comments must be approved before they are published
-        </Typography>
+      <Typography className="comment_warn">
+        Please note, comments must be approved before they are published
+      </Typography>
 
-        <Button
-          onClick={() => dispatch(handlePostComment(id, comment))}
-          className="comment_button"
-          variant="contained"
-        >
-          WRITE A COMMENT
-        </Button>
-      </Box>
+      <Button
+        onClick={() => dispatch(handlePostComment(id, comment))}
+        className="comment_button"
+        variant="contained"
+      >
+        WRITE A COMMENT
+      </Button>
     </RoundedWidget>
   );
 }

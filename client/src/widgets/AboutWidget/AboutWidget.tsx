@@ -26,6 +26,7 @@ export function AboutWidget({ user }: IAboutWidgetProps) {
           width: "100%",
           height: "2em",
         }}
+        iconsSpace="0 0.5em"
       />
     </div>
   );

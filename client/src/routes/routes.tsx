@@ -6,9 +6,7 @@ import { SignUp } from "../pages/SignUp/SignUp";
 import { Test } from "../pages/test/test";
 
 const Home = React.lazy(() => import("../pages/Home/Home"));
-const AddEditBlog = React.lazy(
-  () => import("../pages/AddEditBlog/AddEditBlog")
-);
+const AddEditBlog = React.lazy(() => import("../pages/Post/Post"));
 const Search = React.lazy(() => import("../pages/Search/Search"));
 const UserProfile = React.lazy(() => import("../pages/Profile/UserProfile"));
 

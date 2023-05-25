@@ -1,52 +1,35 @@
 @use "../../../../assets/styles/globalStyles.scss";
+@use "../../../../themes/widgets.scss";
 
-.comment_container {
-    position: relative;
+.comment_title {
+    text-decoration: underline;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: globalStyles.$category-color;
+}
 
-    margin: 3em 0;
+.comment_warn {
+    font-style: italic;
+}
 
-    width: 80%;
+.comment_button {
+    margin: 0.7em auto;
+    @include widgets.background_right;
+}
 
-    font-size: 15px;
+.comment_warn,
+.comment_title,
+.comment_field {
+    margin: 0.7em 0;
+}
 
-    // display: flex;
-    // align-items: center;
-    flex-direction: column;
+.comment_field {
+    width: 90%;
+    border-radius: 1.5em;
+}
 
-    .comment_title {
-        text-decoration: underline;
-        font-size: 1.5em;
+.MuiListItemText-primary {
+    .comment_list_time {
         font-weight: 600;
-        color: globalStyles.$category-color;
-    }
-
-    .comment_warn {
-        font-style: italic;
-    }
-
-    .comment_button {
-        margin: 0.7em auto;
-        background-color: globalStyles.$button-color;
-    }
-
-    .comment_warn,
-    .comment_title,
-    .comment_field {
-        margin: 0.7em 0;
-    }
-
-    .comment_field {
-        width: 70%;
-    }
-
-    .MuiListItemText-primary {
-        .comment_list_time {
-            font-weight: 600;
-            // color: globalStyles.$time-color;
-            color: red;
-        }
-    }
-    .css-83ijpv-MuiTypography-root {
-        padding: 0 1em;
     }
 }

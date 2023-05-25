@@ -4,28 +4,23 @@
 .author_container {
     position: relative;
 
-    width: 75%;
-    height: 12.7em;
+    width: 100%;
 
     font-size: 15px;
 
-    margin-top: 5.5em;
-
     background: #f1f8ff;
 
-    padding: 0 1em;
+    padding: 1em;
 
     @include general.flexRow;
+    justify-content: space-between;
 
     align-items: center;
 
     .author_info {
         position: relative;
 
-        width: 37em;
-        height: 9em;
-
-        margin-left: 2em;
+        width: 80%;
 
         .author_name {
             color: #203656;
@@ -40,40 +35,38 @@
             font-size: 1em;
             line-height: 1.7em;
         }
-
-        .author_contact_social {
-            width: 100%;
-            padding: 0.5em 0;
-
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-
-            a {
-                width: 0.6em;
-
-                margin: 0 1em;
-
-                color: #203656;
-                line-height: 0.8em;
-
-                &:first-child {
-                    margin-left: 0;
-                }
-            }
-        }
     }
 
     .author_avatar {
-        position: relative;
-
-        width: 6.7em;
-        height: 6.7em;
-
         img {
             border-radius: 50%;
 
-            @include general.imageCover;
+            width: 7em;
+            height: 7em;
+
+            object-fit: cover;
+        }
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .author_container {
+        flex-direction: column;
+        text-align: center;
+        font-size: 15px;
+
+        .author_info {
+            font-size: 15px;
+        }
+
+        .author_item {
+            margin: 0.5em 0;
+
+            &:last-child {
+                font-size: 10px;
+            }
+
+            justify-content: center;
         }
     }
 }

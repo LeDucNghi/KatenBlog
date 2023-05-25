@@ -1,0 +1,65 @@
+@use "../../../../assets/styles/globalStyles.scss";
+@use "../../../../themes/general.scss";
+
+.post_body {
+    position: relative;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    margin: 2em auto;
+
+    .post_form {
+        position: relative;
+        width: 100%;
+
+        @include general.flexColumn;
+
+        .post_input_field {
+            position: relative;
+
+            margin-bottom: 1em;
+        }
+
+        .post_input_field.isGuest {
+            .ql-container.ql-snow {
+                border: none;
+                font-size: 18px;
+            }
+
+            .ql-toolbar.ql-snow {
+                display: none;
+            }
+        }
+
+        .post_form_button {
+            background-color: globalStyles.$button-color;
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .postblog_body {
+        flex-direction: column;
+
+        .post_form {
+            width: 100%;
+            margin-bottom: 5em;
+            text-align: center;
+        }
+
+        .postblog_share_social {
+            padding-right: 1em;
+            width: 100%;
+            justify-content: space-between;
+            flex-direction: row;
+            margin-bottom: 5em;
+        }
+
+        .postblog_advertise {
+            width: 100%;
+        }
+    }
+}

@@ -11,12 +11,14 @@ export interface IIconsListWidgetProps {
   style?: React.CSSProperties;
   color?: string;
   iconsSpace?: string;
+  fontSize?: string;
 }
 
 export function IconsListWidget({
   style,
   color,
   iconsSpace,
+  fontSize,
 }: IIconsListWidgetProps) {
   return (
     <ul className="icons_widget" style={style}>

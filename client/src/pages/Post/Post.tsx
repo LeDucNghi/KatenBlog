@@ -1,7 +1,8 @@
-import "./AddEdit.scss";
+import "./Post.scss";
 
 import * as Yup from "yup";
 
+import { Breadcrumbs, Link } from "@mui/material";
 import { Form, Formik } from "formik";
 import {
   addEditPost,
@@ -18,14 +19,15 @@ import { selectGetUserType, setUserType } from "../../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useLocation, useParams } from "react-router-dom";
 
-import { AddEditBanner } from "../../features/addEditBlog/components/Banner/AddEditBanner";
-import { AddEditBody } from "../../features/addEditBlog/components/Body/AddEdtiBody";
 import { Author } from "../../features/addEditBlog/components/Author/Author";
-import { Box } from "@mui/material";
 import { Comment } from "../../features/addEditBlog/components/Comment/Comment";
 import { CommentList } from "../../features/addEditBlog/components/CommentList/CommentList";
+import { InnerWrapper } from "../../widgets/InnerWrapper/InnerWrapper";
 import NotFound from "../../components/Common/NotFound/NotFound";
 import { Post } from "../../models";
+import { PostBanner } from "../../features/addEditBlog/components/Banner/PostBanner";
+import { PostContent } from "../../features/addEditBlog/components/Content/PostContent";
+import { PostHeader } from "../../features/addEditBlog/components/PostHeader/PostHeader";
 import { RelatedBlogs } from "../../features/addEditBlog/components/Related/Related";
 import { ScrollToTop } from "../../components/Common/ScrollToTop/ScrollToTop";
 import { useEffect } from "react";
@@ -89,57 +91,92 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
     );
 
   return (
-    <Box className="addeditblog_container">
+    <div className="post_container">
       <ScrollToTop />
 
-      <Formik
-        enableReinitialize
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values, actions) => dispatch(addEditPost(values, id!))}
-      >
-        {(formikProps) => {
-          const {
-            values,
-            handleChange,
-            handleBlur,
-            touched,
-            errors,
-            setFieldValue,
-          } = formikProps;
+      <Breadcrumbs className="post_breadcrumb" aria-label="breadcrumb">
+        <Link underline="hover" color="inherit" href="/">
+          Home
+        </Link>
+        <Link
+          underline="hover"
+          color="inherit"
+          href="/material-ui/getting-started/installation/"
+        >
+          {blogData?.categories}
+        </Link>
+        <Link
+          underline="hover"
+          color="text.primary"
+          href="/material-ui/react-breadcrumbs/"
+          aria-current="page"
+        >
+          {blogData?.title}
+        </Link>
+      </Breadcrumbs>
 
-          return (
-            <Form>
-              <AddEditBanner
-                blogData={blogData}
-                userType={userType}
-                values={values}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                touched={touched}
-                errors={errors}
-              />
+      <div className="post_single">
+        <PostHeader blogData={blogData} />
 
-              <AddEditBody
-                setFieldValue={setFieldValue}
-                blogData={blogData}
-                userType={userType}
-                values={values}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-              />
-            </Form>
-          );
-        }}
-      </Formik>
+        <Formik
+          enableReinitialize
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={(values, actions) => dispatch(addEditPost(values, id!))}
+        >
+          {(formikProps) => {
+            const {
+              values,
+              handleChange,
+              handleBlur,
+              touched,
+              errors,
+              setFieldValue,
+            } = formikProps;
 
-      <Author author={blogData?.user} />
+            return (
+              <Form>
+                <PostBanner
+                  blogData={blogData}
+                  userType={userType}
+                  values={values}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  touched={touched}
+                  errors={errors}
+                />
 
-      {(userType === "isGuest" || userType === "isPoster") && (
-        <CommentList commentList={commentList} id={`${id}`} />
-      )}
-      {userType === "isGuest" && <Comment id={`${id}`} />}
-      {(userType === "isGuest" || userType === "isPoster") && <RelatedBlogs />}
-    </Box>
+                <PostContent
+                  setFieldValue={setFieldValue}
+                  blogData={blogData}
+                  userType={userType}
+                  values={values}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                />
+              </Form>
+            );
+          }}
+        </Formik>
+
+        <Author author={blogData?.user} />
+
+        {(userType === "isGuest" || userType === "isPoster") && (
+          <CommentList commentList={commentList} id={`${id}`} />
+        )}
+
+        {/* {userType === "isGuest" && <Comment id={`${id}`} />} */}
+
+        <Comment id={`${id}`} />
+
+        {/* {(userType === "isGuest" || userType === "isPoster") && (
+          <RelatedBlogs />
+        )} */}
+      </div>
+
+      <div className="post_right">
+        <InnerWrapper />
+      </div>
+    </div>
   );
 }

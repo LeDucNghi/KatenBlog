@@ -1,22 +1,14 @@
 @use "../../../../assets/styles/globalStyles.scss";
+@use "../../../../themes/general.scss";
+
+.comment_list_paginate {
+    position: relative;
+    width: 100%;
+
+    @include general.flexCenter;
+}
 
 .comment_list_container {
-    position: relative;
-
-    width: 80%;
-
-    margin: 5em 0;
-
-    font-size: 15px;
-
-    .comment_list_paginate {
-        position: relative;
-        width: 100%;
-
-        // display: flex;
-        // justify-content: center;
-    }
-
     .comment_items {
         margin: 1em 0;
     }
@@ -32,9 +24,8 @@
 
         margin-top: 1em;
 
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
+        @include general.flexCenter;
+
         flex-direction: column;
 
         .comment_list_empty_title {
@@ -45,7 +36,6 @@
         }
 
         .comment_list_empty_img {
-            // margin: 0 auto;
             width: 20%;
             height: 20%;
 
@@ -58,11 +48,8 @@
     }
 }
 
-// .comment_list_title {
-//     // text-align: center;
-//     font-size: 1.5em;
-//     font-weight: 600;
-//     text-decoration: underline;
-//     color: globalStyles.$button-color;
-//     padding-right: 2em;
-// }
+@media only screen and (max-width: 1024px) {
+    .comment_list_container {
+        font-size: 12px;
+    }
+}

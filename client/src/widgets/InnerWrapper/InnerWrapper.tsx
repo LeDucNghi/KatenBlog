@@ -23,7 +23,7 @@ export function InnerWrapper({ width }: IInnerWrapperProps) {
 
   return (
     <div className="inner_wrapper" style={{ width: width }}>
-      {pathname === `/profile/${id}` && (
+      {(pathname === `/profile/${id}` || pathname === `/post/${id}`) && (
         <RoundedWidget>
           <AboutWidget user={userProfile!} />
         </RoundedWidget>

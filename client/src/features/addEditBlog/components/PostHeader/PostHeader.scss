@@ -1,0 +1,21 @@
+@use "../../../../assets/styles/globalStyles.scss";
+
+.post_header {
+    position: relative;
+
+    width: 100%;
+
+    margin: 2em 0;
+
+    .post_title {
+        font-family: globalStyles.$poppinFont;
+        font-size: 2.4em;
+        color: globalStyles.$title-color;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .post_header {
+        font-size: 10px;
+    }
+}

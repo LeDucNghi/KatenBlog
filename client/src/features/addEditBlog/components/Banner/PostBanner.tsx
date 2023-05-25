@@ -1,20 +1,14 @@
-import "./AddEditBanner.scss";
+import "./PostBanner.scss";
 
 import { Post, UserType } from "../../../../models";
 
 import Button from "@mui/material/Button";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
-import moment from "moment";
 import { setImageFile } from "../../addEditSlice";
 import { useAppDispatch } from "../../../../app/hooks";
 import { useState } from "react";
 
-export interface IAddEditBannerProps {
+export interface IPostBannerProps {
   values: Post;
   handleChange: any;
   handleBlur: any;
@@ -24,7 +18,7 @@ export interface IAddEditBannerProps {
   blogData: Post | null | undefined;
 }
 
-export function AddEditBanner({
+export function PostBanner({
   values,
   handleBlur,
   handleChange,
@@ -32,7 +26,7 @@ export function AddEditBanner({
   errors,
   userType,
   blogData,
-}: IAddEditBannerProps) {
+}: IPostBannerProps) {
   const dispatch = useAppDispatch();
 
   var [image, setImage] = useState<File | null | string>(null);
@@ -46,7 +40,7 @@ export function AddEditBanner({
 
   return (
     <div className="addedit_banner_container">
-      <div className="addedit_banner_content">
+      {/* <div className="addedit_banner_content">
         <p className="banner_content_category">
           {userType === "isGuest" ? (
             `${blogData?.categories}`
@@ -67,7 +61,6 @@ export function AddEditBanner({
                 onBlur={handleBlur}
                 onChange={handleChange}
                 error={touched.categories && Boolean(errors.categories)}
-                // helperText={touched.categories && errors.categories}
               >
                 {categoriesOptions.map((items, key) => {
                   return (
@@ -124,7 +117,7 @@ export function AddEditBanner({
         <p className="banner_content_time">
           {moment(blogData?.createdAt).format("LL")} • 5 mins read
         </p>
-      </div>
+      </div> */}
 
       <div className="addedit_banner_image">
         {userType === "isGuest" ? null : (

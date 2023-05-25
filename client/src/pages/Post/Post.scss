@@ -1,0 +1,48 @@
+@use "../../themes/colors.scss";
+
+.post_container {
+    position: relative;
+
+    width: 80%;
+
+    margin: 1em auto 5em auto;
+
+    font-size: 15px;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .post_single {
+        position: relative;
+
+        width: 65%;
+    }
+
+    .post_right {
+        width: 35%;
+    }
+
+    .post_breadcrumb {
+        position: relative;
+
+        width: 100%;
+
+        color: colors.$light-grey;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .post_container {
+        flex-direction: column;
+
+        .post_single,
+        .post_right {
+            width: 100%;
+        }
+
+        .post_breadcrumb {
+            font-size: 10px;
+        }
+    }
+}
