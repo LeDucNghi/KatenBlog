@@ -8,6 +8,14 @@ const postsApi = {
     return axiosClient.get(url);
   },
 
+  getPostByCategories(
+    category: string,
+    { page, limit }: PaginationParams
+  ): Promise<PostListRes<Post>> {
+    const url = `/posts/categories/${category}?page=${page}&limit=${limit}`;
+    return axiosClient.get(url);
+  },
+
   addNewPost(params: Post): Promise<any> {
     const formData = new FormData();
 

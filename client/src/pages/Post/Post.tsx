@@ -28,15 +28,14 @@ import { Post } from "../../models";
 import { PostBanner } from "../../features/addEditBlog/components/Banner/PostBanner";
 import { PostContent } from "../../features/addEditBlog/components/Content/PostContent";
 import { PostHeader } from "../../features/addEditBlog/components/PostHeader/PostHeader";
-import { RelatedBlogs } from "../../features/addEditBlog/components/Related/Related";
 import { ScrollToTop } from "../../components/Common/ScrollToTop/ScrollToTop";
 import { useEffect } from "react";
 
-export interface IAddEditBlogProps {
+export interface IPostsProps {
   check?: "isGuest" | "isPoster" | "isAdd";
 }
 
-export default function AddEditBlog({ check }: IAddEditBlogProps) {
+export default function Posts({ check }: IPostsProps) {
   const { id } = useParams<string>();
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
@@ -165,9 +164,7 @@ export default function AddEditBlog({ check }: IAddEditBlogProps) {
           <CommentList commentList={commentList} id={`${id}`} />
         )}
 
-        {/* {userType === "isGuest" && <Comment id={`${id}`} />} */}
-
-        <Comment id={`${id}`} />
+        {userType === "isGuest" && <Comment id={`${id}`} />}
 
         {/* {(userType === "isGuest" || userType === "isPoster") && (
           <RelatedBlogs />

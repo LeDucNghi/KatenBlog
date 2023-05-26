@@ -35,6 +35,7 @@ export interface FetchingState {
   isPostList: boolean;
   isPostDetail: boolean;
   isComment: boolean;
+  isCategory: boolean;
 }
 
 export interface PostState {
@@ -47,6 +48,7 @@ export interface PostState {
 
   postList: Post[];
   userPostList: Post[];
+  categoryList: Post[];
   postData: Post | null | undefined;
 
   commentList: Comment[];

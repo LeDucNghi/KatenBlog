@@ -15,9 +15,9 @@ import { useAppDispatch } from "../../../app/hooks";
 export interface IHeaderProps {}
 
 export function Header(props: IHeaderProps) {
-  const { id } = useParams();
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
+  const { id, name } = useParams();
 
   const token = JSON.parse(localStorage.getItem("token")!);
 
@@ -41,7 +41,8 @@ export function Header(props: IHeaderProps) {
   if (pathname === "/signin") return <></>;
   if (pathname === "/signup") return <></>;
 
-  if (id && pathname === `/profile/${id}`) return <ProfileHeader />;
+  if (id && pathname === `/profile/${id}`) return <></>;
+  if (name && pathname === `/categories/${name}`) return <></>;
 
   return (
     <div className="header_container">

@@ -9,6 +9,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 import { InnerWrapper } from "../../widgets/InnerWrapper/InnerWrapper";
+import { ProfileBanner } from "../../components/Common/Banners/ProfileBanner";
 import { UserBlogList } from "../../features/profile/components/UserBlogList/UserBlogList";
 import { handleGetUserPost } from "../../features/addEditBlog/addEditThunk";
 import { useParams } from "react-router-dom";
@@ -26,14 +27,18 @@ export default function UserProfile(props: IUserProfileProps) {
   }, [id]);
 
   return (
-    <div className="profile_main_content">
-      <div className="profile_container">
-        <UserBlogList userBlogList={userBlogList} id={`${id}`} />
+    <>
+      <ProfileBanner />
 
-        <div className="profile_right">
-          <InnerWrapper />
+      <div className="profile_main_content">
+        <div className="profile_container">
+          <UserBlogList userBlogList={userBlogList} id={`${id}`} />
+
+          <div className="profile_right">
+            <InnerWrapper />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

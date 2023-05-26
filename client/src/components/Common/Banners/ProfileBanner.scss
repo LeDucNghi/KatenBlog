@@ -1,0 +1,80 @@
+@use "../../../assets/styles/globalStyles.scss";
+@use "../../../themes/widgets.scss";
+@use "../../../themes/general.scss";
+
+.profile_section {
+    position: relative;
+
+    width: 100%;
+
+    @include widgets.background_image("../../../assets/images/user-bg.jpg");
+
+    .section_blur {
+        @include widgets.section_blur;
+    }
+
+    .profile_about {
+        position: relative;
+
+        margin: 5em auto;
+
+        width: 50%;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-direction: column;
+
+        text-align: center;
+
+        h2 {
+            color: rgb(255, 255, 255);
+            font-size: 3.2em;
+            font-weight: 700;
+            line-height: 2em;
+        }
+
+        p {
+            color: #c6c4c9;
+            font-size: 1.2em;
+            text-align: center;
+            line-height: 2em;
+        }
+
+        button {
+            width: 9em;
+            height: 3em;
+
+            border: 0.1em solid #ffffff;
+            border-radius: 2em;
+
+            color: #ffffff;
+
+            font-size: 0.9em;
+            text-align: center;
+            text-transform: capitalize;
+
+            transition: all 0.3s ease-in-out;
+
+            background: transparent;
+
+            &:hover {
+                transition: all 0.3s ease-in-out;
+
+                background: #fff;
+                color: #000000;
+            }
+        }
+    }
+
+    .profile_foot {
+        position: relative;
+
+        bottom: -0.5em;
+
+        img {
+            display: inline;
+            fill: #ffffff;
+        }
+    }
+}

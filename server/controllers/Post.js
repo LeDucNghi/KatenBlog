@@ -17,6 +17,29 @@ const getAllPost = async (req, res) => {
   res.json({ data });
 };
 
+// GET POST BY CATEGORY
+const getPostByCategories = async (req, res) => {
+  const categoryName = await req.params.name;
+
+  if (!categoryName)
+    return res.status(404).send({ message: "Not found your categories 🤔" });
+
+  const categoriesData = await posts.findAll({
+    where: { categories: categoryName },
+  });
+
+  if (!categoriesData)
+    return res.status(404).send({
+      message: "This category does not have any posts 😢 Please try another!",
+    });
+  else {
+    const data = handlePaginate(req, categoriesData);
+    return res.status(200).send({
+      ...data,
+    });
+  }
+};
+
 // CREATE NEW POST
 const createPost = async (req, res) => {
   const post = await req.body;
@@ -222,4 +245,5 @@ module.exports = {
   increaseBlogView,
   findTrendingList,
   findUserPost,
+  getPostByCategories,
 };

@@ -6,9 +6,10 @@ import { SignUp } from "../pages/SignUp/SignUp";
 import { Test } from "../pages/test/test";
 
 const Home = React.lazy(() => import("../pages/Home/Home"));
-const AddEditBlog = React.lazy(() => import("../pages/Post/Post"));
+const Posts = React.lazy(() => import("../pages/Post/Post"));
 const Search = React.lazy(() => import("../pages/Search/Search"));
 const UserProfile = React.lazy(() => import("../pages/Profile/UserProfile"));
+const Categories = React.lazy(() => import("../pages/Categories/Categories"));
 
 export const routes = [
   {
@@ -38,7 +39,7 @@ export const routes = [
   {
     path: "add",
     title: "Create New Blog",
-    element: <AddEditBlog />,
+    element: <Posts />,
     loadingTimeout: 500,
     isLandingLayout: true,
   },
@@ -46,7 +47,7 @@ export const routes = [
   {
     path: "post/:id",
     title: "Our Blog",
-    element: <AddEditBlog />,
+    element: <Posts />,
     loadingTimeout: 1000,
     isLandingLayout: true,
   },
@@ -64,6 +65,14 @@ export const routes = [
     title: "Find Your Blog",
     element: <Search />,
     loadingTimeout: 1000,
+    isLandingLayout: true,
+  },
+
+  {
+    path: "categories/:name",
+    title: "",
+    element: <Categories />,
+    loadingTimeout: 0,
     isLandingLayout: true,
   },
 

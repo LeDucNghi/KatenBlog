@@ -26,6 +26,7 @@ const initialState: PostState = {
     isPostDetail: false,
     isPostList: false,
     isComment: false,
+    isCategory: false,
   },
 
   isPosting: {
@@ -43,6 +44,7 @@ const initialState: PostState = {
   postList: [],
   userPostList: [],
   commentList: [],
+  categoryList: [],
 
   imageFile: null,
   postData: null,
@@ -83,6 +85,10 @@ const postSlice = createSlice({
       state.userPostList = action.payload;
     },
 
+    fetchCategoryListSuccess(state, action: PayloadAction<Post[]>) {
+      state.categoryList = action.payload;
+    },
+
     fetchPagination(state, action: PayloadAction<PaginationParams>) {
       state.pagination.page = action.payload.page;
       state.pagination.limit = action.payload.limit;
@@ -117,6 +123,7 @@ export const {
   fetchPostDataSuccess,
   fetchPostListSuccess,
   fetchCommentListSuccess,
+  fetchCategoryListSuccess,
   fetchPagination,
   fetchPostDataFailed,
   setImageFile,
@@ -133,5 +140,6 @@ export const selectPostList = (state: RootState) => state.post.postList;
 export const selectCommentList = (state: RootState) => state.post.commentList;
 export const selectPaginate = (state: RootState) => state.post.pagination;
 export const selectUserPostList = (state: RootState) => state.post.userPostList;
+export const selectCategoryList = (state: RootState) => state.post.categoryList;
 
 export const postReducer = postSlice.reducer;

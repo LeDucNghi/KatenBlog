@@ -21,13 +21,11 @@ export function Router() {
               timeoutMs={route.loadingTimeout}
               fallback={<Loading />}
             >
-              <DocTitle title={`${route.title}`}>
-                {route.isLandingLayout ? (
-                  <LandingLayout>{route.element}</LandingLayout>
-                ) : (
-                  <AuthenticatedLayout>{route.element}</AuthenticatedLayout>
-                )}
-              </DocTitle>
+              {route.isLandingLayout ? (
+                <LandingLayout>{route.element}</LandingLayout>
+              ) : (
+                <AuthenticatedLayout>{route.element}</AuthenticatedLayout>
+              )}
             </CustomSuspense>
           }
         />

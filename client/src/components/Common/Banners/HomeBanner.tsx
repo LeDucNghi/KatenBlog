@@ -2,10 +2,10 @@ import "./HomeBanner.scss";
 
 import * as React from "react";
 
-import { BlogItems } from "../../BlogItems/BlogItems";
-import { BlogsSample } from "../../../../mock";
-import { CustomBackdrop } from "../../Backdrop/CustomBackdrop";
-import { RoundedWidget } from "../../../../widgets/RoundedWidget/RoundedWidgets";
+import { BlogItems } from "../BlogItems/BlogItems";
+import { BlogsSample } from "../../../mock";
+import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
+import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
 
 export interface IHomeBannerProps {}
 

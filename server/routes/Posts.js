@@ -12,12 +12,14 @@ const {
   increaseBlogView,
   findTrendingList,
   findUserPost,
+  getPostByCategories,
 } = require("../controllers/Post");
-const { posts } = require("../models");
-const { handlePaginate } = require("../services/Posts/Pagination");
 
 // GET ALL POST
 router.get("/getallpost", getAllPost);
+
+// GET POST BY CATEGORY
+router.get("/categories/:name", getPostByCategories);
 
 // CREATE A NEW POST
 router.post("/createpost", [validateToken, upload], createPost);

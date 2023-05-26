@@ -1,5 +1,6 @@
 import { Comment, PaginationParams, Post, Profile } from "../../models";
 import {
+  fetchCategoryListSuccess,
   fetchCommentList,
   fetchCommentListSuccess,
   fetchPagination,
@@ -209,5 +210,19 @@ export const handleGetUserPost =
         "🚀 ~ file: addEditThunk.ts:199 ~ handleGetUserPost ~ error:",
         error
       );
+    }
+  };
+
+// FETCH POST BY CATEGORIES
+export const fetchPostByCategory =
+  (category: string, { page, limit }: PaginationParams): AppThunk =>
+  async (dispatch, getState) => {
+    try {
+      const res = await postsApi.getPostByCategories(category, { page, limit });
+
+      dispatch(fetchCategoryListSuccess(res.data.data));
+      dispatch(fetchPagination(res.data.pagination!));
+    } catch (error) {
+      console.log("🚀 ~ file: addEditThunk.ts:222 ~ error:", error);
     }
   };
