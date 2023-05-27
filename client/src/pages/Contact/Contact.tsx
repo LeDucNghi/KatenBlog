@@ -49,7 +49,7 @@ export function Contact(props: IContactProps) {
         </div>
 
         <RoundedWidget
-          title={<h3>Send Message</h3>}
+          title="Send Message"
           isDivider
           anchorTitle="left"
           style={{
@@ -65,30 +65,37 @@ export function Contact(props: IContactProps) {
               id="outlined-basic"
               label="Your name"
               variant="outlined"
+              type="text"
             />
             <TextField
+              color="error"
               className="field_item"
               id="outlined-basic"
               label="Email address"
               variant="outlined"
+              type="email"
             />
             <TextField
+              color="error"
               className="field_item"
               id="outlined-basic"
               label="Subject"
               variant="outlined"
+              type="text"
             />
             <TextField
+              color="error"
               className="field_item"
               id="outlined-basic"
               label="Your message here..."
               variant="outlined"
+              type="text"
               multiline
               rows={10}
             />
           </div>
 
-          <button>Submit message</button>
+          <button type="button">Submit message</button>
         </RoundedWidget>
       </div>
     </>
