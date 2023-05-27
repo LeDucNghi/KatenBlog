@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { Contact } from "../pages/Contact/Contact";
 import NotFound from "../components/Common/NotFound/NotFound";
 import { SignIn } from "../pages/SignIn/SignIn";
 import { SignUp } from "../pages/SignUp/SignUp";
@@ -72,6 +73,14 @@ export const routes = [
     path: "categories/:name",
     title: "",
     element: <Categories />,
+    loadingTimeout: 0,
+    isLandingLayout: true,
+  },
+
+  {
+    path: "contact",
+    title: "",
+    element: <Contact />,
     loadingTimeout: 0,
     isLandingLayout: true,
   },

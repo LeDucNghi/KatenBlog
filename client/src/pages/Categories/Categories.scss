@@ -7,25 +7,25 @@
 
     width: 100%;
 
-    .categories_head {
-        width: 100%;
+    // .categories_head {
+    //     width: 100%;
 
-        background: #f1f8ff;
+    //     background: #f1f8ff;
 
-        @include general.flexCenter;
-        flex-direction: column;
+    //     @include general.flexCenter;
+    //     flex-direction: column;
 
-        padding: 2em;
+    //     padding: 2em;
 
-        margin: 1em 0;
+    //     margin: 1em 0;
 
-        .header_title {
-            color: colors.$title-color;
-            font-family: globalStyles.$poppinFont;
-            font-weight: 800;
-            font-size: 1.5em;
-        }
-    }
+    //     .header_title {
+    //         color: colors.$title-color;
+    //         font-family: globalStyles.$poppinFont;
+    //         font-weight: 800;
+    //         font-size: 1.5em;
+    //     }
+    // }
 
     .categories_content {
         display: flex;

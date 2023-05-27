@@ -1,0 +1,99 @@
+@use "../../themes/colors.scss";
+@use "../../themes/widgets.scss";
+@use "../../themes/general.scss";
+@use "../../assets/styles/globalStyles.scss";
+
+.contact_wrapper {
+    position: relative;
+
+    width: 80%;
+
+    margin: 0 auto;
+
+    .contact_info {
+        width: 100%;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .info_items {
+            width: 30%;
+
+            display: flex;
+            justify-content: space-between;
+
+            border-radius: 1em;
+            border: 0.1em solid #ebebeb;
+
+            padding: 1em;
+
+            .icon {
+                width: 3.3em;
+                height: 3.3em;
+
+                border-radius: 1em;
+
+                color: #ffff;
+
+                @include widgets.background_right;
+
+                @include general.flexCenter;
+            }
+
+            .info_content {
+                display: flex;
+                flex-direction: column;
+
+                width: 75%;
+
+                h3 {
+                    font-size: 1.3em;
+                    font-weight: 700;
+                    color: colors.$title-color;
+                    font-family: globalStyles.$poppinFont;
+                }
+
+                p {
+                    color: colors.$light-grey;
+                    font-size: 1em;
+                    font-family: globalStyles.$robotoFont;
+                }
+            }
+        }
+    }
+
+    .contact_fields {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        .field_item {
+            margin-bottom: 1em;
+
+            border-radius: 1em;
+
+            &:first-child,
+            &:nth-child(2) {
+                width: 48%;
+            }
+
+            &:nth-child(3),
+            &:last-child {
+                width: 100%;
+            }
+        }
+    }
+
+    button {
+        padding: 1em 2em;
+        border-radius: 1.5em;
+
+        @include widgets.background_right;
+
+        font-size: 0.9em;
+        text-align: center;
+        font-family: globalStyles.$robotoFont;
+        font-weight: 500;
+    }
+}

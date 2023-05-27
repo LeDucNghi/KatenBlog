@@ -2,8 +2,7 @@ import "./Categories.scss";
 
 import * as React from "react";
 
-import { Breadcrumbs, Link } from "@mui/material";
-
+import { CategoriesBanner } from "../../components/Common/Banners/CategoriesBanner";
 import { CategoriesList } from "../../features/filter/components/CategoriesList";
 import { Images } from "../../constants";
 import { InnerWrapper } from "../../widgets/InnerWrapper/InnerWrapper";
@@ -26,22 +25,7 @@ export default function Categories(props: ICategoriesProps) {
     <>
       <ProfileHeader title="Katen." image={Images.logoBrand} color="#203656" />{" "}
       <div className="categories_wrapper">
-        <div className="categories_head">
-          <h1 className="header_title">{name}</h1>
-
-          <Breadcrumbs className="post_breadcrumb" aria-label="breadcrumb">
-            <Link underline="hover" color="inherit" href="/">
-              Home
-            </Link>
-            <Link
-              underline="hover"
-              color="inherit"
-              href="/material-ui/getting-started/installation/"
-            >
-              {name}
-            </Link>
-          </Breadcrumbs>
-        </div>
+        <CategoriesBanner categoriesName={`${name}`} />
 
         <div className="categories_content">
           <CategoriesList name={`${name}`} />

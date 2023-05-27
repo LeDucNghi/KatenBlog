@@ -18,7 +18,10 @@ export type IconName =
   | "book"
   | "setting"
   | "logout"
-  | "avatar";
+  | "avatar"
+  | "phone"
+  | "mail"
+  | "location";
 
 export type IconsFontSize = "large" | "medium" | "small";
 

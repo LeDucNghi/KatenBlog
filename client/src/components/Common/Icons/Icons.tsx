@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import DraftsIcon from "@mui/icons-material/Drafts";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import HeadphonesOutlinedIcon from "@mui/icons-material/HeadphonesOutlined";
@@ -8,7 +9,9 @@ import { IIconsProps } from "../../../models";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import Logout from "@mui/icons-material/Logout";
+import MapIcon from "@mui/icons-material/Map";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PersonIcon from "@mui/icons-material/Person";
@@ -166,6 +169,29 @@ export function Icons({ iconName, className, fontSize, style }: IIconsProps) {
         fontSize={fontSize}
         style={style}
       />
+    );
+
+  if (iconName === "phone")
+    return (
+      <LocalPhoneIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
+
+  if (iconName === "mail")
+    return (
+      <DraftsIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
+    );
+
+  if (iconName === "location")
+    return (
+      <MapIcon className={`${className}`} fontSize={fontSize} style={style} />
     );
 
   return null;

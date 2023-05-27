@@ -1,0 +1,29 @@
+@use "../../../themes/colors.scss";
+@use "../../../themes/general.scss";
+@use "../../../assets/styles/globalStyles.scss";
+
+.categories_wrapper {
+    width: 100%;
+
+    background: #f1f8ff;
+
+    @include general.flexCenter;
+    flex-direction: column;
+
+    padding: 2em;
+
+    margin: 1em 0;
+
+    .categories_title {
+        color: colors.$title-color;
+        font-family: globalStyles.$poppinFont;
+        font-weight: 800;
+        font-size: 1.5em;
+    }
+
+    .categories_breadcrumb {
+        color: colors.$light-grey;
+        font-size: 0.9em;
+        line-height: 1.6em;
+    }
+}
