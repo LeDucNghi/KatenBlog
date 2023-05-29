@@ -55,22 +55,22 @@ export const NavbarWidget = [
   {
     id: 2,
     name: "LifeStyle",
-    route: "/",
+    route: "/categories/lifestyle",
   },
   {
     id: 3,
     name: "Inspiration",
-    route: "/",
+    route: "/categories/inspiration",
   },
   {
     id: 4,
-    name: "Pages",
-    route: "/",
+    name: "Food and Drink",
+    route: "/categories/food",
   },
   {
     id: 5,
     name: "Contact",
-    route: "/",
+    route: "/categories/contact",
   },
 ];
 
@@ -113,28 +113,28 @@ export const accountMenuWidget = (id: string | number) => {
       id: 1,
       name: "Profile",
       route: `/profile/${id}`,
-      icon: "person" as IconName ,
+      icon: "person" as IconName,
     },
     {
       id: 2,
       name: "Your Blogs",
       route: "/about",
-      icon: "book" as IconName ,
+      icon: "book" as IconName,
     },
     {
       id: 3,
       name: "Settings",
       route: "/",
-      icon: "setting" as IconName ,
+      icon: "setting" as IconName,
     },
 
     {
       id: 4,
       name: "Logout",
       route: "/",
-      icon: "logout" as IconName ,
+      icon: "logout" as IconName,
     },
   ];
 
-  return menu
-}
+  return menu;
+};

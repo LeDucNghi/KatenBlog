@@ -7,7 +7,7 @@ export const BlogsSample = [
     image: faker.image.image(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
-    createdAt: "May 10, 2020",
+    createdAt: `${new Date()}`,
     subTitle:
       "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
     user: {
@@ -22,7 +22,7 @@ export const BlogsSample = [
     image: faker.image.image(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
-    createdAt: "May 10, 2020",
+    createdAt: `${new Date()}`,
     subTitle:
       "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
     user: {
@@ -38,7 +38,7 @@ export const BlogsSample = [
     image: faker.image.image(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
-    createdAt: "May 10, 2020",
+    createdAt: `${new Date()}`,
     subTitle:
       "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
     user: {
@@ -53,7 +53,7 @@ export const BlogsSample = [
     image: faker.image.image(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
-    createdAt: "May 10, 2020",
+    createdAt: `${new Date()}`,
     subTitle:
       "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
     user: {
@@ -68,7 +68,7 @@ export const BlogsSample = [
     image: faker.image.image(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
-    createdAt: "May 10, 2020",
+    createdAt: `${new Date()}`,
     subTitle:
       "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
     user: {
@@ -84,7 +84,7 @@ export const BlogsSample = [
     image: faker.image.image(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
-    createdAt: "May 10, 2020",
+    createdAt: `${new Date()}`,
     subTitle:
       "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
     user: {
@@ -100,7 +100,7 @@ export const BlogsSample = [
     image: faker.image.image(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
-    createdAt: "May 10, 2020",
+    createdAt: `${new Date()}`,
     subTitle:
       "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
     user: {
@@ -116,7 +116,7 @@ export const BlogsSample = [
     image: faker.image.image(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
-    createdAt: "May 10, 2020",
+    createdAt: `${new Date()}`,
     subTitle:
       "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
     user: {
@@ -140,25 +140,3 @@ export const comments = [...Array(3)].map((_, index) => ({
   date: moment(faker.date.recent()).format("LL"),
   comment: faker.lorem.paragraph(),
 }));
-
-export const BlogsData = [
-  ...Array(10).map((index) => ({
-    id: faker.datatype.uuid(),
-    title: "THIS IS MY THIRD BLOG",
-    subTitle: "HOPE YOU GUYS ENJOY IT AGAIN & AGAIN",
-    image: faker.image.image(),
-    categories: faker.helpers.arrayElement([
-      "LifeStyle",
-      "Inspiration",
-      "Fashion",
-      "Politic",
-      "Trending",
-      "Culture",
-    ]),
-    user: {
-      id: faker.datatype.uuid(),
-      fullname: faker.name.fullName(),
-      avatar: faker.image.avatar(),
-    },
-  })),
-];

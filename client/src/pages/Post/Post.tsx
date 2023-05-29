@@ -100,7 +100,7 @@ export default function Posts({ check }: IPostsProps) {
         <Link
           underline="hover"
           color="inherit"
-          href="/material-ui/getting-started/installation/"
+          href={`/categories/${blogData?.categories}`}
         >
           {blogData?.categories}
         </Link>

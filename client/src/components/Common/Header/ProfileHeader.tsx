@@ -1,10 +1,12 @@
 import "./ProfileHeader.scss";
 
 import { BREAK_POINTS_NUMBER, NavbarWidget } from "../../../constants";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
 import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
+import { useState } from "react";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 
 export interface IProfileHeaderProps {
@@ -28,6 +30,15 @@ export function ProfileHeader({
   style,
 }: IProfileHeaderProps) {
   const { windowInnerWidth } = useWindowSize();
+  const navigate = useNavigate();
+  const { name } = useParams();
+
+  const [active, setActive] = useState("Home");
+
+  const handleActiveNavbar = (name: string, route: string) => {
+    setActive(name);
+    navigate(route);
+  };
 
   return (
     <div className="profile_header" style={style}>
@@ -74,14 +85,17 @@ export function ProfileHeader({
         <div className="nav_header">
           {NavbarWidget.map((nav, key) => {
             return (
-              <a
+              <button
                 key={key}
-                href={nav.route}
-                className={nav.id === 1 ? "nav_items isActive" : "nav_items"}
+                // href={nav.route}
+                onClick={() => handleActiveNavbar(nav.name, nav.route)}
+                className={
+                  active === nav.name ? "nav_items isActive" : "nav_items"
+                }
                 style={{ color: color }}
               >
                 {nav.name}{" "}
-              </a>
+              </button>
             );
           })}
         </div>

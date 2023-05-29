@@ -6,7 +6,6 @@ import { useLocation, useParams } from "react-router-dom";
 import { CustomDrawer } from "../Drawer/Drawer";
 import { HeaderDrawer } from "./Drawer";
 import { Navbar } from "./Navbar";
-import { ProfileHeader } from "./ProfileHeader";
 import { getUserProfile } from "../../../features/auth/authThunk";
 import { handleGetAllPost } from "../../../features/addEditBlog/addEditThunk";
 import { logout } from "../../../features/auth/authSlice";
@@ -19,6 +18,7 @@ export function Header(props: IHeaderProps) {
   const { pathname } = useLocation();
   const { id, name } = useParams();
 
+  console.log("🚀 ~ file: Header.tsx:19 ~ Header ~ pathname:", pathname);
   const token = JSON.parse(localStorage.getItem("token")!);
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
