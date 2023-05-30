@@ -36,6 +36,10 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
     password: "",
     fullname: "",
   };
+  console.log(
+    "🚀 ~ file: AuthForm.tsx:39 ~ AuthForm ~ signInInitialValues:",
+    signInInitialValues
+  );
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()

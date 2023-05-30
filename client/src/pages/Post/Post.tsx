@@ -8,6 +8,7 @@ import {
   addEditPost,
   handleGetDetailPost,
   handleGetPostComment,
+  updateRecentBlog,
 } from "../../features/addEditBlog/addEditThunk";
 import {
   selectCommentList,
@@ -15,7 +16,11 @@ import {
   selectPaginate,
   selectPostData,
 } from "../../features/addEditBlog/addEditSlice";
-import { selectGetUserType, setUserType } from "../../features/auth/authSlice";
+import {
+  selectGetUserType,
+  selectIsLoggedIn,
+  setUserType,
+} from "../../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useLocation, useParams } from "react-router-dom";
 
@@ -41,6 +46,7 @@ export default function Posts({ check }: IPostsProps) {
   const dispatch = useAppDispatch();
   const blogData = useAppSelector(selectPostData);
   const userType = useAppSelector(selectGetUserType);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const isError = useAppSelector(selectFetchPostFailed);
   const commentList = useAppSelector(selectCommentList);
   const commentListPaginate = useAppSelector(selectPaginate);
@@ -51,10 +57,12 @@ export default function Posts({ check }: IPostsProps) {
     } else {
       dispatch(handleGetDetailPost(id!));
       dispatch(handleGetPostComment(id!, commentListPaginate));
-
-      if (userType === "isPoster") console.log();
     }
-  }, [id, pathname]);
+  }, [id, pathname, dispatch]);
+
+  useEffect(() => {
+    if (blogData && isLoggedIn) dispatch(updateRecentBlog(id!));
+  }, [dispatch, blogData, isLoggedIn]);
 
   const initialValues: Post = {
     title: blogData ? blogData?.title : "",
@@ -81,11 +89,14 @@ export default function Posts({ check }: IPostsProps) {
       .required("Let us know your blog's content 🤔"),
   });
 
-  if (isError?.isError)
+  if (!blogData || isError?.isError)
     return (
       <NotFound
         title="Sorry, blog not found"
-        content={`Sorry, we couldn’t find the blog you’re looking for. Perhaps you’ve mistyped the URL? Be sure to check your spelling.`}
+        content={isError!.repsonse.data.message}
+        secondaryButton
+        secondButtonContent="Add a new one? 🤔"
+        secondRoute="/add"
       />
     );
 

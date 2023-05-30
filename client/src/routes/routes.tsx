@@ -38,14 +38,6 @@ export const routes = [
   },
 
   {
-    path: "add",
-    title: "Create New Blog",
-    element: <Posts />,
-    loadingTimeout: 500,
-    isLandingLayout: true,
-  },
-
-  {
     path: "post/:id",
     title: "Our Blog",
     element: <Posts />,
@@ -81,6 +73,14 @@ export const routes = [
     path: "contact",
     title: "",
     element: <Contact />,
+    loadingTimeout: 0,
+    isLandingLayout: true,
+  },
+
+  {
+    path: "add",
+    title: "",
+    element: <Posts />,
     loadingTimeout: 0,
     isLandingLayout: true,
   },

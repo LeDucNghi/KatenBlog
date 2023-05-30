@@ -69,3 +69,12 @@ export interface PostTopicWidget {
 
   topicContent: Post[];
 }
+
+export interface RecentBlog {
+  id: string | number;
+  createdAt?: string;
+  updatedAt?: string;
+  userId: number;
+  postId: number;
+  post: Post;
+}

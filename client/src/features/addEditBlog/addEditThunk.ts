@@ -53,7 +53,6 @@ export const handleGetDetailPost =
         await dispatch(fetchPostDataSuccess(res.data.post));
       }
     } catch (error: any) {
-      console.log("🚀 ~ file: addEditThunk.ts:52 ~ error:", error);
       if (error && error.response) {
         const status: number = error.response.status;
         const message: string = error.response.data.message;
@@ -224,5 +223,17 @@ export const fetchPostByCategory =
       dispatch(fetchPagination(res.data.pagination!));
     } catch (error) {
       console.log("🚀 ~ file: addEditThunk.ts:222 ~ error:", error);
+    }
+  };
+
+// UPDATE RECENT BLOG
+export const updateRecentBlog =
+  (postId: string): AppThunk =>
+  async (dispatch, getState) => {
+    try {
+      const res = await postsApi.updateRecentBlog(postId);
+      console.log("🚀 ~ file: addEditThunk.ts:236 ~ res:", res);
+    } catch (error) {
+      console.log("🚀 ~ file: addEditThunk.ts:237 ~ error:", error);
     }
   };

@@ -91,6 +91,11 @@ const postsApi = {
     const url = `/posts/userpostlist/${id}?page=${page}&limit=${limit}&type=${type}`;
     return axiosClient.get(url);
   },
+
+  updateRecentBlog(postId: string): Promise<any> {
+    const url = `/posts/recent/${postId}`;
+    return axiosClient.post(url);
+  },
 };
 
 export default postsApi;

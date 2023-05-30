@@ -1,5 +1,23 @@
 module.exports = (sequalize, DataTypes) => {
-  const recents = sequalize.define("recents");
+  const recents = sequalize.define(
+    "recents",
+    {
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: new Date(),
+      },
+
+      createddAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: new Date(),
+      },
+    },
+    {
+      timestamps: false,
+    }
+  );
 
   recents.associate = (models) => {
     recents.belongsTo(models.users, {

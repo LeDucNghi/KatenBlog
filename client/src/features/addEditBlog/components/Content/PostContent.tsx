@@ -2,7 +2,6 @@ import "./PostContent.scss";
 
 import { Post, UserType } from "../../../../models";
 
-import { Box } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import ReactQuill from "react-quill";
 import { selectPostingStatus } from "../../addEditSlice";

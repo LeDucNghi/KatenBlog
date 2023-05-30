@@ -1,4 +1,5 @@
 import avatar from "../assets/images/avatar.png";
+import blogFormBackground from "../assets/images/blog-form-background.jpg";
 import logo from "../assets/images/svg/logo.svg";
 import logoBrand from "../assets/images/brand/brand-logo.png";
 import notask from "../assets/images/no-task.png";
@@ -18,4 +19,5 @@ export const Images = {
   titleWave,
   logo,
   thumbnail,
+  blogFormBackground,
 };

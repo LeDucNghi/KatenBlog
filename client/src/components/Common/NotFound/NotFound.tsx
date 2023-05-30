@@ -1,30 +1,19 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 
 import { Images } from "../../../constants/image";
-import PropTypes from "prop-types";
 import { Link as RouterLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-
-// NotFound.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   content: PropTypes.string,
-//   route: PropTypes.string,
-//   buttonContent: PropTypes.string.isRequired,
-// };
-
-// NotFound.defaultProps = {
-//   title: "Sorry, page not found!",
-//   content:
-//     "Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be sure to check your spelling.",
-//   route: "/",
-//   buttonContent: "Go to Home",
-// };
 
 export interface INotFoundProps {
   title: string;
   content: string;
+
   route: string;
   buttonContent: string;
+
+  secondaryButton?: boolean;
+  secondRoute?: string;
+  secondButtonContent?: string;
 }
 
 NotFound.defaultProps = {
@@ -54,6 +43,10 @@ export default function NotFound({
   content,
   route,
   buttonContent,
+
+  secondRoute,
+  secondaryButton,
+  secondButtonContent,
 }: INotFoundProps) {
   return (
     <Container>
@@ -70,14 +63,33 @@ export default function NotFound({
           sx={{ height: 260, mx: "auto", my: { xs: 5, sm: 10 } }}
         />
 
-        <Button
-          to={route}
-          size="large"
-          variant="contained"
-          component={RouterLink}
+        <Box
+          sx={{
+            width: "80%",
+            display: "flex",
+            justifyContent: secondaryButton ? "space-between" : "center",
+          }}
         >
-          {buttonContent}
-        </Button>
+          <Button
+            to={route}
+            size="large"
+            variant="contained"
+            component={RouterLink}
+          >
+            {buttonContent}
+          </Button>
+
+          {secondaryButton && (
+            <Button
+              to={`${secondRoute}`}
+              size="large"
+              variant="contained"
+              component={RouterLink}
+            >
+              {secondButtonContent}
+            </Button>
+          )}
+        </Box>
       </ContentStyle>
     </Container>
   );

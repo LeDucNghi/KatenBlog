@@ -17,8 +17,6 @@ export function Header(props: IHeaderProps) {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const { id, name } = useParams();
-
-  console.log("🚀 ~ file: Header.tsx:19 ~ Header ~ pathname:", pathname);
   const token = JSON.parse(localStorage.getItem("token")!);
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);

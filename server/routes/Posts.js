@@ -14,7 +14,7 @@ const {
   findUserPost,
   getPostByCategories,
 } = require("../controllers/Post");
-const { recents, posts } = require("../models");
+const { recents, posts, users } = require("../models");
 
 // GET ALL POST
 router.get("/getallpost", getAllPost);
@@ -50,19 +50,23 @@ router.get("/userpostlist/:id", findUserPost);
 router.post("/recent/:postId", validateToken, async (req, res) => {
   const postId = Number(req.params.postId);
   const userId = req.user.id;
+  const createdAt = req.body.createdAt;
+  const updatedAt = req.body.updatedAt;
 
-  const findRecentBlog = await recents.findOne({
-    where: { userId: userId, postId: postId },
-  });
+  // const findRecentBlog = await recents.findOne({
+  //   where: { userId: userId, postId: postId },
+  // });
 
-  if (findRecentBlog) {
-    await recents.update(
-      { updatedAt: new Date() },
-      { where: { postId: postId } }
-    );
-  } else {
-    await recents.create({ postId, userId });
-  }
+  // if (findRecentBlog) {
+  //   await recents.update(
+  //     { updatedAt: new Date() },
+  //     { where: { postId: postId } }
+  //   );
+  // } else {
+  //   await recents.create({ postId, userId, createdAt, updatedAt });
+  // }
+
+  await recents.create({ postId, userId, createdAt, updatedAt });
 
   res
     .status(200)
@@ -77,6 +81,9 @@ router.get("/getrecentblog", validateToken, async (req, res) => {
     where: { userId: userId },
     include: {
       model: posts,
+      include: {
+        model: users,
+      },
     },
   });
 

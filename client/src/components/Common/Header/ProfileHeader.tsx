@@ -31,7 +31,6 @@ export function ProfileHeader({
 }: IProfileHeaderProps) {
   const { windowInnerWidth } = useWindowSize();
   const navigate = useNavigate();
-  const { name } = useParams();
 
   const [active, setActive] = useState("Home");
 

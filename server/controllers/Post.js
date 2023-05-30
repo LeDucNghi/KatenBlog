@@ -89,7 +89,10 @@ const getDetailPost = async (req, res) => {
     ],
   });
 
-  if (!post) res.status(404).json({ message: "Can not find your blog" });
+  if (!post)
+    res.status(404).json({
+      message: `Sorry, we couldn’t find the blog you’re looking for. Perhaps you’ve mistyped the URL? Be sure to check your spelling.`,
+    });
   else {
     // nếu như user đã login và có cả userType từ middlewares trả về
     if (req.user && req.user.id && !req.userType) {
