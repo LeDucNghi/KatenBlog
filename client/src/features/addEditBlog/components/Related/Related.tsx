@@ -16,6 +16,7 @@ export function RelatedBlogs(props: IRelatedBlogsProps) {
         {BlogsSample.slice(0, 4).map((blogs, key) => {
           return (
             <BlogItems
+              id={`${blogs.id}`}
               direction="vertical"
               items={blogs}
               key={key}

@@ -10,6 +10,8 @@ import {
   fetchPostList,
   fetchPostListSuccess,
   fetchUserPostList,
+  fetchUserRecentBlog,
+  fetchingRecentBlog,
   setPostingStatus,
 } from "./addEditSlice";
 
@@ -231,9 +233,19 @@ export const updateRecentBlog =
   (postId: string): AppThunk =>
   async (dispatch, getState) => {
     try {
-      const res = await postsApi.updateRecentBlog(postId);
-      console.log("🚀 ~ file: addEditThunk.ts:236 ~ res:", res);
+      await postsApi.updateRecentBlog(postId);
     } catch (error) {
       console.log("🚀 ~ file: addEditThunk.ts:237 ~ error:", error);
     }
   };
+
+export const getUserRecentBlog = (): AppThunk => async (dispatch, getState) => {
+  dispatch(fetchingRecentBlog());
+
+  try {
+    const res = await postsApi.getUserRecentBlog();
+    dispatch(fetchUserRecentBlog(res.data.data));
+  } catch (error) {
+    console.log("🚀 ~ file: addEditThunk.ts:246 ~ error:", error);
+  }
+};

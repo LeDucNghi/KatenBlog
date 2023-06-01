@@ -7,6 +7,7 @@ import { ListItemButton, Paper } from "@mui/material";
 import { DetailWidget } from "../../../widgets/DetailWidget/DetailWidget";
 import { Icons } from "../Icons/Icons";
 import { Post } from "../../../models";
+import { useNavigate } from "react-router-dom";
 
 export interface IBlogItemsProps {
   // horizontal : ngang
@@ -19,7 +20,7 @@ export interface IBlogItemsProps {
   isThumbedNail?: boolean;
   fontSize?: string;
   showBadge: boolean;
-  onclick?: any;
+  id: string;
 }
 
 export function BlogItems({
@@ -31,8 +32,14 @@ export function BlogItems({
   fontSize,
   style,
   showBadge,
-  onclick,
+  id,
 }: IBlogItemsProps) {
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate(`/post/${id}`);
+  };
+
   return (
     <Paper
       elevation={8}
@@ -52,7 +59,7 @@ export function BlogItems({
         style={{
           fontSize: fontSize,
         }}
-        onClick={onclick}
+        onClick={onClick}
       >
         <div
           className={`${

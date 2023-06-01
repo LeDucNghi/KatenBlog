@@ -1,7 +1,8 @@
-const { posts, likes, users } = require("../models");
+const { posts, likes, users, recents } = require("../models");
 const { handlePaginate } = require("../services/Posts/Pagination");
 
 const { uploadImage } = require("../services/Posts/imageUpload");
+const { handleSortList } = require("../services/Posts/sortList");
 
 // GET ALL POST
 const getAllPost = async (req, res) => {
@@ -237,6 +238,57 @@ const findUserPost = async (req, res) => {
   }
 };
 
+const updateUserRecentBlog = async (req, res) => {
+  const postId = Number(req.params.postId);
+  const userId = req.user.id;
+
+  await recents.create({ postId, userId });
+
+  res
+    .status(200)
+    .send({ message: `You've just read blog ${req.params.postId}` });
+};
+
+const getUserRecentBlog = async (req, res) => {
+  const userId = req.user.id;
+
+  const data = await recents.findAll({
+    where: { userId: userId },
+    include: {
+      model: posts,
+      include: {
+        model: users,
+      },
+    },
+  });
+
+  // sort by newest user's recent blog
+  const sortedData = await handleSortList(data, "latest");
+
+  // remove duplicate recent blog
+  const newData = [
+    ...new Map(sortedData.map((data) => [data.post.id, data])).values(),
+  ];
+
+  res.status(200).send({ data: newData });
+};
+
+const getLatestBlogList = async (req, res) => {
+  const data = await posts.findAll({
+    include: {
+      model: users,
+      attributes: {
+        exclude: ["password", "username"],
+      },
+    },
+  });
+
+  const sortByLatest = await handleSortList(data, "latest");
+  const paginatedResults = await handlePaginate(req, sortByLatest);
+
+  res.status(200).send({ data: paginatedResults });
+};
+
 module.exports = {
   getAllPost,
   createPost,
@@ -249,4 +301,7 @@ module.exports = {
   findTrendingList,
   findUserPost,
   getPostByCategories,
+  updateUserRecentBlog,
+  getUserRecentBlog,
+  getLatestBlogList,
 };

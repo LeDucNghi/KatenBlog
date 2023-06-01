@@ -44,7 +44,7 @@ export function CategoriesList({ name }: ICategoriesListProps) {
               style={{
                 width: "45%",
               }}
-              onclick={() => navigate(`/post/${blogs.id}`)}
+              id={`${blogs.id}`}
             />
           );
         })}

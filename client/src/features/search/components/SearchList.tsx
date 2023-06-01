@@ -60,7 +60,7 @@ export function SearchList({ keyword, postList }: ISearchListProps) {
                 direction="vertical"
                 isThumbedNail={false}
                 showBadge={false}
-                onclick={() => navigate(`/post/${blogs.id}`)}
+                id={`${blogs.id}`}
                 style={{
                   width: "25%",
                   margin: "1em 0.5em",

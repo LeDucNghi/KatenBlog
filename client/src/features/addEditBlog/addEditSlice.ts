@@ -5,6 +5,7 @@ import {
   PaginationParams,
   Post,
   PostState,
+  RecentBlog,
 } from "../../models";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
@@ -27,6 +28,7 @@ const initialState: PostState = {
     isPostList: false,
     isComment: false,
     isCategory: false,
+    isRecentBlog: false,
   },
 
   isPosting: {
@@ -45,6 +47,7 @@ const initialState: PostState = {
   userPostList: [],
   commentList: [],
   categoryList: [],
+  recentList: [],
 
   imageFile: null,
   postData: null,
@@ -64,6 +67,10 @@ const postSlice = createSlice({
 
     fetchCommentList(state) {
       state.isFetChing.isComment = true;
+    },
+
+    fetchingRecentBlog(state) {
+      state.isFetChing.isRecentBlog = true;
     },
 
     fetchPostListSuccess(state, action: PayloadAction<Post[]>) {
@@ -87,6 +94,11 @@ const postSlice = createSlice({
 
     fetchCategoryListSuccess(state, action: PayloadAction<Post[]>) {
       state.categoryList = action.payload;
+    },
+
+    fetchUserRecentBlog(state, action: PayloadAction<RecentBlog[]>) {
+      state.isFetChing.isRecentBlog = false;
+      state.recentList = action.payload;
     },
 
     fetchPagination(state, action: PayloadAction<PaginationParams>) {
@@ -118,6 +130,7 @@ const postSlice = createSlice({
 export const {
   fetchPostData,
   fetchPostList,
+  fetchingRecentBlog,
   fetchCommentList,
   fetchUserPostList,
   fetchPostDataSuccess,
@@ -128,6 +141,7 @@ export const {
   fetchPostDataFailed,
   setImageFile,
   setPostingStatus,
+  fetchUserRecentBlog,
 } = postSlice.actions;
 
 export const selectPostData = (state: RootState) => state.post.postData;
@@ -141,5 +155,6 @@ export const selectCommentList = (state: RootState) => state.post.commentList;
 export const selectPaginate = (state: RootState) => state.post.pagination;
 export const selectUserPostList = (state: RootState) => state.post.userPostList;
 export const selectCategoryList = (state: RootState) => state.post.categoryList;
+export const selectUserRecentBlog = (state: RootState) => state.post.recentList;
 
 export const postReducer = postSlice.reducer;

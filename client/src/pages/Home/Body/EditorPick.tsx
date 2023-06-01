@@ -26,6 +26,7 @@ export function EditorPick(props: IEditorPickProps) {
                 style={{
                   marginBottom: "1em",
                 }}
+                id={`${blogs.id}`}
               />
             );
           })}
@@ -41,6 +42,7 @@ export function EditorPick(props: IEditorPickProps) {
                 showBadge={false}
                 items={blogs}
                 fontSize="14px"
+                id={`${blogs.id}`}
                 style={{
                   marginBottom: "1em",
                   height: "6.5em",

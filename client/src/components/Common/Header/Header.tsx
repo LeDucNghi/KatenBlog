@@ -14,9 +14,9 @@ import { useAppDispatch } from "../../../app/hooks";
 export interface IHeaderProps {}
 
 export function Header(props: IHeaderProps) {
-  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const { id, name } = useParams();
+  const dispatch = useAppDispatch();
   const token = JSON.parse(localStorage.getItem("token")!);
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
@@ -26,11 +26,8 @@ export function Header(props: IHeaderProps) {
     if (!token) {
       dispatch(logout());
     }
-  }, [dispatch, token]);
-
-  useEffect(() => {
     dispatch(getUserProfile());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   useEffect(() => {
     dispatch(handleGetAllPost());

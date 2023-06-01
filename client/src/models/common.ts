@@ -12,6 +12,12 @@ export interface PostListRes<T> {
   };
 }
 
+export interface RecentBlogRes<T> {
+  data: {
+    data: T[];
+  };
+}
+
 export interface PostListComment<T> {
   data: {
     data: T[];

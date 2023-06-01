@@ -40,7 +40,7 @@ export function UserBlogList({ userBlogList, id }: IUserBlogListProps) {
                 direction="vertical"
                 isThumbedNail={false}
                 showBadge={false}
-                onclick={() => navigate(`/post/${blogs.id}`)}
+                id={`${blogs.id}`}
               />
             </div>
           );

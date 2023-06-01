@@ -21,6 +21,7 @@ export function Inspiration(props: IInspirationProps) {
           {BlogsSample.slice(0, 1).map((blogs, key) => {
             return (
               <BlogItems
+                id={`${blogs.id}`}
                 direction="vertical"
                 isThumbedNail
                 items={blogs}
@@ -40,6 +41,7 @@ export function Inspiration(props: IInspirationProps) {
           {BlogsSample.slice(0, 1).map((blogs, key) => {
             return (
               <BlogItems
+                id={`${blogs.id}`}
                 direction="vertical"
                 isThumbedNail
                 items={blogs}

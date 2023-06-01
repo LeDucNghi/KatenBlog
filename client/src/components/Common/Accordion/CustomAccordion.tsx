@@ -52,6 +52,7 @@ export function CustomAccordion({ topic }: ICustomAccordionProps) {
               {topic.topicContent.slice(0, 3).map((topic, index) => {
                 return (
                   <BlogItems
+                    id={`${topic.id}`}
                     key={index}
                     direction="horizontal"
                     items={topic}

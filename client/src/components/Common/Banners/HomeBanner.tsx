@@ -2,29 +2,45 @@ import "./HomeBanner.scss";
 
 import * as React from "react";
 
+import {
+  selectIsFetchingPostList,
+  selectUserRecentBlog,
+} from "../../../features/addEditBlog/addEditSlice";
+
 import { BlogItems } from "../BlogItems/BlogItems";
 import { BlogsSample } from "../../../mock";
 import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
+import { useAppSelector } from "../../../app/hooks";
 
-export interface IHomeBannerProps {}
+export interface IHomeBannerProps {
+  handleFetchRecent: (isActive: number) => any;
+}
 
-export function HomeBanner(props: IHomeBannerProps) {
+export function HomeBanner({ handleFetchRecent }: IHomeBannerProps) {
+  const userRecentBlog = useAppSelector(selectUserRecentBlog);
+  const isFetching = useAppSelector(selectIsFetchingPostList);
+
   const [isActive, setIsActive] = React.useState<number>(1);
   const [openBackdrop, setOpenBackdrop] = React.useState<boolean>(false);
 
   const activeNavButtons = (navNums: number) => {
     setIsActive(navNums);
     setOpenBackdrop(!openBackdrop);
+    handleFetchRecent(navNums);
   };
 
   React.useEffect(() => {
-    setTimeout(() => {
-      if (openBackdrop) {
-        setOpenBackdrop(false);
-      }
-    }, 1000);
-  }, [openBackdrop]);
+    // setTimeout(() => {
+    //   if (openBackdrop) {
+    //     setOpenBackdrop(false);
+    //   }
+    // }, 1000);
+
+    if (!isFetching.isRecentBlog) {
+      setOpenBackdrop(false);
+    }
+  }, [isFetching]);
 
   return (
     <div className="homebanner_wrapper">
@@ -33,6 +49,7 @@ export function HomeBanner(props: IHomeBannerProps) {
           {BlogsSample.slice(0, 1).map((blogs, key) => {
             return (
               <BlogItems
+                id={`${blogs.id}`}
                 key={key}
                 items={blogs}
                 direction="vertical"
@@ -86,23 +103,43 @@ export function HomeBanner(props: IHomeBannerProps) {
               padding: 0,
             }}
           >
-            {BlogsSample.slice(0, 4).map((blogs, key) => {
-              return (
-                <BlogItems
-                  key={key}
-                  items={blogs}
-                  shape="circle"
-                  direction="horizontal"
-                  isThumbedNail={false}
-                  showBadge={false}
-                  fontSize="15px"
-                  style={{
-                    margin: "1em 0",
-                    height: "6.5em",
-                  }}
-                />
-              );
-            })}
+            {isActive === 1
+              ? BlogsSample.slice(0, 4).map((blogs, key) => {
+                  return (
+                    <BlogItems
+                      id={`${blogs.id}`}
+                      key={key}
+                      items={blogs}
+                      shape="circle"
+                      direction="horizontal"
+                      isThumbedNail={false}
+                      showBadge={false}
+                      fontSize="15px"
+                      style={{
+                        margin: "1em 0",
+                        height: "6.5em",
+                      }}
+                    />
+                  );
+                })
+              : userRecentBlog.slice(0, 4).map((blogs, key) => {
+                  return (
+                    <BlogItems
+                      id={`${blogs.id}`}
+                      key={key}
+                      items={blogs.post}
+                      shape="circle"
+                      direction="horizontal"
+                      isThumbedNail={false}
+                      showBadge={false}
+                      fontSize="15px"
+                      style={{
+                        margin: "1em 0",
+                        height: "6.5em",
+                      }}
+                    />
+                  );
+                })}
           </RoundedWidget>
         </div>
       </div>

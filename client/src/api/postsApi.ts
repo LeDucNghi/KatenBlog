@@ -1,4 +1,11 @@
-import { PaginationParams, Post, PostData, PostListRes } from "../models";
+import {
+  PaginationParams,
+  Post,
+  PostData,
+  PostListRes,
+  RecentBlog,
+  RecentBlogRes,
+} from "../models";
 
 import axiosClient from "./axiosClient";
 
@@ -95,6 +102,11 @@ const postsApi = {
   updateRecentBlog(postId: string): Promise<any> {
     const url = `/posts/recent/${postId}`;
     return axiosClient.post(url);
+  },
+
+  getUserRecentBlog(): Promise<RecentBlogRes<RecentBlog>> {
+    const url = `/posts/getrecentblog`;
+    return axiosClient.get(url);
   },
 };
 

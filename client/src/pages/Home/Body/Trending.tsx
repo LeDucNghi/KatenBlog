@@ -21,6 +21,7 @@ export function Trending(props: ITrendingProps) {
           {BlogsSample.slice(0, 1).map((blogs, key) => {
             return (
               <BlogItems
+                id={`${blogs.id}`}
                 direction="vertical"
                 items={blogs}
                 showBadge={false}
@@ -35,6 +36,7 @@ export function Trending(props: ITrendingProps) {
           {BlogsSample.slice(0, 2).map((blogs, key) => {
             return (
               <BlogItems
+                id={`${blogs.id}`}
                 key={key}
                 direction="horizontal"
                 shape="square"
@@ -54,6 +56,7 @@ export function Trending(props: ITrendingProps) {
           {BlogsSample.slice(0, 1).map((blogs, key) => {
             return (
               <BlogItems
+                id={`${blogs.id}`}
                 direction="vertical"
                 items={blogs}
                 showBadge={false}
@@ -68,6 +71,7 @@ export function Trending(props: ITrendingProps) {
           {BlogsSample.slice(0, 2).map((blogs, key) => {
             return (
               <BlogItems
+                id={`${blogs.id}`}
                 key={key}
                 direction="horizontal"
                 shape="square"

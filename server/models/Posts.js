@@ -34,12 +34,14 @@ module.exports = (sequalize, DataTypes) => {
 
       updatedAt: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: DataTypes.NOW,
       },
 
-      createddAt: {
+      createdAt: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: DataTypes.NOW,
       },
     },
     {

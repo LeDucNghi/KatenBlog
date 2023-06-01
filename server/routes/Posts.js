@@ -13,8 +13,10 @@ const {
   findTrendingList,
   findUserPost,
   getPostByCategories,
+  updateUserRecentBlog,
+  getUserRecentBlog,
+  getLatestBlogList,
 } = require("../controllers/Post");
-const { recents, posts, users } = require("../models");
 
 // GET ALL POST
 router.get("/getallpost", getAllPost);
@@ -47,53 +49,13 @@ router.get("/trending", findTrendingList);
 router.get("/userpostlist/:id", findUserPost);
 
 // UPDATE USER'S s BLOG
-router.post("/recent/:postId", validateToken, async (req, res) => {
-  const postId = Number(req.params.postId);
-  const userId = req.user.id;
-  const createdAt = req.body.createdAt;
-  const updatedAt = req.body.updatedAt;
-
-  // const findRecentBlog = await recents.findOne({
-  //   where: { userId: userId, postId: postId },
-  // });
-
-  // if (findRecentBlog) {
-  //   await recents.update(
-  //     { updatedAt: new Date() },
-  //     { where: { postId: postId } }
-  //   );
-  // } else {
-  //   await recents.create({ postId, userId, createdAt, updatedAt });
-  // }
-
-  await recents.create({ postId, userId, createdAt, updatedAt });
-
-  res
-    .status(200)
-    .send({ message: `You've just read blog ${req.params.postId}` });
-});
+router.post("/recent/:postId", validateToken, updateUserRecentBlog);
 
 // GET USER'S RECENT BLOG
-router.get("/getrecentblog", validateToken, async (req, res) => {
-  const userId = req.user.id;
+router.get("/getrecentblog", validateToken, getUserRecentBlog);
 
-  const data = await recents.findAll({
-    where: { userId: userId },
-    include: {
-      model: posts,
-      include: {
-        model: users,
-      },
-    },
-  });
-
-  // sort by newest user's recent blog
-  const sortedData = data.sort(
-    (a, b) => Number(b.createdAt) - Number(a.createdAt)
-  );
-
-  res.status(200).send({ data: sortedData.slice(0, 4) });
-});
+// GET LATEST BLOG LIST
+router.get("/latest", getLatestBlogList);
 
 // test
 router.get("/test/:id", async (req, res) => {

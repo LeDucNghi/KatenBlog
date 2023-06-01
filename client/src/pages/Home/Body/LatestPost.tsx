@@ -27,6 +27,7 @@ export function LatestPost(props: ILatestPostProps) {
               marginBottom: "1em",
             }}
             fontSize="13px"
+            id={`${blogs.id}`}
           />
         );
       })}
