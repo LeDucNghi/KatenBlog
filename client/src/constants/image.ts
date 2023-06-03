@@ -1,5 +1,6 @@
 import avatar from "../assets/images/avatar.png";
 import blogFormBackground from "../assets/images/blog-form-background.jpg";
+import emptyListPerson from "../assets/images/empty-list-person.png";
 import logo from "../assets/images/svg/logo.svg";
 import logoBrand from "../assets/images/brand/brand-logo.png";
 import notask from "../assets/images/no-task.png";
@@ -20,4 +21,5 @@ export const Images = {
   logo,
   thumbnail,
   blogFormBackground,
+  emptyListPerson,
 };

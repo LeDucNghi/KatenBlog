@@ -50,6 +50,7 @@ export const NavbarWidget = [
   {
     id: 1,
     name: "Home",
+    secondName: "All",
     route: "/",
   },
   {

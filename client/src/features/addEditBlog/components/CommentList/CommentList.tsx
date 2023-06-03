@@ -68,7 +68,7 @@ export function CommentList({ id, commentList }: ICommentListProps) {
         {commentList?.length === 0 ? (
           <div className="comment_list_empty">
             <div className="comment_list_empty_img">
-              <img src={Images.notask} alt="" />
+              <img src={Images.emptyListPerson} alt="" />
             </div>
 
             <p className="comment_list_empty_title">

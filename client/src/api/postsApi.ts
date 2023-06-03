@@ -4,7 +4,6 @@ import {
   PostData,
   PostListRes,
   RecentBlog,
-  RecentBlogRes,
 } from "../models";
 
 import axiosClient from "./axiosClient";
@@ -104,8 +103,16 @@ const postsApi = {
     return axiosClient.post(url);
   },
 
-  getUserRecentBlog(): Promise<RecentBlogRes<RecentBlog>> {
+  getUserRecentBlog(): Promise<PostListRes<RecentBlog>> {
     const url = `/posts/getrecentblog`;
+    return axiosClient.get(url);
+  },
+
+  getLatestPost({
+    page,
+    limit,
+  }: PaginationParams): Promise<PostListRes<RecentBlog>> {
+    const url = `/posts/latest?page=${page}&limit=${limit} `;
     return axiosClient.get(url);
   },
 };

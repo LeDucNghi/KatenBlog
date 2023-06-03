@@ -244,8 +244,23 @@ export const getUserRecentBlog = (): AppThunk => async (dispatch, getState) => {
 
   try {
     const res = await postsApi.getUserRecentBlog();
+
     dispatch(fetchUserRecentBlog(res.data.data));
   } catch (error) {
     console.log("🚀 ~ file: addEditThunk.ts:246 ~ error:", error);
   }
 };
+
+export const fetchLatestPost =
+  ({ page, limit }: PaginationParams): AppThunk =>
+  async (dispatch, getState) => {
+    dispatch(fetchingRecentBlog());
+
+    try {
+      const res = await postsApi.getLatestPost({ page, limit });
+      dispatch(fetchUserRecentBlog(res.data.data));
+      dispatch(fetchPagination(res.data.pagination!));
+    } catch (error) {
+      console.log("🚀 ~ file: addEditThunk.ts:246 ~ error:", error);
+    }
+  };

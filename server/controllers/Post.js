@@ -202,39 +202,58 @@ const findTrendingList = async (req, res) => {
 const findUserPost = async (req, res) => {
   const userId = req.params.id;
   const postListType = req.query.type;
+  var paginatedResults = null;
+  var userPostList = null;
 
-  const userPostList = await posts.findAll({
-    where: { userId: userId },
-    include: {
-      model: users,
-      attributes: {
-        exclude: ["password", "createdAt", "updatedAt", "username"],
+  if (postListType !== "all" || postListType !== "popular") {
+    userPostList = await posts.findAll({
+      where: { categories: postListType, userId: userId },
+      include: {
+        model: users,
+        attributes: {
+          exclude: ["password", "createdAt", "updatedAt", "username"],
+        },
       },
-    },
-  });
-
-  // this has 2 types of post lists to response
-  // 1st is all post : reponse all user's post list
-  // 2nd is the popular post : response popular's post list
+    });
+  } else {
+    userPostList = await posts.findAll({
+      where: { userId: userId },
+      include: {
+        model: users,
+        attributes: {
+          exclude: ["password", "createdAt", "updatedAt", "username"],
+        },
+      },
+    });
+  }
 
   if (!userPostList) {
+    // this has 3 types of post lists to response
+    // 1st is all post : reponse all user's post list
+    // 2nd is the popular post : response popular's post list
+    // 3rd is the rest of the types : Lifestyle | Food and Drink | ...
+
     res.status(404).json({
       message: "Not found any blog or this user has not shared any blog yet🤔",
     });
   } else {
     if (postListType === "all") {
-      const paginatedResults = await handlePaginate(req, userPostList);
-
-      res.status(200).json({ ...paginatedResults });
+      paginatedResults = await handlePaginate(req, userPostList);
     } else if (postListType === "popular") {
       const popularList = await userPostList.sort((a, b) => {
         return b.visit - a.visit;
       });
 
-      const paginatedResults = await handlePaginate(req, popularList);
+      paginatedResults = await handlePaginate(req, popularList);
+    } else {
+      const newList = await userPostList.sort((a, b) => {
+        return b.visit - a.visit;
+      });
 
-      res.status(200).json({ ...paginatedResults });
+      paginatedResults = await handlePaginate(req, newList);
     }
+
+    res.status(200).json({ ...paginatedResults });
   }
 };
 
@@ -286,7 +305,7 @@ const getLatestBlogList = async (req, res) => {
   const sortByLatest = await handleSortList(data, "latest");
   const paginatedResults = await handlePaginate(req, sortByLatest);
 
-  res.status(200).send({ data: paginatedResults });
+  res.status(200).send({ ...paginatedResults });
 };
 
 module.exports = {

@@ -27,9 +27,22 @@ export default function AccountMenu(props: IAccountMenuProps) {
     setAnchorEl(null);
   };
 
-  const menuItemsClick = (route: string) => {
+  const menuItemsClick = (items: {
+    id: number;
+    name: string;
+    route: string;
+    icon: string;
+  }) => {
     handleClose();
-    navigate(route);
+    navigate(items.route);
+
+    if (items.name === "Logout") {
+      localStorage.removeItem("token");
+
+      handleClose();
+
+      window.location.href = `/`;
+    }
   };
 
   return (
@@ -99,7 +112,7 @@ export default function AccountMenu(props: IAccountMenuProps) {
       >
         {accountMenuWidget(userProfile?.id!).map((items, key) => {
           return (
-            <MenuItem key={key} onClick={() => menuItemsClick(items.route)}>
+            <MenuItem key={key} onClick={() => menuItemsClick(items)}>
               <ListItemIcon>
                 <Icons iconName={items.icon} />
               </ListItemIcon>

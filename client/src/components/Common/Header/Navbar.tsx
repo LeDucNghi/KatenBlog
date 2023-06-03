@@ -1,10 +1,10 @@
 import "./Header.scss";
 
-import { BREAK_POINTS_NUMBER, NavbarWidget } from "../../../constants";
-
+import { BREAK_POINTS_NUMBER } from "../../../constants";
 import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
 import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
+import { NavbarCollapse } from "./NavbarCollapse";
 import { selectIsLoggedIn } from "../../../features/auth/authSlice";
 import { useAppSelector } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
@@ -47,17 +47,7 @@ export function Navbar({
           <img src={Images.logo} alt="" />
         </a>
 
-        {windowInnerWidth > BREAK_POINTS_NUMBER.sm && (
-          <div className="navbar_collapse">
-            {NavbarWidget.map((items, key) => {
-              return (
-                <a href={items.route} className="nav_link" key={key}>
-                  {items.name}
-                </a>
-              );
-            })}
-          </div>
-        )}
+        {/* {windowInnerWidth > BREAK_POINTS_NUMBER.sm && <NavbarCollapse />} */}
 
         <div className="navbar_right">
           {windowInnerWidth > BREAK_POINTS_NUMBER.md && (

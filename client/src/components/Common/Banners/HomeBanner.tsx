@@ -6,20 +6,21 @@ import {
   selectIsFetchingPostList,
   selectUserRecentBlog,
 } from "../../../features/addEditBlog/addEditSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 import { BlogItems } from "../BlogItems/BlogItems";
 import { BlogsSample } from "../../../mock";
 import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
+import { Empty } from "../NotFound/Empty";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
-import { useAppSelector } from "../../../app/hooks";
+import { getUserRecentBlog } from "../../../features/addEditBlog/addEditThunk";
 
-export interface IHomeBannerProps {
-  handleFetchRecent: (isActive: number) => any;
-}
+export interface IHomeBannerProps {}
 
-export function HomeBanner({ handleFetchRecent }: IHomeBannerProps) {
+export function HomeBanner(props: IHomeBannerProps) {
+  const dispatch = useAppDispatch();
   const userRecentBlog = useAppSelector(selectUserRecentBlog);
-  const isFetching = useAppSelector(selectIsFetchingPostList);
+  // const isFetching = useAppSelector(selectIsFetchingPostList);
 
   const [isActive, setIsActive] = React.useState<number>(1);
   const [openBackdrop, setOpenBackdrop] = React.useState<boolean>(false);
@@ -27,20 +28,19 @@ export function HomeBanner({ handleFetchRecent }: IHomeBannerProps) {
   const activeNavButtons = (navNums: number) => {
     setIsActive(navNums);
     setOpenBackdrop(!openBackdrop);
-    handleFetchRecent(navNums);
+
+    if (navNums === 2) {
+      dispatch(getUserRecentBlog());
+    }
   };
 
   React.useEffect(() => {
-    // setTimeout(() => {
-    //   if (openBackdrop) {
-    //     setOpenBackdrop(false);
-    //   }
-    // }, 1000);
-
-    if (!isFetching.isRecentBlog) {
-      setOpenBackdrop(false);
-    }
-  }, [isFetching]);
+    setTimeout(() => {
+      if (openBackdrop) {
+        setOpenBackdrop(false);
+      }
+    }, 1000);
+  }, [openBackdrop]);
 
   return (
     <div className="homebanner_wrapper">
@@ -103,43 +103,52 @@ export function HomeBanner({ handleFetchRecent }: IHomeBannerProps) {
               padding: 0,
             }}
           >
-            {isActive === 1
-              ? BlogsSample.slice(0, 4).map((blogs, key) => {
-                  return (
-                    <BlogItems
-                      id={`${blogs.id}`}
-                      key={key}
-                      items={blogs}
-                      shape="circle"
-                      direction="horizontal"
-                      isThumbedNail={false}
-                      showBadge={false}
-                      fontSize="15px"
-                      style={{
-                        margin: "1em 0",
-                        height: "6.5em",
-                      }}
-                    />
-                  );
-                })
-              : userRecentBlog.slice(0, 4).map((blogs, key) => {
-                  return (
-                    <BlogItems
-                      id={`${blogs.id}`}
-                      key={key}
-                      items={blogs.post}
-                      shape="circle"
-                      direction="horizontal"
-                      isThumbedNail={false}
-                      showBadge={false}
-                      fontSize="15px"
-                      style={{
-                        margin: "1em 0",
-                        height: "6.5em",
-                      }}
-                    />
-                  );
-                })}
+            {isActive === 1 ? (
+              BlogsSample.slice(0, 4).map((blogs, key) => {
+                return (
+                  <BlogItems
+                    id={`${blogs.id}`}
+                    key={key}
+                    items={blogs}
+                    shape="circle"
+                    direction="horizontal"
+                    isThumbedNail={false}
+                    showBadge={false}
+                    fontSize="15px"
+                    style={{
+                      margin: "1em 0",
+                      height: "6.5em",
+                    }}
+                  />
+                );
+              })
+            ) : userRecentBlog.length === 0 ? (
+              <Empty
+                style={{
+                  margin: "1em auto",
+                }}
+                content="You have not read any posts recently🤔"
+              />
+            ) : (
+              userRecentBlog.slice(0, 4).map((blogs, key) => {
+                return (
+                  <BlogItems
+                    id={`${blogs.id}`}
+                    key={key}
+                    items={blogs.post}
+                    shape="circle"
+                    direction="horizontal"
+                    isThumbedNail={false}
+                    showBadge={false}
+                    fontSize="15px"
+                    style={{
+                      margin: "1em 0",
+                      height: "6.5em",
+                    }}
+                  />
+                );
+              })
+            )}
           </RoundedWidget>
         </div>
       </div>

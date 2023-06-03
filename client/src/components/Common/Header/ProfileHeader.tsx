@@ -1,12 +1,12 @@
 import "./ProfileHeader.scss";
 
-import { BREAK_POINTS_NUMBER, NavbarWidget } from "../../../constants";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
+import { BREAK_POINTS_NUMBER } from "../../../constants";
 import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
 import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
-import { useState } from "react";
+import { NavbarCollapse } from "./NavbarCollapse";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 
 export interface IProfileHeaderProps {
@@ -19,6 +19,8 @@ export interface IProfileHeaderProps {
   onclick?: any;
 
   style?: React.CSSProperties;
+
+  handleTypeChange: (type: string) => any;
 }
 
 export function ProfileHeader({
@@ -28,16 +30,15 @@ export function ProfileHeader({
   color,
   onclick,
   style,
+  handleTypeChange,
 }: IProfileHeaderProps) {
   const { windowInnerWidth } = useWindowSize();
-  const navigate = useNavigate();
 
-  const [active, setActive] = useState("Home");
+  const [type, setType] = useState("");
 
-  const handleActiveNavbar = (name: string, route: string) => {
-    setActive(name);
-    navigate(route);
-  };
+  useEffect(() => {
+    handleTypeChange(type);
+  }, [type]);
 
   return (
     <div className="profile_header" style={style}>
@@ -81,23 +82,7 @@ export function ProfileHeader({
       </div>
 
       {windowInnerWidth > BREAK_POINTS_NUMBER.md && (
-        <div className="nav_header">
-          {NavbarWidget.map((nav, key) => {
-            return (
-              <button
-                key={key}
-                // href={nav.route}
-                onClick={() => handleActiveNavbar(nav.name, nav.route)}
-                className={
-                  active === nav.name ? "nav_items isActive" : "nav_items"
-                }
-                style={{ color: color }}
-              >
-                {nav.name}{" "}
-              </button>
-            );
-          })}
-        </div>
+        <NavbarCollapse type={setType} />
       )}
     </div>
   );

@@ -20,19 +20,28 @@ export default function UserProfile(props: IUserProfileProps) {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const paginate = useAppSelector(selectPaginate);
-  const userBlogList = useAppSelector(selectUserPostList);
+
+  const [postListType, setPostListType] = React.useState("popular");
 
   React.useEffect(() => {
-    dispatch(handleGetUserPost(id!, "popular", paginate));
-  }, [id]);
+    dispatch(handleGetUserPost(id!, postListType, { ...paginate, limit: 8 }));
+  }, [id, dispatch, paginate, postListType]);
+
+  // const handleTypeChange = (type: string) => {
+  //   setPostListType(type);
+  // };
+
+  // const handlePageChange = (value: number) => {
+  //   dispatch(handleGetUserPost(id!, postListType, { page: value, limit: 4 }));
+  // };
 
   return (
     <>
-      <ProfileBanner />
+      <ProfileBanner handleTypeChange={setPostListType} />
 
       <div className="profile_main_content">
         <div className="profile_container">
-          <UserBlogList userBlogList={userBlogList} id={`${id}`} />
+          <UserBlogList type={postListType} id={`${id}`} />
 
           <div className="profile_right">
             <InnerWrapper />

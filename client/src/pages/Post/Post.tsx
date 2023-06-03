@@ -29,6 +29,7 @@ import { Comment } from "../../features/addEditBlog/components/Comment/Comment";
 import { CommentList } from "../../features/addEditBlog/components/CommentList/CommentList";
 import { InnerWrapper } from "../../widgets/InnerWrapper/InnerWrapper";
 import NotFound from "../../components/Common/NotFound/NotFound";
+import { Page } from "../../widgets/DocTitle/DocTitle";
 import { Post } from "../../models";
 import { PostBanner } from "../../features/addEditBlog/components/Banner/PostBanner";
 import { PostContent } from "../../features/addEditBlog/components/Content/PostContent";
@@ -101,90 +102,91 @@ export default function Posts({ check }: IPostsProps) {
     );
 
   return (
-    <div className="post_container">
+    <Page title={`${blogData.title}`}>
       <ScrollToTop />
+      <div className="post_container">
+        <Breadcrumbs className="post_breadcrumb" aria-label="breadcrumb">
+          <Link underline="hover" color="inherit" href="/">
+            Home
+          </Link>
+          <Link
+            underline="hover"
+            color="inherit"
+            href={`/categories/${blogData?.categories}`}
+          >
+            {blogData?.categories}
+          </Link>
+          <Link
+            underline="hover"
+            color="text.primary"
+            href="/material-ui/react-breadcrumbs/"
+            aria-current="page"
+          >
+            {blogData?.title}
+          </Link>
+        </Breadcrumbs>
 
-      <Breadcrumbs className="post_breadcrumb" aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
-          Home
-        </Link>
-        <Link
-          underline="hover"
-          color="inherit"
-          href={`/categories/${blogData?.categories}`}
-        >
-          {blogData?.categories}
-        </Link>
-        <Link
-          underline="hover"
-          color="text.primary"
-          href="/material-ui/react-breadcrumbs/"
-          aria-current="page"
-        >
-          {blogData?.title}
-        </Link>
-      </Breadcrumbs>
+        <div className="post_single">
+          <PostHeader blogData={blogData} />
 
-      <div className="post_single">
-        <PostHeader blogData={blogData} />
+          <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={(values, actions) => dispatch(addEditPost(values, id!))}
+          >
+            {(formikProps) => {
+              const {
+                values,
+                handleChange,
+                handleBlur,
+                touched,
+                errors,
+                setFieldValue,
+              } = formikProps;
 
-        <Formik
-          enableReinitialize
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={(values, actions) => dispatch(addEditPost(values, id!))}
-        >
-          {(formikProps) => {
-            const {
-              values,
-              handleChange,
-              handleBlur,
-              touched,
-              errors,
-              setFieldValue,
-            } = formikProps;
+              return (
+                <Form>
+                  <PostBanner
+                    blogData={blogData}
+                    userType={userType}
+                    values={values}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    touched={touched}
+                    errors={errors}
+                  />
 
-            return (
-              <Form>
-                <PostBanner
-                  blogData={blogData}
-                  userType={userType}
-                  values={values}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  touched={touched}
-                  errors={errors}
-                />
+                  <PostContent
+                    setFieldValue={setFieldValue}
+                    blogData={blogData}
+                    userType={userType}
+                    values={values}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                  />
+                </Form>
+              );
+            }}
+          </Formik>
 
-                <PostContent
-                  setFieldValue={setFieldValue}
-                  blogData={blogData}
-                  userType={userType}
-                  values={values}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                />
-              </Form>
-            );
-          }}
-        </Formik>
+          <Author author={blogData?.user} />
 
-        <Author author={blogData?.user} />
+          {(userType === "isGuest" || userType === "isPoster") && (
+            <CommentList commentList={commentList} id={`${id}`} />
+          )}
 
-        {(userType === "isGuest" || userType === "isPoster") && (
-          <CommentList commentList={commentList} id={`${id}`} />
-        )}
+          {userType === "isGuest" && <Comment id={`${id}`} />}
 
-        {userType === "isGuest" && <Comment id={`${id}`} />}
-
-        {/* {(userType === "isGuest" || userType === "isPoster") && (
+          {/* {(userType === "isGuest" || userType === "isPoster") && (
           <RelatedBlogs />
         )} */}
-      </div>
+        </div>
 
-      <div className="post_right">
-        <InnerWrapper />
+        <div className="post_right">
+          <InnerWrapper />
+        </div>
       </div>
-    </div>
+    </Page>
   );
 }

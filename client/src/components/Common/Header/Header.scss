@@ -40,8 +40,10 @@
                 .nav_link {
                     @include general.flexCenter;
 
-                    width: 7em;
-                    height: 2.7em;
+                    // width: 7em;
+                    // height: 2.7em;
+
+                    padding: 0.5em 1.5em;
 
                     color: #c7ccd6;
 

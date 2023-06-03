@@ -1,12 +1,29 @@
 import * as React from "react";
 
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+
 import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
 import { BlogsSample } from "../../../mock";
+import { CustomPagination } from "../../../components/Common/Pagination/Pagination";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
+import { fetchLatestPost } from "../../../features/addEditBlog/addEditThunk";
+import { selectPaginate } from "../../../features/addEditBlog/addEditSlice";
 
 export interface ILatestPostProps {}
 
 export function LatestPost(props: ILatestPostProps) {
+  const dispatch = useAppDispatch();
+  const latestPostPagination = useAppSelector(selectPaginate);
+
+  const handlePageChange = (value: number) => {
+    dispatch(
+      fetchLatestPost({
+        page: value,
+        limit: 4,
+      })
+    );
+  };
+
   return (
     <RoundedWidget
       title="Latest Post"
@@ -26,11 +43,21 @@ export function LatestPost(props: ILatestPostProps) {
             style={{
               marginBottom: "1em",
             }}
-            fontSize="13px"
+            fontSize="15px"
             id={`${blogs.id}`}
           />
         );
       })}
+
+      <CustomPagination
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          margin: "1em 0",
+        }}
+        handlePageChange={handlePageChange}
+        paginate={latestPostPagination}
+      />
     </RoundedWidget>
   );
 }

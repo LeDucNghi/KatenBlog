@@ -4,6 +4,7 @@ import * as React from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
+import { Page } from "../../widgets/DocTitle/DocTitle";
 import { ScrollToTop } from "../../components/Common/ScrollToTop/ScrollToTop";
 import { SearchField } from "../../features/search/components/SearchField";
 import { SearchList } from "../../features/search/components/SearchList";
@@ -24,12 +25,14 @@ export default function SearchSection(props: ISearchSectionProps) {
   }, [dispatch]);
 
   return (
-    <div className="search_container">
-      <ScrollToTop />
+    <Page title="Katen. - Find your favourite blogs">
+      <div className="search_container">
+        <ScrollToTop />
 
-      <SearchField setKeyWord={setKeyword} />
+        <SearchField setKeyWord={setKeyword} />
 
-      <SearchList postList={postList} keyword={`${keyword}`} />
-    </div>
+        <SearchList postList={postList} keyword={`${keyword}`} />
+      </div>
+    </Page>
   );
 }

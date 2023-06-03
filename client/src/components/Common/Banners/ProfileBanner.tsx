@@ -9,9 +9,11 @@ import { ProfileHeader } from "../Header/ProfileHeader";
 import { selectUserProfile } from "../../../features/auth/authSlice";
 import { useAppSelector } from "../../../app/hooks";
 
-export interface IProfileBannerProps {}
+export interface IProfileBannerProps {
+  handleTypeChange: (type: string) => any;
+}
 
-export function ProfileBanner(props: IProfileBannerProps) {
+export function ProfileBanner({ handleTypeChange }: IProfileBannerProps) {
   const userProfile = useAppSelector(selectUserProfile);
 
   const [open, setOpen] = React.useState<boolean>(false);
@@ -28,6 +30,7 @@ export function ProfileBanner(props: IProfileBannerProps) {
         title={userProfile?.fullname}
         slogan="Professional Writer & Personal Blogger"
         onclick={onclick}
+        handleTypeChange={handleTypeChange}
       />
 
       <div className="profile_about">

@@ -23,7 +23,7 @@ export default function Categories(props: ICategoriesProps) {
 
   return (
     <>
-      <ProfileHeader title="Katen." image={Images.logoBrand} color="#203656" />{" "}
+      {/* <ProfileHeader title="Katen." image={Images.logoBrand} color="#203656" />{" "} */}
       <div className="categories_wrapper">
         <CategoriesBanner categoriesName={`${name}`} />
 

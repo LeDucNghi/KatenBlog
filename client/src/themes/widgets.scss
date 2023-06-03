@@ -17,10 +17,10 @@
     transition: globalStyles.$transition;
 }
 
-@mixin nav_links {
-    margin: 0 0.5em;
+@mixin nav_links($background: linear-gradient(to right, #fe4f70 0%, #ffa387 100%)) {
+    // margin: 0 0.5em;
 
-    background: linear-gradient(to right, #fe4f70 0%, #ffa387 100%);
+    background: $background;
 
     border-radius: 3em;
 

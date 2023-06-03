@@ -2,12 +2,12 @@ import * as React from "react";
 
 import { Box } from "@mui/material";
 
-export interface IDocTitleProps {
+export interface IPageProps {
   title: string;
   children: React.ReactNode;
 }
 
-export function DocTitle({ title, children }: IDocTitleProps) {
+export function Page({ title, children }: IPageProps) {
   React.useEffect(() => {
     document.title = `${title}`;
   }, [title]);

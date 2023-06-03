@@ -1,0 +1,46 @@
+@use "../../../themes/widgets.scss";
+@use "../../../assets/styles/globalStyles.scss";
+@use "../../../themes/general.scss";
+
+.navbar_collapse {
+    display: flex;
+    flex-direction: row;
+
+    width: 50%;
+
+    @include general.flexCenter;
+
+    .nav_link {
+        @include general.flexCenter;
+        @include widgets.nav_links(transparent);
+
+        padding: 0.5em 1.5em;
+
+        color: #c7ccd6;
+
+        transition: globalStyles.$transition;
+
+        font-family: globalStyles.$poppinFont;
+
+        margin: 0 0.5em;
+
+        font-weight: 600;
+
+        &:hover {
+            color: #000;
+            transition: globalStyles.$transition;
+        }
+
+        // &:first-child {
+        //     @include widgets.nav_links;
+
+        //     font-weight: 600;
+        //     font-family: globalStyles.$poppinFont;
+        //     font-size: 0.9em;
+        // }
+
+        &.isActive {
+            @include widgets.nav_links;
+        }
+    }
+}

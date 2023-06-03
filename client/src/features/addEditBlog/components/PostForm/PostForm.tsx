@@ -5,8 +5,8 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@mui/material";
-import { DocTitle } from "../../../../widgets/DocTitle/DocTitle";
 import { Images } from "../../../../constants";
+import { Page } from "../../../../widgets/DocTitle/DocTitle";
 import ReactQuill from "react-quill";
 import { RoundedWidget } from "../../../../widgets/RoundedWidget/RoundedWidgets";
 import TextField from "@mui/material/TextField";
@@ -35,7 +35,7 @@ export function PostForm(props: IPostFormProps) {
   }, [fieldValue]);
 
   return (
-    <DocTitle title="Zyro - Create your own">
+    <Page title="Katen. - Create your own">
       <div className="form_container">
         <div className="form_image">
           <RoundedWidget
@@ -96,6 +96,6 @@ export function PostForm(props: IPostFormProps) {
           </RoundedWidget>
         </div>
       </div>
-    </DocTitle>
+    </Page>
   );
 }
