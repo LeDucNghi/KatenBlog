@@ -48,15 +48,13 @@ export function CommentList({ id, commentList }: ICommentListProps) {
 
   return (
     <RoundedWidget
-      title={
-        <h3>
-          Comments (
-          {commentList!.length < 10
-            ? `0${commentList!.length}`
-            : `${commentList!.length}`}{" "}
-          )
-        </h3>
-      }
+      title={` Comments ( ${
+        commentList!.length < 10
+          ? `0${commentList!.length}`
+          : commentList!.length > 99
+          ? `${commentList!.length}+`
+          : `${commentList!.length}`
+      } )`}
       style={{
         width: " 100%",
         margin: "2em 0",

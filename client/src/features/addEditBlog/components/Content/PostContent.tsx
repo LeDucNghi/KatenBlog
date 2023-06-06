@@ -2,6 +2,7 @@ import "./PostContent.scss";
 
 import { Post, UserType } from "../../../../models";
 
+import { Icons } from "../../../../components/Common/Icons/Icons";
 import { LoadingButton } from "@mui/lab";
 import ReactQuill from "react-quill";
 import { selectPostingStatus } from "../../addEditSlice";
@@ -61,6 +62,7 @@ export function PostContent({
             className="post_form_button"
             variant="contained"
             type="submit"
+            loadingPosition="start"
           >
             {userType === "isPoster" ? `Update this post` : `Create new post`}
           </LoadingButton>

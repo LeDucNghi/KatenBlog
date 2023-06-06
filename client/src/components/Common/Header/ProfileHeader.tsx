@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { BREAK_POINTS_NUMBER } from "../../../constants";
 import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
+import { Divider } from "@mui/material";
 import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
 import { NavbarCollapse } from "./NavbarCollapse";
@@ -80,6 +81,14 @@ export function ProfileHeader({
           />
         </div>
       </div>
+
+      <Divider
+        sx={{
+          zIndex: 100,
+          width: "50%",
+          marginBottom: "1em",
+        }}
+      />
 
       {windowInnerWidth > BREAK_POINTS_NUMBER.md && (
         <NavbarCollapse type={setType} />

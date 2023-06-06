@@ -7,6 +7,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 
 import { BlogItems } from "../../../../components/Common/BlogItems/BlogItems";
+import { Contact } from "../../../../pages/Contact/Contact";
 import { CustomPagination } from "../../../../components/Common/Pagination/Pagination";
 import { Empty } from "../../../../components/Common/NotFound/Empty";
 import { handleGetUserPost } from "../../../addEditBlog/addEditThunk";
@@ -42,31 +43,38 @@ export function UserBlogList({ id, type }: IUserBlogListProps) {
   };
 
   return (
-    <div className="blog_list_wrapper">
-      <div className="blog_list">
-        {userBlogList.length === 0 ? (
-          <Empty
-            style={{
-              margin: "0 auto",
-            }}
-            content="Not found any blog or this user has not shared any blog yet🤔"
-          />
-        ) : (
-          userBlogList.map((blogs, key) => {
-            return (
-              <div className="blog_items" key={key}>
-                <BlogItems
-                  items={blogs}
-                  direction="vertical"
-                  isThumbedNail={false}
-                  showBadge={false}
-                  id={`${blogs.id}`}
-                />
-              </div>
-            );
-          })
-        )}
-      </div>
+    <div
+      className="blog_list_wrapper"
+      style={{ width: type === "Contact" ? "100%" : "" }}
+    >
+      {type === "Contact" ? (
+        <Contact hasBanner={false} />
+      ) : (
+        <div className="blog_list">
+          {userBlogList.length === 0 ? (
+            <Empty
+              style={{
+                margin: "0 auto",
+              }}
+              content="Not found any blog or this user has not shared any blog yet🤔"
+            />
+          ) : (
+            userBlogList.map((blogs, key) => {
+              return (
+                <div className="blog_items" key={key}>
+                  <BlogItems
+                    items={blogs}
+                    direction="vertical"
+                    isThumbedNail={false}
+                    showBadge={false}
+                    id={`${blogs.id}`}
+                  />
+                </div>
+              );
+            })
+          )}
+        </div>
+      )}
 
       {userBlogList.length !== 0 && (
         <div className="blog_list_paginate">

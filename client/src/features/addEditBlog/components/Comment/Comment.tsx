@@ -19,7 +19,7 @@ export function Comment({ id }: ICommentProps) {
 
   return (
     <RoundedWidget
-      title={<h3>Leave Comment</h3>}
+      title="Leave Comment"
       style={{
         width: "100%",
       }}

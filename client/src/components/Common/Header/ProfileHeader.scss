@@ -61,31 +61,6 @@
             }
         }
     }
-
-    .nav_header {
-        position: relative;
-
-        @include general.flexCenter;
-
-        width: 80%;
-        height: 4em;
-
-        border-color: rgb(144, 155, 173);
-        border-style: solid none none;
-        border-width: 0.1em;
-
-        .nav_items {
-            padding: 0.5em 1.5em;
-
-            @include general.flexCenter;
-
-            color: #fff;
-
-            &.isActive {
-                @include widgets.nav_links;
-            }
-        }
-    }
 }
 
 @media only screen and (max-width: 600px) {

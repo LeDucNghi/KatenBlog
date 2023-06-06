@@ -7,14 +7,17 @@ import { Icons } from "../../components/Common/Icons/Icons";
 import { RoundedWidget } from "../../widgets/RoundedWidget/RoundedWidgets";
 import { TextField } from "@mui/material";
 
-export interface IContactProps {}
+export interface IContactProps {
+  style?: React.CSSProperties;
+  hasBanner?: boolean;
+}
 
-export function Contact(props: IContactProps) {
+export function Contact({ style, hasBanner }: IContactProps) {
   return (
     <>
-      <CategoriesBanner categoriesName="Contact" />
+      {hasBanner && <CategoriesBanner categoriesName="Contact" />}
 
-      <div className="contact_wrapper">
+      <div className="contact_wrapper" style={style}>
         <div className="contact_info">
           <div className="info_items">
             <span className="icon">

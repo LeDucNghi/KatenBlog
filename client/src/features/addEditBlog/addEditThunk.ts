@@ -81,6 +81,8 @@ export const addEditPost =
       await dispatch(setPostingStatus({ ...postingStatus, isEdit: true }));
     } else await dispatch(setPostingStatus({ ...postingStatus, isAdd: true }));
 
+    console.log("🚀 ~ file: addEditThunk.ts:77 ~ userType:", userType);
+
     const newValue =
       userType === "isPoster"
         ? { ...values, image: image ? image : values.image, id: id }
@@ -94,7 +96,7 @@ export const addEditPost =
       if (res) {
         toast.success(
           `🦄 ${
-            userType === "isPoster" ? `Upload` : `Update`
+            userType === "isPoster" ? `Update` : `Upload`
           } post successful 🥳`,
           {
             position: "top-center",
@@ -115,6 +117,19 @@ export const addEditPost =
           await dispatch(setPostingStatus({ ...postingStatus, isAdd: false }));
       }
     } catch (error) {
+      await dispatch(setPostingStatus({ ...postingStatus, isEdit: false }));
+
+      toast.error(` Something went wrong 🤔`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
       console.log("🚀 ~ file: SignIn.tsx:20 ~ handleSubmit ~ error", error);
     }
   };

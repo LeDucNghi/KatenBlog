@@ -127,8 +127,6 @@ export default function Posts({ check }: IPostsProps) {
         </Breadcrumbs>
 
         <div className="post_single">
-          <PostHeader blogData={blogData} />
-
           <Formik
             enableReinitialize
             initialValues={initialValues}
@@ -147,6 +145,14 @@ export default function Posts({ check }: IPostsProps) {
 
               return (
                 <Form>
+                  <PostHeader
+                    values={values}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    userType={userType}
+                    blogData={blogData}
+                  />
+
                   <PostBanner
                     blogData={blogData}
                     userType={userType}

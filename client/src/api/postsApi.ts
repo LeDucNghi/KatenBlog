@@ -94,7 +94,7 @@ const postsApi = {
     type: string,
     { page, limit }: PaginationParams
   ): Promise<PostListRes<Post>> {
-    const url = `/posts/userpostlist/${id}?page=${page}&limit=${limit}&type=${type}`;
+    const url = `posts/userpostlist/${id}?page=${page}&limit=${limit}&type=${type}`;
     return axiosClient.get(url);
   },
 

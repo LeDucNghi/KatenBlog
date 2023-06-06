@@ -50,7 +50,6 @@ export const NavbarWidget = [
   {
     id: 1,
     name: "Home",
-    secondName: "All",
     route: "/",
   },
   {
@@ -72,6 +71,33 @@ export const NavbarWidget = [
     id: 5,
     name: "Contact",
     route: "/categories/contact",
+  },
+];
+
+export const ProfileNavbarWidget = [
+  {
+    id: 1,
+    name: "Lifestyle",
+  },
+  {
+    id: 2,
+    name: "Inspiration",
+  },
+  {
+    id: 3,
+    name: "Fashion",
+  },
+  {
+    id: 4,
+    name: "Politic",
+  },
+  {
+    id: 5,
+    name: "Culture",
+  },
+  {
+    id: 6,
+    name: "Contact",
   },
 ];
 
@@ -139,3 +165,26 @@ export const accountMenuWidget = (id: string | number) => {
 
   return menu;
 };
+
+export const CategoriesOption = [
+  {
+    id: 1,
+    categoryName: "Lifestyle",
+  },
+  {
+    id: 2,
+    categoryName: "Inspiration",
+  },
+  {
+    id: 3,
+    categoryName: "Fashion",
+  },
+  {
+    id: 4,
+    categoryName: "Politic",
+  },
+  {
+    id: 5,
+    categoryName: "Culture",
+  },
+];

@@ -1,5 +1,6 @@
 @use "../../../../assets/styles/globalStyles.scss";
 @use "../../../../themes/general.scss";
+@use "../../../../themes/widgets.scss";
 
 .post_body {
     position: relative;
@@ -20,7 +21,7 @@
         .post_input_field {
             position: relative;
 
-            margin-bottom: 1em;
+            margin-bottom: 4em;
         }
 
         .post_input_field.isGuest {
@@ -35,7 +36,7 @@
         }
 
         .post_form_button {
-            background-color: globalStyles.$button-color;
+            @include widgets.background_right;
         }
     }
 }

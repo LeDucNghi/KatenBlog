@@ -124,28 +124,44 @@ const postNewComment = async (req, res) => {
 
 // UPDATE POST
 const updatePost = async (req, res) => {
+  var newImage = null;
   const id = req.params.id;
 
-  const { title, subTitle, categories, content } = req.body;
+  const { title, subTitle, categories, content, image } = req.body;
 
-  const image = await uploadImage(req, res);
+  if (!image) {
+    newImage = await uploadImage(req, res);
+  }
 
   if (!req.body || !id) {
     res.status(400).send({ message: "Something is missing 🤔" });
+  } else {
+    if (!image) {
+      await posts.update(
+        {
+          title,
+          image: newImage,
+          subTitle,
+          categories,
+          content,
+        },
+        { where: { id: id } }
+      );
+    } else {
+      await posts.update(
+        {
+          title,
+          image,
+          subTitle,
+          categories,
+          content,
+        },
+        { where: { id: id } }
+      );
+    }
+
+    res.status(200).send({ message: `Update blog ${id} successfully 🥳` });
   }
-
-  await posts.update(
-    {
-      title,
-      image,
-      subTitle,
-      categories,
-      content,
-    },
-    { where: { id: id } }
-  );
-
-  res.status(200).json({ message: `Update blog ${id} successfully 🥳` });
 };
 
 // LIKE POST

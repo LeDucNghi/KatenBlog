@@ -21,7 +21,8 @@ export type IconName =
   | "avatar"
   | "phone"
   | "mail"
-  | "location";
+  | "location"
+  | "loading";
 
 export type IconsFontSize = "large" | "medium" | "small";
 

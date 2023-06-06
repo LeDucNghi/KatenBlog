@@ -17,6 +17,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PersonIcon from "@mui/icons-material/Person";
 import PhotoOutlinedIcon from "@mui/icons-material/PhotoOutlined";
 import PinterestIcon from "@mui/icons-material/Pinterest";
+import SaveIcon from "@mui/icons-material/Save";
 import SearchIcon from "@mui/icons-material/Search";
 import Settings from "@mui/icons-material/Settings";
 import ShareIcon from "@mui/icons-material/Share";
@@ -192,6 +193,11 @@ export function Icons({ iconName, className, fontSize, style }: IIconsProps) {
   if (iconName === "location")
     return (
       <MapIcon className={`${className}`} fontSize={fontSize} style={style} />
+    );
+
+  if (iconName === "loading")
+    return (
+      <SaveIcon className={`${className}`} fontSize={fontSize} style={style} />
     );
 
   return null;
