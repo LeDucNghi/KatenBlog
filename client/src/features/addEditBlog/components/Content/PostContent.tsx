@@ -2,7 +2,6 @@ import "./PostContent.scss";
 
 import { Post, UserType } from "../../../../models";
 
-import { Icons } from "../../../../components/Common/Icons/Icons";
 import { LoadingButton } from "@mui/lab";
 import ReactQuill from "react-quill";
 import { selectPostingStatus } from "../../addEditSlice";
@@ -52,6 +51,7 @@ export function PostContent({
           onChange={(e) => setFieldValue("content", e)}
           onBlur={handleBlur}
           modules={modules}
+          readOnly={userType === "isGuest" ? true : false}
         />
 
         {userType !== "isGuest" && (

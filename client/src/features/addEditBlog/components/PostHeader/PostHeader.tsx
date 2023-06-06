@@ -30,7 +30,7 @@ export function PostHeader({
           `${blogData?.title}`
         ) : (
           <TextField
-            className="banner_input_field"
+            className="input_field"
             fullWidth
             label="Blog's Title"
             id="outlined-size-small"
