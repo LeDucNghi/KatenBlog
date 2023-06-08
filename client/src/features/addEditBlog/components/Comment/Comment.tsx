@@ -3,11 +3,10 @@ import "./Comment.scss";
 import * as React from "react";
 
 import { Button, TextField, Typography } from "@mui/material";
-import { fetchCommentListSuccess, selectCommentList } from "../../addEditSlice";
-import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 
 import { RoundedWidget } from "../../../../widgets/RoundedWidget/RoundedWidgets";
 import { handlePostComment } from "../../addEditThunk";
+import { useAppDispatch } from "../../../../app/hooks";
 
 export interface ICommentProps {
   id: string;
@@ -16,15 +15,7 @@ export interface ICommentProps {
 export function Comment({ id }: ICommentProps) {
   const dispatch = useAppDispatch();
 
-  // const commentList = useAppSelector(selectCommentList)
-
   const [comment, setComment] = React.useState("");
-
-  // const handlePostComment = () => {
-  //   commentList.push()
-
-  //   dispatch(fetchCommentListSuccess())
-  // }
 
   return (
     <RoundedWidget

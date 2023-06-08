@@ -1,4 +1,4 @@
-import { Comment, PaginationParams, PostListComment } from "../models";
+import { Comment, PaginationParams, PostListRes } from "../models";
 
 import axiosClient from "./axiosClient";
 import queryString from "query-string";
@@ -13,12 +13,23 @@ const commentApi = {
   getComment(
     id: string,
     params: PaginationParams
-  ): Promise<PostListComment<Comment>> {
+  ): Promise<PostListRes<Comment>> {
     const { page, limit } = params;
 
     const paramString = queryString.stringify({ page, limit });
     const url = `/comment/${id}?${paramString}`;
     return axiosClient.get(url);
+  },
+
+  likeComment(postId: string, commentId: string): Promise<any> {
+    const url = `/comment/liked/${postId}/${commentId}`;
+    console.log("🚀 ~ file: commentApi.ts:27 ~ likeComment ~ url:", url);
+    return axiosClient.post(url);
+  },
+
+  deleteComment(commentId: string): Promise<any> {
+    const url = `/comment/${commentId}`;
+    return axiosClient.delete(url);
   },
 };
 

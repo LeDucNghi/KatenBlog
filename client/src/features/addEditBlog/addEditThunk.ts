@@ -143,7 +143,7 @@ export const handleGetPostComment =
       const res = await commentApi.getComment(id, params);
 
       dispatch(fetchCommentListSuccess(res.data.data));
-      dispatch(fetchPagination(res.data.pagination));
+      dispatch(fetchPagination(res.data.pagination!));
     } catch (error) {
       console.log(
         "🚀 ~ file: Comment.tsx:35 ~ handleGetPostComment ~ error",
@@ -180,7 +180,7 @@ export const handlePostComment =
         if (res.data) {
           const newListComment = await [...listComment];
 
-          await newListComment.push({
+          await newListComment.unshift({
             id: listComment[listComment.length - 1].id! + 1,
             content: comment,
             user: profile,
@@ -188,7 +188,7 @@ export const handlePostComment =
 
           await dispatch(fetchCommentListSuccess(newListComment));
 
-          toast("Your comment upload successfully 🥳", {
+          toast.success("Your comment upload successfully 🥳", {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -204,6 +204,17 @@ export const handlePostComment =
           "🚀 ~ file: Comment.tsx:22 ~ handlePostComment ~ error",
           error
         );
+
+        toast.error("Your comment can not be uploaded 😢", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       }
     }
   };
@@ -254,6 +265,7 @@ export const updateRecentBlog =
     }
   };
 
+// GET USER RECENT BLOG
 export const getUserRecentBlog = (): AppThunk => async (dispatch, getState) => {
   dispatch(fetchingRecentBlog());
 
@@ -266,6 +278,7 @@ export const getUserRecentBlog = (): AppThunk => async (dispatch, getState) => {
   }
 };
 
+// FETCH LATEST POST
 export const fetchLatestPost =
   ({ page, limit }: PaginationParams): AppThunk =>
   async (dispatch, getState) => {
@@ -277,5 +290,73 @@ export const fetchLatestPost =
       dispatch(fetchPagination(res.data.pagination!));
     } catch (error) {
       console.log("🚀 ~ file: addEditThunk.ts:246 ~ error:", error);
+    }
+  };
+
+// LIKE COMMENT
+export const handleLikeComment =
+  (postId: string, commentId: string): AppThunk =>
+  async (dispatch, getState) => {
+    try {
+      const res = await commentApi.likeComment(postId, commentId);
+
+      await toast.success(`${res.data.message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } catch (error) {
+      console.log("🚀 ~ file: addEditThunk.ts:301 ~ error:", error);
+      toast.error(`Something went wrong 😢`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };
+
+export const handleDeleteComment =
+  (commentId: string): AppThunk =>
+  async (dispatch, getState) => {
+    console.log("🚀 ~ file: addEditThunk.ts:331 ~ commentId:", commentId);
+    // const commentList: Comment[] = getState().post.commentList;
+
+    try {
+      const res = await commentApi.deleteComment(commentId);
+
+      if (res) {
+        toast.success(`${res.data.message}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    } catch (error) {
+      console.log("🚀 ~ file: addEditThunk.ts:336 ~ error:", error);
+      toast.error(`Something went wrong 😢`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };

@@ -17,6 +17,19 @@
         border-radius: 1.5em;
     }
 
+    .comment_buttons {
+        .button_content {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .comment_content {
+        width: 70%;
+
+        white-space: normal;
+    }
+
     .comment_list_empty {
         position: relative;
 

@@ -17,13 +17,20 @@ export default function Categories(props: ICategoriesProps) {
   const { name } = useParams();
   const dispatch = useAppDispatch();
 
+  const [type, setType] = React.useState("Lifestyle");
+
   React.useEffect(() => {
-    dispatch(fetchPostByCategory("Lifestyle", { page: 1, limit: 2 }));
-  }, [dispatch]);
+    dispatch(fetchPostByCategory(name!, { page: 1, limit: 2 }));
+  }, [dispatch, name]);
 
   return (
     <>
-      {/* <ProfileHeader title="Katen." image={Images.logoBrand} color="#203656" />{" "} */}
+      <ProfileHeader
+        handleTypeChange={setType}
+        title="Katen."
+        image={Images.logoBrand}
+        color="#203656"
+      />{" "}
       <div className="categories_wrapper">
         <CategoriesBanner categoriesName={`${name}`} />
 

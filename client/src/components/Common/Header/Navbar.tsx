@@ -40,6 +40,10 @@ export function Navbar({
     }
   };
 
+  const handleTypeChange = (type: string) => {
+    console.log("🚀 ~ file: Navbar.tsx:44 ~ handleTypeChange ~ type:", type);
+  };
+
   return (
     <nav className="header_navbar">
       <div className="navbar_container">
@@ -47,7 +51,9 @@ export function Navbar({
           <img src={Images.logo} alt="" />
         </a>
 
-        {/* {windowInnerWidth > BREAK_POINTS_NUMBER.sm && <NavbarCollapse />} */}
+        {windowInnerWidth > BREAK_POINTS_NUMBER.sm && (
+          <NavbarCollapse type={handleTypeChange} />
+        )}
 
         <div className="navbar_right">
           {windowInnerWidth > BREAK_POINTS_NUMBER.md && (

@@ -12,13 +12,6 @@ export interface PostListRes<T> {
   };
 }
 
-export interface PostListComment<T> {
-  data: {
-    data: T[];
-    pagination: PaginationParams;
-  };
-}
-
 export interface Auth<T> {
   data: T;
   token: string;

@@ -14,7 +14,7 @@ export function CategoriesBanner({
   route,
 }: ICategoriesBannerProps) {
   return (
-    <div className="categories_wrapper">
+    <div className="categories_banner_wrapper">
       <h1 className="categories_title">{categoriesName}</h1>
 
       <Breadcrumbs className="categories_breadcrumb" aria-label="breadcrumb">

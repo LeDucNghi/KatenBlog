@@ -8,10 +8,9 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 export interface INavbarCollapseProps {
   style?: React.CSSProperties;
   type: (type: string) => any;
-  ref?: React.RefObject<HTMLDivElement>;
 }
 
-export function NavbarCollapse({ style, type, ref }: INavbarCollapseProps) {
+export function NavbarCollapse({ style, type }: INavbarCollapseProps) {
   const navigate = useNavigate();
   const { id } = useParams();
   const { pathname } = useLocation();

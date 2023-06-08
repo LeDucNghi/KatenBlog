@@ -20,7 +20,6 @@ export function PostContent({
   values,
   handleBlur,
   userType,
-  blogData,
   setFieldValue,
 }: IPostContentProps) {
   const isPosting = useAppSelector(selectPostingStatus);

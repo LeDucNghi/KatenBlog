@@ -43,7 +43,48 @@ const uploadCloudinary = async (imagePath) => {
   }
 };
 
+const handlePaginate = (req, list) => {
+  const page = parseInt(req.query.page);
+  const limit = parseInt(req.query.limit);
+  const totalRows = list.length;
+  const totalPages = Math.ceil(totalRows / limit);
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  const data = {};
+  var paginatedResults = null;
+
+  data.pagination = {
+    page,
+    limit,
+    totalRows,
+    totalPages,
+  };
+
+  data.data = list.slice(startIndex, endIndex);
+
+  paginatedResults = data;
+
+  return paginatedResults;
+};
+
+const handleSortList = (list, type) => {
+  var newList = null;
+
+  // oldest - latest
+  if (type === "latest") {
+    newList = list.sort((a, b) => Number(b.createdAt) - Number(a.createdAt));
+  } else {
+    newList = list.sort((a, b) => Number(a.createdAt) - Number(b.createdAt));
+  }
+
+  return newList;
+};
+
 module.exports = {
   upload,
   uploadImage,
+  handlePaginate,
+  handleSortList,
 };

@@ -1,8 +1,9 @@
 const { posts, likes, users, recents } = require("../models");
-const { handlePaginate } = require("../services/Posts/Pagination");
-
-const { uploadImage } = require("../services/Posts/imageUpload");
-const { handleSortList } = require("../services/Posts/sortList");
+const {
+  uploadImage,
+  handlePaginate,
+  handleSortList,
+} = require("../services/Post");
 
 // GET ALL POST
 const getAllPost = async (req, res) => {

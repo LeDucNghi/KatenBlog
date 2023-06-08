@@ -22,16 +22,16 @@
             position: relative;
 
             margin-bottom: 4em;
-        }
 
-        .post_input_field.isGuest {
-            .ql-container.ql-snow {
-                border: none;
-                font-size: 18px;
-            }
+            &.isGuest {
+                .ql-container.ql-snow {
+                    border: none;
+                    font-size: 18px;
+                }
 
-            .ql-toolbar.ql-snow {
-                display: none;
+                .ql-toolbar.ql-snow {
+                    display: none;
+                }
             }
         }
 

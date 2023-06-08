@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { validateToken } = require("../middlewares/AuthMiddlewares");
-const { upload } = require("../services/Posts/imageUpload");
+
 const {
   getAllPost,
   createPost,
@@ -17,6 +17,7 @@ const {
   getUserRecentBlog,
   getLatestBlogList,
 } = require("../controllers/Post");
+const { upload } = require("../services/Post");
 
 // GET ALL POST
 router.get("/getallpost", getAllPost);

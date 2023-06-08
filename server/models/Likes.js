@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const likes = sequelize.define("likes");
 
   likes.associate = (models) => {
-    likes.belongsTo(models.posts, {
+    likes.belongsTo(models.comments, {
       onDelete: "cascade",
     });
   };

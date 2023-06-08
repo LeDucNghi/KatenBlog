@@ -10,6 +10,10 @@ module.exports = (sequalize, DataTypes) => {
     comments.belongsTo(models.users, {
       onDelete: "cascade",
     });
+
+    comments.hasMany(models.likes, {
+      onDelete: "cascade",
+    });
   };
 
   return comments;

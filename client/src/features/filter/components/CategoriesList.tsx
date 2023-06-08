@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
 import { CustomPagination } from "../../../components/Common/Pagination/Pagination";
 import { fetchPostByCategory } from "../../addEditBlog/addEditThunk";
-import { useNavigate } from "react-router-dom";
 
 export interface ICategoriesListProps {
   name: string;
@@ -19,7 +18,6 @@ export function CategoriesList({ name }: ICategoriesListProps) {
   const categoriesPaginate = useAppSelector(selectPaginate);
   const dispatch = useAppDispatch();
   const categoryList = useAppSelector(selectCategoryList);
-  const navigate = useNavigate();
 
   const handlePageChange = (value: number) => {
     dispatch(

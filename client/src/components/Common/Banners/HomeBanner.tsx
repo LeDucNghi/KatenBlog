@@ -2,10 +2,6 @@ import "./HomeBanner.scss";
 
 import * as React from "react";
 
-import {
-  selectIsFetchingPostList,
-  selectUserRecentBlog,
-} from "../../../features/addEditBlog/addEditSlice";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 import { BlogItems } from "../BlogItems/BlogItems";
@@ -14,6 +10,7 @@ import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
 import { Empty } from "../NotFound/Empty";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
 import { getUserRecentBlog } from "../../../features/addEditBlog/addEditThunk";
+import { selectUserRecentBlog } from "../../../features/addEditBlog/addEditSlice";
 
 export interface IHomeBannerProps {}
 

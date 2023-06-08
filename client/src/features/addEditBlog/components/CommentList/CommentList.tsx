@@ -6,11 +6,8 @@ import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 
 import Avatar from "@mui/material/Avatar";
 import { Comment } from "../../../../models";
+import { CommentButtons } from "./CommentButton";
 import { CustomPagination } from "../../../../components/Common/Pagination/Pagination";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import IconButton from "@mui/material/IconButton";
 import { Images } from "../../../../constants/image";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -18,24 +15,23 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import { Paper } from "@mui/material";
 import { RoundedWidget } from "../../../../widgets/RoundedWidget/RoundedWidgets";
-import { handleGetPostComment } from "../../addEditThunk";
+import {
+  handleGetPostComment
+} from "../../addEditThunk";
 import moment from "moment";
 import { selectPaginate } from "../../addEditSlice";
 
 export interface ICommentListProps {
   id: string;
-  commentList: Comment[] | null | undefined;
+  commentList: Comment[];
 }
 
 export function CommentList({ id, commentList }: ICommentListProps) {
   const dispatch = useAppDispatch();
   const commentListPaginate = useAppSelector(selectPaginate);
 
-  const [isLiked, setIsLiked] = React.useState<boolean>(false);
-
-  const handleLikePost = () => {
-    setIsLiked(!isLiked);
-  };
+  var [listOfComment, setListOfComment] =
+    React.useState<Comment[]>(commentList);
 
   const handlePageChange = (value: number) => {
     dispatch(
@@ -49,11 +45,11 @@ export function CommentList({ id, commentList }: ICommentListProps) {
   return (
     <RoundedWidget
       title={` Comments ( ${
-        commentList!.length < 10
-          ? `0${commentList!.length}`
-          : commentList!.length > 99
-          ? `${commentList!.length}+`
-          : `${commentList!.length}`
+        listOfComment!.length < 10
+          ? `0${listOfComment!.length}`
+          : listOfComment!.length > 99
+          ? `${listOfComment!.length}+`
+          : `${listOfComment!.length}`
       } )`}
       style={{
         width: " 100%",
@@ -63,7 +59,7 @@ export function CommentList({ id, commentList }: ICommentListProps) {
       anchorTitle="left"
     >
       <List dense={false} className="comment_list_container">
-        {commentList?.length === 0 ? (
+        {listOfComment?.length === 0 ? (
           <div className="comment_list_empty">
             <div className="comment_list_empty_img">
               <img src={Images.emptyListPerson} alt="" />
@@ -74,25 +70,12 @@ export function CommentList({ id, commentList }: ICommentListProps) {
             </p>
           </div>
         ) : (
-          commentList!.map((items, key) => {
+          listOfComment!.map((items, key) => {
             return (
               <Paper key={key} elevation={5} className="comment_items">
                 <ListItem
                   className="comment_buttons"
-                  secondaryAction={
-                    <>
-                      <IconButton
-                        onClick={handleLikePost}
-                        edge="end"
-                        aria-label="delete"
-                      >
-                        {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                      </IconButton>
-                      <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon />
-                      </IconButton>
-                    </>
-                  }
+                  secondaryAction={<CommentButtons items={items} id={`${id}`} listOfComment={listOfComment} setListOfComment={setListOfComment} />}
                 >
                   <ListItemAvatar>
                     <Avatar src={items.user?.avatar} />
@@ -109,7 +92,9 @@ export function CommentList({ id, commentList }: ICommentListProps) {
                         </span>
                       </>
                     }
-                    secondary={items.content}
+                    secondary={
+                      <p className="comment_content">{items.content} </p>
+                    }
                   />
                 </ListItem>
               </Paper>
