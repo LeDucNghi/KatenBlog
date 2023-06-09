@@ -19,6 +19,7 @@ export interface Comment {
   user?: Profile | null;
 
   likes?: Likes[] | undefined;
+  isLiked?: boolean;
 
   createdAt?: string;
   updatedAt?: string;

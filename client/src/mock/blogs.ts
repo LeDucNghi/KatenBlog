@@ -4,7 +4,7 @@ import moment from "moment";
 export const BlogsSample = [
   {
     id: 1,
-    image: faker.image.image(),
+    image: faker.image.animals(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,
@@ -19,7 +19,7 @@ export const BlogsSample = [
   },
   {
     id: 2,
-    image: faker.image.image(),
+    image: faker.image.animals(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,
@@ -35,7 +35,7 @@ export const BlogsSample = [
 
   {
     id: 3,
-    image: faker.image.image(),
+    image: faker.image.animals(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,
@@ -50,7 +50,7 @@ export const BlogsSample = [
   },
   {
     id: 4,
-    image: faker.image.image(),
+    image: faker.image.animals(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,
@@ -65,7 +65,7 @@ export const BlogsSample = [
   },
   {
     id: 5,
-    image: faker.image.image(),
+    image: faker.image.animals(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,
@@ -81,7 +81,7 @@ export const BlogsSample = [
 
   {
     id: 6,
-    image: faker.image.image(),
+    image: faker.image.animals(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,
@@ -97,7 +97,7 @@ export const BlogsSample = [
 
   {
     id: 7,
-    image: faker.image.image(),
+    image: faker.image.animals(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,
@@ -113,7 +113,7 @@ export const BlogsSample = [
 
   {
     id: 8,
-    image: faker.image.image(),
+    image: faker.image.animals(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,

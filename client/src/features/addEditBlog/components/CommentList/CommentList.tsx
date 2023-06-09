@@ -15,9 +15,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import { Paper } from "@mui/material";
 import { RoundedWidget } from "../../../../widgets/RoundedWidget/RoundedWidgets";
-import {
-  handleGetPostComment
-} from "../../addEditThunk";
+import { handleGetPostComment } from "../../addEditThunk";
 import moment from "moment";
 import { selectPaginate } from "../../addEditSlice";
 
@@ -29,9 +27,6 @@ export interface ICommentListProps {
 export function CommentList({ id, commentList }: ICommentListProps) {
   const dispatch = useAppDispatch();
   const commentListPaginate = useAppSelector(selectPaginate);
-
-  var [listOfComment, setListOfComment] =
-    React.useState<Comment[]>(commentList);
 
   const handlePageChange = (value: number) => {
     dispatch(
@@ -45,11 +40,11 @@ export function CommentList({ id, commentList }: ICommentListProps) {
   return (
     <RoundedWidget
       title={` Comments ( ${
-        listOfComment!.length < 10
-          ? `0${listOfComment!.length}`
-          : listOfComment!.length > 99
-          ? `${listOfComment!.length}+`
-          : `${listOfComment!.length}`
+        commentList!.length < 10
+          ? `0${commentList!.length}`
+          : commentList!.length > 99
+          ? `${commentList!.length}+`
+          : `${commentList!.length}`
       } )`}
       style={{
         width: " 100%",
@@ -59,7 +54,7 @@ export function CommentList({ id, commentList }: ICommentListProps) {
       anchorTitle="left"
     >
       <List dense={false} className="comment_list_container">
-        {listOfComment?.length === 0 ? (
+        {commentList?.length === 0 ? (
           <div className="comment_list_empty">
             <div className="comment_list_empty_img">
               <img src={Images.emptyListPerson} alt="" />
@@ -70,12 +65,14 @@ export function CommentList({ id, commentList }: ICommentListProps) {
             </p>
           </div>
         ) : (
-          listOfComment!.map((items, key) => {
+          commentList!.map((items, key) => {
             return (
               <Paper key={key} elevation={5} className="comment_items">
                 <ListItem
                   className="comment_buttons"
-                  secondaryAction={<CommentButtons items={items} id={`${id}`} listOfComment={listOfComment} setListOfComment={setListOfComment} />}
+                  secondaryAction={
+                    <CommentButtons items={items} id={`${id}`} />
+                  }
                 >
                   <ListItemAvatar>
                     <Avatar src={items.user?.avatar} />

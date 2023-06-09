@@ -23,7 +23,6 @@ const commentApi = {
 
   likeComment(postId: string, commentId: string): Promise<any> {
     const url = `/comment/liked/${postId}/${commentId}`;
-    console.log("🚀 ~ file: commentApi.ts:27 ~ likeComment ~ url:", url);
     return axiosClient.post(url);
   },
 

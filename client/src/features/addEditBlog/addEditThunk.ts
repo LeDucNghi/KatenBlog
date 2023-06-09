@@ -138,11 +138,27 @@ export const addEditPost =
 export const handleGetPostComment =
   (id: string, params: PaginationParams): AppThunk =>
   async (dispatch, getState) => {
+    const userProfile: Profile | null = getState().auth.userProfile;
+
     dispatch(fetchCommentList());
     try {
       const res = await commentApi.getComment(id, params);
 
-      dispatch(fetchCommentListSuccess(res.data.data));
+      const dataClone = [...res.data.data];
+
+      const newData = dataClone.map((data) => {
+        const index = data.likes?.findIndex(
+          (like) => like.userId === userProfile?.id && data.id === id
+        );
+
+        if (index) {
+          return { ...data, isLiked: true };
+        } else {
+          return { ...data, isLiked: false };
+        }
+      });
+
+      dispatch(fetchCommentListSuccess(newData));
       dispatch(fetchPagination(res.data.pagination!));
     } catch (error) {
       console.log(
@@ -180,11 +196,19 @@ export const handlePostComment =
         if (res.data) {
           const newListComment = await [...listComment];
 
-          await newListComment.unshift({
-            id: listComment[listComment.length - 1].id! + 1,
-            content: comment,
-            user: profile,
-          });
+          if (newListComment.length === 0) {
+            await newListComment.unshift({
+              id: "1",
+              content: comment,
+              user: profile,
+            });
+          } else {
+            await newListComment.unshift({
+              id: listComment[listComment.length - 1].id! + 1,
+              content: comment,
+              user: profile,
+            });
+          }
 
           await dispatch(fetchCommentListSuccess(newListComment));
 
@@ -297,8 +321,57 @@ export const fetchLatestPost =
 export const handleLikeComment =
   (postId: string, commentId: string): AppThunk =>
   async (dispatch, getState) => {
+    const commentList: Comment[] = getState().post.commentList;
+    const userProfile: Profile | null = getState().auth.userProfile;
+
     try {
       const res = await commentApi.likeComment(postId, commentId);
+
+      const newCommentList = commentList.map((list) => {
+        if (list.id === commentId) {
+          const index = list.likes?.findIndex(
+            (like) =>
+              like.commentId === commentId && like.userId === userProfile?.id
+          );
+
+          if (index! < 0) {
+            var newLikeItems = null;
+
+            newLikeItems = {
+              id:
+                list.likes?.length === 0
+                  ? 1
+                  : list.likes![list.likes!.length - 1].id! + 1,
+              createdAt: `${new Date()}`,
+              updatedAt: `${new Date()}`,
+              commentId,
+              postId: Number(postId),
+              userId: Number(userProfile?.id),
+            };
+
+            return {
+              ...list,
+              likes: [...list.likes!, newLikeItems],
+              isLiked: true,
+            };
+          } else {
+            const filterLikeList = list.likes?.filter(
+              (like) =>
+                like.commentId === commentId && userProfile?.id !== like.userId
+            );
+
+            return {
+              ...list,
+              likes: filterLikeList,
+              isLiked: false,
+            };
+          }
+        } else {
+          return list;
+        }
+      });
+
+      dispatch(fetchCommentListSuccess(newCommentList));
 
       await toast.success(`${res.data.message}`, {
         position: "top-center",
@@ -325,16 +398,24 @@ export const handleLikeComment =
     }
   };
 
+// DELETE COMMENT
 export const handleDeleteComment =
   (commentId: string): AppThunk =>
   async (dispatch, getState) => {
-    console.log("🚀 ~ file: addEditThunk.ts:331 ~ commentId:", commentId);
-    // const commentList: Comment[] = getState().post.commentList;
+    const commentList: Comment[] = getState().post.commentList;
 
     try {
       const res = await commentApi.deleteComment(commentId);
 
       if (res) {
+        const commentListClone = await [...commentList];
+
+        const newCommentList = await commentListClone.filter(
+          (comment) => comment.id !== commentId
+        );
+
+        dispatch(fetchCommentListSuccess(newCommentList));
+
         toast.success(`${res.data.message}`, {
           position: "top-center",
           autoClose: 5000,
