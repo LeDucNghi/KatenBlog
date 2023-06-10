@@ -22,7 +22,8 @@ export type IconName =
   | "phone"
   | "mail"
   | "location"
-  | "loading";
+  | "loading"
+  | "bookadd";
 
 export type IconsFontSize = "large" | "medium" | "small";
 

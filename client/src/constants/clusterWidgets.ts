@@ -150,9 +150,9 @@ export const accountMenuWidget = (id: string | number) => {
     },
     {
       id: 3,
-      name: "Settings",
-      route: "/",
-      icon: "setting" as IconName,
+      name: "Add new blog",
+      route: "/add",
+      icon: "bookadd" as IconName,
     },
 
     {

@@ -21,6 +21,7 @@ import postsApi from "../../api/postsApi";
 import { setUserType } from "../auth/authSlice";
 import { toast } from "react-toastify";
 
+// GET ALL POST
 export const handleGetAllPost = (): AppThunk => async (dispatch, getState) => {
   dispatch(fetchPostList());
   try {
@@ -81,13 +82,12 @@ export const addEditPost =
       await dispatch(setPostingStatus({ ...postingStatus, isEdit: true }));
     } else await dispatch(setPostingStatus({ ...postingStatus, isAdd: true }));
 
-    console.log("🚀 ~ file: addEditThunk.ts:77 ~ userType:", userType);
-
     const newValue =
       userType === "isPoster"
         ? { ...values, image: image ? image : values.image, id: id }
         : { ...values, image: image };
 
+    console.log("🚀 ~ file: addEditThunk.ts:87 ~ newValue:", newValue);
     try {
       const res =
         userType === "isPoster"

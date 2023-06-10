@@ -37,11 +37,9 @@ import { PostHeader } from "../../features/addEditBlog/components/PostHeader/Pos
 import { ScrollToTop } from "../../components/Common/ScrollToTop/ScrollToTop";
 import { useEffect } from "react";
 
-export interface IPostsProps {
-  check?: "isGuest" | "isPoster" | "isAdd";
-}
+export interface IPostsProps {}
 
-export default function Posts({ check }: IPostsProps) {
+export default function Posts(props: IPostsProps) {
   const { id } = useParams<string>();
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
@@ -90,7 +88,7 @@ export default function Posts({ check }: IPostsProps) {
       .required("Let us know your blog's content 🤔"),
   });
 
-  if (!blogData || isError?.isError)
+  if ((pathname !== `/add` && !blogData) || isError?.isError)
     return (
       <NotFound
         title="Sorry, blog not found"
@@ -102,36 +100,47 @@ export default function Posts({ check }: IPostsProps) {
     );
 
   return (
-    <Page title={`${blogData.title}`}>
+    <Page
+      title={
+        pathname === `/add` ? `Create your own blog` : `${blogData?.title}`
+      }
+    >
       <ScrollToTop />
       <div className="post_container">
-        <Breadcrumbs className="post_breadcrumb" aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
-            Home
-          </Link>
-          <Link
-            underline="hover"
-            color="inherit"
-            href={`/categories/${blogData?.categories}`}
-          >
-            {blogData?.categories}
-          </Link>
-          <Link
-            underline="hover"
-            color="text.primary"
-            href="/material-ui/react-breadcrumbs/"
-            aria-current="page"
-          >
-            {blogData?.title}
-          </Link>
-        </Breadcrumbs>
+        {pathname !== `/add` && (
+          <Breadcrumbs className="post_breadcrumb" aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href="/">
+              Home
+            </Link>
+            <Link
+              underline="hover"
+              color="inherit"
+              href={`/categories/${blogData?.categories}`}
+            >
+              {blogData?.categories}
+            </Link>
+            <Link
+              underline="hover"
+              color="text.primary"
+              href="/material-ui/react-breadcrumbs/"
+              aria-current="page"
+            >
+              {blogData?.title}
+            </Link>
+          </Breadcrumbs>
+        )}
 
-        <div className="post_single">
+        <div
+          className="post_single"
+          style={{ width: userType === "isAdd" ? "100%" : "" }}
+        >
           <Formik
             enableReinitialize
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values, actions) => dispatch(addEditPost(values, id!))}
+            onSubmit={(values, actions) => {
+              return dispatch(addEditPost(values, id!));
+            }}
           >
             {(formikProps) => {
               const {
@@ -146,6 +155,7 @@ export default function Posts({ check }: IPostsProps) {
               return (
                 <Form>
                   <PostHeader
+                    pathname={pathname}
                     values={values}
                     handleChange={handleChange}
                     handleBlur={handleBlur}
@@ -154,13 +164,10 @@ export default function Posts({ check }: IPostsProps) {
                   />
 
                   <PostBanner
-                    blogData={blogData}
                     userType={userType}
                     values={values}
-                    handleChange={handleChange}
                     handleBlur={handleBlur}
-                    touched={touched}
-                    errors={errors}
+                    setFieldValue={setFieldValue}
                   />
 
                   <PostContent
@@ -176,7 +183,7 @@ export default function Posts({ check }: IPostsProps) {
             }}
           </Formik>
 
-          <Author author={blogData?.user} />
+          <Author userType={userType} author={blogData?.user} />
 
           {(userType === "isGuest" || userType === "isPoster") && (
             <CommentList commentList={commentList} id={`${id}`} />
@@ -189,9 +196,11 @@ export default function Posts({ check }: IPostsProps) {
         )} */}
         </div>
 
-        <div className="post_right">
-          <InnerWrapper />
-        </div>
+        {userType !== "isAdd" && (
+          <div className="post_right">
+            <InnerWrapper />
+          </div>
+        )}
       </div>
     </Page>
   );

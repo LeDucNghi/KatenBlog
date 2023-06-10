@@ -53,27 +53,18 @@ export default function AccountMenu(props: IAccountMenuProps) {
           alignItems: "center",
           textAlign: "center",
         }}
+        onClick={handleClick}
       >
-        <Tooltip title="Account settings" arrow>
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
-            {userProfile?.avatar ? (
-              <Avatar
-                sx={{ width: 32, height: 32 }}
-                src={userProfile?.avatar}
-              />
-            ) : (
-              <Avatar sx={{ width: 32, height: 32 }}>
-                {userProfile?.fullname?.charAt(0)}
-              </Avatar>
-            )}
-          </IconButton>
-        </Tooltip>
+        {/* <Tooltip title="Account settings" arrow> */}
+
+        {userProfile?.avatar ? (
+          <Avatar sx={{ width: 32, height: 32 }} src={userProfile?.avatar} />
+        ) : (
+          <Avatar sx={{ width: 32, height: 32 }}>
+            {userProfile?.fullname?.charAt(0)}
+          </Avatar>
+        )}
+        {/* </Tooltip> */}
       </Box>
       <Menu
         anchorEl={anchorEl}

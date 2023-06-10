@@ -2,6 +2,7 @@ import "./PostContent.scss";
 
 import { Post, UserType } from "../../../../models";
 
+import { Icons } from "../../../../components/Common/Icons/Icons";
 import { LoadingButton } from "@mui/lab";
 import ReactQuill from "react-quill";
 import { selectPostingStatus } from "../../addEditSlice";
@@ -19,6 +20,7 @@ export interface IPostContentProps {
 export function PostContent({
   values,
   handleBlur,
+  handleChange,
   userType,
   setFieldValue,
 }: IPostContentProps) {
@@ -46,10 +48,10 @@ export function PostContent({
           }
           placeholder="Content"
           theme="snow"
-          value={values.content}
-          onChange={(e) => setFieldValue("content", e)}
-          onBlur={handleBlur}
           modules={modules}
+          value={values.content}
+          onBlur={handleBlur}
+          onChange={(e) => setFieldValue("content", e)}
           readOnly={userType === "isGuest" ? true : false}
         />
 
@@ -62,6 +64,7 @@ export function PostContent({
             variant="contained"
             type="submit"
             loadingPosition="start"
+            startIcon={<Icons iconName="loading" />}
           >
             {userType === "isPoster" ? `Update this post` : `Create new post`}
           </LoadingButton>

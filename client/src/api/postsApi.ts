@@ -23,6 +23,10 @@ const postsApi = {
   },
 
   addNewPost(params: Post): Promise<any> {
+    console.log(
+      "🚀 ~ file: postsApi.ts:26 ~ addNewPost ~ params:",
+      params.image
+    );
     const formData = new FormData();
 
     formData.append("image", params.image!);
@@ -30,6 +34,10 @@ const postsApi = {
     formData.append("subTitle", params.subTitle!);
     formData.append("categories", params.categories!);
     formData.append("content", params.content!);
+    console.log(
+      "🚀 ~ file: postsApi.ts:33 ~ addNewPost ~ formData:",
+      formData.values()
+    );
 
     const url = `/posts/createpost`;
     return axiosClient.post(url, formData, {

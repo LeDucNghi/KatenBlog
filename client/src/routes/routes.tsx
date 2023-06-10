@@ -46,6 +46,14 @@ export const routes = [
   },
 
   {
+    path: "add",
+    title: "Create your own blog",
+    element: <Posts />,
+    loadingTimeout: 1000,
+    isLandingLayout: true,
+  },
+
+  {
     path: "profile/:id",
     title: "Profile",
     element: <UserProfile />,

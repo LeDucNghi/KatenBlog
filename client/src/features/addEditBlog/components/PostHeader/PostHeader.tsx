@@ -7,8 +7,11 @@ import { Post, UserType } from "../../../../models";
 import { CustomSelect } from "../../../../components/Common/Select/CustomSelect";
 import { TextField } from "@mui/material";
 import moment from "moment";
+import { selectUserProfile } from "../../../auth/authSlice";
+import { useAppSelector } from "../../../../app/hooks";
 
 export interface IPostHeaderProps {
+  pathname: string;
   values: Post;
   handleChange: any;
   handleBlur: any;
@@ -17,12 +20,15 @@ export interface IPostHeaderProps {
 }
 
 export function PostHeader({
+  pathname,
   blogData,
   userType,
   values,
   handleBlur,
   handleChange,
 }: IPostHeaderProps) {
+  const userProfile = useAppSelector(selectUserProfile);
+
   return (
     <div className="post_header">
       <h1 className="post_title">
@@ -45,12 +51,41 @@ export function PostHeader({
         )}
       </h1>
 
+      {pathname === "/add" && (
+        <h1 className="post_title">
+          <TextField
+            className="input_field"
+            fullWidth
+            label="Blog's Subtitle"
+            id="outlined-size-small"
+            size="small"
+            name="subTitle"
+            value={values?.subTitle}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            // error={touched.title && Boolean(errors.title)}
+            // helperText={touched.title && errors.title}
+          />
+        </h1>
+      )}
+
       <ul className="meta_list">
         <li>
           <div className="meta_author">
-            <img src={blogData?.user?.avatar} alt="" />
+            <img
+              src={
+                pathname === `/add`
+                  ? userProfile?.avatar
+                  : blogData?.user?.avatar
+              }
+              alt=""
+            />
           </div>
-          <span className="meta_author_name">{blogData?.user?.fullname} </span>
+          <span className="meta_author_name">
+            {pathname === `/add`
+              ? userProfile?.fullname
+              : blogData?.user?.fullname}{" "}
+          </span>
         </li>
         <li>
           {" "}
@@ -66,7 +101,9 @@ export function PostHeader({
           )}{" "}
         </li>
 
-        <li>{moment(blogData?.createdAt).format("LL")} </li>
+        {pathname !== `/add` && (
+          <li>{moment(blogData?.createdAt).format("LL")} </li>
+        )}
       </ul>
     </div>
   );

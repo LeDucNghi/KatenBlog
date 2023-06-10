@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -198,6 +199,15 @@ export function Icons({ iconName, className, fontSize, style }: IIconsProps) {
   if (iconName === "loading")
     return (
       <SaveIcon className={`${className}`} fontSize={fontSize} style={style} />
+    );
+
+  if (iconName === "bookadd")
+    return (
+      <BookmarkAddIcon
+        className={`${className}`}
+        fontSize={fontSize}
+        style={style}
+      />
     );
 
   return null;

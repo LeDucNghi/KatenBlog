@@ -29,7 +29,8 @@ module.exports = (sequalize, DataTypes) => {
 
       visit: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 0,
       },
 
       updatedAt: {
