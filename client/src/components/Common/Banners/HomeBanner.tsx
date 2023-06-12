@@ -17,7 +17,6 @@ export interface IHomeBannerProps {}
 export function HomeBanner(props: IHomeBannerProps) {
   const dispatch = useAppDispatch();
   const userRecentBlog = useAppSelector(selectUserRecentBlog);
-  // const isFetching = useAppSelector(selectIsFetchingPostList);
 
   const [isActive, setIsActive] = React.useState<number>(1);
   const [openBackdrop, setOpenBackdrop] = React.useState<boolean>(false);

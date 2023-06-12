@@ -6,7 +6,6 @@ const storage = multer.diskStorage({
   //   cb(null, `images`);
   // },
   filename: function (req, file, cb) {
-    console.log("🚀 ~ file: Post.js:12 ~ file:", file);
     cb(null, `${new Date().getDate()} `);
   },
 });

@@ -4,6 +4,7 @@ import * as React from "react";
 
 import { Post, UserType } from "../../../../models";
 
+import { CategoriesOption } from "../../../../constants";
 import { CustomSelect } from "../../../../components/Common/Select/CustomSelect";
 import { TextField } from "@mui/material";
 import moment from "moment";
@@ -97,6 +98,7 @@ export function PostHeader({
               handleChange={handleChange}
               handleBlur={handleBlur}
               name="categories"
+              options={CategoriesOption}
             />
           )}{" "}
         </li>

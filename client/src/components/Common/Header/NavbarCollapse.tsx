@@ -5,6 +5,8 @@ import * as React from "react";
 import { NavbarWidget, ProfileNavbarWidget } from "../../../constants";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+import { ScrollTo } from "../ScrollToTop/ScrollTo";
+
 export interface INavbarCollapseProps {
   style?: React.CSSProperties;
   type: (type: string) => any;
@@ -17,18 +19,17 @@ export function NavbarCollapse({ style, type }: INavbarCollapseProps) {
 
   const [active, setActive] = React.useState<number>(1);
   const [activeType, setActiveType] = React.useState<string>("");
-
-  React.useEffect(() => {
-    if (pathname === `/profile/${id}`) {
-      setActiveType("Lifestyle");
-    } else {
-      setActiveType("Home");
-    }
-  }, [pathname]);
+  const [isScroll, setIsScroll] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     type(activeType);
   }, [activeType]);
+
+  React.useEffect(() => {
+    if (window.innerHeight < 800) {
+      setIsScroll(false);
+    }
+  }, [isScroll]);
 
   const handleActiveNavbar = (nav: {
     id?: number;
@@ -41,38 +42,51 @@ export function NavbarCollapse({ style, type }: INavbarCollapseProps) {
 
     if (pathname !== `/profile/${id}`) {
       navigate(nav.route!);
+    } else {
+      setIsScroll(true);
     }
   };
 
   return (
-    <div className="navbar_collapse" style={style}>
-      {pathname === `/profile/${id}`
-        ? ProfileNavbarWidget.map((nav, key) => {
-            return (
-              <button
-                key={key}
-                onClick={() =>
-                  handleActiveNavbar({ id: nav.id, name: nav.name })
-                }
-                className={active === nav.id ? "nav_link isActive" : "nav_link"}
-              >
-                {nav.name}
-              </button>
-            );
-          })
-        : NavbarWidget.map((nav, key) => {
-            return (
-              <button
-                key={key}
-                onClick={() =>
-                  handleActiveNavbar({ id: nav.id, route: nav.route })
-                }
-                className={active === nav.id ? "nav_link isActive" : "nav_link"}
-              >
-                {nav.name}
-              </button>
-            );
-          })}
-    </div>
+    <>
+      {isScroll && <ScrollTo x={0} y={800} />}
+      <div className="navbar_collapse" style={style}>
+        {pathname === `/profile/${id}`
+          ? ProfileNavbarWidget.map((nav, key) => {
+              return (
+                <button
+                  key={key}
+                  onClick={() =>
+                    handleActiveNavbar({ id: nav.id, name: nav.name })
+                  }
+                  className={
+                    active === nav.id ? "nav_link isActive" : "nav_link"
+                  }
+                >
+                  {nav.name}
+                </button>
+              );
+            })
+          : NavbarWidget.map((nav, key) => {
+              return (
+                <button
+                  key={key}
+                  onClick={() =>
+                    handleActiveNavbar({
+                      id: nav.id,
+                      route: nav.route,
+                      name: nav.name,
+                    })
+                  }
+                  className={
+                    active === nav.id ? "nav_link isActive" : "nav_link"
+                  }
+                >
+                  {nav.name}
+                </button>
+              );
+            })}
+      </div>
+    </>
   );
 }

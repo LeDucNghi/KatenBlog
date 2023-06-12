@@ -1,9 +1,7 @@
 import * as React from "react";
 
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-
-import { CategoriesOption } from "../../../constants";
-import { Post } from "../../../models";
+import { Options, Post } from "../../../models";
 
 export interface ICustomSelectProps {
   name: string;
@@ -11,6 +9,7 @@ export interface ICustomSelectProps {
   handleChange: any;
   handleBlur: any;
   className?: string;
+  options?: Options[];
 }
 
 export function CustomSelect({
@@ -19,6 +18,7 @@ export function CustomSelect({
   handleBlur,
   handleChange,
   className,
+  options,
 }: ICustomSelectProps) {
   return (
     <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
@@ -37,10 +37,10 @@ export function CustomSelect({
         onChange={handleChange}
         // error={touched.categories && Boolean(errors.categories)}
       >
-        {CategoriesOption.map((category, key) => {
+        {options?.map((option, key) => {
           return (
-            <MenuItem key={key} value={category.categoryName}>
-              {category.categoryName}{" "}
+            <MenuItem key={key} value={option.optionValue}>
+              {option.optionName}{" "}
             </MenuItem>
           );
         })}

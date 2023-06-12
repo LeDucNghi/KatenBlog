@@ -28,6 +28,12 @@ const getPostByCategories = async (req, res) => {
 
   const categoriesData = await posts.findAll({
     where: { categories: categoryName },
+    include: {
+      model: users,
+      attributes: {
+        exclude: ["password", "createdAt", "updatedAt", "username"],
+      },
+    },
   });
 
   if (!categoriesData)

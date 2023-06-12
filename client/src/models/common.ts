@@ -28,3 +28,9 @@ export interface Errors {
     };
   };
 }
+
+export interface Options {
+  id: number;
+  optionName: string;
+  optionValue: string;
+}

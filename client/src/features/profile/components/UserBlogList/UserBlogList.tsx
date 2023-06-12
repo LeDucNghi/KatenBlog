@@ -1,6 +1,7 @@
 import "./UserBlogList.scss";
 
 import {
+  selectIsFetchingPostList,
   selectPaginate,
   selectUserPostList,
 } from "../../../addEditBlog/addEditSlice";
@@ -10,6 +11,7 @@ import { BlogItems } from "../../../../components/Common/BlogItems/BlogItems";
 import { Contact } from "../../../../pages/Contact/Contact";
 import { CustomPagination } from "../../../../components/Common/Pagination/Pagination";
 import { Empty } from "../../../../components/Common/NotFound/Empty";
+import { Loading } from "../../../../components/Common/Loading/Loading";
 import { handleGetUserPost } from "../../../addEditBlog/addEditThunk";
 import { useEffect } from "react";
 
@@ -19,10 +21,14 @@ export interface IUserBlogListProps {
 }
 
 export function UserBlogList({ id, type }: IUserBlogListProps) {
+  const dispatch = useAppDispatch();
   const userBlogListPaginate = useAppSelector(selectPaginate);
   const userBlogList = useAppSelector(selectUserPostList);
-
-  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(selectIsFetchingPostList);
+  console.log(
+    "🚀 ~ file: CategoriesList.tsx:25 ~ CategoriesList ~ isLoading:",
+    isLoading.isCategory
+  );
 
   useEffect(() => {
     dispatch(
@@ -49,6 +55,8 @@ export function UserBlogList({ id, type }: IUserBlogListProps) {
     >
       {type === "Contact" ? (
         <Contact hasBanner={false} />
+      ) : isLoading.isCategory ? (
+        <Loading />
       ) : (
         <div className="blog_list">
           {userBlogList.length === 0 ? (

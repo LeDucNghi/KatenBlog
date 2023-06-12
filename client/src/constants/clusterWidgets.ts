@@ -169,22 +169,27 @@ export const accountMenuWidget = (id: string | number) => {
 export const CategoriesOption = [
   {
     id: 1,
-    categoryName: "Lifestyle",
+    optionName: "Lifestyle",
+    optionValue: "lifestyle",
   },
   {
     id: 2,
-    categoryName: "Inspiration",
+    optionName: "Inspiration",
+    optionValue: "inspiration",
   },
   {
     id: 3,
-    categoryName: "Fashion",
+    optionName: "Fashion",
+    optionValue: "fashion",
   },
   {
     id: 4,
-    categoryName: "Politic",
+    optionName: "Politic",
+    optionValue: "politic",
   },
   {
     id: 5,
-    categoryName: "Culture",
+    optionName: "Culture",
+    optionValue: "culture",
   },
 ];

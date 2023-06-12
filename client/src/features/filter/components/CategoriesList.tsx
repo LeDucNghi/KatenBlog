@@ -2,12 +2,15 @@ import "../../../pages/Categories/Categories.scss";
 
 import {
   selectCategoryList,
+  selectIsFetchingPostList,
   selectPaginate,
 } from "../../addEditBlog/addEditSlice";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
 import { CustomPagination } from "../../../components/Common/Pagination/Pagination";
+import { Empty } from "../../../components/Common/NotFound/Empty";
+import { Loading } from "../../../components/Common/Loading/Loading";
 import { fetchPostByCategory } from "../../addEditBlog/addEditThunk";
 
 export interface ICategoriesListProps {
@@ -31,29 +34,35 @@ export function CategoriesList({ name }: ICategoriesListProps) {
   return (
     <div className="categories_left">
       <div className="categories_list">
-        {categoryList.map((blogs, key) => {
-          return (
-            <BlogItems
-              key={key}
-              items={blogs}
-              direction="vertical"
-              isThumbedNail={false}
-              showBadge={false}
-              style={{
-                width: "45%",
-              }}
-              id={`${blogs.id}`}
-            />
-          );
-        })}
+        {categoryList.length === 0 ? (
+          <Empty content="There have not had any post in this category 😢 Please try another one 🤔" />
+        ) : (
+          categoryList.map((blogs, key) => {
+            return (
+              <BlogItems
+                key={key}
+                items={blogs}
+                direction="vertical"
+                isThumbedNail={false}
+                showBadge={false}
+                style={{
+                  width: "45%",
+                }}
+                id={`${blogs.id}`}
+              />
+            );
+          })
+        )}
       </div>
 
-      <div className="categories_paginate">
-        <CustomPagination
-          handlePageChange={handlePageChange}
-          paginate={categoriesPaginate}
-        />
-      </div>
+      {categoryList.length !== 0 && (
+        <div className="categories_paginate">
+          <CustomPagination
+            handlePageChange={handlePageChange}
+            paginate={categoriesPaginate}
+          />
+        </div>
+      )}
     </div>
   );
 }

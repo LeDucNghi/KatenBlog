@@ -73,6 +73,10 @@ const postSlice = createSlice({
       state.isFetChing.isRecentBlog = true;
     },
 
+    fetchingCategoryBlog(state) {
+      state.isFetChing.isCategory = true;
+    },
+
     fetchPostListSuccess(state, action: PayloadAction<Post[]>) {
       state.isFetChing.isPostList = true;
       state.postList = action.payload;
@@ -89,6 +93,7 @@ const postSlice = createSlice({
     },
 
     fetchUserPostList(state, action: PayloadAction<Post[]>) {
+      state.isFetChing.isCategory = false;
       state.userPostList = action.payload;
     },
 
@@ -133,6 +138,7 @@ export const {
   fetchingRecentBlog,
   fetchCommentList,
   fetchUserPostList,
+  fetchingCategoryBlog,
   fetchPostDataSuccess,
   fetchPostListSuccess,
   fetchCommentListSuccess,

@@ -17,11 +17,11 @@ export default function Categories(props: ICategoriesProps) {
   const { name } = useParams();
   const dispatch = useAppDispatch();
 
-  const [type, setType] = React.useState("Lifestyle");
+  const [type, setType] = React.useState("");
 
   React.useEffect(() => {
-    dispatch(fetchPostByCategory(name!, { page: 1, limit: 2 }));
-  }, [dispatch, name]);
+    dispatch(fetchPostByCategory(type, { page: 1, limit: 2 }));
+  }, [dispatch, type]);
 
   return (
     <>
@@ -32,10 +32,10 @@ export default function Categories(props: ICategoriesProps) {
         color="#203656"
       />{" "}
       <div className="categories_wrapper">
-        <CategoriesBanner categoriesName={`${name}`} />
+        <CategoriesBanner categoriesName={type} />
 
         <div className="categories_content">
-          <CategoriesList name={`${name}`} />
+          <CategoriesList name={type} />
 
           <div className="categories_right">
             <InnerWrapper />

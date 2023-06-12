@@ -11,6 +11,7 @@ import {
   fetchPostListSuccess,
   fetchUserPostList,
   fetchUserRecentBlog,
+  fetchingCategoryBlog,
   fetchingRecentBlog,
   setPostingStatus,
 } from "./addEditSlice";
@@ -251,11 +252,19 @@ export const handleGetUserPost =
     { page, limit }: PaginationParams
   ): AppThunk =>
   async (dispatch, getState) => {
+    dispatch(fetchingCategoryBlog());
+
+    let time;
+
     try {
       const res = await postsApi.getUserPost(id, type, { page, limit });
 
-      dispatch(fetchUserPostList(res.data.data));
-      dispatch(fetchPagination(res.data.pagination!));
+      clearTimeout(time);
+
+      time = setTimeout(() => {
+        dispatch(fetchUserPostList(res.data.data));
+        dispatch(fetchPagination(res.data.pagination!));
+      }, 1000);
     } catch (error) {
       console.log(
         "🚀 ~ file: addEditThunk.ts:199 ~ handleGetUserPost ~ error:",
