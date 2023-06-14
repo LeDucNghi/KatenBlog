@@ -2,17 +2,28 @@ import "./NavbarCollapse.scss";
 
 import * as React from "react";
 
-import { NavbarWidget, ProfileNavbarWidget } from "../../../constants";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { ScrollTo } from "../ScrollToTop/ScrollTo";
 
+export interface NavbarWidgets {
+  id: number;
+  name: string;
+  route?: string;
+}
 export interface INavbarCollapseProps {
   style?: React.CSSProperties;
-  type: (type: string) => any;
+  navbarList?: NavbarWidgets[];
+  type?: string;
+  setNewType: (type: string) => any;
 }
 
-export function NavbarCollapse({ style, type }: INavbarCollapseProps) {
+export function NavbarCollapse({
+  style,
+  navbarList,
+  setNewType,
+  type,
+}: INavbarCollapseProps) {
   const navigate = useNavigate();
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -22,7 +33,7 @@ export function NavbarCollapse({ style, type }: INavbarCollapseProps) {
   const [isScroll, setIsScroll] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    type(activeType);
+    setNewType(activeType);
   }, [activeType]);
 
   React.useEffect(() => {
@@ -51,41 +62,29 @@ export function NavbarCollapse({ style, type }: INavbarCollapseProps) {
     <>
       {isScroll && <ScrollTo x={0} y={800} />}
       <div className="navbar_collapse" style={style}>
-        {pathname === `/profile/${id}`
-          ? ProfileNavbarWidget.map((nav, key) => {
-              return (
-                <button
-                  key={key}
-                  onClick={() =>
-                    handleActiveNavbar({ id: nav.id, name: nav.name })
-                  }
-                  className={
-                    active === nav.id ? "nav_link isActive" : "nav_link"
-                  }
-                >
-                  {nav.name}
-                </button>
-              );
-            })
-          : NavbarWidget.map((nav, key) => {
-              return (
-                <button
-                  key={key}
-                  onClick={() =>
-                    handleActiveNavbar({
-                      id: nav.id,
-                      route: nav.route,
-                      name: nav.name,
-                    })
-                  }
-                  className={
-                    active === nav.id ? "nav_link isActive" : "nav_link"
-                  }
-                >
-                  {nav.name}
-                </button>
-              );
-            })}
+        {navbarList?.map((nav, key) => {
+          return (
+            <button
+              key={key}
+              onClick={() =>
+                handleActiveNavbar({
+                  id: nav.id,
+                  name: nav.name,
+                  route: nav.route,
+                })
+              }
+              className={
+                type && type === nav.name
+                  ? "nav_link isActive"
+                  : active === nav.id
+                  ? "nav_link isActive"
+                  : "nav_link"
+              }
+            >
+              {nav.name}
+            </button>
+          );
+        })}
       </div>
     </>
   );

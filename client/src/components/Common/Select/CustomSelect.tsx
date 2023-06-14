@@ -39,7 +39,7 @@ export function CustomSelect({
       >
         {options?.map((option, key) => {
           return (
-            <MenuItem key={key} value={option.optionValue}>
+            <MenuItem key={key} value={option.optionName}>
               {option.optionName}{" "}
             </MenuItem>
           );

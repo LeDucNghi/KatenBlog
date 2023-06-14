@@ -3,7 +3,9 @@ import {
   fetchCategoryListSuccess,
   fetchCommentList,
   fetchCommentListSuccess,
+  fetchLatestPosts,
   fetchPagination,
+  fetchPopularPost,
   fetchPostData,
   fetchPostDataFailed,
   fetchPostDataSuccess,
@@ -71,24 +73,37 @@ export const handleGetDetailPost =
     }
   };
 
+// GET POPULAR POSTS LIST
+export const getPopularPostsList =
+  (isUser: boolean, id?: string, params?: PaginationParams): AppThunk =>
+  async (dispatch, getState) => {
+    try {
+      const res = isUser
+        ? await postsApi.getUserPost(id!, "popular", {
+            page: params!.page,
+            limit: params!.limit,
+          })
+        : await postsApi.getPopularPosts();
+      dispatch(fetchPopularPost(res.data.data));
+    } catch (error) {
+      console.log("🚀 ~ file: addEditThunk.ts:81 ~ error:", error);
+    }
+  };
+
 // ADD / EDIT POST
 export const addEditPost =
   (values: Post, id: string): AppThunk =>
   async (dispatch, getState) => {
     const userType = getState().auth.userType;
     const postingStatus = getState().post.isPosting;
-    var image = getState().post.imageFile;
 
     if (userType === "isPoster") {
       await dispatch(setPostingStatus({ ...postingStatus, isEdit: true }));
     } else await dispatch(setPostingStatus({ ...postingStatus, isAdd: true }));
 
     const newValue =
-      userType === "isPoster"
-        ? { ...values, image: image ? image : values.image, id: id }
-        : { ...values, image: image };
+      userType === "isPoster" ? { ...values, id: id } : { ...values };
 
-    console.log("🚀 ~ file: addEditThunk.ts:87 ~ newValue:", newValue);
     try {
       const res =
         userType === "isPoster"
@@ -315,11 +330,10 @@ export const getUserRecentBlog = (): AppThunk => async (dispatch, getState) => {
 export const fetchLatestPost =
   ({ page, limit }: PaginationParams): AppThunk =>
   async (dispatch, getState) => {
-    dispatch(fetchingRecentBlog());
-
     try {
       const res = await postsApi.getLatestPost({ page, limit });
-      dispatch(fetchUserRecentBlog(res.data.data));
+
+      dispatch(fetchLatestPosts(res.data.data));
       dispatch(fetchPagination(res.data.pagination!));
     } catch (error) {
       console.log("🚀 ~ file: addEditThunk.ts:246 ~ error:", error);

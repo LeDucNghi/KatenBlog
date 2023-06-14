@@ -218,7 +218,7 @@ const findTrendingList = async (req, res) => {
 
   const trendingList = await sortPostList.slice(0, 3);
 
-  res.status(200).json({ trendingList });
+  res.status(200).json({ data: trendingList });
 };
 
 // USER'S POST
@@ -228,9 +228,9 @@ const findUserPost = async (req, res) => {
   var paginatedResults = null;
   var userPostList = null;
 
-  if (postListType !== "all" || postListType !== "popular") {
+  if (postListType === "popular" || postListType === "all") {
     userPostList = await posts.findAll({
-      where: { categories: postListType, userId: userId },
+      where: { userId: userId },
       include: {
         model: users,
         attributes: {
@@ -240,7 +240,7 @@ const findUserPost = async (req, res) => {
     });
   } else {
     userPostList = await posts.findAll({
-      where: { userId: userId },
+      where: { categories: postListType, userId: userId },
       include: {
         model: users,
         attributes: {

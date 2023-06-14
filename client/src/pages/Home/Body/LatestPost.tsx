@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { selectLatestList, selectPaginate } from "../../../features/addEditBlog/addEditSlice";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
@@ -7,13 +8,13 @@ import { BlogsSample } from "../../../mock";
 import { CustomPagination } from "../../../components/Common/Pagination/Pagination";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
 import { fetchLatestPost } from "../../../features/addEditBlog/addEditThunk";
-import { selectPaginate } from "../../../features/addEditBlog/addEditSlice";
 
 export interface ILatestPostProps {}
 
 export function LatestPost(props: ILatestPostProps) {
   const dispatch = useAppDispatch();
   const latestPostPagination = useAppSelector(selectPaginate);
+  const latestPost = useAppSelector(selectLatestList)
 
   const handlePageChange = (value: number) => {
     dispatch(
@@ -31,7 +32,7 @@ export function LatestPost(props: ILatestPostProps) {
       anchorTitle="left"
       style={{ width: "100%" }}
     >
-      {BlogsSample.slice(0, 4).map((blogs, key) => {
+      {latestPost.map((blogs, key) => {
         return (
           <BlogItems
             key={key}

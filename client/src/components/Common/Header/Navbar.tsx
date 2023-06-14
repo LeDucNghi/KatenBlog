@@ -1,6 +1,7 @@
 import "./Header.scss";
 
-import { BREAK_POINTS_NUMBER } from "../../../constants";
+import { BREAK_POINTS_NUMBER, NavbarWidget } from "../../../constants";
+
 import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
 import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
@@ -8,6 +9,7 @@ import { NavbarCollapse } from "./NavbarCollapse";
 import { selectIsLoggedIn } from "../../../features/auth/authSlice";
 import { useAppSelector } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 
 export interface INavbarProps {
@@ -28,6 +30,8 @@ export function Navbar({
   const { windowInnerWidth } = useWindowSize();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
+  const [type, setType] = useState("");
+
   const onclick = () => {
     if (windowInnerWidth <= BREAK_POINTS_NUMBER.sm) {
       setOpenDrawer(!openDrawer);
@@ -41,7 +45,7 @@ export function Navbar({
   };
 
   const handleTypeChange = (type: string) => {
-    console.log("🚀 ~ file: Navbar.tsx:44 ~ handleTypeChange ~ type:", type);
+    console.log("🚀 ~ file: Navbar.tsx:48 ~ handleTypeChange ~ type:", type);
   };
 
   return (
@@ -52,7 +56,10 @@ export function Navbar({
         </a>
 
         {windowInnerWidth > BREAK_POINTS_NUMBER.sm && (
-          <NavbarCollapse type={handleTypeChange} />
+          <NavbarCollapse
+            setNewType={handleTypeChange}
+            navbarList={NavbarWidget}
+          />
         )}
 
         <div className="navbar_right">

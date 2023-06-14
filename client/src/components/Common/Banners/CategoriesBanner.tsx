@@ -21,7 +21,12 @@ export function CategoriesBanner({
         <Link underline="hover" color="inherit" href="/">
           Home
         </Link>
-        <Link underline="hover" color="inherit" href={route}>
+        <Link
+          className="category_type"
+          underline="hover"
+          color="inherit"
+          href={route}
+        >
           {categoriesName}
         </Link>
       </Breadcrumbs>

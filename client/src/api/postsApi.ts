@@ -22,11 +22,12 @@ const postsApi = {
     return axiosClient.get(url);
   },
 
+  getPopularPosts(): Promise<PostListRes<Post>> {
+    const url = `/posts/trending`;
+    return axiosClient.get(url);
+  },
+
   addNewPost(params: Post): Promise<any> {
-    console.log(
-      "🚀 ~ file: postsApi.ts:26 ~ addNewPost ~ params:",
-      params.image
-    );
     const formData = new FormData();
 
     formData.append("image", params.image!);
@@ -116,10 +117,12 @@ const postsApi = {
     return axiosClient.get(url);
   },
 
-  getLatestPost({
-    page,
-    limit,
-  }: PaginationParams): Promise<PostListRes<RecentBlog>> {
+  // getLatestPost({ page, limit }: PaginationParams): Promise<PostListRes<Post>> {
+  //   const url = `/posts/latest?page=${page}&limit=${limit} `;
+  //   return axiosClient.get(url);
+  // },
+
+  getLatestPost({ page, limit }: PaginationParams): Promise<PostListRes<Post>> {
     const url = `/posts/latest?page=${page}&limit=${limit} `;
     return axiosClient.get(url);
   },

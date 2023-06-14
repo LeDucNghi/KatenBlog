@@ -62,7 +62,7 @@ export function SearchList({ keyword, postList }: ISearchListProps) {
                 showBadge={false}
                 id={`${blogs.id}`}
                 style={{
-                  width: "25%",
+                  maxWidth: "30%",
                   margin: "1em 0.5em",
                 }}
               />

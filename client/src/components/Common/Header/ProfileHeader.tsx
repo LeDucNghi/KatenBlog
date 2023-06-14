@@ -1,5 +1,6 @@
 import "./ProfileHeader.scss";
 
+import { NavbarCollapse, NavbarWidgets } from "./NavbarCollapse";
 import { useEffect, useState } from "react";
 
 import { BREAK_POINTS_NUMBER } from "../../../constants";
@@ -7,13 +8,14 @@ import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget
 import { Divider } from "@mui/material";
 import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
 import { Images } from "../../../constants/image";
-import { NavbarCollapse } from "./NavbarCollapse";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 
 export interface IProfileHeaderProps {
   image?: string;
   title?: string;
   slogan?: string;
+
+  navbarList: NavbarWidgets[];
 
   color?: string;
 
@@ -31,6 +33,7 @@ export function ProfileHeader({
   color,
   onclick,
   style,
+  navbarList,
   handleTypeChange,
 }: IProfileHeaderProps) {
   const { windowInnerWidth } = useWindowSize();
@@ -91,7 +94,7 @@ export function ProfileHeader({
       />
 
       {windowInnerWidth > BREAK_POINTS_NUMBER.md && (
-        <NavbarCollapse type={setType} />
+        <NavbarCollapse setNewType={setType} navbarList={navbarList} />
       )}
     </div>
   );

@@ -19,11 +19,21 @@
         font-family: globalStyles.$poppinFont;
         font-weight: 800;
         font-size: 1.5em;
+
+        &::first-letter {
+            text-transform: capitalize;
+        }
     }
 
     .categories_breadcrumb {
         color: colors.$light-grey;
         font-size: 0.9em;
         line-height: 1.6em;
+
+        .category_type {
+            &::first-letter {
+                text-transform: capitalize;
+            }
+        }
     }
 }

@@ -2,9 +2,10 @@ import "./Categories.scss";
 
 import * as React from "react";
 
+import { Images, ProfileNavbarWidget } from "../../constants";
+
 import { CategoriesBanner } from "../../components/Common/Banners/CategoriesBanner";
 import { CategoriesList } from "../../features/filter/components/CategoriesList";
-import { Images } from "../../constants";
 import { InnerWrapper } from "../../widgets/InnerWrapper/InnerWrapper";
 import { ProfileHeader } from "../../components/Common/Header/ProfileHeader";
 import { fetchPostByCategory } from "../../features/addEditBlog/addEditThunk";
@@ -14,7 +15,7 @@ import { useParams } from "react-router-dom";
 export interface ICategoriesProps {}
 
 export default function Categories(props: ICategoriesProps) {
-  const { name } = useParams();
+  const { name } = useParams<string>();
   const dispatch = useAppDispatch();
 
   const [type, setType] = React.useState("");
@@ -30,12 +31,13 @@ export default function Categories(props: ICategoriesProps) {
         title="Katen."
         image={Images.logoBrand}
         color="#203656"
+        navbarList={ProfileNavbarWidget}
       />{" "}
       <div className="categories_wrapper">
-        <CategoriesBanner categoriesName={type} />
+        <CategoriesBanner categoriesName={name!} />
 
         <div className="categories_content">
-          <CategoriesList name={type} />
+          <CategoriesList name={name!} />
 
           <div className="categories_right">
             <InnerWrapper />

@@ -2,9 +2,10 @@ import "./ProfileBanner.scss";
 
 import * as React from "react";
 
+import { Images, ProfileNavbarWidget } from "../../../constants";
+
 import { CustomDrawer } from "../Drawer/Drawer";
 import { HeaderDrawer } from "../Header/Drawer";
-import { Images } from "../../../constants";
 import { ProfileHeader } from "../Header/ProfileHeader";
 import { selectUserProfile } from "../../../features/auth/authSlice";
 import { useAppSelector } from "../../../app/hooks";
@@ -31,6 +32,7 @@ export function ProfileBanner({ handleTypeChange }: IProfileBannerProps) {
         slogan="Professional Writer & Personal Blogger"
         onclick={onclick}
         handleTypeChange={handleTypeChange}
+        navbarList={ProfileNavbarWidget}
       />
 
       <div className="profile_about">

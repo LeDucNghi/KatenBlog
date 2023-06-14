@@ -48,6 +48,8 @@ const initialState: PostState = {
   commentList: [],
   categoryList: [],
   recentList: [],
+  popularList: [],
+  latestList: [],
 
   imageFile: null,
   postData: null,
@@ -97,6 +99,14 @@ const postSlice = createSlice({
       state.userPostList = action.payload;
     },
 
+    fetchPopularPost(state, action: PayloadAction<Post[]>) {
+      state.popularList = action.payload;
+    },
+
+    fetchLatestPosts(state, action: PayloadAction<Post[]>) {
+      state.latestList = action.payload;
+    },
+
     fetchCategoryListSuccess(state, action: PayloadAction<Post[]>) {
       state.categoryList = action.payload;
     },
@@ -138,6 +148,8 @@ export const {
   fetchingRecentBlog,
   fetchCommentList,
   fetchUserPostList,
+  fetchPopularPost,
+  fetchLatestPosts,
   fetchingCategoryBlog,
   fetchPostDataSuccess,
   fetchPostListSuccess,
@@ -162,5 +174,7 @@ export const selectPaginate = (state: RootState) => state.post.pagination;
 export const selectUserPostList = (state: RootState) => state.post.userPostList;
 export const selectCategoryList = (state: RootState) => state.post.categoryList;
 export const selectUserRecentBlog = (state: RootState) => state.post.recentList;
+export const selectPopularList = (state: RootState) => state.post.popularList;
+export const selectLatestList = (state: RootState) => state.post.latestList;
 
 export const postReducer = postSlice.reducer;

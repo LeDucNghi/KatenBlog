@@ -2,6 +2,10 @@ import "./HomeBanner.scss";
 
 import * as React from "react";
 
+import {
+  selectLatestList,
+  selectUserRecentBlog,
+} from "../../../features/addEditBlog/addEditSlice";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 import { BlogItems } from "../BlogItems/BlogItems";
@@ -10,13 +14,13 @@ import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
 import { Empty } from "../NotFound/Empty";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
 import { getUserRecentBlog } from "../../../features/addEditBlog/addEditThunk";
-import { selectUserRecentBlog } from "../../../features/addEditBlog/addEditSlice";
 
 export interface IHomeBannerProps {}
 
 export function HomeBanner(props: IHomeBannerProps) {
   const dispatch = useAppDispatch();
   const userRecentBlog = useAppSelector(selectUserRecentBlog);
+  const latestPost = useAppSelector(selectLatestList);
 
   const [isActive, setIsActive] = React.useState<number>(1);
   const [openBackdrop, setOpenBackdrop] = React.useState<boolean>(false);
@@ -42,7 +46,7 @@ export function HomeBanner(props: IHomeBannerProps) {
     <div className="homebanner_wrapper">
       <div className="homebanner_container">
         <div className="homebanner_thumbnail">
-          {BlogsSample.slice(0, 1).map((blogs, key) => {
+          {latestPost.slice(0, 1).map((blogs, key) => {
             return (
               <BlogItems
                 id={`${blogs.id}`}

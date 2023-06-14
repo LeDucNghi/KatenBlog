@@ -25,10 +25,6 @@ export function UserBlogList({ id, type }: IUserBlogListProps) {
   const userBlogListPaginate = useAppSelector(selectPaginate);
   const userBlogList = useAppSelector(selectUserPostList);
   const isLoading = useAppSelector(selectIsFetchingPostList);
-  console.log(
-    "🚀 ~ file: CategoriesList.tsx:25 ~ CategoriesList ~ isLoading:",
-    isLoading.isCategory
-  );
 
   useEffect(() => {
     dispatch(

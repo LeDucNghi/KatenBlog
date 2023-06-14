@@ -64,7 +64,7 @@ export const NavbarWidget = [
   },
   {
     id: 4,
-    name: "Food and Drink",
+    name: "Food",
     route: "/categories/food",
   },
   {

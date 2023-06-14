@@ -51,6 +51,8 @@ export interface PostState {
   userPostList: Post[];
   categoryList: Post[];
   recentList: RecentBlog[];
+  popularList: Post[];
+  latestList: Post[];
   postData: Post | null | undefined;
 
   commentList: Comment[];

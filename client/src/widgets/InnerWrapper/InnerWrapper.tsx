@@ -2,6 +2,12 @@ import "./InnerWrapper.scss";
 
 import * as React from "react";
 
+import {
+  fetchPostByCategory,
+  getPopularPostsList,
+  handleGetUserPost,
+} from "../../features/addEditBlog/addEditThunk";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useLocation, useParams } from "react-router-dom";
 
 import { AboutWidget } from "../AboutWidget/AboutWidget";
@@ -10,16 +16,28 @@ import { CustomAccordion } from "../../components/Common/Accordion/CustomAccordi
 import { PopularPosts } from "../../features/profile/components/PopularPosts/PopularPosts";
 import { RoundedWidget } from "../RoundedWidget/RoundedWidgets";
 import { selectUserProfile } from "../../features/auth/authSlice";
-import { useAppSelector } from "../../app/hooks";
 
 export interface IInnerWrapperProps {
   width?: string;
 }
 
 export function InnerWrapper({ width }: IInnerWrapperProps) {
-  const userProfile = useAppSelector(selectUserProfile);
-  const { pathname } = useLocation();
   const { id } = useParams();
+  const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
+  const userProfile = useAppSelector(selectUserProfile);
+
+  React.useEffect(() => {
+    if (pathname === `/profile/${id}`) {
+      dispatch(getPopularPostsList(true, id, { page: 1, limit: 3 }));
+    } else {
+      dispatch(getPopularPostsList(false));
+    }
+  }, [dispatch, pathname, id]);
+
+  React.useEffect(() => {
+    dispatch(fetchPostByCategory("Lifestyle", { page: 1, limit: 3 }));
+  }, [dispatch]);
 
   return (
     <div className="inner_wrapper" style={{ width: width }}>

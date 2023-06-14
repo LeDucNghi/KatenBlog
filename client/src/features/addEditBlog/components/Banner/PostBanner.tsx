@@ -22,7 +22,7 @@ export function PostBanner({
   userType,
   setFieldValue,
 }: IPostBannerProps) {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   var [image, setImage] = useState<File | null | string>(null);
 
   const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +30,7 @@ export function PostBanner({
     setImage(image);
 
     setFieldValue("image", e.target.files![0]);
-    dispatch(setImageFile(e.target.files![0]));
+    // dispatch(setImageFile(e.target.files![0]));
   };
 
   return (
