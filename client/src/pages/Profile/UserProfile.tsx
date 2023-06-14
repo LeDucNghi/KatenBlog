@@ -18,7 +18,13 @@ export default function UserProfile(props: IUserProfileProps) {
   const dispatch = useAppDispatch();
   const paginate = useAppSelector(selectPaginate);
 
-  const [postListType, setPostListType] = React.useState("popular");
+  const [postListType, setPostListType] = React.useState("");
+
+  React.useEffect(() => {
+    if (!postListType) {
+      setPostListType("Lifestyle");
+    }
+  }, [postListType]);
 
   React.useEffect(() => {
     dispatch(handleGetUserPost(id!, postListType, { ...paginate, limit: 8 }));

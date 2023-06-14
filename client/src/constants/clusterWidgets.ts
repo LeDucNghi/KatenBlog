@@ -104,7 +104,7 @@ export const ProfileNavbarWidget = [
 export const BlogTopicWidget = [
   {
     id: 1,
-    topicTitle: "LifeStyle",
+    topicTitle: "Lifestyle",
     topicContent: BlogsSample,
   },
   {

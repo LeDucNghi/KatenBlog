@@ -5,7 +5,6 @@ import * as React from "react";
 import {
   fetchPostByCategory,
   getPopularPostsList,
-  handleGetUserPost,
 } from "../../features/addEditBlog/addEditThunk";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useLocation, useParams } from "react-router-dom";
