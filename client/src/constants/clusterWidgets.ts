@@ -1,3 +1,4 @@
+import { BREAK_POINTS_NUMBER } from "./breakPoints";
 import { BlogsSample } from "../mock";
 import { IconName } from "../models";
 
@@ -46,33 +47,68 @@ export const IconsWidgets = [
   },
 ];
 
-export const NavbarWidget = [
-  {
-    id: 1,
-    name: "Home",
-    route: "/",
-  },
-  {
-    id: 2,
-    name: "LifeStyle",
-    route: "/categories/lifestyle",
-  },
-  {
-    id: 3,
-    name: "Inspiration",
-    route: "/categories/inspiration",
-  },
-  {
-    id: 4,
-    name: "Food",
-    route: "/categories/food",
-  },
-  {
-    id: 5,
-    name: "Contact",
-    route: "/categories/contact",
-  },
-];
+export const navbarWidget = (
+  id?: string | number | undefined,
+  width?: number
+) => {
+  const navbar = [
+    {
+      id: 1,
+      name: "Home",
+      route: "/",
+    },
+    {
+      id: 2,
+      name: "LifeStyle",
+      route: "/categories/lifestyle",
+    },
+    {
+      id: 3,
+      name: "Inspiration",
+      route: "/categories/inspiration",
+    },
+    {
+      id: 4,
+      name: "Food",
+      route: "/categories/food",
+    },
+    {
+      id: 5,
+      name: "Contact",
+      route: "/categories/contact",
+    },
+  ];
+
+  if (width! < BREAK_POINTS_NUMBER.md && id) {
+    const userMenu = [
+      {
+        id: 5,
+        name: "Profile",
+        route: `/profile/${id}`,
+      },
+      {
+        id: 6,
+        name: "Your Blogs",
+        route: "/about",
+      },
+      {
+        id: 7,
+        name: "Add new blog",
+        route: "/add",
+      },
+      {
+        id: 8,
+        name: "Logout",
+        route: "/",
+      },
+    ];
+    const newNavbar = navbar.concat(userMenu);
+
+    return newNavbar;
+  }
+
+  return navbar;
+};
 
 export const ProfileNavbarWidget = [
   {
@@ -162,6 +198,10 @@ export const accountMenuWidget = (id: string | number) => {
       icon: "logout" as IconName,
     },
   ];
+
+  if (!id) {
+    menu.push();
+  }
 
   return menu;
 };

@@ -1,6 +1,6 @@
 import "./Header.scss";
 
-import { BREAK_POINTS_NUMBER, NavbarWidget } from "../../../constants";
+import { BREAK_POINTS_NUMBER, navbarWidget } from "../../../constants";
 
 import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
 import { IconsListWidget } from "../../../widgets/ListWidget/IconsListWidget";
@@ -9,7 +9,6 @@ import { NavbarCollapse } from "./NavbarCollapse";
 import { selectIsLoggedIn } from "../../../features/auth/authSlice";
 import { useAppSelector } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 
 export interface INavbarProps {
@@ -29,8 +28,6 @@ export function Navbar({
   const navigate = useNavigate();
   const { windowInnerWidth } = useWindowSize();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
-
-  const [type, setType] = useState("");
 
   const onclick = () => {
     if (windowInnerWidth <= BREAK_POINTS_NUMBER.sm) {
@@ -58,12 +55,12 @@ export function Navbar({
         {windowInnerWidth > BREAK_POINTS_NUMBER.sm && (
           <NavbarCollapse
             setNewType={handleTypeChange}
-            navbarList={NavbarWidget}
+            navbarList={navbarWidget()}
           />
         )}
 
         <div className="navbar_right">
-          {windowInnerWidth > BREAK_POINTS_NUMBER.md && (
+          {windowInnerWidth > BREAK_POINTS_NUMBER.lg && (
             <IconsListWidget iconsSpace="0 0.5em" />
           )}
 

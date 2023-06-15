@@ -30,7 +30,9 @@ export function ButtonsListWidget({ style, onclick }: IListButtonsWidgetProps) {
       </button>
 
       <button className="icon_button" onClick={onclick}>
-        {isLoggedIn && pathname !== `/profile/${id}` ? (
+        {isLoggedIn &&
+        pathname !== `/profile/${id}` &&
+        windowInnerWidth > BREAK_POINTS_NUMBER.sm ? (
           <AccountMenu />
         ) : (
           <Icons

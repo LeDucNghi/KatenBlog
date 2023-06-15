@@ -2,6 +2,7 @@ import "./ProfileHeader.scss";
 
 import { NavbarCollapse, NavbarWidgets } from "./NavbarCollapse";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { BREAK_POINTS_NUMBER } from "../../../constants";
 import { ButtonsListWidget } from "../../../widgets/ListWidget/ButtonsListWidget";
@@ -37,12 +38,21 @@ export function ProfileHeader({
   handleTypeChange,
 }: IProfileHeaderProps) {
   const { windowInnerWidth } = useWindowSize();
+  const navigate = useNavigate();
+  const { name } = useParams();
+  const { pathname } = useLocation();
 
   const [type, setType] = useState("");
 
   useEffect(() => {
     handleTypeChange(type);
   }, [type]);
+
+  const handleNavigate = () => {
+    if (pathname === `/categories/${name}`) {
+      navigate("/");
+    }
+  };
 
   return (
     <div className="profile_header" style={style}>
@@ -62,7 +72,11 @@ export function ProfileHeader({
               <img src={image ? image : Images.avatar} alt="" />
             </div>
 
-            <h2 className="user_name" style={{ color: color }}>
+            <h2
+              className="user_name"
+              style={{ color: color, cursor: "pointer" }}
+              onClick={handleNavigate}
+            >
               {title}{" "}
             </h2>
 

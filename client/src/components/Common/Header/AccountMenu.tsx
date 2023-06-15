@@ -1,4 +1,4 @@
-import { Avatar, Box, IconButton, Tooltip } from "@mui/material";
+import { Avatar, Box } from "@mui/material";
 
 import { Icons } from "../Icons/Icons";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -55,8 +55,6 @@ export default function AccountMenu(props: IAccountMenuProps) {
         }}
         onClick={handleClick}
       >
-        {/* <Tooltip title="Account settings" arrow> */}
-
         {userProfile?.avatar ? (
           <Avatar sx={{ width: 32, height: 32 }} src={userProfile?.avatar} />
         ) : (
@@ -64,7 +62,6 @@ export default function AccountMenu(props: IAccountMenuProps) {
             {userProfile?.fullname?.charAt(0)}
           </Avatar>
         )}
-        {/* </Tooltip> */}
       </Box>
       <Menu
         anchorEl={anchorEl}

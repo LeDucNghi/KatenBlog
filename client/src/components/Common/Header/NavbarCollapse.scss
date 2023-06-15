@@ -31,14 +31,6 @@
             transition: globalStyles.$transition;
         }
 
-        // &:first-child {
-        //     @include widgets.nav_links;
-
-        //     font-weight: 600;
-        //     font-family: globalStyles.$poppinFont;
-        //     font-size: 0.9em;
-        // }
-
         &.isActive {
             @include widgets.nav_links;
         }

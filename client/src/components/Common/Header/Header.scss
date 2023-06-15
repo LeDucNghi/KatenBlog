@@ -33,42 +33,6 @@
                 width: 10%;
             }
 
-            .navbar_collapse {
-                display: flex;
-                flex-direction: row;
-
-                width: 50%;
-
-                .nav_link {
-                    @include general.flexCenter;
-
-                    // width: 7em;
-                    // height: 2.7em;
-
-                    padding: 0.5em 1.5em;
-
-                    color: #c7ccd6;
-
-                    transition: globalStyles.$transition;
-
-                    font-family: globalStyles.$poppinFont;
-                    font-size: 0.9em;
-
-                    &:hover {
-                        color: #000;
-                        transition: globalStyles.$transition;
-                    }
-
-                    &:first-child {
-                        @include widgets.nav_links;
-
-                        font-weight: 600;
-                        font-family: globalStyles.$poppinFont;
-                        font-size: 0.9em;
-                    }
-                }
-            }
-
             .navbar_right {
                 @include general.flexSpaceCenter;
 
@@ -94,7 +58,7 @@
     }
 }
 
-@media only screen and (min-width: 501px) and (max-width: 1024px) {
+@media only screen and (max-width: 1024px) {
     .header_container {
         .header_navbar {
             .navbar_container {
@@ -105,6 +69,18 @@
                 .navbar_right {
                     width: auto;
                 }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    .header_container {
+        .header_navbar {
+            .navbar_container {
+                // background: #000;
+
+                justify-content: space-between;
             }
         }
     }
