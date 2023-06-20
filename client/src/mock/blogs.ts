@@ -19,7 +19,7 @@ export const BlogsSample = [
   },
   {
     id: 2,
-    image: faker.image.animals(),
+    image: faker.image.food(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,
@@ -35,7 +35,7 @@ export const BlogsSample = [
 
   {
     id: 3,
-    image: faker.image.animals(),
+    image: faker.image.nature(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,
@@ -65,7 +65,7 @@ export const BlogsSample = [
   },
   {
     id: 5,
-    image: faker.image.animals(),
+    image: faker.image.technics(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,
@@ -81,7 +81,7 @@ export const BlogsSample = [
 
   {
     id: 6,
-    image: faker.image.animals(),
+    image: faker.image.cats(),
     categories: "Food and Drink",
     title: "Far far away behind the Word Mountains far from Away.",
     createdAt: `${new Date()}`,

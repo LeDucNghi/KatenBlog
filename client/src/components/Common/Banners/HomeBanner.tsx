@@ -4,12 +4,12 @@ import * as React from "react";
 
 import {
   selectLatestList,
+  selectPopularList,
   selectUserRecentBlog,
 } from "../../../features/addEditBlog/addEditSlice";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 import { BlogItems } from "../BlogItems/BlogItems";
-import { BlogsSample } from "../../../mock";
 import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
 import { Empty } from "../NotFound/Empty";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
@@ -21,6 +21,7 @@ export function HomeBanner(props: IHomeBannerProps) {
   const dispatch = useAppDispatch();
   const userRecentBlog = useAppSelector(selectUserRecentBlog);
   const latestPost = useAppSelector(selectLatestList);
+  const popularPost = useAppSelector(selectPopularList);
 
   const [isActive, setIsActive] = React.useState<number>(1);
   const [openBackdrop, setOpenBackdrop] = React.useState<boolean>(false);
@@ -104,7 +105,8 @@ export function HomeBanner(props: IHomeBannerProps) {
             }}
           >
             {isActive === 1 ? (
-              BlogsSample.slice(0, 4).map((blogs, key) => {
+              popularPost &&
+              popularPost.map((blogs, key) => {
                 return (
                   <BlogItems
                     id={`${blogs.id}`}
