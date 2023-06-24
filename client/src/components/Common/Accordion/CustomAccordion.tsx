@@ -10,6 +10,7 @@ import { Post, PostTopicWidget } from "../../../models";
 
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import { BlogItems } from "../BlogItems/BlogItems";
+import { BlogsSample } from "../../../mock";
 import { Empty } from "../NotFound/Empty";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
@@ -32,17 +33,19 @@ export function CustomAccordion({ topic }: ICustomAccordionProps) {
     (event: React.SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
 
-      const filterPostList = postList.filter(
-        (post) => post.categories === categories
-      );
+      const filterPostList =
+        postList.length > 0
+          ? postList.filter((post) => post.categories === categories)
+          : BlogsSample.filter((blog) => blog.categories === categories);
 
       setCategoryPostList(filterPostList);
     };
 
   const handleCalculateLength = (category: string) => {
-    const calculateLength = postList.filter(
-      (posts) => posts.categories === category
-    );
+    const calculateLength =
+      postList.length > 0
+        ? postList.filter((post) => post.categories === category)
+        : BlogsSample.filter((blog) => blog.categories === category);
 
     return calculateLength.length;
   };

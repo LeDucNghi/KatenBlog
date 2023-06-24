@@ -1,8 +1,5 @@
 import "./AboutWidget.scss";
 
-import * as React from "react";
-
-import { Icons } from "../../components/Common/Icons/Icons";
 import { IconsListWidget } from "../ListWidget/IconsListWidget";
 import { Profile } from "../../models";
 

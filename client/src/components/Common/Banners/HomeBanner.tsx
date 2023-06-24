@@ -10,6 +10,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 import { BlogItems } from "../BlogItems/BlogItems";
+import { BlogsSample } from "../../../mock";
 import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
 import { Empty } from "../NotFound/Empty";
 import { RoundedWidget } from "../../../widgets/RoundedWidget/RoundedWidgets";
@@ -21,6 +22,10 @@ export function HomeBanner(props: IHomeBannerProps) {
   const dispatch = useAppDispatch();
   const userRecentBlog = useAppSelector(selectUserRecentBlog);
   const latestPost = useAppSelector(selectLatestList);
+  console.log(
+    "🚀 ~ file: HomeBanner.tsx:25 ~ HomeBanner ~ latestPost:",
+    latestPost
+  );
   const popularPost = useAppSelector(selectPopularList);
 
   const [isActive, setIsActive] = React.useState<number>(1);
@@ -47,22 +52,39 @@ export function HomeBanner(props: IHomeBannerProps) {
     <div className="homebanner_wrapper">
       <div className="homebanner_container">
         <div className="homebanner_thumbnail">
-          {latestPost.slice(0, 1).map((blogs, key) => {
-            return (
-              <BlogItems
-                id={`${blogs.id}`}
-                key={key}
-                items={blogs}
-                direction="vertical"
-                isThumbedNail={true}
-                showBadge={false}
-                style={{
-                  height: "100%",
-                  padding: 0,
-                }}
-              />
-            );
-          })}
+          {latestPost.length > 0
+            ? latestPost.slice(0, 1).map((blogs, key) => {
+                return (
+                  <BlogItems
+                    id={`${blogs.id}`}
+                    key={key}
+                    items={blogs}
+                    direction="vertical"
+                    isThumbedNail={true}
+                    showBadge={false}
+                    style={{
+                      height: "100%",
+                      padding: 0,
+                    }}
+                  />
+                );
+              })
+            : BlogsSample.slice(0, 1).map((blogs, key) => {
+                return (
+                  <BlogItems
+                    id={`${blogs.id}`}
+                    key={key}
+                    items={blogs}
+                    direction="vertical"
+                    isThumbedNail={true}
+                    showBadge={false}
+                    style={{
+                      height: "100%",
+                      padding: 0,
+                    }}
+                  />
+                );
+              })}
         </div>
 
         <div className="homebanner_post_tabs">
@@ -105,13 +127,59 @@ export function HomeBanner(props: IHomeBannerProps) {
             }}
           >
             {isActive === 1 ? (
-              popularPost &&
-              popularPost.map((blogs, key) => {
+              popularPost.length > 0 ? (
+                popularPost.map((blogs, key) => {
+                  return (
+                    <BlogItems
+                      id={`${blogs.id}`}
+                      key={key}
+                      items={blogs}
+                      shape="circle"
+                      direction="horizontal"
+                      isThumbedNail={false}
+                      showBadge={false}
+                      fontSize="15px"
+                      style={{
+                        margin: "1em 0",
+                        height: "6.5em",
+                      }}
+                    />
+                  );
+                })
+              ) : (
+                BlogsSample.slice(0, 4).map((blogs, key) => {
+                  return (
+                    <BlogItems
+                      id={`${blogs.id}`}
+                      key={key}
+                      items={blogs}
+                      shape="circle"
+                      direction="horizontal"
+                      isThumbedNail={false}
+                      showBadge={false}
+                      fontSize="15px"
+                      style={{
+                        margin: "1em 0",
+                        height: "6.5em",
+                      }}
+                    />
+                  );
+                })
+              )
+            ) : userRecentBlog.length === 0 ? (
+              <Empty
+                style={{
+                  margin: "1em auto",
+                }}
+                content="You have not read any posts recently🤔"
+              />
+            ) : userRecentBlog.length > 0 ? (
+              userRecentBlog.slice(0, 4).map((blogs, key) => {
                 return (
                   <BlogItems
                     id={`${blogs.id}`}
                     key={key}
-                    items={blogs}
+                    items={blogs.post}
                     shape="circle"
                     direction="horizontal"
                     isThumbedNail={false}
@@ -124,20 +192,13 @@ export function HomeBanner(props: IHomeBannerProps) {
                   />
                 );
               })
-            ) : userRecentBlog.length === 0 ? (
-              <Empty
-                style={{
-                  margin: "1em auto",
-                }}
-                content="You have not read any posts recently🤔"
-              />
             ) : (
-              userRecentBlog.slice(0, 4).map((blogs, key) => {
+              BlogsSample.slice(5, 8).map((blogs, key) => {
                 return (
                   <BlogItems
                     id={`${blogs.id}`}
                     key={key}
-                    items={blogs.post}
+                    items={blogs}
                     shape="circle"
                     direction="horizontal"
                     isThumbedNail={false}

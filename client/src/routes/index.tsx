@@ -6,8 +6,6 @@ import { LandingLayout } from "../components/layouts/LandingLayout";
 import { Loading } from "../components/Common/Loading/Loading";
 import { routes } from "./routes";
 
-// export interface IRouterProps {}
-
 export function Router() {
   return (
     <Routes>

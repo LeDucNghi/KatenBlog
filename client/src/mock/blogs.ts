@@ -5,11 +5,11 @@ export const BlogsSample = [
   {
     id: 1,
     image: faker.image.animals(),
-    categories: "Food and Drink",
-    title: "Far far away behind the Word Mountains far from Away.",
+    categories: "Lifestyle",
+    title: faker.lorem.sentence(),
     createdAt: `${new Date()}`,
-    subTitle:
-      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    subTitle: faker.lorem.paragraph(2),
+    content: faker.lorem.paragraphs(5),
     user: {
       id: 1,
       fullname: faker.name.fullName(),
@@ -20,11 +20,11 @@ export const BlogsSample = [
   {
     id: 2,
     image: faker.image.food(),
-    categories: "Food and Drink",
-    title: "Far far away behind the Word Mountains far from Away.",
+    categories: "Lifestyle",
+    title: faker.lorem.sentence(),
     createdAt: `${new Date()}`,
-    subTitle:
-      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    subTitle: faker.lorem.paragraph(2),
+    content: faker.lorem.paragraphs(5),
     user: {
       id: 2,
       fullname: faker.name.fullName(),
@@ -36,11 +36,11 @@ export const BlogsSample = [
   {
     id: 3,
     image: faker.image.nature(),
-    categories: "Food and Drink",
-    title: "Far far away behind the Word Mountains far from Away.",
+    categories: "Lifestyle",
+    title: faker.lorem.sentence(),
     createdAt: `${new Date()}`,
-    subTitle:
-      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    subTitle: faker.lorem.paragraph(2),
+    content: faker.lorem.paragraphs(5),
     user: {
       id: 3,
       fullname: faker.name.fullName(),
@@ -51,11 +51,11 @@ export const BlogsSample = [
   {
     id: 4,
     image: faker.image.animals(),
-    categories: "Food and Drink",
-    title: "Far far away behind the Word Mountains far from Away.",
+    categories: "Inspiration",
+    title: faker.lorem.sentence(),
     createdAt: `${new Date()}`,
-    subTitle:
-      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    subTitle: faker.lorem.paragraph(2),
+    content: faker.lorem.paragraphs(5),
     user: {
       id: 4,
       fullname: faker.name.fullName(),
@@ -66,11 +66,11 @@ export const BlogsSample = [
   {
     id: 5,
     image: faker.image.technics(),
-    categories: "Food and Drink",
-    title: "Far far away behind the Word Mountains far from Away.",
+    categories: "Inspiration",
+    title: faker.lorem.sentence(),
     createdAt: `${new Date()}`,
-    subTitle:
-      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    subTitle: faker.lorem.paragraph(2),
+    content: faker.lorem.paragraphs(5),
     user: {
       id: 5,
       fullname: faker.name.fullName(),
@@ -82,11 +82,11 @@ export const BlogsSample = [
   {
     id: 6,
     image: faker.image.cats(),
-    categories: "Food and Drink",
-    title: "Far far away behind the Word Mountains far from Away.",
+    categories: "Fashion",
+    title: faker.lorem.sentence(),
     createdAt: `${new Date()}`,
-    subTitle:
-      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    subTitle: faker.lorem.paragraph(2),
+    content: faker.lorem.paragraphs(5),
     user: {
       id: 6,
       fullname: faker.name.fullName(),
@@ -98,11 +98,11 @@ export const BlogsSample = [
   {
     id: 7,
     image: faker.image.animals(),
-    categories: "Food and Drink",
-    title: "Far far away behind the Word Mountains far from Away.",
+    categories: "Trending",
+    title: faker.lorem.sentence(),
     createdAt: `${new Date()}`,
-    subTitle:
-      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    subTitle: faker.lorem.paragraph(2),
+    content: faker.lorem.paragraphs(5),
     user: {
       id: 7,
       fullname: faker.name.fullName(),
@@ -114,11 +114,11 @@ export const BlogsSample = [
   {
     id: 8,
     image: faker.image.animals(),
-    categories: "Food and Drink",
-    title: "Far far away behind the Word Mountains far from Away.",
+    categories: "Trending",
+    title: faker.lorem.sentence(),
     createdAt: `${new Date()}`,
-    subTitle:
-      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    subTitle: faker.lorem.paragraph(2),
+    content: faker.lorem.paragraphs(5),
     user: {
       id: 8,
       fullname: faker.name.fullName(),

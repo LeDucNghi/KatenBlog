@@ -31,6 +31,8 @@ export interface LoadingState {
   isEdit: boolean;
 }
 
+export type ApiStatus = "Network Error" | "Available";
+
 export interface FetchingState {
   isPostList: boolean;
   isPostDetail: boolean;
@@ -40,6 +42,8 @@ export interface FetchingState {
 }
 
 export interface PostState {
+  apiStatus: ApiStatus;
+
   isFetChing: FetchingState;
   isPosting: LoadingState;
 

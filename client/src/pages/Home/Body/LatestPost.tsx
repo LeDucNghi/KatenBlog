@@ -1,6 +1,9 @@
 import * as React from "react";
 
-import { selectLatestList, selectPaginate } from "../../../features/addEditBlog/addEditSlice";
+import {
+  selectLatestList,
+  selectPaginate,
+} from "../../../features/addEditBlog/addEditSlice";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
@@ -14,7 +17,7 @@ export interface ILatestPostProps {}
 export function LatestPost(props: ILatestPostProps) {
   const dispatch = useAppDispatch();
   const latestPostPagination = useAppSelector(selectPaginate);
-  const latestPost = useAppSelector(selectLatestList)
+  const latestPost = useAppSelector(selectLatestList);
 
   const handlePageChange = (value: number) => {
     dispatch(
@@ -32,23 +35,41 @@ export function LatestPost(props: ILatestPostProps) {
       anchorTitle="left"
       style={{ width: "100%" }}
     >
-      {latestPost.map((blogs, key) => {
-        return (
-          <BlogItems
-            key={key}
-            direction="horizontal"
-            size="big"
-            showBadge={false}
-            items={blogs}
-            isThumbedNail={false}
-            style={{
-              marginBottom: "1em",
-            }}
-            fontSize="15px"
-            id={`${blogs.id}`}
-          />
-        );
-      })}
+      {latestPost.length > 0
+        ? latestPost.map((blogs, key) => {
+            return (
+              <BlogItems
+                key={key}
+                direction="horizontal"
+                size="big"
+                showBadge={false}
+                items={blogs}
+                isThumbedNail={false}
+                style={{
+                  marginBottom: "1em",
+                }}
+                fontSize="15px"
+                id={`${blogs.id}`}
+              />
+            );
+          })
+        : BlogsSample.slice(0, 3).map((blogs, key) => {
+            return (
+              <BlogItems
+                key={key}
+                direction="horizontal"
+                size="big"
+                showBadge={false}
+                items={blogs}
+                isThumbedNail={false}
+                style={{
+                  marginBottom: "1em",
+                }}
+                fontSize="15px"
+                id={`${blogs.id}`}
+              />
+            );
+          })}
 
       <CustomPagination
         style={{

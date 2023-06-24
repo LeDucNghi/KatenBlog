@@ -6,7 +6,6 @@ import { BlogItems } from "../../../components/Common/BlogItems/BlogItems";
 import List from "@mui/material/List";
 import { Loading } from "../../../components/Common/Loading/Loading";
 import { Post } from "../../../models";
-import { useNavigate } from "react-router-dom";
 
 export interface ISearchListProps {
   keyword: string;
@@ -14,7 +13,10 @@ export interface ISearchListProps {
 }
 
 export function SearchList({ keyword, postList }: ISearchListProps) {
-  const navigate = useNavigate();
+  console.log(
+    "🚀 ~ file: SearchList.tsx:16 ~ SearchList ~ postList:",
+    postList
+  );
 
   const [listPost, setListPost] = React.useState<Post[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);

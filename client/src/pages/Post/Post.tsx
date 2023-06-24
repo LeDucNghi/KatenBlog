@@ -11,6 +11,7 @@ import {
   updateRecentBlog,
 } from "../../features/addEditBlog/addEditThunk";
 import {
+  selectApiStatus,
   selectCommentList,
   selectFetchPostFailed,
   selectPaginate,
@@ -25,6 +26,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useLocation, useParams } from "react-router-dom";
 
 import { Author } from "../../features/addEditBlog/components/Author/Author";
+import { BlogsSample } from "../../mock";
 import { Comment } from "../../features/addEditBlog/components/Comment/Comment";
 import { CommentList } from "../../features/addEditBlog/components/CommentList/CommentList";
 import { InnerWrapper } from "../../widgets/InnerWrapper/InnerWrapper";
@@ -37,11 +39,14 @@ import { PostHeader } from "../../features/addEditBlog/components/PostHeader/Pos
 import { ScrollToTop } from "../../components/Common/ScrollToTop/ScrollToTop";
 import { useEffect } from "react";
 
-export interface IPostsProps {}
+export interface IPostsProps {
+  data?: Post;
+}
 
-export default function Posts(props: IPostsProps) {
+export default function Posts({ data }: IPostsProps) {
   const { id } = useParams<string>();
   const { pathname } = useLocation();
+
   const dispatch = useAppDispatch();
   const blogData = useAppSelector(selectPostData);
   const userType = useAppSelector(selectGetUserType);
@@ -49,19 +54,24 @@ export default function Posts(props: IPostsProps) {
   const isError = useAppSelector(selectFetchPostFailed);
   const commentList = useAppSelector(selectCommentList);
   const commentListPaginate = useAppSelector(selectPaginate);
+  const apiStatus = useAppSelector(selectApiStatus);
 
   useEffect(() => {
-    if (pathname === "/add") {
+    if (apiStatus === "Network Error") {
+      const data = BlogsSample.find((blog) => blog.id === Number(id));
+
+      dispatch(handleGetDetailPost(id!, data));
+    } else if (pathname === "/add") {
       dispatch(setUserType("isAdd"));
     } else {
       dispatch(handleGetDetailPost(id!));
       dispatch(handleGetPostComment(id!, commentListPaginate));
     }
-  }, [id, pathname, dispatch]);
+  }, [id, pathname, dispatch, apiStatus]);
 
   useEffect(() => {
     if (blogData && isLoggedIn) dispatch(updateRecentBlog(id!));
-  }, [dispatch, blogData, isLoggedIn]);
+  }, [dispatch, blogData, isLoggedIn, id]);
 
   const initialValues: Post = {
     title: blogData ? blogData?.title : "",

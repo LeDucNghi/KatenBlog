@@ -33,7 +33,7 @@ export function Trending(props: ITrendingProps) {
             );
           })}
 
-          {BlogsSample.slice(0, 2).map((blogs, key) => {
+          {BlogsSample.slice(2, 4).map((blogs, key) => {
             return (
               <BlogItems
                 id={`${blogs.id}`}
@@ -53,7 +53,7 @@ export function Trending(props: ITrendingProps) {
         </div>
 
         <div className="side">
-          {BlogsSample.slice(0, 1).map((blogs, key) => {
+          {BlogsSample.slice(2, 3).map((blogs, key) => {
             return (
               <BlogItems
                 id={`${blogs.id}`}
@@ -68,7 +68,7 @@ export function Trending(props: ITrendingProps) {
             );
           })}
 
-          {BlogsSample.slice(0, 2).map((blogs, key) => {
+          {BlogsSample.slice(4, 6).map((blogs, key) => {
             return (
               <BlogItems
                 id={`${blogs.id}`}

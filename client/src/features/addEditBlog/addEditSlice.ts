@@ -1,4 +1,5 @@
 import {
+  ApiStatus,
   Comment,
   Errors,
   LoadingState,
@@ -12,6 +13,8 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
 const initialState: PostState = {
+  apiStatus: "Network Error",
+
   errors: {
     isError: false,
 
@@ -59,6 +62,10 @@ const postSlice = createSlice({
   name: "post",
   initialState,
   reducers: {
+    checkApiStatus(state, action: PayloadAction<ApiStatus>) {
+      state.apiStatus = action.payload;
+    },
+
     fetchPostData(state) {
       state.isFetChing.isPostDetail = true;
     },
@@ -143,6 +150,7 @@ const postSlice = createSlice({
 });
 
 export const {
+  checkApiStatus,
   fetchPostData,
   fetchPostList,
   fetchingRecentBlog,
@@ -162,6 +170,7 @@ export const {
   fetchUserRecentBlog,
 } = postSlice.actions;
 
+export const selectApiStatus = (state: RootState) => state.post.apiStatus;
 export const selectPostData = (state: RootState) => state.post.postData;
 export const selectImageFile = (state: RootState) => state.post.imageFile;
 export const selectPostingStatus = (state: RootState) => state.post.isPosting;

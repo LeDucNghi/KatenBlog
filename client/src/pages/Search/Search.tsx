@@ -4,6 +4,7 @@ import * as React from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
+import { BlogsSample } from "../../mock";
 import { Page } from "../../widgets/DocTitle/DocTitle";
 import { ScrollToTop } from "../../components/Common/ScrollToTop/ScrollToTop";
 import { SearchField } from "../../features/search/components/SearchField";
@@ -31,7 +32,10 @@ export default function SearchSection(props: ISearchSectionProps) {
 
         <SearchField setKeyWord={setKeyword} />
 
-        <SearchList postList={postList} keyword={`${keyword}`} />
+        <SearchList
+          postList={postList.length > 0 ? postList : BlogsSample}
+          keyword={`${keyword}`}
+        />
       </div>
     </Page>
   );

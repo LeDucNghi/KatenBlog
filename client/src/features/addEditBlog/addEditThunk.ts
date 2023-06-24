@@ -1,5 +1,12 @@
-import { Comment, PaginationParams, Post, Profile } from "../../models";
 import {
+  ApiStatus,
+  Comment,
+  PaginationParams,
+  Post,
+  Profile,
+} from "../../models";
+import {
+  checkApiStatus,
   fetchCategoryListSuccess,
   fetchCommentList,
   fetchCommentListSuccess,
@@ -33,42 +40,58 @@ export const handleGetAllPost = (): AppThunk => async (dispatch, getState) => {
     } = await postsApi.getAll();
 
     dispatch(fetchPostListSuccess(data));
-  } catch (error) {
+  } catch (error: any) {
     console.log(
       "🚀 ~ file: addEditThunk.ts:19 ~ handleGetAllPost ~ error:",
       error
     );
+
+    if (error.message === "Network Error") {
+      dispatch(checkApiStatus("Network Error"));
+    } else {
+      dispatch(checkApiStatus("Available"));
+    }
   }
 };
 
 // GET DETAIL POST
 export const handleGetDetailPost =
-  (id: string): AppThunk =>
+  (id: string, data?: Post): AppThunk =>
   async (dispatch, getState) => {
+    const apiStatus: ApiStatus = getState().post.apiStatus;
+
     const type = "isBlog";
 
     dispatch(fetchPostData());
 
-    try {
-      const res = await postsApi.getDetailPost(id!, type);
-      await postsApi.increasePostView(id!);
+    if (apiStatus === "Network Error") {
+      console.log("🚀 ~ file: addEditThunk.ts:60 ~ data:", data);
 
-      if (res.data) {
-        await dispatch(setUserType(res.data.userType!));
+      await dispatch(setUserType("isGuest"));
 
-        await dispatch(fetchPostDataSuccess(res.data.post));
-      }
-    } catch (error: any) {
-      if (error && error.response) {
-        const status: number = error.response.status;
-        const message: string = error.response.data.message;
-        dispatch(
-          fetchPostDataFailed({
-            status: status,
-            isError: true,
-            repsonse: { data: { message: message } },
-          })
-        );
+      await dispatch(fetchPostDataSuccess(data!));
+    } else {
+      try {
+        const res = await postsApi.getDetailPost(id!, type);
+        await postsApi.increasePostView(id!);
+
+        if (res.data) {
+          await dispatch(setUserType(res.data.userType!));
+
+          await dispatch(fetchPostDataSuccess(res.data.post));
+        }
+      } catch (error: any) {
+        if (error && error.response) {
+          const status: number = error.response.status;
+          const message: string = error.response.data.message;
+          dispatch(
+            fetchPostDataFailed({
+              status: status,
+              isError: true,
+              repsonse: { data: { message: message } },
+            })
+          );
+        }
       }
     }
   };

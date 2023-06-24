@@ -22,10 +22,10 @@ import { useAppDispatch } from "../../../app/hooks";
 import { useState } from "react";
 
 export interface ISignInFormProps {
-  isSignin: boolean;
+  status: "isSignin" | "isSignup" | "withoutApi";
 }
 
-export function AuthForm({ isSignin }: ISignInFormProps) {
+export function AuthForm({ status }: ISignInFormProps) {
   const dispatch = useAppDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -36,10 +36,6 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
     password: "",
     fullname: "",
   };
-  console.log(
-    "🚀 ~ file: AuthForm.tsx:39 ~ AuthForm ~ signInInitialValues:",
-    signInInitialValues
-  );
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -53,9 +49,11 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
   return (
     <Formik
       enableReinitialize={true}
-      initialValues={isSignin ? signInInitialValues : signUpInitialValues}
+      initialValues={
+        status === "isSignin" ? signInInitialValues : signUpInitialValues
+      }
       validationSchema={validationSchema}
-      onSubmit={(values) => dispatch(handleAuthForm(values, isSignin))}
+      onSubmit={(values) => dispatch(handleAuthForm(values, status))}
     >
       {(formikProps) => {
         const {
@@ -70,7 +68,7 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
         } = formikProps;
         return (
           <Form className="form">
-            {!isSignin && (
+            {status === "isSignin" && (
               <Box className="signup_form">
                 <TextField
                   className="form_input_field"
@@ -78,7 +76,7 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
                   variant="outlined"
                   name="fullname"
                   autoFocus={true}
-                  value={!isSignin ? values.fullname : ""}
+                  value={status === "isSignin" ? values.fullname : ""}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={touched.fullname && Boolean(errors.fullname)}
@@ -126,14 +124,16 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
             />
 
             <Typography variant="h5">
-              {isSignin ? "Don't have an account?" : "Already have an account?"}
+              {status === "isSignin"
+                ? "Don't have an account?"
+                : "Already have an account?"}
               <Link
                 variant="subtitle2"
                 underline="hover"
                 component={RouterLink}
-                to={isSignin ? `/signup` : `/signin`}
+                to={status === "isSignin" ? `/signup` : `/signin`}
               >
-                {isSignin ? "Signup" : "Signin"}
+                {status === "isSignin" ? "Signup" : "Signin"}
               </Link>
             </Typography>
 
@@ -144,7 +144,7 @@ export function AuthForm({ isSignin }: ISignInFormProps) {
               type="submit"
               loading={isSubmitting}
             >
-              {isSignin ? "Login" : "Signup"}
+              {status === "isSignin" ? "Login" : "Signup"}
             </LoadingButton>
           </Form>
         );
