@@ -3,6 +3,7 @@ import "./AuthPage.scss";
 import * as React from "react";
 
 import { Box, Button, Divider, Paper, Typography } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
@@ -21,6 +22,16 @@ export default function AuthPage({
   formSubtitle,
   children,
 }: IAuthPageProps) {
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+
+  React.useEffect(() => {
+    if (token) {
+      navigate(`/`);
+    }
+  }, [token, navigate]);
+
   return (
     <Box className="auth_container">
       <Box className="auth_brand">
