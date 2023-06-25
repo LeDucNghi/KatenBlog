@@ -17,6 +17,12 @@ export function Comment({ id }: ICommentProps) {
 
   const [comment, setComment] = React.useState("");
 
+  const handlePostNewComment = () => {
+    dispatch(handlePostComment(id, comment));
+
+    setComment("");
+  };
+
   return (
     <RoundedWidget
       title="Leave Comment"
@@ -33,6 +39,7 @@ export function Comment({ id }: ICommentProps) {
         rows={4}
         className="comment_field"
         variant="outlined"
+        value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
 
@@ -41,7 +48,7 @@ export function Comment({ id }: ICommentProps) {
       </Typography>
 
       <Button
-        onClick={() => dispatch(handlePostComment(id, comment))}
+        onClick={handlePostNewComment}
         className="comment_button"
         variant="contained"
       >

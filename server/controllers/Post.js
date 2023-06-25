@@ -212,11 +212,11 @@ const increaseBlogView = async (req, res) => {
 const findTrendingList = async (req, res) => {
   const postList = await posts.findAll();
 
-  const sortPostList = await postList.sort((a, b) => {
+  const sortPostList = await postList!.sort((a, b) => {
     return b.visit - a.visit;
   });
 
-  const trendingList = await sortPostList.slice(0, 3);
+  const trendingList = await sortpostList!.slice(0, 3);
 
   res.status(200).json({ data: trendingList });
 };
@@ -263,13 +263,13 @@ const findUserPost = async (req, res) => {
     if (postListType === "all") {
       paginatedResults = await handlePaginate(req, userPostList);
     } else if (postListType === "popular") {
-      const popularList = await userPostList.sort((a, b) => {
+      const popularList = await userpostList!.sort((a, b) => {
         return b.visit - a.visit;
       });
 
       paginatedResults = await handlePaginate(req, popularList);
     } else {
-      const newList = await userPostList.sort((a, b) => {
+      const newList = await userpostList!.sort((a, b) => {
         return b.visit - a.visit;
       });
 

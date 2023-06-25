@@ -55,7 +55,7 @@ export function UserBlogList({ id, type }: IUserBlogListProps) {
         <Loading />
       ) : (
         <div className="blog_list">
-          {userBlogList.length === 0 ? (
+          {userBlogList!.length === 0 ? (
             <Empty
               style={{
                 margin: "0 auto",
@@ -63,7 +63,7 @@ export function UserBlogList({ id, type }: IUserBlogListProps) {
               content="Not found any blog or this user has not shared any blog yet🤔"
             />
           ) : (
-            userBlogList.map((blogs, key) => {
+            userBlogList!.map((blogs, key) => {
               return (
                 <div className="blog_items" key={key}>
                   <BlogItems
@@ -72,6 +72,9 @@ export function UserBlogList({ id, type }: IUserBlogListProps) {
                     isThumbedNail={false}
                     showBadge={false}
                     id={`${blogs.id}`}
+                    style={{
+                      marginBottom: "1em",
+                    }}
                   />
                 </div>
               );
@@ -80,7 +83,7 @@ export function UserBlogList({ id, type }: IUserBlogListProps) {
         </div>
       )}
 
-      {userBlogList.length !== 0 && (
+      {userBlogList!.length !== 0 && (
         <div className="blog_list_paginate">
           <CustomPagination
             paginate={userBlogListPaginate}

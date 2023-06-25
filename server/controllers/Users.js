@@ -57,7 +57,6 @@ exports.signin = async (req, res) => {
     const { password, ...rest } = user.dataValues;
 
     const d = new Date();
-    const hour = d.getUTCHours();
 
     if (accessToken) {
       return res.status(200).json({

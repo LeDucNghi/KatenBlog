@@ -52,8 +52,8 @@ export function HomeBanner(props: IHomeBannerProps) {
     <div className="homebanner_wrapper">
       <div className="homebanner_container">
         <div className="homebanner_thumbnail">
-          {latestPost.length > 0
-            ? latestPost.slice(0, 1).map((blogs, key) => {
+          {latestPost!.length > 0
+            ? latestPost!.slice(0, 1).map((blogs, key) => {
                 return (
                   <BlogItems
                     id={`${blogs.id}`}
@@ -127,8 +127,8 @@ export function HomeBanner(props: IHomeBannerProps) {
             }}
           >
             {isActive === 1 ? (
-              popularPost.length > 0 ? (
-                popularPost.map((blogs, key) => {
+              popularPost!.length > 0 ? (
+                popularPost!.map((blogs, key) => {
                   return (
                     <BlogItems
                       id={`${blogs.id}`}
@@ -166,15 +166,15 @@ export function HomeBanner(props: IHomeBannerProps) {
                   );
                 })
               )
-            ) : userRecentBlog.length === 0 ? (
+            ) : userRecentBlog!.length === 0 ? (
               <Empty
                 style={{
                   margin: "1em auto",
                 }}
                 content="You have not read any posts recently🤔"
               />
-            ) : userRecentBlog.length > 0 ? (
-              userRecentBlog.slice(0, 4).map((blogs, key) => {
+            ) : userRecentBlog!.length > 0 ? (
+              userRecentBlog!.slice(0, 4).map((blogs, key) => {
                 return (
                   <BlogItems
                     id={`${blogs.id}`}

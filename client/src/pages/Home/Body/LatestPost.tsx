@@ -35,8 +35,8 @@ export function LatestPost(props: ILatestPostProps) {
       anchorTitle="left"
       style={{ width: "100%" }}
     >
-      {latestPost.length > 0
-        ? latestPost.map((blogs, key) => {
+      {latestPost!.length > 0
+        ? latestPost!.map((blogs, key) => {
             return (
               <BlogItems
                 key={key}

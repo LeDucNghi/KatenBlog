@@ -85,7 +85,7 @@ export function CommentList({ id, commentList }: ICommentListProps) {
                         </span>{" "}
                         -{" "}
                         <span className="comment_list_time">
-                          {moment(items.createdAt).startOf("day").fromNow()}
+                          {moment(items.createdAt).startOf("hour").fromNow()}
                         </span>
                       </>
                     }

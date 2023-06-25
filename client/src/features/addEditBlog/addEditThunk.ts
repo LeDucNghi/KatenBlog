@@ -26,6 +26,7 @@ import {
 } from "./addEditSlice";
 
 import { AppThunk } from "../../app/store";
+import { BlogsSample } from "../../mock";
 import commentApi from "../../api/commentApi";
 import postsApi from "../../api/postsApi";
 import { setUserType } from "../auth/authSlice";
@@ -48,6 +49,8 @@ export const handleGetAllPost = (): AppThunk => async (dispatch, getState) => {
 
     if (error.message === "Network Error") {
       dispatch(checkApiStatus("Network Error"));
+
+      dispatch(fetchPostListSuccess(BlogsSample));
     } else {
       dispatch(checkApiStatus("Available"));
     }
@@ -65,8 +68,6 @@ export const handleGetDetailPost =
     dispatch(fetchPostData());
 
     if (apiStatus === "Network Error") {
-      console.log("🚀 ~ file: addEditThunk.ts:60 ~ data:", data);
-
       await dispatch(setUserType("isGuest"));
 
       await dispatch(fetchPostDataSuccess(data!));
@@ -115,10 +116,12 @@ export const getPopularPostsList =
 
 // ADD / EDIT POST
 export const addEditPost =
-  (values: Post, id: string): AppThunk =>
+  (values: Post, id: number): AppThunk =>
   async (dispatch, getState) => {
     const userType = getState().auth.userType;
     const postingStatus = getState().post.isPosting;
+    const apiStatus: ApiStatus = getState().post.apiStatus;
+    const postList: Post[] = getState().post.postList!;
 
     if (userType === "isPoster") {
       await dispatch(setPostingStatus({ ...postingStatus, isEdit: true }));
@@ -127,49 +130,80 @@ export const addEditPost =
     const newValue =
       userType === "isPoster" ? { ...values, id: id } : { ...values };
 
-    try {
-      const res =
-        userType === "isPoster"
-          ? await postsApi.updatePost(newValue)
-          : await postsApi.addNewPost(newValue);
-      if (res) {
-        toast.success(
-          `🦄 ${
-            userType === "isPoster" ? `Update` : `Upload`
-          } post successful 🥳`,
-          {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          }
-        );
+    if (apiStatus === "Network Error") {
+      const newSampleData: Post[] = [...BlogsSample];
 
-        // await setIsLoading(false);
-        if (userType === "isPoster") {
-          await dispatch(setPostingStatus({ ...postingStatus, isEdit: false }));
-        } else
-          await dispatch(setPostingStatus({ ...postingStatus, isAdd: false }));
+      newSampleData.unshift(values);
+
+      if (userType === "isPoster") {
+        await dispatch(setPostingStatus({ ...postingStatus, isEdit: false }));
+      } else
+        await dispatch(setPostingStatus({ ...postingStatus, isAdd: false }));
+
+      toast.success(
+        `🦄 ${
+          userType === "isPoster" ? `Update` : `Upload`
+        } post successful 🥳`,
+        {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        }
+      );
+    } else {
+      try {
+        const res =
+          userType === "isPoster"
+            ? await postsApi.updatePost(newValue)
+            : await postsApi.addNewPost(newValue);
+        if (res) {
+          toast.success(
+            `🦄 ${
+              userType === "isPoster" ? `Update` : `Upload`
+            } post successful 🥳`,
+            {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            }
+          );
+
+          // await setIsLoading(false);
+          if (userType === "isPoster") {
+            await dispatch(
+              setPostingStatus({ ...postingStatus, isEdit: false })
+            );
+          } else
+            await dispatch(
+              setPostingStatus({ ...postingStatus, isAdd: false })
+            );
+        }
+      } catch (error) {
+        await dispatch(setPostingStatus({ ...postingStatus, isEdit: false }));
+
+        toast.error(` Something went wrong 🤔`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+
+        console.log("🚀 ~ file: SignIn.tsx:20 ~ handleSubmit ~ error", error);
       }
-    } catch (error) {
-      await dispatch(setPostingStatus({ ...postingStatus, isEdit: false }));
-
-      toast.error(` Something went wrong 🤔`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-
-      console.log("🚀 ~ file: SignIn.tsx:20 ~ handleSubmit ~ error", error);
     }
   };
 
@@ -178,14 +212,14 @@ export const handleGetPostComment =
   (id: string, params: PaginationParams): AppThunk =>
   async (dispatch, getState) => {
     const userProfile: Profile | null = getState().auth.userProfile;
+    const apiStatus: ApiStatus = getState().post.apiStatus;
+    const commentList: Comment[] = getState().post.commentList;
 
-    dispatch(fetchCommentList());
-    try {
-      const res = await commentApi.getComment(id, params);
+    if (apiStatus === "Network Error") {
+      console.log("🚀 ~ file: addEditThunk.ts:182 ~ apiStatus:", apiStatus);
+      const newCommentList = [...commentList];
 
-      const dataClone = [...res.data.data];
-
-      const newData = dataClone.map((data) => {
+      const newData = newCommentList.map((data) => {
         const index = data.likes?.findIndex(
           (like) => like.userId === userProfile?.id && data.id === id
         );
@@ -198,12 +232,34 @@ export const handleGetPostComment =
       });
 
       dispatch(fetchCommentListSuccess(newData));
-      dispatch(fetchPagination(res.data.pagination!));
-    } catch (error) {
-      console.log(
-        "🚀 ~ file: Comment.tsx:35 ~ handleGetPostComment ~ error",
-        error
-      );
+      dispatch(fetchPagination(params));
+    } else {
+      dispatch(fetchCommentList());
+      try {
+        const res = await commentApi.getComment(id, params);
+
+        const dataClone = [...res.data.data];
+
+        const newData = dataClone.map((data) => {
+          const index = data.likes?.findIndex(
+            (like) => like.userId === userProfile?.id && data.id === id
+          );
+
+          if (index) {
+            return { ...data, isLiked: true };
+          } else {
+            return { ...data, isLiked: false };
+          }
+        });
+
+        dispatch(fetchCommentListSuccess(newData));
+        dispatch(fetchPagination(res.data.pagination!));
+      } catch (error) {
+        console.log(
+          "🚀 ~ file: Comment.tsx:35 ~ handleGetPostComment ~ error",
+          error
+        );
+      }
     }
   };
 
@@ -213,11 +269,40 @@ export const handlePostComment =
   async (dispatch, getState) => {
     const listComment: Comment[] = getState().post.commentList;
     const profile: Profile | null = getState().auth.userProfile;
-
+    const apiStatus: ApiStatus = getState().post.apiStatus;
     const isLoggedIn = getState().auth.isLoggedIn;
 
-    if (!isLoggedIn) {
-      toast("Please let us know who you are🤔", {
+    if (apiStatus === "Network Error") {
+      const newListComment = [...listComment];
+      if (newListComment.length === 0) {
+        newListComment.unshift({
+          id: "1",
+          content: comment,
+          user: profile,
+          postId: id,
+          isLiked: false,
+          likes: [],
+          createdAt: `${new Date(Date.now())}`,
+        });
+      } else {
+        newListComment.unshift({
+          id: listComment[listComment.length - 1].id! + 1,
+          content: comment,
+          user: profile,
+          postId: id,
+          isLiked: false,
+          likes: [],
+          createdAt: `${new Date(Date.now())}`,
+        });
+      }
+      console.log(
+        "🚀 ~ file: addEditThunk.ts:256 ~ new Date(Date.now()):",
+        typeof `${new Date(Date.now())}`
+      );
+
+      await dispatch(fetchCommentListSuccess(newListComment));
+
+      toast.success("Your comment upload successfully 🥳", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -228,30 +313,59 @@ export const handlePostComment =
         theme: "dark",
       });
     } else {
-      const content = comment;
+      if (!isLoggedIn) {
+        toast("Please let us know who you are 🤔", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else {
+        const content = comment;
 
-      try {
-        const res = await commentApi.comment({ id, content });
-        if (res.data) {
-          const newListComment = await [...listComment];
+        try {
+          const res = await commentApi.comment({ id, content });
+          if (res.data) {
+            const newListComment = await [...listComment];
 
-          if (newListComment.length === 0) {
-            await newListComment.unshift({
-              id: "1",
-              content: comment,
-              user: profile,
-            });
-          } else {
-            await newListComment.unshift({
-              id: listComment[listComment.length - 1].id! + 1,
-              content: comment,
-              user: profile,
+            if (newListComment.length === 0) {
+              await newListComment.unshift({
+                id: "1",
+                content: comment,
+                user: profile,
+              });
+            } else {
+              await newListComment.unshift({
+                id: listComment[listComment.length - 1].id! + 1,
+                content: comment,
+                user: profile,
+              });
+            }
+
+            await dispatch(fetchCommentListSuccess(newListComment));
+
+            toast.success("Your comment upload successfully 🥳", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
             });
           }
+        } catch (error) {
+          console.log(
+            "🚀 ~ file: Comment.tsx:22 ~ handlePostComment ~ error",
+            error
+          );
 
-          await dispatch(fetchCommentListSuccess(newListComment));
-
-          toast.success("Your comment upload successfully 🥳", {
+          toast.error("Your comment can not be uploaded 😢", {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -262,22 +376,6 @@ export const handlePostComment =
             theme: "dark",
           });
         }
-      } catch (error) {
-        console.log(
-          "🚀 ~ file: Comment.tsx:22 ~ handlePostComment ~ error",
-          error
-        );
-
-        toast.error("Your comment can not be uploaded 😢", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
       }
     }
   };
@@ -290,24 +388,41 @@ export const handleGetUserPost =
     { page, limit }: PaginationParams
   ): AppThunk =>
   async (dispatch, getState) => {
+    const apiStatus: ApiStatus = getState().post.apiStatus;
+
     dispatch(fetchingCategoryBlog());
 
     let time;
 
-    try {
-      const res = await postsApi.getUserPost(id, type, { page, limit });
+    if (apiStatus === "Network Error") {
+      const newBlogData: Post[] = [...BlogsSample];
+
+      const filter = newBlogData.filter((blog) => blog.categories === type);
 
       clearTimeout(time);
 
       time = setTimeout(() => {
-        dispatch(fetchUserPostList(res.data.data));
-        dispatch(fetchPagination(res.data.pagination!));
+        dispatch(fetchUserPostList(filter));
+        dispatch(fetchPagination({ page, limit }));
       }, 1000);
-    } catch (error) {
-      console.log(
-        "🚀 ~ file: addEditThunk.ts:199 ~ handleGetUserPost ~ error:",
-        error
-      );
+    } else {
+      try {
+        const res = await postsApi.getUserPost(id, type, { page, limit });
+
+        clearTimeout(time);
+
+        time = setTimeout(() => {
+          dispatch(fetchUserPostList(res.data.data));
+          dispatch(fetchPagination(res.data.pagination!));
+        }, 1000);
+      } catch (error) {
+        console.log(
+          "🚀 ~ file: addEditThunk.ts:199 ~ handleGetUserPost ~ error:",
+          error
+        );
+
+        dispatch(fetchUserPostList([]));
+      }
     }
   };
 
@@ -315,13 +430,39 @@ export const handleGetUserPost =
 export const fetchPostByCategory =
   (category: string, { page, limit }: PaginationParams): AppThunk =>
   async (dispatch, getState) => {
-    try {
-      const res = await postsApi.getPostByCategories(category, { page, limit });
+    const apistatus: ApiStatus = getState().post.apiStatus;
 
-      dispatch(fetchCategoryListSuccess(res.data.data));
-      dispatch(fetchPagination(res.data.pagination!));
-    } catch (error) {
-      console.log("🚀 ~ file: addEditThunk.ts:222 ~ error:", error);
+    let time;
+
+    dispatch(fetchingCategoryBlog());
+
+    if (apistatus === "Network Error") {
+      const newBlogData: Post[] = [...BlogsSample];
+
+      const filter = newBlogData.filter((blog) => blog.categories === category);
+
+      clearTimeout(time);
+
+      time = setTimeout(() => {
+        dispatch(fetchCategoryListSuccess(filter));
+        dispatch(fetchPagination({ page, limit }));
+      }, 1000);
+    } else {
+      try {
+        const res = await postsApi.getPostByCategories(category, {
+          page,
+          limit,
+        });
+
+        clearTimeout(time);
+
+        time = setTimeout(() => {
+          dispatch(fetchCategoryListSuccess(res.data.data));
+          dispatch(fetchPagination(res.data.pagination!));
+        }, 1000);
+      } catch (error) {
+        console.log("🚀 ~ file: addEditThunk.ts:222 ~ error:", error);
+      }
     }
   };
 

@@ -178,21 +178,16 @@ export const accountMenuWidget = (id: string | number) => {
       route: `/profile/${id}`,
       icon: "person" as IconName,
     },
+
     {
       id: 2,
-      name: "Your Blogs",
-      route: "/about",
-      icon: "book" as IconName,
-    },
-    {
-      id: 3,
       name: "Add new blog",
       route: "/add",
       icon: "bookadd" as IconName,
     },
 
     {
-      id: 4,
+      id: 3,
       name: "Logout",
       route: "/",
       icon: "logout" as IconName,

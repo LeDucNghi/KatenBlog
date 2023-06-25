@@ -33,7 +33,7 @@ export default function SearchSection(props: ISearchSectionProps) {
         <SearchField setKeyWord={setKeyword} />
 
         <SearchList
-          postList={postList.length > 0 ? postList : BlogsSample}
+          postList={postList!.length > 0 ? postList : BlogsSample}
           keyword={`${keyword}`}
         />
       </div>

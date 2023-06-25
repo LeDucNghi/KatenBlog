@@ -34,8 +34,8 @@ export function CustomAccordion({ topic }: ICustomAccordionProps) {
       setExpanded(newExpanded ? panel : false);
 
       const filterPostList =
-        postList.length > 0
-          ? postList.filter((post) => post.categories === categories)
+        postList!.length > 0
+          ? postList!.filter((post) => post.categories === categories)
           : BlogsSample.filter((blog) => blog.categories === categories);
 
       setCategoryPostList(filterPostList);
@@ -43,8 +43,8 @@ export function CustomAccordion({ topic }: ICustomAccordionProps) {
 
   const handleCalculateLength = (category: string) => {
     const calculateLength =
-      postList.length > 0
-        ? postList.filter((post) => post.categories === category)
+      postList!.length > 0
+        ? postList!.filter((post) => post.categories === category)
         : BlogsSample.filter((blog) => blog.categories === category);
 
     return calculateLength.length;
@@ -73,10 +73,10 @@ export function CustomAccordion({ topic }: ICustomAccordionProps) {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {categoryPostList.length === 0 ? (
+              {categoryPostList!.length === 0 ? (
                 <Empty content="No one has posted anything in this category yet" />
               ) : (
-                categoryPostList.map((topic, index) => {
+                categoryPostList!.map((topic, index) => {
                   return (
                     <BlogItems
                       id={`${topic.id}`}

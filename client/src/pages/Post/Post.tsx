@@ -61,6 +61,10 @@ export default function Posts({ data }: IPostsProps) {
       const data = BlogsSample.find((blog) => blog.id === Number(id));
 
       dispatch(handleGetDetailPost(id!, data));
+
+      if (pathname === "/add") {
+        dispatch(setUserType("isAdd"));
+      }
     } else if (pathname === "/add") {
       dispatch(setUserType("isAdd"));
     } else {
@@ -148,19 +152,13 @@ export default function Posts({ data }: IPostsProps) {
             enableReinitialize
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values, actions) => {
-              return dispatch(addEditPost(values, id!));
-            }}
+            onSubmit={(values, actions) =>
+              dispatch(addEditPost(values, Number(id)))
+            }
           >
             {(formikProps) => {
-              const {
-                values,
-                handleChange,
-                handleBlur,
-                touched,
-                errors,
-                setFieldValue,
-              } = formikProps;
+              const { values, handleChange, handleBlur, setFieldValue } =
+                formikProps;
 
               return (
                 <Form>

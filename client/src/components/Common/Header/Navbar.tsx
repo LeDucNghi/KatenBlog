@@ -48,9 +48,9 @@ export function Navbar({
   return (
     <nav className="header_navbar">
       <div className="navbar_container">
-        <a href="/" className="navbar_brand">
+        <span onClick={() => navigate(`/`)} className="navbar_brand">
           <img src={Images.logo} alt="" />
-        </a>
+        </span>
 
         {windowInnerWidth > BREAK_POINTS_NUMBER.sm && (
           <NavbarCollapse

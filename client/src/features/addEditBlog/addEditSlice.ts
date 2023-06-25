@@ -116,6 +116,7 @@ const postSlice = createSlice({
 
     fetchCategoryListSuccess(state, action: PayloadAction<Post[]>) {
       state.categoryList = action.payload;
+      state.isFetChing.isCategory = false;
     },
 
     fetchUserRecentBlog(state, action: PayloadAction<RecentBlog[]>) {

@@ -2,11 +2,13 @@ import "./Loading.scss";
 
 import * as React from "react";
 
-export interface ILoadingProps {}
+export interface ILoadingProps {
+  style?: React.CSSProperties;
+}
 
-export function Loading(props: ILoadingProps) {
+export function Loading({ style }: ILoadingProps) {
   return (
-    <div className="loading_container">
+    <div className="loading_container" style={style}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="200px"

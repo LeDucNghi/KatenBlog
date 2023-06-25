@@ -9,7 +9,7 @@ import { Post } from "../../../models";
 
 export interface ISearchListProps {
   keyword: string;
-  postList: Post[];
+  postList: Post[] | null;
 }
 
 export function SearchList({ keyword, postList }: ISearchListProps) {
@@ -26,7 +26,7 @@ export function SearchList({ keyword, postList }: ISearchListProps) {
   }, [keyword]);
 
   React.useEffect(() => {
-    setListPost(postList);
+    setListPost(postList!);
   }, [postList]);
 
   const handleSearchPost = async () => {
@@ -43,7 +43,7 @@ export function SearchList({ keyword, postList }: ISearchListProps) {
     timer = setTimeout(() => {
       setIsLoading(false);
 
-      setListPost(newPostList);
+      setListPost(newPostList!);
     }, 500);
   };
 

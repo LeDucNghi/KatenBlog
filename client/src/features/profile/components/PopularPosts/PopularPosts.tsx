@@ -10,8 +10,8 @@ export function PopularPosts(props: IPopularPostsProps) {
 
   return (
     <>
-      {popularPost.length > 0
-        ? popularPost.map((blogs, key) => {
+      {popularPost!.length > 0
+        ? popularPost!.map((blogs, key) => {
             return (
               <BlogItems
                 key={key}

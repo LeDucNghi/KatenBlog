@@ -21,6 +21,7 @@ export function CategoriesList({ name }: ICategoriesListProps) {
   const categoriesPaginate = useAppSelector(selectPaginate);
   const dispatch = useAppDispatch();
   const categoryList = useAppSelector(selectCategoryList);
+  const isFetching = useAppSelector(selectIsFetchingPostList);
 
   const handlePageChange = (value: number) => {
     dispatch(
@@ -34,10 +35,16 @@ export function CategoriesList({ name }: ICategoriesListProps) {
   return (
     <div className="categories_left">
       <div className="categories_list">
-        {categoryList.length === 0 ? (
+        {isFetching.isCategory ? (
+          <Loading
+            style={{
+              height: "100%",
+            }}
+          />
+        ) : categoryList!.length === 0 ? (
           <Empty content="There have not had any post in this category 😢 Please try another one 🤔" />
         ) : (
-          categoryList.map((blogs, key) => {
+          categoryList!.map((blogs, key) => {
             return (
               <BlogItems
                 key={key}
@@ -47,6 +54,8 @@ export function CategoriesList({ name }: ICategoriesListProps) {
                 showBadge={false}
                 style={{
                   width: "45%",
+
+                  marginBottom: "1em",
                 }}
                 id={`${blogs.id}`}
               />
@@ -55,7 +64,7 @@ export function CategoriesList({ name }: ICategoriesListProps) {
         )}
       </div>
 
-      {categoryList.length !== 0 && (
+      {categoryList!.length !== 0 && (
         <div className="categories_paginate">
           <CustomPagination
             handlePageChange={handlePageChange}

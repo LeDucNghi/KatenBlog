@@ -51,13 +51,13 @@ export interface PostState {
 
   imageFile: string | File | null | undefined;
 
-  postList: Post[];
-  userPostList: Post[];
-  categoryList: Post[];
-  recentList: RecentBlog[];
-  popularList: Post[];
-  latestList: Post[];
-  postData: Post | null | undefined;
+  postList: Post[] | null;
+  userPostList: Post[] | null;
+  categoryList: Post[] | null;
+  recentList: RecentBlog[] | null;
+  popularList: Post[] | null;
+  latestList: Post[] | null;
+  postData: Post | null;
 
   commentList: Comment[];
   pagination: PaginationParams;
