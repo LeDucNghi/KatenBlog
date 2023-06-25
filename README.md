@@ -1,4 +1,4 @@
-# Zyro Blog Web Application
+# Katen Blog Web Application
 
 ## Installation
 
