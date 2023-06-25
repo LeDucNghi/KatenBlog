@@ -13,7 +13,7 @@ export function SignUp(props: ISignUpProps) {
         brandTitle="Subscribe to write interesting things"
         formTitle="Get started"
       >
-        <AuthForm status="isSignup" />
+        <AuthForm isSignin={false} />
       </AuthPage>
     </Page>
   );

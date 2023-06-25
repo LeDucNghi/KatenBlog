@@ -12,7 +12,7 @@ export function SignIn(props: ISignInProps) {
         formTitle="Sign in to Zyro"
         formSubtitle="Enter your detail below."
       >
-        <AuthForm status="isSignin" />
+        <AuthForm isSignin />
       </AuthPage>
     </Page>
   );

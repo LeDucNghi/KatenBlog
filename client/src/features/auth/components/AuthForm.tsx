@@ -22,10 +22,10 @@ import { useAppDispatch } from "../../../app/hooks";
 import { useState } from "react";
 
 export interface ISignInFormProps {
-  status: "isSignin" | "isSignup" | "withoutApi";
+  isSignin: boolean;
 }
 
-export function AuthForm({ status }: ISignInFormProps) {
+export function AuthForm({ isSignin }: ISignInFormProps) {
   const dispatch = useAppDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -49,11 +49,9 @@ export function AuthForm({ status }: ISignInFormProps) {
   return (
     <Formik
       enableReinitialize={true}
-      initialValues={
-        status === "isSignin" ? signInInitialValues : signUpInitialValues
-      }
+      initialValues={isSignin ? signInInitialValues : signUpInitialValues}
       validationSchema={validationSchema}
-      onSubmit={(values) => dispatch(handleAuthForm(values, status))}
+      onSubmit={(values) => dispatch(handleAuthForm(values, isSignin))}
     >
       {(formikProps) => {
         const {
@@ -68,7 +66,7 @@ export function AuthForm({ status }: ISignInFormProps) {
         } = formikProps;
         return (
           <Form className="form">
-            {status === "isSignin" && (
+            {isSignin && (
               <Box className="signup_form">
                 <TextField
                   className="form_input_field"
@@ -76,7 +74,7 @@ export function AuthForm({ status }: ISignInFormProps) {
                   variant="outlined"
                   name="fullname"
                   autoFocus={true}
-                  value={status === "isSignin" ? values.fullname : ""}
+                  value={isSignin ? values.fullname : ""}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={touched.fullname && Boolean(errors.fullname)}
@@ -124,16 +122,14 @@ export function AuthForm({ status }: ISignInFormProps) {
             />
 
             <Typography variant="h5">
-              {status === "isSignin"
-                ? "Don't have an account?"
-                : "Already have an account?"}
+              {isSignin ? "Don't have an account?" : "Already have an account?"}
               <Link
                 variant="subtitle2"
                 underline="hover"
                 component={RouterLink}
-                to={status === "isSignin" ? `/signup` : `/signin`}
+                to={isSignin ? `/signup` : `/signin`}
               >
-                {status === "isSignin" ? "Signup" : "Signin"}
+                {isSignin ? "Signup" : "Signin"}
               </Link>
             </Typography>
 
@@ -144,7 +140,7 @@ export function AuthForm({ status }: ISignInFormProps) {
               type="submit"
               loading={isSubmitting}
             >
-              {status === "isSignin" ? "Login" : "Signup"}
+              {isSignin ? "Login" : "Signup"}
             </LoadingButton>
           </Form>
         );

@@ -8,57 +8,61 @@ import moment from "moment";
 import { toast } from "react-toastify";
 
 export const handleAuthForm =
-  (values: Profile, status: "isSignin" | "isSignup" | "withoutApi"): AppThunk =>
+  (values: Profile, isSignin: boolean): AppThunk =>
   async (dispatch, getState) => {
-    try {
-      var res = null;
-      if (status === "isSignin") {
-        res = await authApi.signin(values);
-      } else if (status === "isSignup") {
-        res = await authApi.signup(values);
-      }
+    const apiStatus: ApiStatus = getState().post.apiStatus;
 
-      if (res!.data) {
-        if (status === "isSignin") {
-          const tokenParams = {
-            ...res!.data,
-            expiresDate: moment(res!.data.expiresIn).format("LLL"),
-          };
-
-          localStorage.setItem("token", JSON.stringify(tokenParams));
+    if (apiStatus === "Network Error") {
+      localStorage.setItem(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBoYW1hbmh0dWFuQGdtYWlsLmNvbSIsImF2YXRhciI6Imh0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTIxNzE0MTYxODE5LTE1NTM0OTY4ZmM1Zj9peGxpYj1yYi00LjAuMyZpeGlkPU1ud3hNakEzZkRCOE1IeHdhRzkwYnkxd1lXZGxmSHg4ZkdWdWZEQjhmSHg4JmF1dG89Zm9ybWF0JmZpdD1jcm9wJnc9ODcwJnE9ODAiLCJmdWxsbmFtZSI6IlBo4bqhbSBBbmggVHXhuqVuIiwiaWQiOjIsImlhdCI6MTY4NzU3OTk4NywiZXhwIjoxNjg3NjY2Mzg3fQ.qSAwO6NYsxxGWbKXZBYkD62E0DGJav-ese-hj7nshyY"
+      );
+    } else {
+      try {
+        var res = null;
+        if (isSignin) {
+          res = await authApi.signin(values);
+        } else if (isSignin) {
+          res = await authApi.signup(values);
         }
 
-        await toast(`${res!.data.message} success 🥳`, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        if (res!.data) {
+          if (isSignin) {
+            const tokenParams = {
+              ...res!.data,
+              expiresDate: moment(res!.data.expiresIn).format("LLL"),
+            };
 
-        window.location.href = status === "isSignin" ? "/" : "/signin";
-      } else if (status === "withoutApi") {
-        localStorage.setItem(
-          "token",
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBoYW1hbmh0dWFuQGdtYWlsLmNvbSIsImF2YXRhciI6Imh0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTIxNzE0MTYxODE5LTE1NTM0OTY4ZmM1Zj9peGxpYj1yYi00LjAuMyZpeGlkPU1ud3hNakEzZkRCOE1IeHdhRzkwYnkxd1lXZGxmSHg4ZkdWdWZEQjhmSHg4JmF1dG89Zm9ybWF0JmZpdD1jcm9wJnc9ODcwJnE9ODAiLCJmdWxsbmFtZSI6IlBo4bqhbSBBbmggVHXhuqVuIiwiaWQiOjIsImlhdCI6MTY4NzU3OTk4NywiZXhwIjoxNjg3NjY2Mzg3fQ.qSAwO6NYsxxGWbKXZBYkD62E0DGJav-ese-hj7nshyY"
-        );
-      }
-    } catch (error: any) {
-      if (error) {
-        toast(`${error.response.data.message} 😢`, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        console.log(error.response.data.message);
+            localStorage.setItem("token", JSON.stringify(tokenParams));
+          }
+
+          await toast(`${res!.data.message} success 🥳`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+
+          window.location.href = isSignin ? "/" : "/signin";
+        }
+      } catch (error: any) {
+        if (error) {
+          toast(`${error.response.data.message} 😢`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          console.log(error.response.data.message);
+        }
       }
     }
   };
